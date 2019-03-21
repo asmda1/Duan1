@@ -9,5 +9,5 @@
  * @author baotri1998
  */
 public class NewClass {
-    
+    //
 }
