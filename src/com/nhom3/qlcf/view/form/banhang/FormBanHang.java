@@ -81,7 +81,7 @@ public class FormBanHang extends javax.swing.JPanel {
             Designhelper designhelper = new Designhelper();
             designhelper.DesignPage(jpnNext, sql.select());
             list = designhelper.LimitPage(sql.select(), start, end);
-            designhelper.DesignSanPham(jpnDSsanpham, list, DongCTHD, jpldonhang);
+            designhelper.DesignSanPham(jpnDSsanpham, list);
 
         } catch (Exception e) {
             System.out.println(e);
@@ -389,7 +389,7 @@ public class FormBanHang extends javax.swing.JPanel {
         jplDonHang.setBackground(new java.awt.Color(255, 255, 255));
 
         jSDonHang.setBackground(Color.decode("#e6e6e6"));
-        jSDonHang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 102)));
+        jSDonHang.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jSDonHang.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jpldonhang.setBackground(new java.awt.Color(255, 255, 255));

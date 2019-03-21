@@ -18,7 +18,7 @@ import javax.swing.JPanel;
  * @author baotri1998
  */
 public interface DesignInterFace {
-    public void DesignSanPham(JPanel sanphamUI, List<SanPham> data,List<CTHoaDon> donhang,JPanel jpldonhang);
+    public void DesignSanPham(JPanel sanphamUI, List<SanPham> data);
 
     public void DesignPage(JPanel PageUI, List<SanPham> limit);
     

@@ -465,10 +465,8 @@
                       <Connection code="Color.decode(&quot;#e6e6e6&quot;)" type="code"/>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                        <LineBorder>
-                          <Color PropertyName="color" blue="66" green="0" red="cc" type="rgb"/>
-                        </LineBorder>
+                      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                        <EmptyBorder/>
                       </Border>
                     </Property>
                     <Property name="horizontalScrollBarPolicy" type="int" value="31"/>

@@ -48,11 +48,9 @@ public class Designhelper implements DesignInterFace {
     String tenspString, giaSP, img, so;
 
     @Override
-    public void DesignSanPham(JPanel sanphamUI, List<SanPham> data, List<CTHoaDon> CTHD, JPanel donhang) {
+    public void DesignSanPham(JPanel sanphamUI, List<SanPham> data) {
         this.sanphamUI = sanphamUI;
         this.data = data;
-        this.CTHD = CTHD;
-        this.donhang = donhang;
         this.sanphamUI.removeAll();
         this.sanphamUI.updateUI();
         this.sanphamUI.setVisible(true);
@@ -78,16 +76,9 @@ public class Designhelper implements DesignInterFace {
                 @Override
                 public void mousePressed(MouseEvent e) {
 
-                    if (CTHD.isEmpty()) {
-                        Datmon dt = new Datmon(null, true, e.getComponent().getName(), giaSP, tenspString, img);
-                        dt.setVisible(true);
-                    } else {
-                        Datmon dt = new Datmon(null, true, e.getComponent().getName(), giaSP, tenspString, img, so);
-                        dt.setVisible(true);
+                    Datmon dt = new Datmon(null, true, e.getComponent().getName(), giaSP, tenspString, img);
+                    dt.setVisible(true);
 
-                    }
-
-                    DesigDonHang(donhang, CTHD);
 
                 }
             ;
@@ -139,7 +130,7 @@ public class Designhelper implements DesignInterFace {
                         end = limit.size();
                     }
                     data = LimitPage(limit, start, end);
-                    DesignSanPham(sanphamUI, data, null, null);
+                    DesignSanPham(sanphamUI, data);
                     System.out.println(LimitPage(limit, start, end));
                 }
 
@@ -153,43 +144,43 @@ public class Designhelper implements DesignInterFace {
 
     @Override
     public void DesigDonHang(JPanel donhangUI, List<CTHoaDon> CTHD) {
+        this.CTHD = CTHD;
         donhangUI.removeAll();
         donhangUI.updateUI();
         donhangUI.setVisible(true);
         donhangUI.setLayout(new BoxLayout(donhangUI, BoxLayout.PAGE_AXIS));
-        JPanel[] pnl = new JPanel[CTHD.size()];
+        JPanel[] pnl = new JPanel[this.CTHD.size()];
         //   donhangUI.removeAll();
-        for (int i = 0; i < CTHD.size(); i++) {
+        for (int i = 0; i < this.CTHD.size(); i++) {
             pnl[i] = new JPanel();
             // pnl[i].setBorder(BorderFactory.createLineBorder(new Color(204, 7, 140), 1));
             pnl[i].setBackground(Color.WHITE);
             pnl[i].setLayout(new GridLayout(2, 4, 1, 3));
-            pnl[i].setPreferredSize(new Dimension(600, 35));
-            pnl[i].setMaximumSize(new Dimension(600, 35));
-            pnl[i].setMinimumSize(new Dimension(600, 35));
-
+            pnl[i].setPreferredSize(new Dimension(600, 40));
+            pnl[i].setMaximumSize(new Dimension(600, 40));
+            pnl[i].setMinimumSize(new Dimension(600, 40));
             lblsoluong = new JLabel();
-            lblsoluong = new JLabel(String.valueOf(CTHD.get(i).getSoLuong()));
+            lblsoluong = new JLabel(String.valueOf(this.CTHD.get(i).getSoLuong()));
             lblsoluong.setFont(new Font("Tahoma", 1, 11));
             lblsoluong.setPreferredSize(new Dimension(50, 20));
-            JLabel lbltenSP = new JLabel(CTHD.get(i).getMaSanPham().getTenSp());
-            JLabel lblmaSP = new JLabel(CTHD.get(i).getMaSanPham().getMaSanPham());
+            JLabel lbltenSP = new JLabel(this.CTHD.get(i).getMaSanPham().getTenSp());
+            JLabel lblmaSP = new JLabel(this.CTHD.get(i).getMaSanPham().getMaSanPham());
             JLabel lbltenSPmaSP = new JLabel(lbltenSP.getText() + " (" + lblmaSP.getText() + ")");
-            lbltenSPmaSP.setName(CTHD.get(i).getMaSanPham().getMaSanPham());
+            lbltenSPmaSP.setName(this.CTHD.get(i).getMaSanPham().getMaSanPham());
             lbltenSPmaSP.setForeground(Color.BLUE);
             lbltenSPmaSP.setFont(new Font("Tahoma", 1, 11));
-            double tongtien = CTHD.get(i).getMaSanPham().getGiaBan();
-            if (tongtien == CTHD.get(i).getMaSanPham().getGiaBan()) {
-                tongtien += CTHD.get(i).getMaSanPham().getGiaBan() * CTHD.get(i).getSoLuong();
+            double tongtien = this.CTHD.get(i).getMaSanPham().getGiaBan();
+            if (tongtien == this.CTHD.get(i).getMaSanPham().getGiaBan()) {
+                tongtien += this.CTHD.get(i).getMaSanPham().getGiaBan() * this.CTHD.get(i).getSoLuong();
             }
             JLabel lblXoa = new JLabel("Xóa");
             int index = i;
             lblXoa.setName(String.valueOf(index));
             lblXoa.setToolTipText(String.valueOf(index));
             lblXoa.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            JLabel lblgiaSP = new JLabel(String.valueOf(CTHD.get(i).getMaSanPham().getGiaBan()));
+            JLabel lblgiaSP = new JLabel(String.valueOf(this.CTHD.get(i).getMaSanPham().getGiaBan()));
             lblgiaSP.setFont(new Font("Tahoma", 1, 11));
-            JLabel lblTongTien = new JLabel(String.valueOf(tongtien - CTHD.get(i).getMaSanPham().getGiaBan()) + "/" + lblsoluong.getText());
+            JLabel lblTongTien = new JLabel(String.valueOf(tongtien - this.CTHD.get(i).getMaSanPham().getGiaBan()) + "/" + lblsoluong.getText());
             lblTongTien.setFont(new Font("Tahoma", 1, 11));
             lblTongTien.setForeground(Color.RED);
             JLabel lblghiChu = new JLabel("Ghi Chú: "/* + CTHD.get(i).getMaSanPham().getExtra()*/);
