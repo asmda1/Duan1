@@ -5,6 +5,7 @@
  */
 package com.nhom3.qlcf.view.form.menu;
 
+import com.nhom3.qlcf.helper.Designhelper;
 import com.nhom3.qlcf.helper.Soundhelper;
 import com.nhom3.qlcf.view.form.hanghoa.FormKiemTraHangHoa;
 import com.nhom3.qlcf.view.form.hanghoa.FormNhapThemHangHoa;
@@ -1124,6 +1125,8 @@ public class FormMenu extends javax.swing.JPanel {
         FormLogin.login.Card.repaint();
         FormLogin.login.Card.revalidate();
         FormLogin.login.Card.show();
+    
+            
         //mp3 = new Soundhelper("src/QLBHcafe/mp3/Night-Of-The-Piano.mp3");
 //        mp3.play();
         jfMain.hide();

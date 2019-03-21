@@ -22,6 +22,7 @@ import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.sql.Array;
 import java.util.ArrayList;
@@ -59,20 +60,28 @@ public class FormBanHang extends javax.swing.JPanel {
 
         try {
             testSQL sql = new testSQL();
-            jpnDSsanpham.setLayout(new GridLayout(2, 3, 4, 4));
+            jpnDSsanpham.setLayout(new FlowLayout(FlowLayout.LEFT, 45, 45));
             int start = 0;
             int end = 9;
             // List Show sp từ dữ liệu SQL
 
             if (sql.select().size() < 9) {
                 end = sql.select().size();
+                //jpnDSsanpham.setLayout(new GridLayout(2, 3, 4, 4));
+            } else {
+                if (sql.select().size() < 6) {
+                    end = sql.select().size();
+
+                } else {
+                    if (sql.select().size() < 3) {
+                        end = sql.select().size();
+                    }
+                }
             }
             Designhelper designhelper = new Designhelper();
-
+            designhelper.DesignPage(jpnNext, sql.select());
             list = designhelper.LimitPage(sql.select(), start, end);
             designhelper.DesignSanPham(jpnDSsanpham, list, DongCTHD, jpldonhang);
-
-            designhelper.DesignPage(jpnNext, sql.select());
 
         } catch (Exception e) {
             System.out.println(e);
