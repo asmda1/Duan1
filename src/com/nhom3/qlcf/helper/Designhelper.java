@@ -8,6 +8,7 @@ package com.nhom3.qlcf.helper;
 import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.SanPham;
 import com.nhom3.qlcf.view.form.banhang.Datmon;
+import com.nhom3.qlcf.view.form.banhang.FormBanHang;
 import com.sun.corba.se.impl.naming.cosnaming.InterOperableNamingImpl;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -17,6 +18,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -37,28 +39,35 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
  * @author baotri1998
  */
 public class Designhelper implements DesignInterFace {
-
+    
     private JLabel lblgia, lbltenSP, lblImg;
     public JLabel lblsoluong;
+    private JPanel sanphamUI, donhang;
+    private List<CTHoaDon> CTHD;
+    private List<SanPham> data;
     String tenspString, giaSP, img, so;
-
+    
     @Override
     public void DesignSanPham(JPanel sanphamUI, List<SanPham> data, List<CTHoaDon> CTHD, JPanel donhang) {
-        sanphamUI.removeAll();
-        sanphamUI.updateUI();
-        sanphamUI.setVisible(true);
-        JPanel[] pnlSanPham = new JPanel[data.size()];
-        int x = Integer.parseInt(String.valueOf(data.size() / 4));
-        sanphamUI.setLayout(new GridLayout(x + 1, 3, 15, 15));
-
-        for (int i = 0; i < data.size(); i++) {
+        this.sanphamUI = sanphamUI;
+        this.data = data;
+        this.CTHD = CTHD;
+        this.donhang = donhang;
+        this.sanphamUI.removeAll();
+        this.sanphamUI.updateUI();
+        this.sanphamUI.setVisible(true);
+        JPanel[] pnlSanPham = new JPanel[this.data.size()];
+        int x = Integer.parseInt(String.valueOf(this.data.size() / 4));
+        this.sanphamUI.setLayout(new GridLayout(x + 1, 3, 15, 15));
+        
+        for (int i = 0; i < this.data.size(); i++) {
             pnlSanPham[i] = new JPanel();
-            lbltenSP = new JLabel(data.get(i).getTenSp());
-            lblgia = new JLabel(String.valueOf(data.get(i).getGiaBan()));
+            lbltenSP = new JLabel(this.data.get(i).getTenSp());
+            lblgia = new JLabel(String.valueOf(this.data.get(i).getGiaBan()));
             lblImg = new JLabel();
             lblImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/" + data.get(i).getHinhAnh())));
-
-            pnlSanPham[i].setName(data.get(i).getMaSanPham());
+            
+            pnlSanPham[i].setName(this.data.get(i).getMaSanPham());
             pnlSanPham[i].setPreferredSize(new Dimension(140, 175)); //w = 200 hei = 250
             pnlSanPham[i].setLayout(new BoxLayout(pnlSanPham[i], javax.swing.BoxLayout.LINE_AXIS));
             pnlSanPham[i].setBackground(new Color(255, 255, 255));
@@ -68,29 +77,29 @@ public class Designhelper implements DesignInterFace {
             pnlSanPham[i].addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-
+                    
                     if (CTHD.isEmpty()) {
                         Datmon dt = new Datmon(null, true, e.getComponent().getName(), giaSP, tenspString, img);
                         dt.setVisible(true);
                     } else {
                         Datmon dt = new Datmon(null, true, e.getComponent().getName(), giaSP, tenspString, img, so);
                         dt.setVisible(true);
-
+                        
                     }
-
+                    
                     DesigDonHang(donhang, CTHD);
-
+                    
                 }
             ;
             });
             DesigMenuThucDon(lblgia, lbltenSP, lblImg);
             pnlSanPham[i].add(DesigMenuThucDon(lblgia, lbltenSP, lblImg));
-
-            sanphamUI.add(pnlSanPham[i]);
-            sanphamUI.updateUI();
+            
+            this.sanphamUI.add(pnlSanPham[i]);
+            this.sanphamUI.updateUI();
         }
     }
-
+    
     @Override
     public List<SanPham> LimitPage(List<SanPham> LimitUI, int start, int end) {
         ArrayList<SanPham> list = new ArrayList<>();
@@ -99,10 +108,10 @@ public class Designhelper implements DesignInterFace {
         }
         return list;
     }
-
+    
     @Override
     public void DesignPage(JPanel PageUI, List<SanPham> limit) {
-
+        
         PageUI.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
         PageUI.removeAll();
         PageUI.updateUI();
@@ -112,7 +121,7 @@ public class Designhelper implements DesignInterFace {
             gioihan += 1;
         }
         JPanel[] jplNext = new JPanel[limit.size()];
-
+        
         for (int i = 0; i < gioihan; i++) {
             jplNext[i] = new JPanel();
             jplNext[i].setBorder(new LineBorder(Color.gray));
@@ -130,17 +139,18 @@ public class Designhelper implements DesignInterFace {
                         end = limit.size();
                     }
                     LimitPage(limit, start, end);
+                    DesignSanPham(sanphamUI, limit, null, null);
                     System.out.println(LimitPage(limit, start, end));
                 }
-
+                
             });
             PageUI.add(jplNext[i]);
             PageUI.updateUI();
-
+            
         }
-
+        
     }
-
+    
     @Override
     public void DesigDonHang(JPanel donhangUI, List<CTHoaDon> CTHD) {
         donhangUI.removeAll();
@@ -157,7 +167,7 @@ public class Designhelper implements DesignInterFace {
             pnl[i].setPreferredSize(new Dimension(600, 35));
             pnl[i].setMaximumSize(new Dimension(600, 35));
             pnl[i].setMinimumSize(new Dimension(600, 35));
-
+            
             lblsoluong = new JLabel();
             lblsoluong = new JLabel(String.valueOf(CTHD.get(i).getSoLuong()));
             lblsoluong.setFont(new Font("Tahoma", 1, 11));
@@ -188,25 +198,25 @@ public class Designhelper implements DesignInterFace {
             pnl[i].add(lbltenSPmaSP);
             pnl[i].add(lblgiaSP);
             pnl[i].add(lblTongTien);
-         pnl[i].add(lblghiChu);
+            pnl[i].add(lblghiChu);
             pnl[i].add(lblXoa).addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-
+                    
                     CTHD.remove(CTHD.get(Integer.parseInt(e.getComponent().getName())));
                     DesigDonHang(donhangUI, CTHD);
                 }
-
+                
             });;
             so = lblsoluong.getText();
             pnl[i].setToolTipText(so);
-
+            
             donhangUI.add(pnl[i]);
             donhangUI.updateUI();
         }
-
+        
     }
-
+    
     @Override
     public JPanel DesigMenuThucDon(JLabel lblgia, JLabel lblten, JLabel lblimg) {
         this.lbltenSP = lblten;
@@ -240,12 +250,12 @@ public class Designhelper implements DesignInterFace {
         );
         pnlAblayout.add(pnlNen, new AbsoluteConstraints(0, 140, 150, 39));
         pnlAblayout.add(lblgia, new AbsoluteConstraints(60, 10, 90, 30));
-
+        
         pnlAblayout.add(lblimg, new AbsoluteConstraints(0, 0, 150, 170));
         pnlthucdon.add(pnlAblayout);
         return pnlAblayout;
     }
-
+    
     public static boolean checkDuplicateUsingAdd(List<CTHoaDon> input) {
         Set tempSet = new HashSet();
         for (CTHoaDon str : input) {
@@ -255,7 +265,7 @@ public class Designhelper implements DesignInterFace {
         }
         return false;
     }
-
+    
     public static boolean bruteforce(List<CTHoaDon> input) {
         for (int i = 0; i < input.size(); i++) {
             for (int j = 0; j < input.size(); j++) {
@@ -266,10 +276,10 @@ public class Designhelper implements DesignInterFace {
         }
         return false;
     }
-
+    
     @Override
     public JDialog DesignDatMon() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }
