@@ -71,7 +71,7 @@ public class FormBanHang extends javax.swing.JPanel {
             Designhelper designhelper = new Designhelper();
             designhelper.DesignPage(jpnNext, sql.select());
             list = designhelper.LimitPage(sql.select(), start, end);
-            designhelper.DesignSanPham(jpnDSsanpham, list);
+            designhelper.DesignSanPham(jpnDSsanpham, testSQL.select());
 
         } catch (Exception e) {
             System.out.println(e);
@@ -571,7 +571,7 @@ public class FormBanHang extends javax.swing.JPanel {
         jSSanPham.setBorder(null);
         jSSanPham.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        jpnDSsanpham.setBackground(new java.awt.Color(255, 255, 255));
+        jpnDSsanpham.setBackground(new java.awt.Color(255, 204, 255));
         jpnDSsanpham.setAutoscrolls(true);
         jpnDSsanpham.setMaximumSize(new java.awt.Dimension(32767, 400));
         jpnDSsanpham.setLayout(new javax.swing.BoxLayout(jpnDSsanpham, javax.swing.BoxLayout.LINE_AXIS));

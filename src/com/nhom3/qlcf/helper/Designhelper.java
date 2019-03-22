@@ -17,10 +17,14 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.Normalizer;
 import java.text.NumberFormat;
@@ -64,7 +68,11 @@ public class Designhelper implements DesignInterFace {
         this.sanphamUI.setVisible(true);
         JPanel[] pnlSanPham = new JPanel[this.data.size()];
         // int x = Integer.parseInt(String.valueOf(data.size() / 3)); //1.2
-        sanphamUI.setLayout(new GridLayout(3, 4, 5, 5));
+//        sanphamUI.setLayout(new GridLayout(3, 4, 5, 5));
+        sanphamUI.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        int x = 0, y = 0;
         for (int i = 0; i < this.data.size(); i++) {
             try {
                 pnlSanPham[i] = new JPanel();
@@ -95,9 +103,20 @@ public class Designhelper implements DesignInterFace {
                 } );
                    DesigMenuThucDon(lblgia, lbltenSP, lblImg);
                 pnlSanPham[i].add(DesigMenuThucDon(lblgia, lbltenSP, lblImg));
-                this.sanphamUI.add(pnlSanPham[i]);
+
+                gbc.insets = new Insets(3, 3, 3, 3);
+                gbc.gridx = x;
+                gbc.gridy = y;
+                this.sanphamUI.add(pnlSanPham[i], gbc);
                 this.sanphamUI.updateUI();
-            } catch (Exception e) {
+                if (y < 2) {
+                    y++;
+                } else if (y == 2) {
+                    x++;
+                    y = 0;
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
 
         }
@@ -302,7 +321,7 @@ public class Designhelper implements DesignInterFace {
     public void DesignSizeSP(JPanel size, List<SizeSP> dataSize, List<SanPham> dataSP, JLabel giaSize, JLabel showSize) {
         this.lblSize = giaSize;
         this.data = dataSP;
-      
+
         size.setLayout(new FlowLayout(FlowLayout.LEFT, 7, 7));
         size.removeAll();
         size.updateUI();
@@ -315,7 +334,7 @@ public class Designhelper implements DesignInterFace {
             jplNext[i].setBackground(Color.WHITE);
             JLabel M = new JLabel();
             M.setText(dataSize.get(i).getTenSize());
-          
+
             jplNext[i].setName(String.valueOf(dataSize.get(i).getHeSo()));
             jplNext[i].add(M);
             jplNext[i].addMouseListener(new MouseAdapter() {
@@ -326,7 +345,7 @@ public class Designhelper implements DesignInterFace {
                 }
 
             });
-            
+
             size.add(jplNext[i]);
             size.updateUI();
 
