@@ -755,7 +755,7 @@
         <Component class="javax.swing.JLabel" name="lblFormDangKy">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/nhom3/qlcf/img/nenThuNgan.png"/>
+              <Image iconType="3" name="/com/nhom3/qlcf/img/nenLogin.png"/>
             </Property>
           </Properties>
           <Constraints>

@@ -52,10 +52,15 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
         jpnToolbar19 = new javax.swing.JPanel();
         lblAn_BanHang = new javax.swing.JLabel();
         lblOutBangHang = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        jplbackround = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jpnNen = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jplnen = new javax.swing.JPanel();
+        lblName = new javax.swing.JLabel();
         lblanhGiaoDien = new javax.swing.JLabel();
         Card = new javax.swing.JPanel();
 
@@ -209,40 +214,12 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(51, 51, 255));
-
-        jTextField1.setText("Tìm kiếm");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Tìm Kiếm");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField1)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout jpnToolbar19Layout = new javax.swing.GroupLayout(jpnToolbar19);
         jpnToolbar19.setLayout(jpnToolbar19Layout);
         jpnToolbar19Layout.setHorizontalGroup(
             jpnToolbar19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnToolbar19Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 604, Short.MAX_VALUE)
+                .addContainerGap(996, Short.MAX_VALUE)
                 .addComponent(lblAn_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblOutBangHang)
@@ -251,28 +228,94 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
         jpnToolbar19Layout.setVerticalGroup(
             jpnToolbar19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblAn_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(jpnToolbar19Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(lblOutBangHang, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
         jfSuaHang.add(jpnToolbar19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 50));
 
-        jpnNen.setBackground(new java.awt.Color(255, 255, 255));
+        jplbackround.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jpnNenLayout = new javax.swing.GroupLayout(jpnNen);
-        jpnNen.setLayout(jpnNenLayout);
-        jpnNenLayout.setHorizontalGroup(
-            jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel2.setText("HÀNG");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 130, 90));
+
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("CẬP NHẬT KHÁC");
+        jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.setOpaque(true);
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 230, 40));
+
+        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("CHỈNH SỬA GIÁ");
+        jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel5.setOpaque(true);
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel5MousePressed(evt);
+            }
+        });
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 230, 40));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel3.setText("MẶT ");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 100, 90));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenAdmin_thucuong.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 270, 610));
+
+        jplnen.setLayout(new javax.swing.BoxLayout(jplnen, javax.swing.BoxLayout.LINE_AXIS));
+
+        lblName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblName.setText("NAME");
+
+        javax.swing.GroupLayout jplbackroundLayout = new javax.swing.GroupLayout(jplbackround);
+        jplbackround.setLayout(jplbackroundLayout);
+        jplbackroundLayout.setHorizontalGroup(
+            jplbackroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jplbackroundLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jplbackroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jplbackroundLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jplnen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jplbackroundLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
-        jpnNenLayout.setVerticalGroup(
-            jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 630, Short.MAX_VALUE)
+        jplbackroundLayout.setVerticalGroup(
+            jplbackroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jplbackroundLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jplnen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jfSuaHang.add(jpnNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 630));
+        lblName.setText("CHỈNH SỬA HÀNG HÓA");
+        jplnen.removeAll();
+        jplnen.updateUI();
+        jplnen.add(new SuaHangHoa());
+        jplnen.repaint();
+        jplnen.updateUI();
+
+        jfSuaHang.add(jplbackround, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 630));
 
         lblanhGiaoDien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenThuNgan.png"))); // NOI18N
         jfSuaHang.add(lblanhGiaoDien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, -1));
@@ -397,21 +440,36 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
         jpnShowMenuOut.hide();
     }//GEN-LAST:event_jpnShowMenuOutMouseExited
 
+    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
+        // TODO add your handling code here:
+        lblName.setText("CHỈNH SỬA HÀNG HÓA");
+        jplnen.removeAll();
+        jplnen.updateUI();
+        jplnen.add(new SuaHangHoa());
+        jplnen.repaint();
+        jplnen.updateUI();
+    }//GEN-LAST:event_jLabel5MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JPanel Card;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     protected static javax.swing.JPanel jfSuaHang;
+    private javax.swing.JPanel jplbackround;
+    private javax.swing.JPanel jplnen;
     private javax.swing.JPanel jpnDangXuat;
-    private javax.swing.JPanel jpnNen;
     private javax.swing.JPanel jpnQuayVe;
     private javax.swing.JPanel jpnShowMenuOut;
     private javax.swing.JPanel jpnTenDangNhap;
     private javax.swing.JPanel jpnToolbar19;
     private javax.swing.JLabel lblAn_BanHang;
     private javax.swing.JLabel lblDangXuatBangHang;
+    private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblOutBangHang;
     private javax.swing.JLabel lblQuayVeBangHang;
     private javax.swing.JLabel lblTenDangNhapBangHang;

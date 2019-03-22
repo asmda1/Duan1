@@ -509,7 +509,7 @@ public class FormKhachHang extends javax.swing.JPanel {
         jpnDangKyForm.setLayout(new javax.swing.BoxLayout(jpnDangKyForm, javax.swing.BoxLayout.LINE_AXIS));
         jfKhachHang.add(jpnDangKyForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 450, 530));
 
-        lblFormDangKy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenThuNgan.png"))); // NOI18N
+        lblFormDangKy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenLogin.png"))); // NOI18N
         jfKhachHang.add(lblFormDangKy, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1100, 710));
 
         add(jfKhachHang);

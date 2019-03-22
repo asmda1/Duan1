@@ -262,14 +262,14 @@ public class FormQuanLyPhieuNhap_admin extends javax.swing.JPanel {
         jpnNen.setLayout(jpnNenLayout);
         jpnNenLayout.setHorizontalGroup(
             jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+            .addGap(0, 1080, Short.MAX_VALUE)
         );
         jpnNenLayout.setVerticalGroup(
             jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGap(0, 630, Short.MAX_VALUE)
         );
 
-        jfPhieuNhap.add(jpnNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 480, 600));
+        jfPhieuNhap.add(jpnNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 630));
 
         lblanhGiaoDien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenThuNgan.png"))); // NOI18N
         jfPhieuNhap.add(lblanhGiaoDien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, -1));

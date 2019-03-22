@@ -54,6 +54,13 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jpnNen = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        jplnen = new javax.swing.JPanel();
         lblanhGiaoDien = new javax.swing.JLabel();
         Card = new javax.swing.JPanel();
 
@@ -259,16 +266,73 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
 
         jpnNen.setBackground(new java.awt.Color(255, 255, 255));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("CHỈNH SỬA NHÀ CUNG CẤP");
+        jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.setOpaque(true);
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel4MousePressed(evt);
+            }
+        });
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 230, 40));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel6.setText("SẢN");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 100, 90));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel7.setText("PHẨM");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 140, 70));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenAdmin_thucuong.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 300, 610));
+
+        lblName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblName.setText("NAME");
+
+        jplnen.setLayout(new javax.swing.BoxLayout(jplnen, javax.swing.BoxLayout.LINE_AXIS));
+
         javax.swing.GroupLayout jpnNenLayout = new javax.swing.GroupLayout(jpnNen);
         jpnNen.setLayout(jpnNenLayout);
         jpnNenLayout.setHorizontalGroup(
             jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
+            .addGroup(jpnNenLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnNenLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpnNenLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jplnen, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnNenLayout.setVerticalGroup(
             jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 630, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+            .addGroup(jpnNenLayout.createSequentialGroup()
+                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jplnen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        lblName.setText("CHỈNH SỬA SẢN PHẨM");
+        jplnen.removeAll();
+        jplnen.updateUI();
+        jplnen.add(new SuaSP());
+        jplnen.repaint();
+        jplnen.updateUI();
 
         jfTSuaXoa.add(jpnNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 630));
 
@@ -395,13 +459,31 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
         jpnShowMenuOut.hide();
     }//GEN-LAST:event_jpnShowMenuOutMouseExited
 
+    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+        // TODO add your handling code here:
+
+        lblName.setText("CHỈNH SỬA SẢN PHẨM");
+        jplnen.removeAll();
+        jplnen.updateUI();
+        jplnen.add(new SuaSP());
+        jplnen.repaint();
+        jplnen.updateUI();
+
+    }//GEN-LAST:event_jLabel4MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JPanel Card;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
     protected static javax.swing.JPanel jfTSuaXoa;
+    private javax.swing.JPanel jplnen;
     private javax.swing.JPanel jpnDangXuat;
     private javax.swing.JPanel jpnNen;
     private javax.swing.JPanel jpnQuayVe;
@@ -410,6 +492,7 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
     private javax.swing.JPanel jpnToolbar19;
     private javax.swing.JLabel lblAn_BanHang;
     private javax.swing.JLabel lblDangXuatBangHang;
+    private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblOutBangHang;
     private javax.swing.JLabel lblQuayVeBangHang;
     private javax.swing.JLabel lblTenDangNhapBangHang;
