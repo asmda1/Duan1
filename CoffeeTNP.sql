@@ -222,8 +222,8 @@ GO
 
 
 INSERT INTO dbo.SizeSP ( maSize, tenSize, heSo ) VALUES  ( 'M',  N'Vừa', 1  )
-INSERT INTO dbo.SizeSP ( maSize, tenSize, heSo ) VALUES  ( 'L',  N'Lớn', 1  )
-INSERT INTO dbo.SizeSP ( maSize, tenSize, heSo ) VALUES  ( 'XL',  N'Siêu lớn', 1  )
+INSERT INTO dbo.SizeSP ( maSize, tenSize, heSo ) VALUES  ( 'L',  N'Lớn', 1.2  )
+INSERT INTO dbo.SizeSP ( maSize, tenSize, heSo ) VALUES  ( 'XL',  N'Siêu lớn', 1.5  )
 GO
 
 
