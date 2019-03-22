@@ -16,6 +16,7 @@ public class PhieuNhap {
     private String maPhieu;
     private HangHoa maHangHoa;
     private NhaCungCap maNhaCungCap;
+    private NguoiDung maNguoiDung;
     private Date ngayNhap;
     private int SoLuong;
     private double tongTien;
@@ -23,10 +24,11 @@ public class PhieuNhap {
     public PhieuNhap() {
     }
 
-    public PhieuNhap(String maPhieu, HangHoa maHangHoa, NhaCungCap maNhaCungCap, Date ngayNhap, int SoLuong, double tongTien) {
+    public PhieuNhap(String maPhieu, HangHoa maHangHoa, NhaCungCap maNhaCungCap, NguoiDung maNguoiDung, Date ngayNhap, int SoLuong, double tongTien) {
         this.maPhieu = maPhieu;
         this.maHangHoa = maHangHoa;
         this.maNhaCungCap = maNhaCungCap;
+        this.maNguoiDung = maNguoiDung;
         this.ngayNhap = ngayNhap;
         this.SoLuong = SoLuong;
         this.tongTien = tongTien;
@@ -56,6 +58,14 @@ public class PhieuNhap {
         this.maNhaCungCap = maNhaCungCap;
     }
 
+    public NguoiDung getMaNguoiDung() {
+        return maNguoiDung;
+    }
+
+    public void setMaNguoiDung(NguoiDung maNguoiDung) {
+        this.maNguoiDung = maNguoiDung;
+    }
+
     public Date getNgayNhap() {
         return ngayNhap;
     }
@@ -79,6 +89,8 @@ public class PhieuNhap {
     public void setTongTien(double tongTien) {
         this.tongTien = tongTien;
     }
+
+ 
 
     
     

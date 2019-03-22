@@ -14,29 +14,31 @@ public class CTHoaDon {
     private int id;
     private HoaDon maHoaDon;
     private SanPham maSanPham;
+    private Extra extra;
     private int soLuong;
-    
 
     public CTHoaDon() {
-    }
-
+ }
     public CTHoaDon(int id) {
         this.id = id;
     }
 
-    public CTHoaDon(int id, HoaDon maHoaDon, SanPham maSanPham, int soLuong) {
+    public CTHoaDon(int id, HoaDon maHoaDon, SanPham maSanPham, Extra extra, int soLuong) {
         this.id = id;
         this.maHoaDon = maHoaDon;
         this.maSanPham = maSanPham;
+        this.extra = extra;
+        this.soLuong = soLuong;
+    }
+
+    public CTHoaDon(HoaDon maHoaDon, SanPham maSanPham, Extra extra, int soLuong) {
+        this.maHoaDon = maHoaDon;
+        this.maSanPham = maSanPham;
+        this.extra = extra;
         this.soLuong = soLuong;
     }
 
     
-    public CTHoaDon(HoaDon maHoaDon, SanPham maSanPham, int soLuong) {
-        this.maHoaDon = maHoaDon;
-        this.maSanPham = maSanPham;
-        this.soLuong = soLuong;
-    }
 
     public int getId() {
         return id;
@@ -60,6 +62,14 @@ public class CTHoaDon {
 
     public void setMaSanPham(SanPham maSanPham) {
         this.maSanPham = maSanPham;
+    }
+
+    public Extra getExtra() {
+        return extra;
+    }
+
+    public void setExtra(Extra extra) {
+        this.extra = extra;
     }
 
     public int getSoLuong() {

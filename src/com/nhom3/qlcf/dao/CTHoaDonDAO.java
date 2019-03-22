@@ -7,6 +7,7 @@ package com.nhom3.qlcf.dao;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.model.CTHoaDon;
+import com.nhom3.qlcf.model.Extra;
 import com.nhom3.qlcf.model.HoaDon;
 import com.nhom3.qlcf.model.SanPham;
 import java.sql.ResultSet;
@@ -14,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**1
+/**
  *
  * @author Kanbi
  */
@@ -22,8 +23,8 @@ public class CTHoaDonDAO implements DAO<CTHoaDon> {
 
     @Override
     public boolean insert(CTHoaDon t) {
-        String sql = "Insert dbo.CTHoaDon values (?,?,?)";
-        return JDBCHelper.executeUpdate(sql, t.getMaHoaDon().getMaHoaDon(), t.getMaSanPham().getMaSanPham(), t.getSoLuong());
+        String sql = "Insert dbo.CTHoaDon values (?,?,?,?)";
+        return JDBCHelper.executeUpdate(sql, t.getMaHoaDon().getMaHoaDon(), t.getMaSanPham().getMaSanPham(), t.getExtra().getId(), t.getSoLuong());
     }
 
     @Override
@@ -35,7 +36,7 @@ public class CTHoaDonDAO implements DAO<CTHoaDon> {
     @Override
     public boolean update(CTHoaDon t) {
         String sql = "Update dbo.CTHoaDon set maHD=?,maSP=?,soLuong=? where maCTHD=?";
-        return JDBCHelper.executeUpdate(sql, t.getMaHoaDon().getMaHoaDon(), t.getMaSanPham().getMaSanPham(), t.getSoLuong(), t.getId());
+        return JDBCHelper.executeUpdate(sql, t.getMaHoaDon().getMaHoaDon(), t.getMaSanPham().getMaSanPham(), t.getExtra().getId(), t.getSoLuong(), t.getId());
     }
 
     @Override
@@ -69,16 +70,16 @@ public class CTHoaDonDAO implements DAO<CTHoaDon> {
         CTHoaDon model = new CTHoaDon();
         try {
             model.setId(rs.getInt(1));
-            
             HoaDon hd = new HoaDon();
             hd.setMaHoaDon(rs.getString(2));
             model.setMaHoaDon(hd);
-            
             SanPham sp = new SanPham();
             sp.setMaSanPham(rs.getString(3));
             model.setMaSanPham(sp);
-            
-            model.setSoLuong(rs.getInt(4)); 
+            Extra ex = new Extra();
+            ex.setId(rs.getString(4));
+            model.setExtra(ex);
+            model.setSoLuong(rs.getInt(5));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

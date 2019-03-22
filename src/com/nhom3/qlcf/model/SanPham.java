@@ -21,9 +21,6 @@ public class SanPham implements Serializable{
     private boolean trangThai;
     private String hinhAnh;
 
-    public SanPham() {
-    }
-
     public SanPham(String maSanPham, LoaiSanPham maLoaiSanPham, HangHoa maHangHoa, String tenSp, double giaBan, boolean trangThai, String hinhAnh) {
         this.maSanPham = maSanPham;
         this.maLoaiSanPham = maLoaiSanPham;
@@ -32,6 +29,11 @@ public class SanPham implements Serializable{
         this.giaBan = giaBan;
         this.trangThai = trangThai;
         this.hinhAnh = hinhAnh;
+    }
+
+    
+
+    public SanPham() {
     }
 
     public String getMaSanPham() {
@@ -74,6 +76,7 @@ public class SanPham implements Serializable{
         this.giaBan = giaBan;
     }
 
+    
     public boolean isTrangThai() {
         return trangThai;
     }
@@ -89,8 +92,6 @@ public class SanPham implements Serializable{
     public void setHinhAnh(String hinhAnh) {
         this.hinhAnh = hinhAnh;
     }
-
-   
     
     
 

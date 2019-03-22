@@ -13,6 +13,11 @@ public class NhaCungCap {
   private  String maNhaCungCap,tenNhaCC,dienThoai,diaChi;
   private  boolean trangThai;
 
+    public NhaCungCap() {
+    }
+
+
+
     public NhaCungCap(String maNhaCungCap, String tenNhaCC, String dienThoai, String diaChi, boolean trangThai) {
         this.maNhaCungCap = maNhaCungCap;
         this.tenNhaCC = tenNhaCC;
