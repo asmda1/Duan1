@@ -40,6 +40,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
@@ -58,6 +59,7 @@ public class Designhelper implements DesignInterFace {
     private List<SanPham> data;
     String tenspString, giaSP, img, so;
     NumberFormat chuyentien = new DecimalFormat("#,###,###");
+    int s1;
 
     @Override
     public void DesignSanPham(JPanel sanphamUI, List<SanPham> data) {
@@ -68,7 +70,7 @@ public class Designhelper implements DesignInterFace {
         this.sanphamUI.setVisible(true);
         JPanel[] pnlSanPham = new JPanel[this.data.size()];
         // int x = Integer.parseInt(String.valueOf(data.size() / 3)); //1.2
-//        sanphamUI.setLayout(new GridLayout(3, 4, 5, 5));
+
         sanphamUI.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -104,7 +106,7 @@ public class Designhelper implements DesignInterFace {
                    DesigMenuThucDon(lblgia, lbltenSP, lblImg);
                 pnlSanPham[i].add(DesigMenuThucDon(lblgia, lbltenSP, lblImg));
 
-                gbc.insets = new Insets(3, 3, 3, 3);
+                gbc.insets = new Insets(3, 3, 7, 7);
                 gbc.gridx = x;
                 gbc.gridy = y;
                 this.sanphamUI.add(pnlSanPham[i], gbc);
@@ -197,7 +199,8 @@ public class Designhelper implements DesignInterFace {
             lblsoluong.setPreferredSize(new Dimension(50, 20));
             JLabel lbltenSP = new JLabel(this.CTHD.get(i).getMaSanPham().getTenSp());
             JLabel lblmaSP = new JLabel(this.CTHD.get(i).getMaSanPham().getMaSanPham());
-            JLabel lbltenSPmaSP = new JLabel(lbltenSP.getText() + " (" + lblmaSP.getText() + ")");
+            JLabel lblSize = new JLabel(this.CTHD.get(i).getSizeSP().getMaSize());
+            JLabel lbltenSPmaSP = new JLabel(lblmaSP.getText() + "/" + lbltenSP.getText() + " (" + lblSize.getText() + ")");
             lbltenSPmaSP.setName(this.CTHD.get(i).getMaSanPham().getMaSanPham());
             lbltenSPmaSP.setForeground(Color.BLUE);
             lbltenSPmaSP.setFont(new Font("Tahoma", 1, 11));
@@ -218,7 +221,7 @@ public class Designhelper implements DesignInterFace {
             JLabel lblghiChu = new JLabel("Ghi Chú: "/* + CTHD.get(i).getMaSanPham().getExtra()*/);
             lblghiChu.setForeground(Color.GRAY);
             lblghiChu.setFont(new Font("Tahoma", 2, 11));
-            JLabel size = new JLabel();
+
             pnl[i].add(lbltenSPmaSP);
             pnl[i].add(lblgiaSP);
             pnl[i].add(lblTongTien);
@@ -318,10 +321,10 @@ public class Designhelper implements DesignInterFace {
     }
 
     @Override
-    public void DesignSizeSP(JPanel size, List<SizeSP> dataSize, List<SanPham> dataSP, JLabel giaSize, JLabel showSize) {
+    public void DesignSizeSP(JPanel size, List<SizeSP> dataSize, List<SanPham> dataSP, JLabel giaSize, JLabel showSize, int so, JTextField txtsoluong) {
         this.lblSize = giaSize;
         this.data = dataSP;
-
+        s1 = so;
         size.setLayout(new FlowLayout(FlowLayout.LEFT, 7, 7));
         size.removeAll();
         size.updateUI();
@@ -334,14 +337,16 @@ public class Designhelper implements DesignInterFace {
             jplNext[i].setBackground(Color.WHITE);
             JLabel M = new JLabel();
             M.setText(dataSize.get(i).getTenSize());
-
+            M.setName(dataSize.get(i).getMaSize());
             jplNext[i].setName(String.valueOf(dataSize.get(i).getHeSo()));
             jplNext[i].add(M);
             jplNext[i].addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
-                    giaSize.setText(String.valueOf(chuyentien.format(dataSP.get(0).getGiaBan() * Float.parseFloat(e.getComponent().getName()))) + " VNĐ");
+                    s1 = Integer.parseInt(txtsoluong.getText());
+                    giaSize.setText(String.valueOf(chuyentien.format((dataSP.get(0).getGiaBan() * s1) * Float.parseFloat(e.getComponent().getName()))) + " VNĐ");
                     giaSize.setName(String.valueOf(dataSP.get(0).getGiaBan() * Float.parseFloat(e.getComponent().getName())));
                     showSize.setText(M.getText());
+                    showSize.setName(M.getName());
                 }
 
             });

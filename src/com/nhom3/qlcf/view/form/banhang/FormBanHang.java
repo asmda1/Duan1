@@ -59,6 +59,7 @@ public class FormBanHang extends javax.swing.JPanel {
     public void LoadDataSanPham() {
 
         try {
+            jpnDSsanpham.setLayout(new GridLayout(9, 4, 3, 3));
             testSQL sql = new testSQL();
             int start = 0;
             int end = 9;
@@ -90,6 +91,7 @@ public class FormBanHang extends javax.swing.JPanel {
                 cthd.setMaHoaDon(mahDon);
                 cthd.setMaSanPham(DongCTHD.get(i).getMaSanPham());
                 cthd.setSoLuong(DongCTHD.get(i).getSoLuong());
+                
                 insert.insert(cthd);
                 System.out.println("Thanh công HDCT");
             }

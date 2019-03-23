@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -30,7 +31,7 @@ public interface DesignInterFace {
 
     public JPanel DesigMenuThucDon(JLabel lblgia, JLabel lblTen, JLabel lblImg);
 
-    public void DesignSizeSP(JPanel size, List<SizeSP> data,List<SanPham> showGia, JLabel giaDieuChinh,JLabel showSize);
+    public void DesignSizeSP(JPanel size, List<SizeSP> data,List<SanPham> showGia, JLabel giaDieuChinh,JLabel showSize,int soluongdat,JTextField lblgetSoluong);
 
     public JDialog DesignDatMon();
 
