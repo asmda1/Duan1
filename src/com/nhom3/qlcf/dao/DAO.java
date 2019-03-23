@@ -14,15 +14,18 @@ import java.util.List;
  * @param <T>
  */
 public interface DAO<T> {
+
     public boolean insert(T t);
-    
+
     public boolean delete(T t);
-    
+
     public boolean update(T t);
-    
+
     public List<T> selectAll();
-    
+
+    public T selectID(String ID);
+
     public List<T> select(String sql, Object... args);
-    
+
     public T readFromResultSet(ResultSet rs);
 }

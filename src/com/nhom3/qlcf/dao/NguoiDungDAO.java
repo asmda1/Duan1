@@ -32,8 +32,8 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
 
     @Override
     public boolean update(NguoiDung t) {
-        String sql = "Update dbo.NguoiDung set taiKhoan=?, matKhau=?, hoTen=?, dienThoai=?, vaiTro=?, trangThai=? where maNguoiDung=?";
-        return JDBCHelper.executeUpdate(sql, t.getTaiKhoan(), t.getMatKhau(), t.getHoTen(), t.getDienThoai(), t.getVaiTro(), t.getTaiKhoan(), t.getMaNguoidung());
+        String sql = "Update dbo.NguoiDung set taiKhoan=?,matKhau=?, hoTen=?, dienThoai=?, vaiTro=?, trangThai=? where maNguoiDung=?";
+        return JDBCHelper.executeUpdate(sql, t.getTaiKhoan(),t.getMatKhau(), t.getHoTen(), t.getDienThoai(), t.getVaiTro(), t.isTrangThai(), t.getMaNguoidung());
     }
 
     @Override
@@ -77,6 +77,14 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
             throw new RuntimeException(ex);
         }
         return model;
+    }
+
+    @Override
+    public NguoiDung selectID(String ID) {
+
+        String sql = "Select * from dbo.NguoiDung where maNguoiDung=?";
+        List<NguoiDung> list = select(sql, ID);
+        return list.size() > 0 ? list.get(0) : null;
     }
 
 }

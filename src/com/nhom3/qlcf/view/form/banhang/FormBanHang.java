@@ -60,7 +60,6 @@ public class FormBanHang extends javax.swing.JPanel {
 
         try {
             testSQL sql = new testSQL();
-            jpnDSsanpham.setLayout(new FlowLayout(FlowLayout.LEFT, 45, 45));
             int start = 0;
             int end = 9;
             // List Show sp từ dữ liệu SQL
@@ -68,15 +67,6 @@ public class FormBanHang extends javax.swing.JPanel {
             if (sql.select().size() < 9) {
                 end = sql.select().size();
                 //jpnDSsanpham.setLayout(new GridLayout(2, 3, 4, 4));
-            } else {
-                if (sql.select().size() < 6) {
-                    end = sql.select().size();
-
-                } else {
-                    if (sql.select().size() < 3) {
-                        end = sql.select().size();
-                    }
-                }
             }
             Designhelper designhelper = new Designhelper();
             designhelper.DesignPage(jpnNext, sql.select());

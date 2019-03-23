@@ -88,4 +88,11 @@ public class HoaDonDAO implements DAO<HoaDon> {
         return model;
     }
 
+  
+
+    @Override
+    public HoaDon selectID(String ID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

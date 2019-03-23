@@ -55,9 +55,8 @@ public class Designhelper implements DesignInterFace {
         this.sanphamUI.updateUI();
         this.sanphamUI.setVisible(true);
         JPanel[] pnlSanPham = new JPanel[this.data.size()];
-        int x = Integer.parseInt(String.valueOf(this.data.size() / 4));
-        this.sanphamUI.setLayout(new GridLayout(x + 1, 4, 15, 15));
-
+       // int x = Integer.parseInt(String.valueOf(data.size() / 3)); //1.2
+        sanphamUI.setLayout(new GridLayout(3, 4, 5, 5));
         for (int i = 0; i < this.data.size(); i++) {
             pnlSanPham[i] = new JPanel();
             lbltenSP = new JLabel(this.data.get(i).getTenSp());
@@ -78,7 +77,6 @@ public class Designhelper implements DesignInterFace {
 
                     Datmon dt = new Datmon(null, true, e.getComponent().getName(), giaSP, tenspString, img);
                     dt.setVisible(true);
-
 
                 }
             ;
@@ -130,6 +128,7 @@ public class Designhelper implements DesignInterFace {
                         end = limit.size();
                     }
                     data = LimitPage(limit, start, end);
+
                     DesignSanPham(sanphamUI, data);
                     System.out.println(LimitPage(limit, start, end));
                 }

@@ -74,4 +74,11 @@ public class LoaiSanPhamDAO implements DAO<LoaiSanPham> {
         return model;
     }
 
+   
+
+    @Override
+    public LoaiSanPham selectID(String ID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

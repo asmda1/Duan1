@@ -5,6 +5,11 @@
  */
 package com.nhom3.qlcf.view.form.users;
 
+import com.nhom3.qlcf.dao.NguoiDungDAO;
+import com.nhom3.qlcf.model.NguoiDung;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComponent;
+
 /**
  *
  * @author baotri1998
@@ -14,8 +19,45 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
     /**
      * Creates new form Quanlyusers
      */
+    NguoiDung ndung = null;
+
     public ChinhSuaTaiKhoan() {
         initComponents();
+    }
+
+    public void update() {
+
+        try {
+            NguoiDung nd = new NguoiDung();
+            nd.setMaNguoidung(lblNhapMa.getText());
+            nd.setHoTen(txtten.getText());
+            nd.setDienThoai(txtSDT.getText());
+            nd.setVaiTro(cbxNhanVien.getSelectedItem().toString());
+            nd.setMatKhau(ndung.getMatKhau());
+            nd.setTaiKhoan(lblTenDangNhap.getText());
+            nd.setTrangThai(true);
+            NguoiDungDAO ndDAO = new NguoiDungDAO();
+            ndDAO.update(nd);
+
+        } catch (Exception e) {
+            System.out.println(e);
+
+        }
+
+    }
+
+    public void timMaNguoiDung() {
+
+        NguoiDungDAO ndDAO = new NguoiDungDAO();
+        ndDAO.selectID(txtTimKiem.getText());
+        ndung = ndDAO.selectID(txtTimKiem.getText());
+        lblTenDangNhap.setText(ndung.getTaiKhoan());
+        lblNhapMa.setText(ndung.getMaNguoidung());
+        cbxNhanVien.setSelectedItem(ndung.getVaiTro());
+        txtten.setText(ndung.getHoTen());
+        txtSDT.setText(ndung.getDienThoai());
+       
+
     }
 
     /**
@@ -28,20 +70,22 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblNhapMa = new javax.swing.JLabel();
+        lblTenDangNhap = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxNhanVien = new javax.swing.JComboBox<>();
         lblpass3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtten = new javax.swing.JTextField();
         lblvien2 = new javax.swing.JLabel();
         lblpass1 = new javax.swing.JLabel();
         lblvien3 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtSDT = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        lblTen = new javax.swing.JLabel();
+        lblMaNhanVien1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTimKiem = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -50,28 +94,28 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("Mã Nhân Viên: ps08177");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 331, 43));
+        lblNhapMa.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblNhapMa.setText("...");
+        jPanel1.add(lblNhapMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 220, 43));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("Tên Đăng Nhập: tridbps08177");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 331, 43));
+        lblTenDangNhap.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTenDangNhap.setText("...");
+        jPanel1.add(lblTenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 220, 43));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Vai Trò:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 74, 27));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viêm", "Admin" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 242, -1));
+        cbxNhanVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Admin" }));
+        jPanel1.add(cbxNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 242, -1));
 
         lblpass3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblpass3.setText("Số ĐT :");
         jPanel1.add(lblpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 80, 20));
 
-        jTextField3.setBorder(null);
-        jTextField3.setOpaque(false);
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 259, 40));
+        txtten.setBorder(null);
+        txtten.setOpaque(false);
+        jPanel1.add(txtten, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 259, 40));
 
         lblvien2.setText("___________________________________________");
         jPanel1.add(lblvien2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 260, 30));
@@ -83,9 +127,9 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         lblvien3.setText("___________________________________________");
         jPanel1.add(lblvien3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 260, 30));
 
-        jTextField5.setBorder(null);
-        jTextField5.setOpaque(false);
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 259, 40));
+        txtSDT.setBorder(null);
+        txtSDT.setOpaque(false);
+        jPanel1.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 259, 40));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -101,7 +145,20 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         jLabel7.setText("Câp Nhật");
         jLabel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel7.setOpaque(true);
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel7MousePressed(evt);
+            }
+        });
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 110, 40));
+
+        lblTen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTen.setText("Tên Đăng Nhập:");
+        jPanel1.add(lblTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 43));
+
+        lblMaNhanVien1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblMaNhanVien1.setText("Mã Nhân Viên:");
+        jPanel1.add(lblMaNhanVien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 100, 43));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -109,6 +166,11 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Tìm Kiếm");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -116,15 +178,15 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -149,23 +211,36 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        // TODO add your handling code here:
+        timMaNguoiDung();
+    }//GEN-LAST:event_jLabel1MousePressed
+
+    private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
+        // TODO add your handling code here:
+
+        update();
+    }//GEN-LAST:event_jLabel7MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbxNhanVien;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel lblMaNhanVien1;
+    private javax.swing.JLabel lblNhapMa;
+    private javax.swing.JLabel lblTen;
+    private javax.swing.JLabel lblTenDangNhap;
     private javax.swing.JLabel lblpass1;
     private javax.swing.JLabel lblpass3;
     private javax.swing.JLabel lblvien2;
     private javax.swing.JLabel lblvien3;
+    private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtTimKiem;
+    private javax.swing.JTextField txtten;
     // End of variables declaration//GEN-END:variables
 }

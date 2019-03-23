@@ -78,4 +78,11 @@ public class ExtraDAO implements DAO<Extra> {
 
     }
 
+  
+
+    @Override
+    public Extra selectID(String ID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

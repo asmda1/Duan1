@@ -5,6 +5,10 @@
  */
 package com.nhom3.qlcf.view.form.users;
 
+import com.nhom3.qlcf.dao.NguoiDungDAO;
+import com.nhom3.qlcf.model.NguoiDung;
+import java.util.stream.Stream;
+
 /**
  *
  * @author baotri1998
@@ -29,20 +33,20 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtUsers = new javax.swing.JTextField();
         lblvien = new javax.swing.JLabel();
         lblvien1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtMatKhau = new javax.swing.JTextField();
         lblpass = new javax.swing.JLabel();
         lbluser = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtTen = new javax.swing.JTextField();
         lblpass1 = new javax.swing.JLabel();
         lblvien2 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtSDT = new javax.swing.JTextField();
         lblpass2 = new javax.swing.JLabel();
         lblvien3 = new javax.swing.JLabel();
         lblpass3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxVaiTro = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -63,14 +67,14 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         jLabel1.setPreferredSize(new java.awt.Dimension(122, 17));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 58));
 
-        jTextField1.setBorder(null);
-        jTextField1.setOpaque(false);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtUsers.setBorder(null);
+        txtUsers.setOpaque(false);
+        txtUsers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtUsersActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 102, 259, 40));
+        jPanel1.add(txtUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 102, 259, 40));
 
         lblvien.setText("___________________________________________");
         jPanel1.add(lblvien, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 114, 260, 30));
@@ -78,9 +82,9 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         lblvien1.setText("___________________________________________");
         jPanel1.add(lblvien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 260, 30));
 
-        jTextField2.setBorder(null);
-        jTextField2.setOpaque(false);
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 259, 40));
+        txtMatKhau.setBorder(null);
+        txtMatKhau.setOpaque(false);
+        jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 259, 40));
 
         lblpass.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblpass.setText("Password*:");
@@ -90,9 +94,9 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         lbluser.setText("UserName*:");
         jPanel1.add(lbluser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 84, 80, 20));
 
-        jTextField3.setBorder(null);
-        jTextField3.setOpaque(false);
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 259, 40));
+        txtTen.setBorder(null);
+        txtTen.setOpaque(false);
+        jPanel1.add(txtTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 259, 40));
 
         lblpass1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblpass1.setText("Họ Tên*:");
@@ -101,9 +105,9 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         lblvien2.setText("___________________________________________");
         jPanel1.add(lblvien2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 260, 30));
 
-        jTextField4.setBorder(null);
-        jTextField4.setOpaque(false);
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 259, 40));
+        txtSDT.setBorder(null);
+        txtSDT.setOpaque(false);
+        jPanel1.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 259, 40));
 
         lblpass2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblpass2.setText("Vài Trò:");
@@ -116,8 +120,13 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         lblpass3.setText("Số ĐT *:");
         jPanel1.add(lblpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 80, 20));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Admin" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 210, -1));
+        cbxVaiTro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Admin" }));
+        cbxVaiTro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxVaiTroActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbxVaiTro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 210, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -133,6 +142,11 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         jLabel4.setText("TẠO");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel4.setOpaque(true);
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel4MousePressed(evt);
+            }
+        });
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 110, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -153,21 +167,36 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsersActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtUsersActionPerformed
 
+    private void cbxVaiTroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxVaiTroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxVaiTroActionPerformed
+
+    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+        // TODO add your handling code here:
+        InsertUser();
+    }//GEN-LAST:event_jLabel4MousePressed
+    public void InsertUser() {
+        NguoiDung nd = new NguoiDung();
+        nd.setMaNguoidung("ND002");
+        nd.setTaiKhoan(txtUsers.getText());
+        nd.setMatKhau(txtMatKhau.getText());
+        nd.setDienThoai(txtSDT.getText());
+        nd.setVaiTro((String) cbxVaiTro.getSelectedItem());
+        nd.setTrangThai(true);
+        NguoiDungDAO ndDAO = new NguoiDungDAO();
+        ndDAO.insert(nd);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbxVaiTro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblpass;
     private javax.swing.JLabel lblpass1;
     private javax.swing.JLabel lblpass2;
@@ -177,5 +206,9 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JLabel lblvien1;
     private javax.swing.JLabel lblvien2;
     private javax.swing.JLabel lblvien3;
+    private javax.swing.JTextField txtMatKhau;
+    private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtTen;
+    private javax.swing.JTextField txtUsers;
     // End of variables declaration//GEN-END:variables
 }
