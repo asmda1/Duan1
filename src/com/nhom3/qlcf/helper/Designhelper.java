@@ -7,6 +7,7 @@ package com.nhom3.qlcf.helper;
 
 import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.SanPham;
+import com.nhom3.qlcf.model.SizeSP;
 import com.nhom3.qlcf.view.form.banhang.Datmon;
 import com.nhom3.qlcf.view.form.banhang.FormBanHang;
 import com.sun.corba.se.impl.naming.cosnaming.InterOperableNamingImpl;
@@ -20,7 +21,9 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
 import java.text.Normalizer;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -45,11 +48,12 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 public class Designhelper implements DesignInterFace {
 
     private JLabel lblgia, lbltenSP, lblImg;
-    public JLabel lblsoluong;
+    public JLabel lblsoluong, lblSize;
     private JPanel sanphamUI, donhang;
     private List<CTHoaDon> CTHD;
     private List<SanPham> data;
     String tenspString, giaSP, img, so;
+    NumberFormat chuyentien = new DecimalFormat("#,###,###");
 
     @Override
     public void DesignSanPham(JPanel sanphamUI, List<SanPham> data) {
@@ -65,14 +69,13 @@ public class Designhelper implements DesignInterFace {
             try {
                 pnlSanPham[i] = new JPanel();
                 lbltenSP = new JLabel(this.data.get(i).getTenSp());
-                lblgia = new JLabel(String.valueOf(this.data.get(i).getGiaBan()));
+                lblgia = new JLabel(String.valueOf(chuyentien.format(this.data.get(i).getGiaBan())) + " VNĐ");
                 lblImg = new JLabel();
-               
                 BufferedImage image = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/" + data.get(i).getHinhAnh()));
                 int type = image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType();
                 BufferedImage HinhAnh = buffImage(image, type);
                 ImageIcon icon = new ImageIcon(HinhAnh);
-                 lblImg.setIcon(icon);
+                lblImg.setIcon(icon);
                 pnlSanPham[i].setName(this.data.get(i).getMaSanPham());
                 pnlSanPham[i].setPreferredSize(new Dimension(140, 175)); //w = 200 hei = 250
                 pnlSanPham[i].setLayout(new BoxLayout(pnlSanPham[i], javax.swing.BoxLayout.LINE_AXIS));
@@ -188,14 +191,15 @@ public class Designhelper implements DesignInterFace {
             lblXoa.setName(String.valueOf(index));
             lblXoa.setToolTipText(String.valueOf(index));
             lblXoa.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            JLabel lblgiaSP = new JLabel(String.valueOf(this.CTHD.get(i).getMaSanPham().getGiaBan()));
+            JLabel lblgiaSP = new JLabel(String.valueOf(chuyentien.format(this.CTHD.get(i).getMaSanPham().getGiaBan())) + " VNĐ");
             lblgiaSP.setFont(new Font("Tahoma", 1, 11));
-            JLabel lblTongTien = new JLabel(String.valueOf(tongtien - this.CTHD.get(i).getMaSanPham().getGiaBan()) + "/" + lblsoluong.getText());
+            JLabel lblTongTien = new JLabel(String.valueOf(chuyentien.format(tongtien - this.CTHD.get(i).getMaSanPham().getGiaBan()) + " VNĐ/" + lblsoluong.getText()));
             lblTongTien.setFont(new Font("Tahoma", 1, 11));
             lblTongTien.setForeground(Color.RED);
             JLabel lblghiChu = new JLabel("Ghi Chú: "/* + CTHD.get(i).getMaSanPham().getExtra()*/);
             lblghiChu.setForeground(Color.GRAY);
             lblghiChu.setFont(new Font("Tahoma", 2, 11));
+            JLabel size = new JLabel();
             pnl[i].add(lbltenSPmaSP);
             pnl[i].add(lblgiaSP);
             pnl[i].add(lblTongTien);
@@ -292,6 +296,41 @@ public class Designhelper implements DesignInterFace {
         g.drawImage(buffImage, 0, 0, chieurong, chieucao, null);
         g.dispose();
         return buff;
+    }
+
+    @Override
+    public void DesignSizeSP(JPanel size, List<SizeSP> dataSize, List<SanPham> dataSP, JLabel giaSize, JLabel showSize) {
+        this.lblSize = giaSize;
+        this.data = dataSP;
+      
+        size.setLayout(new FlowLayout(FlowLayout.LEFT, 7, 7));
+        size.removeAll();
+        size.updateUI();
+        size.setVisible(true);
+        JPanel[] jplNext = new JPanel[dataSize.size()];
+        for (int i = 0; i < dataSize.size(); i++) {
+            jplNext[i] = new JPanel();
+            jplNext[i].setBorder(new LineBorder(Color.gray));
+            jplNext[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jplNext[i].setBackground(Color.WHITE);
+            JLabel M = new JLabel();
+            M.setText(dataSize.get(i).getTenSize());
+          
+            jplNext[i].setName(String.valueOf(dataSize.get(i).getHeSo()));
+            jplNext[i].add(M);
+            jplNext[i].addMouseListener(new MouseAdapter() {
+                public void mousePressed(MouseEvent e) {
+                    giaSize.setText(String.valueOf(chuyentien.format(dataSP.get(0).getGiaBan() * Float.parseFloat(e.getComponent().getName()))) + " VNĐ");
+                    giaSize.setName(String.valueOf(dataSP.get(0).getGiaBan() * Float.parseFloat(e.getComponent().getName())));
+                    showSize.setText(M.getText());
+                }
+
+            });
+            
+            size.add(jplNext[i]);
+            size.updateUI();
+
+        }
     }
 
 }

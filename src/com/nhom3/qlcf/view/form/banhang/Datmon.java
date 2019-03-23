@@ -9,15 +9,20 @@ import com.nhom3.qlcf.helper.Designhelper;
 import static com.nhom3.qlcf.helper.Designhelper.bruteforce;
 import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.SanPham;
+import com.nhom3.qlcf.model.SizeSP;
+import com.nhom3.qlcf.test.SelectSIze;
 
 import com.nhom3.qlcf.test.testSQL;
 import com.nhom3.qlcf.view.form.banhang.FormBanHang;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.DongCTHD;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.jpldonhang;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -35,7 +40,8 @@ public class Datmon extends javax.swing.JDialog {
     String maString, ten, gia, img, soluong;
     public List<CTHoaDon> list1;
     public List<SanPham> showSP = null;
-
+    NumberFormat chuyentien = new DecimalFormat("#,###,###");
+   
     int so = 0;
     public static Datmon datmon;
 
@@ -52,7 +58,6 @@ public class Datmon extends javax.swing.JDialog {
         lblgia.setText(this.gia);
         lblten.setName(maString);
         lblten.setText(this.ten);
-      
 
         fill();
 
@@ -70,7 +75,7 @@ public class Datmon extends javax.swing.JDialog {
         lblgia.setText(this.gia);
         lblten.setName(maString);
         lblten.setText(this.ten);
-     
+
         fill();
 
     }
@@ -81,12 +86,12 @@ public class Datmon extends javax.swing.JDialog {
         SanPham sp = new SanPham();
         sp.setTenSp(lblten.getText());
         sp.setMaSanPham(lblten.getName());
-        sp.setGiaBan(Double.parseDouble(lblgia.getText()));
-       // sp.setExtra(txtGhichu.getText());
+        sp.setGiaBan(Double.parseDouble(lblgia.getName()));
+        // sp.setExtra(txtGhichu.getText());
         sp.setHinhAnh("/com/qlbhcafe/img/" + lblimg.getText());
         //getClass().getResource("/com/qlbhcafe/img/" + data.get(i).getHinhAnh()))
         ct.setSoLuong(Integer.parseInt(txtdatmon.getText()));
-    
+
         ct.setMaSanPham(sp);
 
         list1.add(ct);
@@ -99,7 +104,7 @@ public class Datmon extends javax.swing.JDialog {
             sp.setMaSanPham(Datmon.datmon.list1.get(i).getMaSanPham().getMaSanPham());
             sp.setTenSp(Datmon.datmon.list1.get(i).getMaSanPham().getTenSp());
             sp.setGiaBan(Datmon.datmon.list1.get(i).getMaSanPham().getGiaBan());
-          //  sp.setExtra(Datmon.datmon.list1.get(i).getMaSanPham().getExtra());
+            //  sp.setExtra(Datmon.datmon.list1.get(i).getMaSanPham().getExtra());
             sp.setHinhAnh(Datmon.datmon.list1.get(i).getMaSanPham().getHinhAnh());
             cthd.setSoLuong(Datmon.datmon.list1.get(i).getSoLuong());
             cthd.setMaSanPham(sp);
@@ -110,10 +115,14 @@ public class Datmon extends javax.swing.JDialog {
     public void fill() {
         showSP = testSQL.FindmaSP(maString);
         lblmaSP.setText(showSP.get(0).getMaSanPham());
+        //lblsize = new JLabel(" Vừa");
         lblten.setName(showSP.get(0).getMaSanPham());
         lblten.setText(showSP.get(0).getTenSp());
-        lblgia.setText(String.valueOf(showSP.get(0).getGiaBan()));
+        lblgia.setText(String.valueOf(chuyentien.format(showSP.get(0).getGiaBan())) + " VNĐ");
+        lblgia.setName(String.valueOf(showSP.get(0).getGiaBan()));
         lblimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/" + showSP.get(0).getHinhAnh())));
+        Designhelper designhelper = new Designhelper();
+        designhelper.DesignSizeSP(jpnSize, SelectSIze.select(), showSP, lblgia,lblsize);
     }
 
     /**
@@ -126,26 +135,28 @@ public class Datmon extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtdatmon = new javax.swing.JTextField();
         lblten = new javax.swing.JLabel();
         lbltengia = new javax.swing.JLabel();
         lblimg = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtGhichu = new javax.swing.JTextArea();
+        lblsize = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblgia = new javax.swing.JLabel();
         lblbutonTat = new javax.swing.JLabel();
         lblbutonThem = new javax.swing.JLabel();
         lblmaSP = new javax.swing.JLabel();
+        jpnSize = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtdatmon = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        txtdatmon.setText("1");
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblten.setBackground(new java.awt.Color(51, 0, 255));
         lblten.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -153,28 +164,40 @@ public class Datmon extends javax.swing.JDialog {
         lblten.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblten.setText("tên:");
         lblten.setOpaque(true);
+        jPanel1.add(lblten, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 536, 26));
 
-        lbltengia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbltengia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbltengia.setText("Giá");
+        jPanel1.add(lbltengia, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 25, -1));
 
         lblimg.setBackground(new java.awt.Color(255, 255, 255));
         lblimg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblimg.setAutoscrolls(true);
         lblimg.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblimg.setOpaque(true);
+        jPanel1.add(lblimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 57, 140, 180));
 
         txtGhichu.setColumns(20);
         txtGhichu.setRows(5);
         jScrollPane1.setViewportView(txtGhichu);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setText("SL:");
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 155, 306, 90));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblsize.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblsize.setText("Vừa");
+        jPanel1.add(lblsize, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 90, 20));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("SỐ LƯỢNG:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 100, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Ghi Chú:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 104, 24));
 
         lblgia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblgia.setText("....");
+        jPanel1.add(lblgia, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 260, 170, 30));
 
         lblbutonTat.setBackground(new java.awt.Color(51, 51, 255));
         lblbutonTat.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -188,6 +211,7 @@ public class Datmon extends javax.swing.JDialog {
                 lblbutonTatMousePressed(evt);
             }
         });
+        jPanel1.add(lblbutonTat, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, 94, 30));
 
         lblbutonThem.setBackground(new java.awt.Color(51, 51, 255));
         lblbutonThem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -201,79 +225,31 @@ public class Datmon extends javax.swing.JDialog {
                 lblbutonThemMousePressed(evt);
             }
         });
+        jPanel1.add(lblbutonThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 119, 30));
 
         lblmaSP.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         lblmaSP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(lblmaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 140, 30));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(lblbutonThem, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(lblbutonTat, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblimg, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblmaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtdatmon, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lbltengia, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblgia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addComponent(lblten, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(lblten, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(jLabel2)
-                .addGap(5, 5, 5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtdatmon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel3)
-                        .addGap(11, 11, 11)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblgia)
-                            .addComponent(lbltengia)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblimg, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblmaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblbutonThem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblbutonTat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
+        jpnSize.setLayout(new javax.swing.BoxLayout(jpnSize, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel1.add(jpnSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 140, 40));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("Kích cở:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 95, -1, 30));
+
+        txtdatmon.setText("1");
+        jPanel1.add(txtdatmon, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 310, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
         );
 
         pack();
@@ -289,13 +265,12 @@ public class Datmon extends javax.swing.JDialog {
             }
 
         }*/
-       
-     
+
         getCTHD();
         DongGoi();
-         Designhelper designhelper = new Designhelper();
-         designhelper.DesigDonHang(jpldonhang, DongCTHD);
-                 
+        Designhelper designhelper = new Designhelper();
+        designhelper.DesigDonHang(jpldonhang, DongCTHD);
+
         dispose();
 
     }//GEN-LAST:event_lblbutonThemMousePressed
@@ -349,18 +324,21 @@ public class Datmon extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jpnSize;
     private javax.swing.JLabel lblbutonTat;
     private javax.swing.JLabel lblbutonThem;
     private javax.swing.JLabel lblgia;
     private javax.swing.JLabel lblimg;
     private javax.swing.JLabel lblmaSP;
+    private javax.swing.JLabel lblsize;
     private javax.swing.JLabel lblten;
     private javax.swing.JLabel lbltengia;
     private javax.swing.JTextArea txtGhichu;
-    public static javax.swing.JTextField txtdatmon;
+    private javax.swing.JTextField txtdatmon;
     // End of variables declaration//GEN-END:variables
 }
