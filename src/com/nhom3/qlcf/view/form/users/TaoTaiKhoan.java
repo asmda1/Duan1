@@ -20,6 +20,7 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
      */
     public TaoTaiKhoan() {
         initComponents();
+        AutogetMaND();
     }
 
     /**
@@ -181,16 +182,25 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel4MousePressed
     public void InsertUser() {
         NguoiDung nd = new NguoiDung();
-        nd.setMaNguoidung("ND002");
+        nd.setMaNguoidung(txtUsers.getName());
         nd.setTaiKhoan(txtUsers.getText());
         nd.setMatKhau(txtMatKhau.getText());
         nd.setDienThoai(txtSDT.getText());
+        nd.setHoTen(txtTen.getText());
         nd.setVaiTro((String) cbxVaiTro.getSelectedItem());
         nd.setTrangThai(true);
         NguoiDungDAO ndDAO = new NguoiDungDAO();
         ndDAO.insert(nd);
     }
 
+    public String AutogetMaND() {
+        NguoiDungDAO ndDao = new NguoiDungDAO();
+        int Index = ndDao.selectAll().size() - 1;
+        String chuoi = ndDao.selectAll().get(Index).getMaNguoidung().substring(2);
+        int so = Integer.parseInt(chuoi);
+        txtUsers.setName("ND" + String.valueOf(so + 1));
+        return txtUsers.getName();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbxVaiTro;
     private javax.swing.JLabel jLabel1;
