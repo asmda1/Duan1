@@ -15,17 +15,21 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -55,37 +59,44 @@ public class Designhelper implements DesignInterFace {
         this.sanphamUI.updateUI();
         this.sanphamUI.setVisible(true);
         JPanel[] pnlSanPham = new JPanel[this.data.size()];
-       // int x = Integer.parseInt(String.valueOf(data.size() / 3)); //1.2
+        // int x = Integer.parseInt(String.valueOf(data.size() / 3)); //1.2
         sanphamUI.setLayout(new GridLayout(3, 4, 5, 5));
         for (int i = 0; i < this.data.size(); i++) {
-            pnlSanPham[i] = new JPanel();
-            lbltenSP = new JLabel(this.data.get(i).getTenSp());
-            lblgia = new JLabel(String.valueOf(this.data.get(i).getGiaBan()));
-            lblImg = new JLabel();
-            lblImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/" + data.get(i).getHinhAnh())));
+            try {
+                pnlSanPham[i] = new JPanel();
+                lbltenSP = new JLabel(this.data.get(i).getTenSp());
+                lblgia = new JLabel(String.valueOf(this.data.get(i).getGiaBan()));
+                lblImg = new JLabel();
+               
+                BufferedImage image = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/" + data.get(i).getHinhAnh()));
+                int type = image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType();
+                BufferedImage HinhAnh = buffImage(image, type);
+                ImageIcon icon = new ImageIcon(HinhAnh);
+                 lblImg.setIcon(icon);
+                pnlSanPham[i].setName(this.data.get(i).getMaSanPham());
+                pnlSanPham[i].setPreferredSize(new Dimension(140, 175)); //w = 200 hei = 250
+                pnlSanPham[i].setLayout(new BoxLayout(pnlSanPham[i], javax.swing.BoxLayout.LINE_AXIS));
+                pnlSanPham[i].setBackground(new Color(255, 255, 255));
+                pnlSanPham[i].setBorder(new LineBorder(Color.BLUE, 1));
+                //Action
+                pnlSanPham[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
+                pnlSanPham[i].addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent e) {
 
-            pnlSanPham[i].setName(this.data.get(i).getMaSanPham());
-            pnlSanPham[i].setPreferredSize(new Dimension(140, 175)); //w = 200 hei = 250
-            pnlSanPham[i].setLayout(new BoxLayout(pnlSanPham[i], javax.swing.BoxLayout.LINE_AXIS));
-            pnlSanPham[i].setBackground(new Color(255, 255, 255));
-            pnlSanPham[i].setBorder(new LineBorder(Color.BLUE, 1));
-            //Action
-            pnlSanPham[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
-            pnlSanPham[i].addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
+                        Datmon dt = new Datmon(null, true, e.getComponent().getName(), giaSP, tenspString, img);
+                        dt.setVisible(true);
 
-                    Datmon dt = new Datmon(null, true, e.getComponent().getName(), giaSP, tenspString, img);
-                    dt.setVisible(true);
+                    }
+                ;
+                } );
+                   DesigMenuThucDon(lblgia, lbltenSP, lblImg);
+                pnlSanPham[i].add(DesigMenuThucDon(lblgia, lbltenSP, lblImg));
+                this.sanphamUI.add(pnlSanPham[i]);
+                this.sanphamUI.updateUI();
+            } catch (Exception e) {
+            }
 
-                }
-            ;
-            });
-            DesigMenuThucDon(lblgia, lbltenSP, lblImg);
-            pnlSanPham[i].add(DesigMenuThucDon(lblgia, lbltenSP, lblImg));
-
-            this.sanphamUI.add(pnlSanPham[i]);
-            this.sanphamUI.updateUI();
         }
     }
 
@@ -270,6 +281,17 @@ public class Designhelper implements DesignInterFace {
     @Override
     public JDialog DesignDatMon() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public BufferedImage buffImage(BufferedImage buffImage, int type) {
+        int chieurong = 150; //150px
+        int chieucao = 150;
+        BufferedImage buff = new BufferedImage(chieurong, chieucao, type);
+        //set đồ họa ảnh
+        Graphics2D g = buff.createGraphics();
+        g.drawImage(buffImage, 0, 0, chieurong, chieucao, null);
+        g.dispose();
+        return buff;
     }
 
 }
