@@ -240,3 +240,47 @@ INSERT INTO dbo.Extra ( id,ten,gia)VALUES ('EX003',N'Ít Đường',0)
 INSERT INTO dbo.Extra ( id,ten,gia)VALUES ('EX004',N'Ít Đá',0)
 INSERT INTO dbo.Extra ( id,ten,gia)VALUES ('EX005',N'One Shot',15000)
 GO
+
+CREATE VIEW LichSuBanHang AS 
+	SELECT tenSp, giaBan, soLuong, ngayHD, tongTien FROM dbo.HoaDon, dbo.CTHoaDon, dbo.SanPham
+	WHERE CTHoaDon.maHD = HoaDon.maHD AND CTHoaDon.maSp = SanPham.maSp
+	GO
+ 
+SELECT * FROM dbo.LichSuBanHang
+GO 
+
+INSERT dbo.HoaDon VALUES  ( '1' , 'ND001' , 'KH001' , 0 , GETDATE() , 500 , 1  )
+GO
+INSERT dbo.CTHoaDon VALUES  ( '1', 'SP001', 'M', 'EX001', 2  )
+GO
+
+INSERT dbo.HoaDon VALUES  ( '2' , 'ND003' , 'KH003' , 0 , GETDATE() , 5000 , 1  )
+GO
+INSERT dbo.CTHoaDon VALUES  ( '2', 'SP003', 'XL', 'EX003', 5  )
+GO   
+INSERT dbo.HoaDon VALUES  ( '3' , 'ND001' , 'KH001' , 0 , GETDATE() , 400 , 1  )
+GO
+INSERT dbo.CTHoaDon VALUES  ( '3', 'SP001', 'M', 'EX001', 2  )
+GO
+
+CREATE PROCEDURE SanPhamBanChay AS 
+	SELECT CTHoaDon.maSp, tenSp, SUM(soLuong) AS tongSoLuong 
+		FROM dbo.CTHoaDon, dbo.SanPham
+		WHERE CTHoaDon.maSp = SanPham.maSp
+		GROUP BY CTHoaDon.maSp, tenSp
+		ORDER BY tongSoLuong DESC
+GO
+
+EXEC dbo.SanPhamBanChay
+GO
+
+
+
+CREATE PROCEDURE DoanhThuTheoSP AS 
+SELECT CTHoaDon.maSp, tenSp, giaBan, SUM(soLuong) AS soLuong, SUM(tongTien) AS doanhThu FROM dbo.HoaDon, dbo.CTHoaDon, dbo.SanPham 
+	WHERE CTHoaDon.maHD = HoaDon.maHD AND CTHoaDon.maSp = SanPham.maSp
+	GROUP BY CTHoaDon.maSp, tenSp, giaBan
+	ORDER BY doanhThu DESC
+GO
+
+EXEC dbo.DoanhThuTheoSP

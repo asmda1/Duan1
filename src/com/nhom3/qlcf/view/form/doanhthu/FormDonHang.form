@@ -30,7 +30,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="jplTable.removeAll();&#xa;        jplTable.add(new TongKHTheoHoaDon());&#xa;        jplTable.repaint();&#xa;        jplTable.revalidate();&#xa;        jplTable.show();"/>
+        <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="jplTable.removeAll();&#xa;        jplTable.add(new com.nhom3.qlcf.view.form.doanhthu.KhachHangTheoDon());&#xa;        jplTable.repaint();&#xa;        jplTable.revalidate();&#xa;        jplTable.show();"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
       </AuxValues>
 

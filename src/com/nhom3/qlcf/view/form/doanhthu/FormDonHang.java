@@ -421,7 +421,7 @@ public class FormDonHang extends javax.swing.JPanel {
         jfDonHang.add(lblAnhgiaodien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, -1));
 
         jplTable.removeAll();
-        jplTable.add(new TongKHTheoHoaDon());
+        jplTable.add(new KhachHangTheoDon());
         jplTable.repaint();
         jplTable.revalidate();
         jplTable.show();
@@ -549,7 +549,7 @@ public class FormDonHang extends javax.swing.JPanel {
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         // TODO add your handling code here:
         jplTable.removeAll();
-        jplTable.add(new LichSuMuaHang());
+        jplTable.add(new LichSuBanHang());
         jplTable.repaint();
         jplTable.revalidate();
         jplTable.show();
@@ -568,7 +568,7 @@ public class FormDonHang extends javax.swing.JPanel {
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
         // TODO add your handling code here:
          jplTable.removeAll();
-        jplTable.add(new TongKHTheoHoaDon());
+        jplTable.add(new KhachHangTheoDon());
         jplTable.repaint();
         jplTable.revalidate();
         jplTable.show();
