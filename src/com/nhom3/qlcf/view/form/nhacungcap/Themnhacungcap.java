@@ -78,7 +78,7 @@ public class Themnhacungcap extends javax.swing.JPanel {
         jPanel1.add(lblvien, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 114, 260, 30));
 
         lblvien1.setText("___________________________________________");
-        jPanel1.add(lblvien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 260, 40));
+        jPanel1.add(lblvien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 260, 30));
 
         txtTendoitac.setBackground(new java.awt.Color(255, 204, 0));
         txtTendoitac.setBorder(null);
@@ -121,7 +121,7 @@ public class Themnhacungcap extends javax.swing.JPanel {
                 txtDienThoaiActionPerformed(evt);
             }
         });
-        jPanel1.add(txtDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 230, 260, 40));
+        jPanel1.add(txtDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 260, 40));
 
         lblpass2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblpass2.setText("Trạng Thái:");
