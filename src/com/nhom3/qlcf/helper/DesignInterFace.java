@@ -6,6 +6,7 @@
 package com.nhom3.qlcf.helper;
 
 import com.nhom3.qlcf.model.CTHoaDon;
+import com.nhom3.qlcf.model.Extra;
 import com.nhom3.qlcf.model.SanPham;
 import com.nhom3.qlcf.model.SizeSP;
 import com.sun.glass.ui.Size;
@@ -31,8 +32,10 @@ public interface DesignInterFace {
 
     public JPanel DesigMenuThucDon(JLabel lblgia, JLabel lblTen, JLabel lblImg);
 
-    public void DesignSizeSP(JPanel size, List<SizeSP> data,List<SanPham> showGia, JLabel giaDieuChinh,JLabel showSize,int soluongdat,JTextField lblgetSoluong);
+    public void DesignSizeSP(JPanel size, List<SizeSP> data,List<SanPham> showGia, JLabel giaDieuChinh,JLabel showSize,int soluongdat,JTextField lblgetSoluong,JLabel giaEtra);
 
+   public void DesignExtra(JPanel jplExtra, List<Extra> data,JLabel lblExtra, JLabel tenExtra,JLabel lblTongTien,JLabel lblTinhThem,JTextField txtsoluong, int so);
+    
     public JDialog DesignDatMon();
 
 }

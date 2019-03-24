@@ -6,11 +6,10 @@
 package com.nhom3.qlcf.helper;
 
 import com.nhom3.qlcf.model.CTHoaDon;
+import com.nhom3.qlcf.model.Extra;
 import com.nhom3.qlcf.model.SanPham;
 import com.nhom3.qlcf.model.SizeSP;
 import com.nhom3.qlcf.view.form.banhang.Datmon;
-import com.nhom3.qlcf.view.form.banhang.FormBanHang;
-import com.sun.corba.se.impl.naming.cosnaming.InterOperableNamingImpl;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -53,13 +52,14 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 public class Designhelper implements DesignInterFace {
 
     private JLabel lblgia, lbltenSP, lblImg;
-    public JLabel lblsoluong, lblSize;
-    private JPanel sanphamUI, donhang;
+    public JLabel lblsoluong, lblSize, giaExtra, lbltenExtra;
+    private JPanel sanphamUI;
     private List<CTHoaDon> CTHD;
     private List<SanPham> data;
     String tenspString, giaSP, img, so;
     NumberFormat chuyentien = new DecimalFormat("#,###,###");
     int s1;
+    double tienEx;
 
     @Override
     public void DesignSanPham(JPanel sanphamUI, List<SanPham> data) {
@@ -74,6 +74,7 @@ public class Designhelper implements DesignInterFace {
         sanphamUI.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
+
         int x = 0, y = 0;
         for (int i = 0; i < this.data.size(); i++) {
             try {
@@ -165,7 +166,7 @@ public class Designhelper implements DesignInterFace {
                     data = LimitPage(limit, start, end);
 
                     DesignSanPham(sanphamUI, data);
-                    System.out.println(LimitPage(limit, start, end));
+
                 }
 
             });
@@ -179,6 +180,7 @@ public class Designhelper implements DesignInterFace {
     @Override
     public void DesigDonHang(JPanel donhangUI, List<CTHoaDon> CTHD) {
         this.CTHD = CTHD;
+
         donhangUI.removeAll();
         donhangUI.updateUI();
         donhangUI.setVisible(true);
@@ -186,6 +188,7 @@ public class Designhelper implements DesignInterFace {
         JPanel[] pnl = new JPanel[this.CTHD.size()];
         //   donhangUI.removeAll();
         for (int i = 0; i < this.CTHD.size(); i++) {
+            //Set JPanel
             pnl[i] = new JPanel();
             // pnl[i].setBorder(BorderFactory.createLineBorder(new Color(204, 7, 140), 1));
             pnl[i].setBackground(Color.WHITE);
@@ -193,50 +196,64 @@ public class Designhelper implements DesignInterFace {
             pnl[i].setPreferredSize(new Dimension(600, 40));
             pnl[i].setMaximumSize(new Dimension(600, 40));
             pnl[i].setMinimumSize(new Dimension(600, 40));
+            // So Luong SP
             lblsoluong = new JLabel();
             lblsoluong = new JLabel(String.valueOf(this.CTHD.get(i).getSoLuong()));
             lblsoluong.setFont(new Font("Tahoma", 1, 11));
             lblsoluong.setPreferredSize(new Dimension(50, 20));
+            //Set Ten SP
             JLabel lbltenSP = new JLabel(this.CTHD.get(i).getMaSanPham().getTenSp());
+            //Set ma SP
             JLabel lblmaSP = new JLabel(this.CTHD.get(i).getMaSanPham().getMaSanPham());
+            //Set Size M XL L
             JLabel lblSize = new JLabel(this.CTHD.get(i).getSizeSP().getMaSize());
+            //Show mã SP, Tên SP và Size
             JLabel lbltenSPmaSP = new JLabel(lblmaSP.getText() + "/" + lbltenSP.getText() + " (" + lblSize.getText() + ")");
             lbltenSPmaSP.setName(this.CTHD.get(i).getMaSanPham().getMaSanPham());
             lbltenSPmaSP.setForeground(Color.BLUE);
             lbltenSPmaSP.setFont(new Font("Tahoma", 1, 11));
+            //Tổng Tiền 
             double tongtien = this.CTHD.get(i).getMaSanPham().getGiaBan();
             if (tongtien == this.CTHD.get(i).getMaSanPham().getGiaBan()) {
-                tongtien += this.CTHD.get(i).getMaSanPham().getGiaBan() * this.CTHD.get(i).getSoLuong();
+                tongtien += this.CTHD.get(i).getMaSanPham().getGiaBan() * this.CTHD.get(i).getSoLuong()*this.CTHD.get(i).getSizeSP().getHeSo();
             }
+            JLabel lbltongtien = new JLabel(String.valueOf(chuyentien.format(tongtien - this.CTHD.get(i).getMaSanPham().getGiaBan()) + " VNĐ/" + lblsoluong.getText()));
+            lbltongtien.setFont(new Font("Tahoma", 1, 11));
+            lbltongtien.setForeground(Color.RED);
+            lbltongtien.setToolTipText(String.valueOf(chuyentien.format(tongtien - this.CTHD.get(i).getMaSanPham().getGiaBan())));
+            //Xóa
             JLabel lblXoa = new JLabel("Xóa");
             int index = i;
             lblXoa.setName(String.valueOf(index));
             lblXoa.setToolTipText(String.valueOf(index));
             lblXoa.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            JLabel lblgiaSP = new JLabel(String.valueOf(chuyentien.format(this.CTHD.get(i).getMaSanPham().getGiaBan())) + " VNĐ");
+            //Set show Giá
+            JLabel lblgiaSP = new JLabel(String.valueOf(chuyentien.format(this.CTHD.get(i).getMaSanPham().getGiaBan())) + " VNĐ (*" +this.CTHD.get(i).getSizeSP().getHeSo() + ")");
             lblgiaSP.setFont(new Font("Tahoma", 1, 11));
-            JLabel lblTongTien = new JLabel(String.valueOf(chuyentien.format(tongtien - this.CTHD.get(i).getMaSanPham().getGiaBan()) + " VNĐ/" + lblsoluong.getText()));
-            lblTongTien.setFont(new Font("Tahoma", 1, 11));
-            lblTongTien.setForeground(Color.RED);
-            JLabel lblghiChu = new JLabel("Ghi Chú: "/* + CTHD.get(i).getMaSanPham().getExtra()*/);
+
+            //show Extra
+            JLabel lblghiChu = new JLabel("Ghi Chú: " + CTHD.get(i).getExtra().getTen() + " ( " + chuyentien.format(CTHD.get(i).getExtra().getGia())+ " VNĐ)");
+            lblghiChu.setName(CTHD.get(i).getExtra().getId());
             lblghiChu.setForeground(Color.GRAY);
             lblghiChu.setFont(new Font("Tahoma", 2, 11));
 
+            //Add
             pnl[i].add(lbltenSPmaSP);
             pnl[i].add(lblgiaSP);
-            pnl[i].add(lblTongTien);
+            pnl[i].add(lbltongtien);
             pnl[i].add(lblghiChu);
             pnl[i].add(lblXoa).addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-
                     CTHD.remove(CTHD.get(Integer.parseInt(e.getComponent().getName())));
+                    Datmon d = new Datmon(null, true);
+                    d.getTongTien();
                     DesigDonHang(donhangUI, CTHD);
                 }
 
             });;
-            so = lblsoluong.getText();
-            pnl[i].setToolTipText(so);
+            // so = lblsoluong.getText();
+            // pnl[i].setToolTipText(so);
 
             donhangUI.add(pnl[i]);
             donhangUI.updateUI();
@@ -249,6 +266,7 @@ public class Designhelper implements DesignInterFace {
         this.lbltenSP = lblten;
         this.lblgia = lblgia;
         this.lblImg = lblimg;
+
         JPanel pnlthucdon = new JPanel();
         pnlthucdon.setLayout(new BoxLayout(pnlthucdon, BoxLayout.LINE_AXIS));
         JPanel pnlAblayout = new JPanel();
@@ -257,15 +275,18 @@ public class Designhelper implements DesignInterFace {
         pnlAblayout.setLayout(new AbsoluteLayout());
         pnlAblayout.setPreferredSize(new Dimension(140, 175));
         pnlAblayout.setBackground(Color.gray);
+        //Ten
         lblten.setForeground(Color.white);
         lblten.setBackground(new Color(0, 0, 0, 65));
         lblten.setFont(new Font("Tahoma", 1, 12));
         lblten.setHorizontalAlignment(SwingConstants.CENTER);
+        //gia SP
         lblgia.setBackground(new Color(0, 0, 0, 65));
         lblgia.setForeground(Color.WHITE);
         lblgia.setFont(new Font("Tahoma", 1, 11));
         lblgia.setOpaque(true);
         lblgia.setHorizontalAlignment(SwingConstants.CENTER);
+        //Anh
         lblimg.setHorizontalAlignment(SwingConstants.CENTER);
         GroupLayout pnlLayout = new GroupLayout(pnlNen);
         pnlLayout.setHorizontalGroup(
@@ -281,27 +302,6 @@ public class Designhelper implements DesignInterFace {
         pnlAblayout.add(lblimg, new AbsoluteConstraints(0, 0, 150, 170));
         pnlthucdon.add(pnlAblayout);
         return pnlAblayout;
-    }
-
-    public static boolean checkDuplicateUsingAdd(List<CTHoaDon> input) {
-        Set tempSet = new HashSet();
-        for (CTHoaDon str : input) {
-            if (!tempSet.add(str)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean bruteforce(List<CTHoaDon> input) {
-        for (int i = 0; i < input.size(); i++) {
-            for (int j = 0; j < input.size(); j++) {
-                if (input.get(i).equals(input.get(j)) && i != j) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     @Override
@@ -321,10 +321,11 @@ public class Designhelper implements DesignInterFace {
     }
 
     @Override
-    public void DesignSizeSP(JPanel size, List<SizeSP> dataSize, List<SanPham> dataSP, JLabel giaSize, JLabel showSize, int so, JTextField txtsoluong) {
+    public void DesignSizeSP(JPanel size, List<SizeSP> dataSize, List<SanPham> dataSP, JLabel giaSize, JLabel showSize, int so, JTextField txtsoluong, JLabel giaEtra) {
         this.lblSize = giaSize;
         this.data = dataSP;
         s1 = so;
+
         size.setLayout(new FlowLayout(FlowLayout.LEFT, 7, 7));
         size.removeAll();
         size.updateUI();
@@ -338,21 +339,94 @@ public class Designhelper implements DesignInterFace {
             JLabel M = new JLabel();
             M.setText(dataSize.get(i).getTenSize());
             M.setName(dataSize.get(i).getMaSize());
+            JLabel Heso = new JLabel(String.valueOf(dataSize.get(i).getHeSo()));
+          
             jplNext[i].setName(String.valueOf(dataSize.get(i).getHeSo()));
             jplNext[i].add(M);
             jplNext[i].addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
                     s1 = Integer.parseInt(txtsoluong.getText());
-                    giaSize.setText(String.valueOf(chuyentien.format((dataSP.get(0).getGiaBan() * s1) * Float.parseFloat(e.getComponent().getName()))) + " VNĐ");
-                    giaSize.setName(String.valueOf(dataSP.get(0).getGiaBan() * Float.parseFloat(e.getComponent().getName())));
+
+                    giaSize.setText(String.valueOf(chuyentien.format(((dataSP.get(0).getGiaBan() ) * s1) * Float.parseFloat(e.getComponent().getName()))) + " VNĐ");
                     showSize.setText(M.getText());
                     showSize.setName(M.getName());
-                }
+                    if(showSize.getText().equals("Lớn")){
+                        showSize.setForeground(Color.orange);
+                        giaSize.setForeground(Color.orange);
+                    }else if(showSize.getText().equals("Vừa")){
+                         showSize.setForeground(Color.green);
+                          giaSize.setForeground(Color.green);
+                    }else{
+                         showSize.setForeground(Color.red);
+                          giaSize.setForeground(Color.red);
+                         
+                    }
+                    showSize.setToolTipText(Heso.getText());
+                    giaSize.setName(String.valueOf(((dataSP.get(0).getGiaBan() ) * s1) * Float.parseFloat(e.getComponent().getName())));
+                    giaSize.setToolTipText(String.valueOf(((dataSP.get(0).getGiaBan())) * Float.parseFloat(e.getComponent().getName())));
 
+                }
             });
 
             size.add(jplNext[i]);
             size.updateUI();
+
+        }
+    }
+
+    @Override
+    public void DesignExtra(JPanel jplExtra, List<Extra> data, JLabel lblExtra, JLabel tenExtra, JLabel lblTongTien, JLabel lblTinhThem, JTextField txtsoluong, int so) {
+        this.giaExtra = lblExtra;
+        this.lbltenExtra = tenExtra;
+        s1 = so;
+        jplExtra.setLayout(new GridLayout(3, 3, 2, 3));
+        jplExtra.removeAll();
+        jplExtra.updateUI();
+        jplExtra.setVisible(true);
+        JPanel[] jplNext = new JPanel[data.size()];
+        for (int i = 0; i < data.size(); i++) {
+            jplNext[i] = new JPanel();
+            jplNext[i].setBorder(new LineBorder(Color.gray));
+            jplNext[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jplNext[i].setBackground(Color.WHITE);
+            JLabel id = new JLabel(data.get(i).getId());
+            JLabel tenEx = new JLabel(data.get(i).getTen());
+            tenEx.setForeground(Color.blue);
+            int ten = i;
+            giaExtra = new JLabel(String.valueOf(data.get(i).getGia()));
+            tenEx.setFont(new Font("Tahoma", 1, 11));
+            jplNext[i].setName(String.valueOf(chuyentien.format(data.get(i).getGia())) + " VNĐ");
+            jplNext[i].add(tenEx);
+            jplNext[i].addMouseListener(new MouseAdapter() {
+                public void mousePressed(MouseEvent e) {
+                    s1 = Integer.parseInt(txtsoluong.getText());
+                    lblExtra.setText("+ " + e.getComponent().getName());
+                    lblExtra.setName(String.valueOf(data.get(ten).getGia()));
+                    tenExtra.setToolTipText(id.getText());
+                    tenExtra.setText(data.get(ten).getTen());
+                    //lblTongTien.setText(String.valueOf(chuyentien.format(data.get(ten).getGia())) + " VNĐ");
+                    lblTinhThem.setText(String.valueOf(chuyentien.format(data.get(ten).getGia() * s1)) + " VNĐ");
+
+                }
+
+                public void mouseEntered(MouseEvent e) {
+                    tenEx.setBackground(Color.BLUE);
+                    tenEx.setForeground(Color.white);
+                    tenEx.setOpaque(true);
+
+                }
+
+                public void mouseExited(MouseEvent e) {
+                    tenEx.setBackground(Color.white);
+                    tenEx.setForeground(Color.blue);
+                    tenEx.setOpaque(false);
+
+                }
+
+            });
+
+            jplExtra.add(jplNext[i]);
+            jplExtra.updateUI();
 
         }
     }

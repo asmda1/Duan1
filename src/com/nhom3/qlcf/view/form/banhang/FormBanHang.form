@@ -514,7 +514,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="#M&#xe3;/T&#xea;nSP                                                Gi&#xe1; B&#xe1;n                                                   Th&#xe0;nh Ti&#x1ec1;n              "/>
+                    <Property name="text" type="java.lang.String" value="#M&#xe3;/T&#xea;nSP                                             Gi&#xe1; Ni&#xea;m Y&#x1ebf;t                                                   Th&#xe0;nh Ti&#x1ec1;n  /SL            "/>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </Component>
@@ -562,8 +562,17 @@
                                   <Component id="jLabel7" min="-2" pref="103" max="-2" attributes="0"/>
                                   <Component id="jLabel8" alignment="0" pref="116" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="76" max="32767" attributes="0"/>
-                              <Component id="jLabel11" min="-2" pref="131" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="0" pref="70" max="32767" attributes="0"/>
+                                      <Component id="jLabel11" min="-2" pref="131" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblTongTien" min="-2" pref="176" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                           <Component id="jTextField2" max="32767" attributes="0"/>
                       </Group>
@@ -578,7 +587,10 @@
                                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel5" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="lblTongTien" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel7" min="-2" pref="25" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -613,7 +625,7 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="12" style="1"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="T&#x1ed5;ng C&#xf4;ng:"/>
+                        <Property name="text" type="java.lang.String" value="T&#x1ea1;m T&#xed;nh:"/>
                         <Property name="toolTipText" type="java.lang.String" value="HD001"/>
                       </Properties>
                     </Component>
@@ -648,6 +660,17 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Tim Khach H&#xe0;ng"/>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblTongTien">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Tahoma" size="12" style="1"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="...."/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>

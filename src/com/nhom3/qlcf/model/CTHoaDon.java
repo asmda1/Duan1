@@ -17,6 +17,7 @@ public class CTHoaDon {
     private Extra extra;
     private int soLuong;
     private SizeSP sizeSP;
+    double Tongtien;
     public CTHoaDon() {
  }
 
