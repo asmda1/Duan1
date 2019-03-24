@@ -13,7 +13,6 @@ import com.nhom3.qlcf.view.form.hanghoa.FormSuaHangHoa_admin;
 import com.nhom3.qlcf.view.form.banhang.FormBanHang;
 import com.nhom3.qlcf.view.form.doanhthu.FormDonHang;
 import com.nhom3.qlcf.view.form.doanhthu.FormThongKe;
-import com.nhom3.qlcf.view.form.hanghoa.FormQuanLyPhieuNhap_admin;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.khachhang.FormKhachHang;
 import com.nhom3.qlcf.view.form.login.Login;
@@ -23,6 +22,7 @@ import com.nhom3.qlcf.view.form.sanpham.FormSuaXoaSP_admin;
 import com.nhom3.qlcf.view.form.sanpham.FormThemSanPham;
 import com.nhom3.qlcf.view.form.users.FormQuanLyTaiKhoan_admin;
 import com.nhom3.qlcf.view.form.users.FormTaiKhoan;
+import com.nhom3.qlcf.view.phieunhap.FormQuanLyPhieuNhap;
 import java.awt.Color;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -1338,7 +1338,7 @@ public class FormMenu extends javax.swing.JPanel {
     private void lblPhieuNhapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPhieuNhapMousePressed
         // TODOFormLogin.login.Card.removeAll();
         FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormQuanLyPhieuNhap_admin());
+        FormLogin.login.Card.add(new FormQuanLyPhieuNhap());
         FormLogin.login.Card.repaint();
         FormLogin.login.Card.revalidate();
         FormLogin.login.Card.show();

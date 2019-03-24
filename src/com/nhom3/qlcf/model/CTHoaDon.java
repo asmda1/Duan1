@@ -20,7 +20,7 @@ public class CTHoaDon {
     public CTHoaDon() {
  }
 
-    public CTHoaDon(int id, HoaDon maHoaDon, SanPham maSanPham, Extra extra, int soLuong, SizeSP sizeSP) {
+    public CTHoaDon(int id, HoaDon maHoaDon, SanPham maSanPham,SizeSP sizeSP, Extra extra, int soLuong) {
         this.id = id;
         this.maHoaDon = maHoaDon;
         this.maSanPham = maSanPham;

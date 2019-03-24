@@ -10,6 +10,7 @@ import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.Extra;
 import com.nhom3.qlcf.model.HoaDon;
 import com.nhom3.qlcf.model.SanPham;
+import com.nhom3.qlcf.model.SizeSP;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,8 +24,8 @@ public class CTHoaDonDAO implements DAO<CTHoaDon> {
 
     @Override
     public boolean insert(CTHoaDon t) {
-        String sql = "Insert dbo.CTHoaDon values (?,?,?,?)";
-        return JDBCHelper.executeUpdate(sql, t.getMaHoaDon().getMaHoaDon(), t.getMaSanPham().getMaSanPham(), t.getExtra().getId(), t.getSoLuong());
+        String sql = "Insert dbo.CTHoaDon values (?,?,?,?,?)";
+        return JDBCHelper.executeUpdate(sql, t.getMaHoaDon().getMaHoaDon(), t.getMaSanPham().getMaSanPham(),t.getSizeSP().getMaSize(), t.getExtra().getId(), t.getSoLuong());
     }
 
     @Override
@@ -35,8 +36,8 @@ public class CTHoaDonDAO implements DAO<CTHoaDon> {
 
     @Override
     public boolean update(CTHoaDon t) {
-        String sql = "Update dbo.CTHoaDon set maHD=?,maSP=?,soLuong=? where maCTHD=?";
-        return JDBCHelper.executeUpdate(sql, t.getMaHoaDon().getMaHoaDon(), t.getMaSanPham().getMaSanPham(), t.getExtra().getId(), t.getSoLuong(), t.getId());
+        String sql = "Update dbo.CTHoaDon set maHD=?,maSP=?,maSize=?, soLuong=? where maCTHD=?";
+        return JDBCHelper.executeUpdate(sql, t.getMaHoaDon().getMaHoaDon(), t.getMaSanPham().getMaSanPham(),t.getSizeSP().getMaSize(), t.getExtra().getId(), t.getSoLuong(), t.getId());
     }
 
     @Override
@@ -69,17 +70,20 @@ public class CTHoaDonDAO implements DAO<CTHoaDon> {
     public CTHoaDon readFromResultSet(ResultSet rs) {
         CTHoaDon model = new CTHoaDon();
         try {
-            model.setId(rs.getInt(1));
+            model.setId(rs.getInt("maCTHD"));
             HoaDon hd = new HoaDon();
-            hd.setMaHoaDon(rs.getString(2));
+            hd.setMaHoaDon(rs.getString("maHD"));
             model.setMaHoaDon(hd);
             SanPham sp = new SanPham();
-            sp.setMaSanPham(rs.getString(3));
+            sp.setMaSanPham(rs.getString("maSP"));
             model.setMaSanPham(sp);
+            SizeSP size = new SizeSP();
+            size.setMaSize(rs.getString("maSize"));
+            model.setSizeSP(size);
             Extra ex = new Extra();
-            ex.setId(rs.getString(4));
+            ex.setId(rs.getString("extra"));
             model.setExtra(ex);
-            model.setSoLuong(rs.getInt(5));
+            model.setSoLuong(rs.getInt("soLuong"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

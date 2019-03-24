@@ -8,6 +8,7 @@ package com.nhom3.qlcf.view.form.banhang;
 import com.nhom3.qlcf.helper.Designhelper;
 import static com.nhom3.qlcf.helper.Designhelper.bruteforce;
 import com.nhom3.qlcf.model.CTHoaDon;
+import com.nhom3.qlcf.model.Extra;
 import com.nhom3.qlcf.model.SanPham;
 import com.nhom3.qlcf.model.SizeSP;
 import com.nhom3.qlcf.test.SelectSIze;
@@ -85,23 +86,26 @@ public class Datmon extends javax.swing.JDialog {
         list1 = new ArrayList<CTHoaDon>();
         CTHoaDon ct = new CTHoaDon();
         SanPham sp = new SanPham();
+        Extra Ex = new Extra();
+        SizeSP sSP = new SizeSP();
         sp.setTenSp(lblten.getText());
         sp.setMaSanPham(lblten.getName());
         sp.setGiaBan(Double.parseDouble(lblgia.getName()));
-        // sp.setExtra(txtGhichu.getText());
+
         sp.setHinhAnh("/com/qlbhcafe/img/" + lblimg.getText());
         //getClass().getResource("/com/qlbhcafe/img/" + data.get(i).getHinhAnh()))
-        SizeSP sSP = new SizeSP();
+        Ex.setId("EX001");
         if (lblsize.getText().equals("VỪA")) {
             lblsize.setName("M");
             sSP.setMaSize(lblsize.getName());
+            ct.setSizeSP(sSP);
         } else {
             sSP.setMaSize(lblsize.getName());
+            ct.setSizeSP(sSP);
         }
-
+        ct.setExtra(Ex);
         ct.setSoLuong(Integer.parseInt(txtsoluong.getText()));
         ct.setMaSanPham(sp);
-        ct.setSizeSP(sSP);
 
         list1.add(ct);
     }
@@ -110,16 +114,18 @@ public class Datmon extends javax.swing.JDialog {
         CTHoaDon cthd = new CTHoaDon();
         SanPham sp = new SanPham();
         SizeSP sSp = new SizeSP();
+        Extra Ex = new Extra();
         for (int i = 0; i < Datmon.datmon.list1.size(); i++) {
             sp.setMaSanPham(Datmon.datmon.list1.get(i).getMaSanPham().getMaSanPham());
             sp.setTenSp(Datmon.datmon.list1.get(i).getMaSanPham().getTenSp());
             sp.setGiaBan(Datmon.datmon.list1.get(i).getMaSanPham().getGiaBan());
-            //  sp.setExtra(Datmon.datmon.list1.get(i).getMaSanPham().getExtra());
             sp.setHinhAnh(Datmon.datmon.list1.get(i).getMaSanPham().getHinhAnh());
-            sSp.setMaSize(list1.get(i).getSizeSP().getMaSize());
+            sSp.setMaSize(Datmon.datmon.list1.get(i).getSizeSP().getMaSize());
+            Ex.setId(list1.get(i).getExtra().getId());
             cthd.setSoLuong(Datmon.datmon.list1.get(i).getSoLuong());
             cthd.setMaSanPham(sp);
             cthd.setSizeSP(sSp);
+            cthd.setExtra(Ex);
         }
         DongCTHD.add(cthd);
     }
@@ -135,7 +141,7 @@ public class Datmon extends javax.swing.JDialog {
         lblgia.setName(String.valueOf(showSP.get(0).getGiaBan()));
         lblimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/" + showSP.get(0).getHinhAnh())));
         Designhelper designhelper = new Designhelper();
-        designhelper.DesignSizeSP(jpnSize, SelectSIze.select(), showSP, lblgia, lblsize, so,txtsoluong);
+        designhelper.DesignSizeSP(jpnSize, SelectSIze.select(), showSP, lblgia, lblsize, so, txtsoluong);
     }
 
     /**
@@ -249,6 +255,7 @@ public class Datmon extends javax.swing.JDialog {
 
         lblmaSP.setBackground(new Color(25,0,0,20));
         lblmaSP.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lblmaSP.setForeground(new java.awt.Color(0, 51, 255));
         lblmaSP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblmaSP.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lblmaSP.setOpaque(true);
@@ -362,7 +369,7 @@ public class Datmon extends javax.swing.JDialog {
             double giaBan = Double.parseDouble(lblgia.getName());
             lblgia.setText(String.valueOf(chuyentien.format(giaBan * (so))) + " VNĐ");
             Designhelper designhelper = new Designhelper();
-            designhelper.DesignSizeSP(jpnSize, SelectSIze.select(), showSP, lblgia, lblsize, so,txtsoluong);
+            designhelper.DesignSizeSP(jpnSize, SelectSIze.select(), showSP, lblgia, lblsize, so, txtsoluong);
 
         }
     }//GEN-LAST:event_jLabel4MousePressed
@@ -377,7 +384,7 @@ public class Datmon extends javax.swing.JDialog {
             double giaBan = Double.parseDouble(lblgia.getName());
             lblgia.setText(String.valueOf(chuyentien.format(giaBan * (so))) + " VNĐ");
             Designhelper designhelper = new Designhelper();
-            designhelper.DesignSizeSP(jpnSize, SelectSIze.select(), showSP, lblgia, lblsize, so,txtsoluong);
+            designhelper.DesignSizeSP(jpnSize, SelectSIze.select(), showSP, lblgia, lblsize, so, txtsoluong);
 
         }
     }//GEN-LAST:event_jLabel3MousePressed

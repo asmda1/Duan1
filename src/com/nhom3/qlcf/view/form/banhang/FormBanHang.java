@@ -5,6 +5,7 @@
  */
 package com.nhom3.qlcf.view.form.banhang;
 
+import com.nhom3.qlcf.dao.CTHoaDonDAO;
 import com.nhom3.qlcf.helper.Soundhelper;
 import com.nhom3.qlcf.helper.Designhelper;
 import com.nhom3.qlcf.model.CTHoaDon;
@@ -85,13 +86,16 @@ public class FormBanHang extends javax.swing.JPanel {
 
             CTHoaDon cthd = new CTHoaDon();
             for (int i = 0; i < DongCTHD.size(); i++) {
-                testInsert insert = new testInsert();
+                CTHoaDonDAO insert = new CTHoaDonDAO();
                 HoaDon mahDon = new HoaDon();
                 mahDon.setMaHoaDon(jLabel5.getToolTipText());
                 cthd.setMaHoaDon(mahDon);
                 cthd.setMaSanPham(DongCTHD.get(i).getMaSanPham());
                 cthd.setSoLuong(DongCTHD.get(i).getSoLuong());
-                
+                cthd.setSizeSP(DongCTHD.get(i).getSizeSP());
+                cthd.setExtra(DongCTHD.get(i).getExtra());
+                System.out.println(DongCTHD.get(i).getSizeSP().getMaSize());
+                System.out.println(DongCTHD.get(i).getExtra().getId());
                 insert.insert(cthd);
                 System.out.println("Thanh công HDCT");
             }

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nhom3.qlcf.view.form.hanghoa;
+package com.nhom3.qlcf.view.phieunhap;
 
+import com.nhom3.qlcf.view.form.doanhthu.*;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
@@ -16,14 +17,14 @@ import javax.swing.JFrame;
  *
  * @author baotri1998
  */
-public class FormQuanLyPhieuNhap_admin extends javax.swing.JPanel {
+public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
 
     /**
      * Creates new form FormLogin
      */
-    public static FormQuanLyPhieuNhap_admin login;
+    public static FormQuanLyPhieuNhap login;
 
-    public FormQuanLyPhieuNhap_admin() {
+    public FormQuanLyPhieuNhap() {
         initComponents();
         // jpnLogin1.setBackground(new Color(0, 0, 0, 134));
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
@@ -39,7 +40,7 @@ public class FormQuanLyPhieuNhap_admin extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jfPhieuNhap = new javax.swing.JPanel();
+        jfThongKe = new javax.swing.JPanel();
         jpnShowMenuOut = new javax.swing.JPanel();
         jpnQuayVe = new javax.swing.JPanel();
         lblQuayVeBangHang = new javax.swing.JLabel();
@@ -54,13 +55,22 @@ public class FormQuanLyPhieuNhap_admin extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jpnNen = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblquanlyphieu = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        cbxNgay = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         lblanhGiaoDien = new javax.swing.JLabel();
+        Card = new javax.swing.JPanel();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        jfPhieuNhap.setBackground(new java.awt.Color(255, 255, 255));
-        jfPhieuNhap.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jfPhieuNhap.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jfThongKe.setBackground(new java.awt.Color(255, 255, 255));
+        jfThongKe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jfThongKe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpnShowMenuOut.setBackground(new java.awt.Color(255, 255, 255));
         jpnShowMenuOut.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 255)));
@@ -167,7 +177,7 @@ public class FormQuanLyPhieuNhap_admin extends javax.swing.JPanel {
         jpnShowMenuOut.add(jpnDangXuat);
         jpnDangXuat.setBounds(10, 50, 150, 40);
 
-        jfPhieuNhap.add(jpnShowMenuOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 30, 170, 140));
+        jfThongKe.add(jpnShowMenuOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 30, 170, 140));
         jpnShowMenuOut.hide();
 
         jpnToolbar19.setBackground(new java.awt.Color(255, 255, 255));
@@ -239,7 +249,7 @@ public class FormQuanLyPhieuNhap_admin extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnToolbar19Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 604, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 614, Short.MAX_VALUE)
                 .addComponent(lblAn_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblOutBangHang)
@@ -254,27 +264,70 @@ public class FormQuanLyPhieuNhap_admin extends javax.swing.JPanel {
             .addComponent(lblOutBangHang, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jfPhieuNhap.add(jpnToolbar19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 50));
+        jfThongKe.add(jpnToolbar19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 50));
 
         jpnNen.setBackground(new java.awt.Color(255, 255, 255));
+        jpnNen.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jpnNenLayout = new javax.swing.GroupLayout(jpnNen);
-        jpnNen.setLayout(jpnNenLayout);
-        jpnNenLayout.setHorizontalGroup(
-            jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
-        );
-        jpnNenLayout.setVerticalGroup(
-            jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 630, Short.MAX_VALUE)
-        );
+        jScrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jfPhieuNhap.add(jpnNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 630));
+        tblquanlyphieu.setForeground(new java.awt.Color(51, 51, 51));
+        tblquanlyphieu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã Phiếu", "Mã Hàng Hóa", "Tên Nhà Cung Cấp", "Tên Hàng Hóa", "Người Nhập Hàng", "Ngày Nhập Hàng", "Số Lượng", "Tổng Tiền"
+            }
+        ));
+        tblquanlyphieu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblquanlyphieu.setFocusable(false);
+        tblquanlyphieu.setGridColor(new java.awt.Color(0, 0, 0));
+        tblquanlyphieu.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tblquanlyphieu.setRowHeight(25);
+        tblquanlyphieu.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tblquanlyphieu.setShowHorizontalLines(false);
+        tblquanlyphieu.setShowVerticalLines(false);
+        tblquanlyphieu.setSurrendersFocusOnKeystroke(true);
+        tblquanlyphieu.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(tblquanlyphieu);
 
-        lblanhGiaoDien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenThuNgan.png"))); // NOI18N
-        jfPhieuNhap.add(lblanhGiaoDien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, -1));
+        jpnNen.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 125, 1050, 490));
 
-        add(jfPhieuNhap);
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("QUẢN LÝ PHIẾU NHẬP HÀNG");
+        jpnNen.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 40));
+
+        jLabel10.setText("Tổng Số Phiếu:");
+        jpnNen.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 120, -1));
+
+        jLabel11.setText("Tổng Thu Chi:");
+        jpnNen.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 120, 20));
+
+        jLabel2.setText("Ngày tạo: ");
+        jpnNen.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 194, 30));
+
+        cbxNgay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hôm Nay", "7 Ngày Trước", "14 Ngày Trước", "1 Tháng Trước", "6 Tháng Trước", "1 Năm Trước" }));
+        jpnNen.add(cbxNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, 190, -1));
+
+        jLabel1.setText("Xem :");
+        jpnNen.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 90, 40, 20));
+
+        jfThongKe.add(jpnNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 630));
+
+        lblanhGiaoDien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenDao.png"))); // NOI18N
+        jfThongKe.add(lblanhGiaoDien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, -1));
+
+        add(jfThongKe);
+
+        Card.setBackground(new java.awt.Color(255, 255, 255));
+        Card.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        Card.setLayout(new java.awt.CardLayout());
+        add(Card);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblAn_BanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAn_BanHangMouseClicked
@@ -358,7 +411,7 @@ public class FormQuanLyPhieuNhap_admin extends javax.swing.JPanel {
         FormLogin.login.Card.revalidate();
         FormLogin.login.Card.show();
         jfMain.hide();
-        jfPhieuNhap.hide();
+        jfThongKe.hide();
         /* jpnNenButton_login.setBackground(new Color(0, 0, 0));
         jpnNenButton_login.setOpaque(false);
         lblLogin.setForeground(Color.white);
@@ -391,10 +444,18 @@ public class FormQuanLyPhieuNhap_admin extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected static javax.swing.JPanel Card;
+    private javax.swing.JComboBox<String> cbxNgay;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField1;
-    protected static javax.swing.JPanel jfPhieuNhap;
+    protected static javax.swing.JPanel jfThongKe;
     private javax.swing.JPanel jpnDangXuat;
     private javax.swing.JPanel jpnNen;
     private javax.swing.JPanel jpnQuayVe;
@@ -407,5 +468,6 @@ public class FormQuanLyPhieuNhap_admin extends javax.swing.JPanel {
     private javax.swing.JLabel lblQuayVeBangHang;
     private javax.swing.JLabel lblTenDangNhapBangHang;
     private javax.swing.JLabel lblanhGiaoDien;
+    private javax.swing.JTable tblquanlyphieu;
     // End of variables declaration//GEN-END:variables
 }
