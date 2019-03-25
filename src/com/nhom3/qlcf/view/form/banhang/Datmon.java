@@ -6,6 +6,7 @@
 package com.nhom3.qlcf.view.form.banhang;
 
 import com.nhom3.qlcf.dao.ExtraDAO;
+import com.nhom3.qlcf.dao.HoaDonDAO;
 import com.nhom3.qlcf.helper.Designhelper;
 import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.Extra;
@@ -16,8 +17,8 @@ import com.nhom3.qlcf.test.SelectSIze;
 import com.nhom3.qlcf.test.testSQL;
 import com.nhom3.qlcf.view.form.banhang.FormBanHang;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.DongCTHD;
+import static com.nhom3.qlcf.view.form.banhang.FormBanHang.SavehoaDon;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.jpldonhang;
-import static com.nhom3.qlcf.view.form.banhang.FormBanHang.lblTongTien;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.awt.Color;
 import java.sql.Array;
@@ -28,6 +29,8 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import static com.nhom3.qlcf.view.form.banhang.FormBanHang.lblTamTinh;
+import static com.nhom3.qlcf.view.form.banhang.FormBanHang.lblThanhTien;
 
 /**
  *
@@ -44,7 +47,7 @@ public class Datmon extends javax.swing.JDialog {
     }
     String maString, ten, gia, img, soluong;
     double tong;
-    public List<CTHoaDon> list1;
+    public List<CTHoaDon> hdct;
     public List<SanPham> showSP = null;
     NumberFormat chuyentien = new DecimalFormat("#,###,###");
 
@@ -88,8 +91,7 @@ public class Datmon extends javax.swing.JDialog {
     }
 
     public void getCTHD() {
-        list1 = new ArrayList<CTHoaDon>();
-        HoaDon t = new HoaDon();
+        hdct = new ArrayList<CTHoaDon>();
         CTHoaDon ct = new CTHoaDon();
         SanPham sp = new SanPham();
         Extra Ex = new Extra();
@@ -112,16 +114,16 @@ public class Datmon extends javax.swing.JDialog {
             sSP.setMaSize(lblsize.getName());
             ct.setSizeSP(sSP);
         }
-
+        HoaDon t = new HoaDon();
         so = Integer.parseInt(txtsoluong.getText());
         t.setTongTien(Double.parseDouble(lblgia.getName()) + Double.parseDouble(lblgiaExtra.getName()) * so);
+        t.setMaHoaDon(FormBanHang.lblbuton_thanhToan.getToolTipText());
         //Add
-
         ct.setExtra(Ex);
         ct.setSoLuong(Integer.parseInt(txtsoluong.getText()));
         ct.setMaSanPham(sp);
         ct.setMaHoaDon(t);
-        list1.add(ct);
+        hdct.add(ct);
     }
 
     public void DongGoi() {
@@ -130,18 +132,19 @@ public class Datmon extends javax.swing.JDialog {
         SizeSP sSp = new SizeSP();
         Extra Ex = new Extra();
         HoaDon hd = new HoaDon();
-        for (int i = 0; i < list1.size(); i++) {
-            sp.setMaSanPham(list1.get(i).getMaSanPham().getMaSanPham());
-            sp.setTenSp(list1.get(i).getMaSanPham().getTenSp());
-            sp.setGiaBan(list1.get(i).getMaSanPham().getGiaBan());
-            sp.setHinhAnh(list1.get(i).getMaSanPham().getHinhAnh());
-            sSp.setMaSize(list1.get(i).getSizeSP().getMaSize());
-            sSp.setHeSo(list1.get(i).getSizeSP().getHeSo());
-            Ex.setId(list1.get(i).getExtra().getId());
-            Ex.setTen(list1.get(i).getExtra().getTen());
-            Ex.setGia(list1.get(i).getExtra().getGia());
-            hd.setTongTien(list1.get(i).getMaHoaDon().getTongTien());
-            cthd.setSoLuong(list1.get(i).getSoLuong());
+        for (int i = 0; i < hdct.size(); i++) {
+            sp.setMaSanPham(hdct.get(i).getMaSanPham().getMaSanPham());
+            sp.setTenSp(hdct.get(i).getMaSanPham().getTenSp());
+            sp.setGiaBan(hdct.get(i).getMaSanPham().getGiaBan());
+            sp.setHinhAnh(hdct.get(i).getMaSanPham().getHinhAnh());
+            sSp.setMaSize(hdct.get(i).getSizeSP().getMaSize());
+            sSp.setHeSo(hdct.get(i).getSizeSP().getHeSo());
+            Ex.setId(hdct.get(i).getExtra().getId());
+            Ex.setTen(hdct.get(i).getExtra().getTen());
+            Ex.setGia(hdct.get(i).getExtra().getGia());
+            hd.setTongTien(hdct.get(i).getMaHoaDon().getTongTien());
+            hd.setMaHoaDon(hdct.get(i).getMaHoaDon().getMaHoaDon());
+            cthd.setSoLuong(hdct.get(i).getSoLuong());
             cthd.setMaSanPham(sp);
             cthd.setMaHoaDon(hd);
             cthd.setSizeSP(sSp);
@@ -177,13 +180,14 @@ public class Datmon extends javax.swing.JDialog {
 
     }
 
-    public void getTongTien() {
+    public void getTamTinh() {
         double tongtien = 0;
-
         for (int i = 0; i < DongCTHD.size(); i++) {
             tongtien += (DongCTHD.get(i).getMaHoaDon().getTongTien());
         }
-        lblTongTien.setText(String.valueOf(chuyentien.format(tongtien)) + " VNĐ");
+
+        lblTamTinh.setText(String.valueOf(chuyentien.format(tongtien)) + " VNĐ");
+        lblThanhTien.setText(String.valueOf(chuyentien.format(tongtien)) + " VNĐ");
     }
 
     /**
@@ -416,14 +420,14 @@ public class Datmon extends javax.swing.JDialog {
                 i.remove();
             }
 
-        }*/
-
+        }*/ 
+        FormBanHang.banhang.AutogetMaHD();
         getCTHD();
         DongGoi();
-        getTongTien();
+        getTamTinh();
+        FormBanHang.banhang.getTongTien();
         Designhelper designhelper = new Designhelper();
         designhelper.DesigDonHang(jpldonhang, DongCTHD);
-
         dispose();
 
     }//GEN-LAST:event_lblbutonThemMousePressed

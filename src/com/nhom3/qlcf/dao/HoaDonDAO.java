@@ -24,6 +24,7 @@ public class HoaDonDAO implements DAO<HoaDon> {
     public boolean insert(HoaDon t) {
         String sql = "Insert dbo.Hoadon values (?,?,?,?,?,?,?)";
         return JDBCHelper.executeUpdate(sql, t.getMaHoaDon(), t.getMaNguoiDung().getMaNguoidung(), t.getMaKhachHang().getMakh(), t.getChietKhau(), t.getNgayHD(), t.getTongTien(), t.isTrangThai());
+        
     }
 
     @Override
@@ -69,15 +70,12 @@ public class HoaDonDAO implements DAO<HoaDon> {
         HoaDon model = new HoaDon();
         try {
             model.setMaHoaDon(rs.getString(1));
-
             NguoiDung nd = new NguoiDung();
             nd.setMaNguoidung(rs.getString(2));
             model.setMaNguoiDung(nd);
-
             KhachHang kh = new KhachHang();
             kh.setMakh(rs.getString(3));
             model.setMaKhachHang(kh);
-
             model.setChietKhau(rs.getDouble(4));
             model.setNgayHD(rs.getDate(5));
             model.setTongTien(rs.getDouble(6));

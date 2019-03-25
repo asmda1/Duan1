@@ -284,3 +284,28 @@ SELECT CTHoaDon.maSp, tenSp, giaBan, SUM(soLuong) AS soLuong, SUM(tongTien) AS d
 GO
 
 EXEC dbo.DoanhThuTheoSP
+
+SELECT * FROM dbo.HoaDon
+SELECT * FROM dbo.CTHoaDon
+SELECT maNguoiDung, GETDATE() AS Times FROM dbo.NguoiDung;
+
+
+INSERT INTO dbo.HoaDon
+        ( maHD ,
+          maNguoiDung ,
+          maKH ,
+          chietKhau ,
+          ngayHD ,
+          tongTien ,
+          trangThai
+        )
+VALUES  ( '' , -- maHD - varchar(10)
+          '' , -- maNguoiDung - varchar(10)
+          '' , -- maKH - varchar(10)
+          NULL , -- chietKhau - money
+          GETDATE() , -- ngayHD - date
+          NULL , -- tongTien - money
+          NULL  -- trangThai - bit
+        )
+
+		SELECT * FROM dbo.KhachHang
