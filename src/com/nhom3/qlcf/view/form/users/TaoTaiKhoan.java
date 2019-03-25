@@ -198,7 +198,7 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         int Index = ndDao.selectAll().size() - 1;
         String chuoi = ndDao.selectAll().get(Index).getMaNguoidung().substring(2);
         int so = Integer.parseInt(chuoi);
-        txtUsers.setName("ND" + String.valueOf(so + 1));
+        txtUsers.setName("ND00" + String.valueOf(so + 1));
         return txtUsers.getName();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

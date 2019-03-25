@@ -7,6 +7,7 @@ package com.nhom3.qlcf.dao;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.model.KhachHang;
+import com.nhom3.qlcf.model.NguoiDung;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,31 +18,31 @@ import java.util.List;
  * @author Kanbi
  */
 public class KhachHangDAO implements DAO<KhachHang> {
-    
+
     @Override
     public boolean insert(KhachHang t) {
         String sql = "Insert dbo.KhachHang values (?,?,?,?,?,?,?)";
         return JDBCHelper.executeUpdate(sql, t.getMakh(), t.getTenKh(), t.getEmail(), t.getDienThoai(), t.getDiaChi(), t.isTrangThai(), t.getDiemThuong());
     }
-    
+
     @Override
     public boolean delete(KhachHang t) {
         String sql = "Delete from dbo.KhachHang where maKh=?";
         return JDBCHelper.executeUpdate(sql, t.getMakh());
     }
-    
+
     @Override
     public boolean update(KhachHang t) {
         String sql = "Update dbo.KhachHang set tenKh=?, email=?, dienThoai=?, diaChi=?, trangThai=?, diemThuong=? where maKh=?";
         return JDBCHelper.executeUpdate(sql, t.getTenKh(), t.getEmail(), t.getDienThoai(), t.getDiaChi(), t.isTrangThai(), t.getDiemThuong(), t.getMakh());
     }
-    
+
     @Override
     public List<KhachHang> selectAll() {
         String sql = "Select * from dbo.KhachHang";
         return select(sql);
     }
-    
+
     @Override
     public List<KhachHang> select(String sql, Object... args) {
         List<KhachHang> list = new ArrayList<>();
@@ -61,7 +62,7 @@ public class KhachHangDAO implements DAO<KhachHang> {
         }
         return list;
     }
-    
+
     @Override
     public KhachHang readFromResultSet(ResultSet rs) {
         KhachHang model = new KhachHang();
@@ -72,19 +73,19 @@ public class KhachHangDAO implements DAO<KhachHang> {
             model.setDienThoai(rs.getString(4));
             model.setDiaChi(rs.getString(5));
             model.setTrangThai(rs.getBoolean(6));
-            model.setDiemThuong(rs.getInt(7)); 
+            model.setDiemThuong(rs.getInt(7));
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-        
+
         return model;
     }
 
-  
-
     @Override
     public KhachHang selectID(String ID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "Select * from dbo.KhachHang where dienThoai = ?";
+        List<KhachHang> list = select(sql, ID);
+        return list.size() > 0 ? list.get(0) : null;
     }
-    
+
 }

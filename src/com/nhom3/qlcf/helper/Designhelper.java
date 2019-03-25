@@ -70,7 +70,6 @@ public class Designhelper implements DesignInterFace {
         this.sanphamUI.setVisible(true);
         JPanel[] pnlSanPham = new JPanel[this.data.size()];
         // int x = Integer.parseInt(String.valueOf(data.size() / 3)); //1.2
-
         sanphamUI.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -247,7 +246,7 @@ public class Designhelper implements DesignInterFace {
                 public void mousePressed(MouseEvent e) {
                     CTHD.remove(CTHD.get(Integer.parseInt(e.getComponent().getName())));
                     Datmon d = new Datmon(null, true);
-                    d.getTongTien();
+                    d.getTamTinh();
                     DesigDonHang(donhangUI, CTHD);
                 }
 
@@ -375,8 +374,8 @@ public class Designhelper implements DesignInterFace {
     }
 
     @Override
-    public void DesignExtra(JPanel jplExtra, List<Extra> data, JLabel lblExtra, JLabel tenExtra, JLabel lblTongTien, JLabel lblTinhThem, JTextField txtsoluong, int so) {
-        this.giaExtra = lblExtra;
+    public void DesignExtra(JPanel jplExtra, List<Extra> data, JLabel lblgiaExtra, JLabel tenExtra, JLabel lblTongTien, JLabel lblTinhThem, JTextField txtsoluong, int so) {
+        this.giaExtra = lblgiaExtra;
         this.lbltenExtra = tenExtra;
         s1 = so;
         jplExtra.setLayout(new GridLayout(3, 3, 2, 3));
@@ -398,10 +397,11 @@ public class Designhelper implements DesignInterFace {
             jplNext[i].setName(String.valueOf(chuyentien.format(data.get(i).getGia())) + " VNĐ");
             jplNext[i].add(tenEx);
             jplNext[i].addMouseListener(new MouseAdapter() {
+                @Override
                 public void mousePressed(MouseEvent e) {
                     s1 = Integer.parseInt(txtsoluong.getText());
-                    lblExtra.setText("+ " + e.getComponent().getName());
-                    lblExtra.setName(String.valueOf(data.get(ten).getGia()));
+                    lblgiaExtra.setText("+ " + e.getComponent().getName());
+                    lblgiaExtra.setName(String.valueOf(data.get(ten).getGia()));
                     tenExtra.setToolTipText(id.getText());
                     tenExtra.setText(data.get(ten).getTen());
                     //lblTongTien.setText(String.valueOf(chuyentien.format(data.get(ten).getGia())) + " VNĐ");
@@ -409,6 +409,7 @@ public class Designhelper implements DesignInterFace {
 
                 }
 
+                @Override
                 public void mouseEntered(MouseEvent e) {
                     tenEx.setBackground(Color.BLUE);
                     tenEx.setForeground(Color.white);
@@ -416,6 +417,7 @@ public class Designhelper implements DesignInterFace {
 
                 }
 
+                @Override
                 public void mouseExited(MouseEvent e) {
                     tenEx.setBackground(Color.white);
                     tenEx.setForeground(Color.blue);
