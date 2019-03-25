@@ -6,6 +6,7 @@
 package com.nhom3.qlcf.view.form.doanhthu;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.helper.XuLy;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -28,23 +29,7 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
         initComponents();
         txtSearch.setText("Tìm kiếm khách hàng");
         txtSearch.setForeground(Color.gray);
-        txtSearch.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (txtSearch.getText().equals("Tìm kiếm khách hàng")) {
-                    txtSearch.setText("");
-                    txtSearch.setForeground(Color.BLACK);
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (txtSearch.getText().isEmpty()) {
-                    txtSearch.setForeground(Color.GRAY);
-                    txtSearch.setText("Tìm kiếm khách hàng");
-                }
-            }
-        });
+        XuLy.placeHolder(txtSearch, "Tìm kiếm khách hàng");
     }
 
     private void fillToTable() {
