@@ -112,7 +112,7 @@ public class FormBanHang extends javax.swing.JPanel {
             lblThanhTien.setName(String.valueOf(tongtien * (100 - ChietKhau) / 100));
             lblThanhTien.setToolTipText(String.valueOf(tongtien * (100 - ChietKhau) / 100));
         } else {
-            ChietKhau = Double.parseDouble(txtChietKhau.getText());
+            ChietKhau = Double.parseDouble(txtChietKhau.getText().substring(1));
             lblThanhTien.setText(String.valueOf(chuyentien.format(tongtien * (100 - ChietKhau) / 100)) + " VNĐ");
             lblThanhTien.setName(String.valueOf(tongtien * (100 - ChietKhau) / 100));
             lblThanhTien.setToolTipText(String.valueOf(tongtien * (100 - ChietKhau) / 100));
@@ -131,7 +131,7 @@ public class FormBanHang extends javax.swing.JPanel {
         hoadon.setChietKhau(ChietKhau);
         hoadon.setTongTien(Double.parseDouble(lblThanhTien.getToolTipText()));
         System.out.println(lblThanhTien.getToolTipText());
-        kh.setMakh(lbltenKH.getToolTipText());
+        kh.setMakh(lbltenKH.getName());
         hoadon.setMaKhachHang(kh);
         hoadon.setTrangThai(true);
         hoadon.setMaNguoiDung(nd);
@@ -195,6 +195,18 @@ public class FormBanHang extends javax.swing.JPanel {
         }
     }
 
+    public void Reset() {
+        jpldonhang.removeAll();
+        DongCTHD.removeAll(DongCTHD);
+        SavehoaDon.removeAll(SavehoaDon);
+        lblTamTinh.setText("0 VNĐ");
+        lblThanhTien.setText("0 VNĐ");
+        lblThanhTien.setToolTipText("0");
+        lbltenKH.setText(" x Khách lẻ");
+        lbltenKH.setName("KH001");
+        txtChietKhau.setText("-0");
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -235,7 +247,7 @@ public class FormBanHang extends javax.swing.JPanel {
         txtTimSDT = new javax.swing.JTextField();
         lblTamTinh = new javax.swing.JLabel();
         lblThanhTien = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lbltimSDT = new javax.swing.JLabel();
         txtChietKhau = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -538,6 +550,7 @@ public class FormBanHang extends javax.swing.JPanel {
         lbltenKH.setToolTipText("KH001");
         lbltenKH.setOpaque(true);
         jplHoaDon.add(lbltenKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 43, 174, -1));
+        lbltenKH.setName("KH001");
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -576,29 +589,29 @@ public class FormBanHang extends javax.swing.JPanel {
 
         lblTamTinh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTamTinh.setText("....");
-        jplHoaDon.add(lblTamTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 62, 90, 30));
+        jplHoaDon.add(lblTamTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 190, 30));
 
         lblThanhTien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblThanhTien.setText("0 VNĐ");
         jplHoaDon.add(lblThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 129, 143, 23));
 
-        jLabel4.setBackground(new java.awt.Color(0, 51, 255));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Tìm Kiếm");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.setOpaque(true);
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbltimSDT.setBackground(new java.awt.Color(0, 51, 255));
+        lbltimSDT.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbltimSDT.setForeground(new java.awt.Color(255, 255, 255));
+        lbltimSDT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbltimSDT.setText("Tìm Kiếm");
+        lbltimSDT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbltimSDT.setOpaque(true);
+        lbltimSDT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel4MousePressed(evt);
+                lbltimSDTMousePressed(evt);
             }
         });
-        jplHoaDon.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 0, 72, 31));
+        jplHoaDon.add(lbltimSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 0, 72, 31));
 
         txtChietKhau.setEditable(false);
         txtChietKhau.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtChietKhau.setText("0");
+        txtChietKhau.setText("-0");
         txtChietKhau.setOpaque(false);
         txtChietKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -607,6 +620,7 @@ public class FormBanHang extends javax.swing.JPanel {
         });
         jplHoaDon.add(txtChietKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 50, 20));
 
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("%");
         jplHoaDon.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 20, 20));
 
@@ -729,7 +743,7 @@ public class FormBanHang extends javax.swing.JPanel {
         jSSanPham.setBorder(null);
         jSSanPham.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        jpnDSsanpham.setBackground(new java.awt.Color(255, 204, 255));
+        jpnDSsanpham.setBackground(new java.awt.Color(255, 255, 255));
         jpnDSsanpham.setAutoscrolls(true);
         jpnDSsanpham.setMaximumSize(new java.awt.Dimension(32767, 400));
         jpnDSsanpham.setLayout(new javax.swing.BoxLayout(jpnDSsanpham, javax.swing.BoxLayout.LINE_AXIS));
@@ -915,14 +929,7 @@ public class FormBanHang extends javax.swing.JPanel {
         DongGoiHD();
         InsertHD();
         InsertHDCT();
-        jpldonhang.removeAll();
-        DongCTHD.removeAll(DongCTHD);
-        SavehoaDon.removeAll(SavehoaDon);
-        lblTamTinh.setText("0 VNĐ");
-        lblThanhTien.setText("0 VNĐ");
-        lblThanhTien.setToolTipText("0");
-
-        txtChietKhau.setText("0");
+        Reset();
         Designhelper designhelper = new Designhelper();
         designhelper.DesigDonHang(jpldonhang, DongCTHD);
     }//GEN-LAST:event_lblbuton_thanhToanMousePressed
@@ -938,13 +945,13 @@ public class FormBanHang extends javax.swing.JPanel {
         getTongTien();
     }//GEN-LAST:event_txtChietKhauActionPerformed
     KhachHang nd = null;
-    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+    private void lbltimSDTMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltimSDTMousePressed
         // TODO add your handling code here:
         KhachHangDAO khDao = new KhachHangDAO();
         nd = khDao.selectID(txtTimSDT.getText());
         lbltenKH.setText(nd.getTenKh());
         lbltenKH.setName(nd.getMakh());
-    }//GEN-LAST:event_jLabel4MousePressed
+    }//GEN-LAST:event_lbltimSDTMousePressed
 
     private void txtTimSDTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimSDTMouseEntered
         // TODO add your handling code here:
@@ -970,10 +977,10 @@ public class FormBanHang extends javax.swing.JPanel {
 
     private void jLabel15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MousePressed
         // TODO add your handling code here:
-        so = Integer.parseInt(txtChietKhau.getText());
+        so = Integer.parseInt(txtChietKhau.getText().substring(1));
         if (so < 100) {
             so++;
-            txtChietKhau.setText(String.valueOf((so + 5) - 1));
+            txtChietKhau.setText("-"+String.valueOf((so + 5) - 1));
             getTongTien();
 
         }
@@ -983,10 +990,10 @@ public class FormBanHang extends javax.swing.JPanel {
     private void jLabel13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MousePressed
         // TODO add your handling code here:
 
-        so = Integer.parseInt(txtChietKhau.getText());
+        so = Integer.parseInt(txtChietKhau.getText().substring(1));
         if (so != 0 && so != 1) {
             so--;
-            txtChietKhau.setText(String.valueOf(so - 4));
+            txtChietKhau.setText("-"+String.valueOf(so - 4));
             getTongTien();
 
         }
@@ -1004,7 +1011,6 @@ public class FormBanHang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1042,6 +1048,7 @@ public class FormBanHang extends javax.swing.JPanel {
     private javax.swing.JLabel lblVienTxt;
     protected static javax.swing.JLabel lblbuton_thanhToan;
     private javax.swing.JLabel lbltenKH;
+    private javax.swing.JLabel lbltimSDT;
     private javax.swing.JTextField txtChietKhau;
     private javax.swing.JTextField txtTimSDT;
     // End of variables declaration//GEN-END:variables

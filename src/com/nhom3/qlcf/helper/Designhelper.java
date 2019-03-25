@@ -73,7 +73,6 @@ public class Designhelper implements DesignInterFace {
         sanphamUI.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
-
         int x = 0, y = 0;
         for (int i = 0; i < this.data.size(); i++) {
             try {
@@ -214,7 +213,7 @@ public class Designhelper implements DesignInterFace {
             //Tổng Tiền 
             double tongtien = this.CTHD.get(i).getMaSanPham().getGiaBan();
             if (tongtien == this.CTHD.get(i).getMaSanPham().getGiaBan()) {
-                tongtien += this.CTHD.get(i).getMaSanPham().getGiaBan() * this.CTHD.get(i).getSoLuong()*this.CTHD.get(i).getSizeSP().getHeSo();
+                tongtien += this.CTHD.get(i).getMaSanPham().getGiaBan() * this.CTHD.get(i).getSoLuong() * this.CTHD.get(i).getSizeSP().getHeSo();
             }
             JLabel lbltongtien = new JLabel(String.valueOf(chuyentien.format(tongtien - this.CTHD.get(i).getMaSanPham().getGiaBan()) + " VNĐ/" + lblsoluong.getText()));
             lbltongtien.setFont(new Font("Tahoma", 1, 11));
@@ -227,11 +226,14 @@ public class Designhelper implements DesignInterFace {
             lblXoa.setToolTipText(String.valueOf(index));
             lblXoa.setCursor(new Cursor(Cursor.HAND_CURSOR));
             //Set show Giá
-            JLabel lblgiaSP = new JLabel(String.valueOf(chuyentien.format(this.CTHD.get(i).getMaSanPham().getGiaBan())) + " VNĐ (*" +this.CTHD.get(i).getSizeSP().getHeSo() + ")");
+            JLabel lblgiaSP = new JLabel(String.valueOf(chuyentien.format(this.CTHD.get(i).getMaSanPham().getGiaBan())) + " VNĐ (*" + this.CTHD.get(i).getSizeSP().getHeSo() + ")");
             lblgiaSP.setFont(new Font("Tahoma", 1, 11));
 
             //show Extra
-            JLabel lblghiChu = new JLabel("Ghi Chú: " + CTHD.get(i).getExtra().getTen() + " ( " + chuyentien.format(CTHD.get(i).getExtra().getGia())+ " VNĐ)");
+            JLabel lblghiChu = new JLabel("Ghi Chú: " + CTHD.get(i).getExtra().getTen() + " ( " + chuyentien.format(CTHD.get(i).getExtra().getGia()) + " VNĐ)");
+            if (!lblghiChu.getText().equals("Ghi Chú: Trống ( 0 VNĐ)")) {
+                lblghiChu.setText("Ghi Chú: " + CTHD.get(i).getExtra().getTen() + " ( " + chuyentien.format(CTHD.get(i).getExtra().getGia())+ " VNĐ*"+ lblsoluong.getText() +")" );
+            }
             lblghiChu.setName(CTHD.get(i).getExtra().getId());
             lblghiChu.setForeground(Color.GRAY);
             lblghiChu.setFont(new Font("Tahoma", 2, 11));
@@ -339,29 +341,29 @@ public class Designhelper implements DesignInterFace {
             M.setText(dataSize.get(i).getTenSize());
             M.setName(dataSize.get(i).getMaSize());
             JLabel Heso = new JLabel(String.valueOf(dataSize.get(i).getHeSo()));
-          
+
             jplNext[i].setName(String.valueOf(dataSize.get(i).getHeSo()));
             jplNext[i].add(M);
             jplNext[i].addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
                     s1 = Integer.parseInt(txtsoluong.getText());
 
-                    giaSize.setText(String.valueOf(chuyentien.format(((dataSP.get(0).getGiaBan() ) * s1) * Float.parseFloat(e.getComponent().getName()))) + " VNĐ");
+                    giaSize.setText(String.valueOf(chuyentien.format(((dataSP.get(0).getGiaBan()) * s1) * Float.parseFloat(e.getComponent().getName()))) + " VNĐ");
                     showSize.setText(M.getText());
                     showSize.setName(M.getName());
-                    if(showSize.getText().equals("Lớn")){
+                    if (showSize.getText().equals("Lớn")) {
                         showSize.setForeground(Color.orange);
                         giaSize.setForeground(Color.orange);
-                    }else if(showSize.getText().equals("Vừa")){
-                         showSize.setForeground(Color.green);
-                          giaSize.setForeground(Color.green);
-                    }else{
-                         showSize.setForeground(Color.red);
-                          giaSize.setForeground(Color.red);
-                         
+                    } else if (showSize.getText().equals("Vừa")) {
+                        showSize.setForeground(Color.green);
+                        giaSize.setForeground(Color.green);
+                    } else {
+                        showSize.setForeground(Color.red);
+                        giaSize.setForeground(Color.red);
+
                     }
                     showSize.setToolTipText(Heso.getText());
-                    giaSize.setName(String.valueOf(((dataSP.get(0).getGiaBan() ) * s1) * Float.parseFloat(e.getComponent().getName())));
+                    giaSize.setName(String.valueOf(((dataSP.get(0).getGiaBan()) * s1) * Float.parseFloat(e.getComponent().getName())));
                     giaSize.setToolTipText(String.valueOf(((dataSP.get(0).getGiaBan())) * Float.parseFloat(e.getComponent().getName())));
 
                 }
