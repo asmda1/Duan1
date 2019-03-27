@@ -249,19 +249,6 @@ CREATE VIEW LichSuBanHang AS
 SELECT * FROM dbo.LichSuBanHang
 GO 
 
-INSERT dbo.HoaDon VALUES  ( '1' , 'ND001' , 'KH001' , 0 , GETDATE() , 500 , 1  )
-GO
-INSERT dbo.CTHoaDon VALUES  ( '1', 'SP001', 'M', 'EX001', 2  )
-GO
-
-INSERT dbo.HoaDon VALUES  ( '2' , 'ND003' , 'KH003' , 0 , GETDATE() , 5000 , 1  )
-GO
-INSERT dbo.CTHoaDon VALUES  ( '2', 'SP003', 'XL', 'EX003', 5  )
-GO   
-INSERT dbo.HoaDon VALUES  ( '3' , 'ND001' , 'KH001' , 0 , GETDATE() , 400 , 1  )
-GO
-INSERT dbo.CTHoaDon VALUES  ( '3', 'SP001', 'M', 'EX001', 2  )
-GO
 
 CREATE PROCEDURE SanPhamBanChay AS 
 	SELECT CTHoaDon.maSp, tenSp, SUM(soLuong) AS tongSoLuong 
@@ -291,7 +278,8 @@ EXEC dbo.DoanhThuTheoSP
 SELECT * FROM dbo.HoaDon
 SELECT * FROM dbo.CTHoaDon
 SELECT maNguoiDung, GETDATE() AS Times FROM dbo.NguoiDung;
-
+GO
+ 
 CREATE PROC HoaDonChuaThanhToan AS 
 SELECT dbo.HoaDon.maHD, tenSp,CTHoaDon.maSize,giaBan,tenKh,diaChi,dienThoai,tongTien, HoaDon.trangThai FROM dbo.HoaDon JOIN dbo.CTHoaDon 
 ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham 
