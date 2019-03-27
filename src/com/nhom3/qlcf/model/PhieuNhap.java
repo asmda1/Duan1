@@ -88,10 +88,7 @@ public class PhieuNhap {
 
     public void setTongTien(double tongTien) {
         this.tongTien = tongTien;
+
     }
 
- 
-
-    
-    
 }

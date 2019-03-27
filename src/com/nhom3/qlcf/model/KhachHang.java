@@ -7,7 +7,8 @@ package com.nhom3.qlcf.model;
 
 /**
  *
- * @author baotri1998
+ * @author h.P
+ * 
  */
 public class KhachHang {
   private  String makh,tenKh,email,dienThoai,diaChi;
