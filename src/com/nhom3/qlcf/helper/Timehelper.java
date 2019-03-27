@@ -32,7 +32,7 @@ public class Timehelper implements TimerHelperInterFace {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.SECOND, 10); //0h:0m:10s
         Date dateSchedule = calendar.getTime();
-        long period = 24 * 170;  //tinh theo giay 
+        long period = 24 * 150;  //tinh theo giay 
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {

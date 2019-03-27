@@ -246,9 +246,8 @@ public class FormBanHang extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        lblShoworderweb = new javax.swing.JLabel();
         lblorderweb = new javax.swing.JLabel();
+        lblShoworderweb = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jplDonHang = new javax.swing.JPanel();
         jSDonHang = new javax.swing.JScrollPane();
@@ -465,11 +464,13 @@ public class FormBanHang extends javax.swing.JPanel {
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setText("Nhom San Pham");
-        jPanel9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 0, 180, 35));
+        jPanel9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 40));
 
-        jPanel4.setBackground(new java.awt.Color(102, 102, 255));
-        jPanel4.setOpaque(false);
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        lblorderweb.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblorderweb.setForeground(new java.awt.Color(255, 102, 0));
+        lblorderweb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblorderweb.setText("0");
+        jPanel9.add(lblorderweb, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 40, 20));
 
         lblShoworderweb.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblShoworderweb.setForeground(new java.awt.Color(255, 255, 255));
@@ -481,15 +482,7 @@ public class FormBanHang extends javax.swing.JPanel {
                 lblShoworderwebMousePressed(evt);
             }
         });
-        jPanel4.add(lblShoworderweb, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 40));
-
-        lblorderweb.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblorderweb.setForeground(new java.awt.Color(255, 51, 0));
-        lblorderweb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblorderweb.setText("0");
-        jPanel4.add(lblorderweb, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 20, 20));
-
-        jPanel9.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 50, 40));
+        jPanel9.add(lblShoworderweb, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 50, 40));
 
         javax.swing.GroupLayout jpnToolbar19Layout = new javax.swing.GroupLayout(jpnToolbar19);
         jpnToolbar19.setLayout(jpnToolbar19Layout);
@@ -1053,7 +1046,6 @@ public class FormBanHang extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
