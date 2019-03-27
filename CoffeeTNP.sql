@@ -250,7 +250,6 @@ SELECT * FROM dbo.LichSuBanHang
 GO 
 
 
-
 CREATE PROCEDURE SanPhamBanChay AS 
 	SELECT CTHoaDon.maSp, tenSp, SUM(soLuong) AS tongSoLuong 
 		FROM dbo.CTHoaDon, dbo.SanPham
@@ -281,6 +280,7 @@ SELECT * FROM dbo.CTHoaDon
 SELECT maNguoiDung, GETDATE() AS Times FROM dbo.NguoiDung;
 GO
 
+ 
 CREATE PROC HoaDonChuaThanhToan AS 
 SELECT dbo.HoaDon.maHD, tenSp,CTHoaDon.maSize,giaBan,tenKh,diaChi,dienThoai,tongTien, HoaDon.trangThai FROM dbo.HoaDon JOIN dbo.CTHoaDon 
 ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham 
