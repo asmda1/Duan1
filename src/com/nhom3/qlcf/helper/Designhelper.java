@@ -102,7 +102,7 @@ public class Designhelper implements DesignInterFace {
                     }
                 ;
                 } );
-                   DesigMenuThucDon(lblgia, lbltenSP, lblImg);
+               DesigMenuThucDon(lblgia, lbltenSP, lblImg);
                 pnlSanPham[i].add(DesigMenuThucDon(lblgia, lbltenSP, lblImg));
 
                 gbc.insets = new Insets(3, 3, 7, 7);
