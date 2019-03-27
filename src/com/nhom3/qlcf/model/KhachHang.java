@@ -10,5 +10,36 @@ package com.nhom3.qlcf.model;
  * @author h.Phong
  */
 public class KhachHang {
-    hello
+
+    hello hello hello hello hello hello
+    hello hello
+    hello hello
+    hello hello
+    hello hello
+    hello hello
+    hello hello
+    hello hello
+                                                                            
+                                                                            
+    hello hello
+    hello hello
+    hello hello
+    hello hello
+    hello hello
+    hello hello
+    hello hello
+    hello hello
+    hello hello
+    hello hello
+    hello hello
+    hello hello
+            
+                                                                                                                         
+                                                                                                                         
+                                                                                                                         
+             
+             
+             
+             
+            
 }
