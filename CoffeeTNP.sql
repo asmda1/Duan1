@@ -274,8 +274,11 @@ GO
 EXEC dbo.SanPhamBanChay
 GO
 
-
-
+CREATE PROCEDURE SoLuongDatMuaTrenWeb AS
+SELECT COUNT(maHD) AS soluong FROM dbo.HoaDon WHERE trangThai =0
+GO 
+ EXEC dbo.SoLuongDatMuaTrenWeb
+ GO 
 CREATE PROCEDURE DoanhThuTheoSP AS 
 SELECT CTHoaDon.maSp, tenSp, giaBan, SUM(soLuong) AS soLuong, SUM(tongTien) AS doanhThu FROM dbo.HoaDon, dbo.CTHoaDon, dbo.SanPham 
 	WHERE CTHoaDon.maHD = HoaDon.maHD AND CTHoaDon.maSp = SanPham.maSp
@@ -289,23 +292,14 @@ SELECT * FROM dbo.HoaDon
 SELECT * FROM dbo.CTHoaDon
 SELECT maNguoiDung, GETDATE() AS Times FROM dbo.NguoiDung;
 
+CREATE PROC HoaDonChuaThanhToan AS 
+SELECT dbo.HoaDon.maHD, tenSp,CTHoaDon.maSize,giaBan,tenKh,diaChi,dienThoai,tongTien, HoaDon.trangThai FROM dbo.HoaDon JOIN dbo.CTHoaDon 
+ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham 
+ON SanPham.maSp = CTHoaDon.maSp JOIN dbo.SizeSP 
+ON SizeSP.maSize = CTHoaDon.maSize JOIN dbo.KhachHang 
+ON KhachHang.maKh = HoaDon.maKH WHERE HoaDon.trangThai = 0
+GO 
 
-INSERT INTO dbo.HoaDon
-        ( maHD ,
-          maNguoiDung ,
-          maKH ,
-          chietKhau ,
-          ngayHD ,
-          tongTien ,
-          trangThai
-        )
-VALUES  ( '' , -- maHD - varchar(10)
-          '' , -- maNguoiDung - varchar(10)
-          '' , -- maKH - varchar(10)
-          NULL , -- chietKhau - money
-          GETDATE() , -- ngayHD - date
-          NULL , -- tongTien - money
-          NULL  -- trangThai - bit
-        )
+EXEC HoaDonChuaThanhToan
+GO 
 
-		SELECT * FROM dbo.KhachHang
