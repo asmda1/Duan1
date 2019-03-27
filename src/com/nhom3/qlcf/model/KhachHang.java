@@ -7,8 +7,7 @@ package com.nhom3.qlcf.model;
 
 /**
  *
- * @author h.P
- * 
+ * @author h.Phong
  */
 public class KhachHang {
   private  String makh,tenKh,email,dienThoai,diaChi;
@@ -83,6 +82,9 @@ public class KhachHang {
     public void setDiemThuong(int diemThuong) {
         this.diemThuong = diemThuong;
     }
+    
+    
+    
     
     
 }
