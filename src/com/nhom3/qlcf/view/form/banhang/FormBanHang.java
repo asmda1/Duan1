@@ -99,12 +99,31 @@ public class FormBanHang extends javax.swing.JPanel {
     }
 
     public String AutogetMaHD() {
-        HoaDonDAO ndDao = new HoaDonDAO();
-        int Index = ndDao.selectAll().size() - 1;
-        String chuoi = ndDao.selectAll().get(Index).getMaHoaDon().substring(2);
-        int so = Integer.parseInt(chuoi);
-        lblbuton_thanhToan.setToolTipText("HD" + String.valueOf(so + 1));
-        return lblbuton_thanhToan.getToolTipText();
+        HoaDonDAO hdDao = new HoaDonDAO();
+        String chuoi = "";
+        List<HoaDon> list = hdDao.selectAll();
+        if (list.isEmpty()) {
+            chuoi = "HD001";
+            lblbuton_thanhToan.setToolTipText(chuoi);
+            return lblbuton_thanhToan.getToolTipText();
+        } else {
+            int index = list.size() - 1;
+            int so = Integer.parseInt(list.get(index).getMaHoaDon().substring(2)) + 1;
+            switch (String.valueOf(so).length()) {
+                case 1:
+                    chuoi = "HD00" + so;
+                    break;
+                case 2:
+                    chuoi = "HD0" + so;
+                    break;
+                case 3:
+                    chuoi = "HD" + so;
+                    break;
+            }
+            System.out.println("dmio " + chuoi);
+            lblbuton_thanhToan.setToolTipText(chuoi);
+            return lblbuton_thanhToan.getToolTipText();
+        }
     }
 
     public void getTongTien() {
@@ -215,11 +234,10 @@ public class FormBanHang extends javax.swing.JPanel {
     }
 
     public void CountSoLuongHoaDonTrenWeb() {
-        
+
         Timehelper time = new Timehelper();
         time.DatLichTimer(lblorderweb, "EXEC dbo.SoLuongDatMuaTrenWeb");
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1021,7 +1039,7 @@ public class FormBanHang extends javax.swing.JPanel {
 
     private void lblShoworderwebMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblShoworderwebMousePressed
         // TODO add your handling code here:
-        
+
         CapNhatHoaDon hd = new CapNhatHoaDon(null, true);
         hd.setVisible(true);
     }//GEN-LAST:event_lblShoworderwebMousePressed
