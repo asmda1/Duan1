@@ -120,7 +120,6 @@ public class FormBanHang extends javax.swing.JPanel {
                     chuoi = "HD" + so;
                     break;
             }
-            System.out.println("dmio " + chuoi);
             lblbuton_thanhToan.setToolTipText(chuoi);
             return lblbuton_thanhToan.getToolTipText();
         }
