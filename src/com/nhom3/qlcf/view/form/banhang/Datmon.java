@@ -126,7 +126,7 @@ public class Datmon extends javax.swing.JDialog {
         hdct.add(ct);
     }
 
-    public void DongGoi() {
+    public void DongGoiHDCT() {
         CTHoaDon cthd = new CTHoaDon();
         SanPham sp = new SanPham();
         SizeSP sSp = new SizeSP();
@@ -423,7 +423,7 @@ public class Datmon extends javax.swing.JDialog {
         }*/ 
         FormBanHang.banhang.AutogetMaHD();
         getCTHD();
-        DongGoi();
+        DongGoiHDCT();
         getTamTinh();
         FormBanHang.banhang.getTongTien();
         Designhelper designhelper = new Designhelper();
