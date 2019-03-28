@@ -40,6 +40,13 @@ public class Timehelper implements TimerHelperInterFace {
                 try {
                     while (rs.next()) {
                         lbl.setText(rs.getString(1));
+                        Soundhelper mp3;
+                        mp3 = new Soundhelper("src/com/nhom3/qlcf/mp3/RengReng.mp3");
+                        if (lbl.getText().equals("0")) {
+                            mp3.stop();
+                        } else {
+                            mp3.play();
+                        }
                     }
                 } catch (Exception e) {
                     System.out.println(e);
@@ -53,7 +60,7 @@ public class Timehelper implements TimerHelperInterFace {
 
     @Override
     public void LoadTime5s() {
-       
+
     }
 
 }
