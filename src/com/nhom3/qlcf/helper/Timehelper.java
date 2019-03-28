@@ -30,7 +30,7 @@ public class Timehelper implements TimerHelperInterFace {
     @Override
     public void DatLichTimer(JLabel lbl, String sql) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.SECOND, 10); //0h:0m:10s
+        calendar.set(Calendar.SECOND, 7); //0h:0m:10s
         Date dateSchedule = calendar.getTime();
         long period = 24 * 150;  //tinh theo giay 
         TimerTask timerTask = new TimerTask() {
