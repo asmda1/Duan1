@@ -42,9 +42,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+import jdk.nashorn.internal.ir.BreakNode;
 
 /**
  *
@@ -52,7 +50,6 @@ import java.util.TimerTask;
  */
 public class FormBanHang extends javax.swing.JPanel {
 
-    Soundhelper mp3;
     /**
      * Creates new form FormLogin
      */
@@ -72,8 +69,10 @@ public class FormBanHang extends javax.swing.JPanel {
         LoadDataSanPham();
         getTongTien();
         CountSoLuongHoaDonTrenWeb();
+
     }
 
+  
     public void LoadDataSanPham() {
 
         try {

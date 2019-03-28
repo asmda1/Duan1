@@ -289,7 +289,7 @@
               <Color blue="ff" green="66" red="0" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Kh&#xe1;ch &#x110;&#x1eb7;t Tr&#xea;n Web"/>
+            <Property name="text" type="java.lang.String" value="Kh&#xe1;ch &#x110;&#x1eb7;t Online"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbltongtien">
