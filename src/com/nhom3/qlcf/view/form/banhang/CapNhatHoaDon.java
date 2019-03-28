@@ -89,6 +89,10 @@ public class CapNhatHoaDon extends javax.swing.JDialog {
             lblThongBao.setText("Thanh Toán Thành Công !");
             lblThongBao.setForeground(Color.green);
             filltoTable();
+            lblmaHD.setText("Mã HĐ: ");
+            lblKH.setText("");
+            lblsdt.setText("");
+            lbltongtien.setText("");
         }
 
     }
