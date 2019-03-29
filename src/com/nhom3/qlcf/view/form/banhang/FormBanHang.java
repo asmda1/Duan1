@@ -12,6 +12,7 @@ import com.nhom3.qlcf.dao.NguoiDungDAO;
 import com.nhom3.qlcf.helper.Soundhelper;
 import com.nhom3.qlcf.helper.Designhelper;
 import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.helper.ReSizehelper;
 import com.nhom3.qlcf.helper.Timehelper;
 import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.HoaDon;
@@ -32,6 +33,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.sql.Array;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
@@ -41,6 +44,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import jdk.nashorn.internal.ir.BreakNode;
 
@@ -69,10 +74,42 @@ public class FormBanHang extends javax.swing.JPanel {
         LoadDataSanPham();
         getTongTien();
         CountSoLuongHoaDonTrenWeb();
+        RezieImageGroupLogo();
+    }
+
+    public void RezieImageGroupLogo() {
+        try {
+            BufferedImage HinhAnh, HinhAnh2, HinhAnh3, HinhAnh4, HinhAnh5;
+            BufferedImage coffee = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/Americano(44).png"));
+            BufferedImage tea = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/TraThachVai(39).png"));
+            BufferedImage banhmi = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/GaXeNuocTuong(19).png"));
+            BufferedImage banhngot = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/PhoMaiTraXanh(29).jpg"));
+            BufferedImage fee = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/FreezeChocolate(49).png"));
+            int type = coffee.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : coffee.getType();
+            int type1 = tea.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : tea.getType();
+            int type2 = banhmi.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : banhmi.getType();
+            int type3 = banhngot.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : banhngot.getType();
+            int type4 = fee.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : fee.getType();
+            HinhAnh = new ReSizehelper().buffImage(coffee, type, 70, 60);
+            HinhAnh2 = new ReSizehelper().buffImage(tea, type1, 60, 40);
+            HinhAnh3 = new ReSizehelper().buffImage(banhmi, type2, 60, 50);
+            HinhAnh4 = new ReSizehelper().buffImage(banhngot, type3, 60, 50);
+            HinhAnh5 = new ReSizehelper().buffImage(fee, type4, 60, 40);
+            ImageIcon icon = new ImageIcon(HinhAnh);
+            ImageIcon icon2 = new ImageIcon(HinhAnh2);
+            ImageIcon icon3 = new ImageIcon(HinhAnh3);
+            ImageIcon icon4 = new ImageIcon(HinhAnh4);
+             ImageIcon icon5 = new ImageIcon(HinhAnh5);
+            lblcoffe.setIcon(icon);
+            lbltea.setIcon(icon2);
+            lblbanhmi.setIcon(icon3);
+            lblbanhngot.setIcon(icon4);
+             lblfee.setIcon(icon5);
+        } catch (Exception e) {
+        }
 
     }
 
-  
     public void LoadDataSanPham() {
 
         try {
@@ -261,9 +298,14 @@ public class FormBanHang extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        lblfee = new javax.swing.JLabel();
         lblorderweb = new javax.swing.JLabel();
         lblShoworderweb = new javax.swing.JLabel();
+        lblcoffe = new javax.swing.JLabel();
+        lblbanhmi = new javax.swing.JLabel();
+        lbltea = new javax.swing.JLabel();
+        lblbanhngot = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jplDonHang = new javax.swing.JPanel();
         jSDonHang = new javax.swing.JScrollPane();
@@ -479,14 +521,18 @@ public class FormBanHang extends javax.swing.JPanel {
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setText("Nhom San Pham");
-        jPanel9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 40));
+        lblfee.setBackground(new java.awt.Color(255, 255, 255));
+        lblfee.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblfee.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblfee.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblfee.setOpaque(true);
+        jPanel9.add(lblfee, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 80, 40));
 
         lblorderweb.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblorderweb.setForeground(new java.awt.Color(255, 102, 0));
         lblorderweb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblorderweb.setText("0");
-        jPanel9.add(lblorderweb, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 40, 20));
+        jPanel9.add(lblorderweb, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 40, 20));
 
         lblShoworderweb.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblShoworderweb.setForeground(new java.awt.Color(255, 255, 255));
@@ -498,7 +544,38 @@ public class FormBanHang extends javax.swing.JPanel {
                 lblShoworderwebMousePressed(evt);
             }
         });
-        jPanel9.add(lblShoworderweb, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 50, 40));
+        jPanel9.add(lblShoworderweb, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 0, 50, 40));
+
+        lblcoffe.setBackground(new java.awt.Color(255, 255, 255));
+        lblcoffe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblcoffe.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblcoffe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblcoffe.setOpaque(true);
+        jPanel9.add(lblcoffe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 40));
+
+        lblbanhmi.setBackground(new java.awt.Color(255, 255, 255));
+        lblbanhmi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblbanhmi.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblbanhmi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblbanhmi.setOpaque(true);
+        jPanel9.add(lblbanhmi, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 80, 40));
+
+        lbltea.setBackground(new java.awt.Color(255, 255, 255));
+        lbltea.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbltea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbltea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbltea.setOpaque(true);
+        jPanel9.add(lbltea, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 80, 40));
+
+        lblbanhngot.setBackground(new java.awt.Color(255, 255, 255));
+        lblbanhngot.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblbanhngot.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblbanhngot.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblbanhngot.setOpaque(true);
+        jPanel9.add(lblbanhngot, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 80, 40));
+
+        jLabel4.setText("Khác");
+        jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, -1, 40));
 
         javax.swing.GroupLayout jpnToolbar19Layout = new javax.swing.GroupLayout(jpnToolbar19);
         jpnToolbar19.setLayout(jpnToolbar19Layout);
@@ -508,8 +585,8 @@ public class FormBanHang extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(lblAn_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblOutBangHang)
@@ -518,12 +595,12 @@ public class FormBanHang extends javax.swing.JPanel {
         jpnToolbar19Layout.setVerticalGroup(
             jpnToolbar19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblAn_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(lblOutBangHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jpnToolbar19Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpnToolbar19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblOutBangHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jfBangHang.add(jpnToolbar19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 50));
@@ -1054,8 +1131,8 @@ public class FormBanHang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1090,8 +1167,13 @@ public class FormBanHang extends javax.swing.JPanel {
     private javax.swing.JLabel lblThongBao;
     private javax.swing.JLabel lblUsers;
     private javax.swing.JLabel lblVienTxt;
+    private javax.swing.JLabel lblbanhmi;
+    private javax.swing.JLabel lblbanhngot;
     protected static javax.swing.JLabel lblbuton_thanhToan;
+    private javax.swing.JLabel lblcoffe;
+    private javax.swing.JLabel lblfee;
     private javax.swing.JLabel lblorderweb;
+    private javax.swing.JLabel lbltea;
     private javax.swing.JLabel lbltenKH;
     private javax.swing.JLabel lbltimSDT;
     private javax.swing.JTextField txtChietKhau;
