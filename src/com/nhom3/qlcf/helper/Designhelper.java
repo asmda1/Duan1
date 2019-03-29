@@ -82,7 +82,7 @@ public class Designhelper implements DesignInterFace {
                 lblImg = new JLabel();
                 BufferedImage image = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/" + data.get(i).getHinhAnh()));
                 int type = image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType();
-                BufferedImage HinhAnh = buffImage(image, type);
+                BufferedImage HinhAnh = new ReSizehelper().buffImage(image, type,150,150);
                 ImageIcon icon = new ImageIcon(HinhAnh);
                 lblImg.setIcon(icon);
                 pnlSanPham[i].setName(this.data.get(i).getMaSanPham());
@@ -310,16 +310,6 @@ public class Designhelper implements DesignInterFace {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public BufferedImage buffImage(BufferedImage buffImage, int type) {
-        int chieurong = 150; //150px
-        int chieucao = 150;
-        BufferedImage buff = new BufferedImage(chieurong, chieucao, type);
-        //set đồ họa ảnh
-        Graphics2D g = buff.createGraphics();
-        g.drawImage(buffImage, 0, 0, chieurong, chieucao, null);
-        g.dispose();
-        return buff;
-    }
 
     @Override
     public void DesignSizeSP(JPanel size, List<SizeSP> dataSize, List<SanPham> dataSP, JLabel giaSize, JLabel showSize, int so, JTextField txtsoluong, JLabel giaEtra) {

@@ -196,6 +196,7 @@ public class CapNhatHoaDon extends javax.swing.JDialog {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Khách Đặt Online");
 
+        lbltongtien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbltongtien.setText("...");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
