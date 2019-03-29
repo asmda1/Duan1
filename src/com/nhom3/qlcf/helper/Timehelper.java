@@ -19,8 +19,10 @@ import javax.swing.Timer;
  */
 public class Timehelper implements TimerHelperInterFace {
 
+   public Timer t;
+
     @Override
-    public void TimerLoad(Timer t, ActionListener action) {
+    public void TimerLoad(ActionListener action) {
 
         t = new javax.swing.Timer(1, action);
         t.start();

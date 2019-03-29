@@ -91,10 +91,15 @@ public class SanPhamDAO implements DAO<SanPham> {
 
     }
 
-
     @Override
     public SanPham selectID(String ID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    //bổ sung
+    public List<SanPham> selecttheoLoai(String loai) {
+        String sql = "Select * from SanPham where maLoai =?";
+        return select(sql, loai);
     }
 
 }

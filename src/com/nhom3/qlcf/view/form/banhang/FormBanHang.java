@@ -9,11 +9,14 @@ import com.nhom3.qlcf.dao.CTHoaDonDAO;
 import com.nhom3.qlcf.dao.HoaDonDAO;
 import com.nhom3.qlcf.dao.KhachHangDAO;
 import com.nhom3.qlcf.dao.NguoiDungDAO;
+import com.nhom3.qlcf.dao.SanPhamDAO;
 import com.nhom3.qlcf.helper.Soundhelper;
 import com.nhom3.qlcf.helper.Designhelper;
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.ReSizehelper;
 import com.nhom3.qlcf.helper.Timehelper;
+import com.nhom3.qlcf.helper.XuLy;
+import com.nhom3.qlcf.helper.limitKiTuHelper;
 import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.HoaDon;
 import com.nhom3.qlcf.model.KhachHang;
@@ -33,21 +36,17 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.sql.Array;
-import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import jdk.nashorn.internal.ir.BreakNode;
+import javax.swing.JLabel;
 
 /**
  *
@@ -77,203 +76,6 @@ public class FormBanHang extends javax.swing.JPanel {
         RezieImageGroupLogo();
     }
 
-    public void RezieImageGroupLogo() {
-        try {
-            BufferedImage HinhAnh, HinhAnh2, HinhAnh3, HinhAnh4, HinhAnh5;
-            BufferedImage coffee = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/Americano(44).png"));
-            BufferedImage tea = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/TraThachVai(39).png"));
-            BufferedImage banhmi = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/GaXeNuocTuong(19).png"));
-            BufferedImage banhngot = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/PhoMaiTraXanh(29).jpg"));
-            BufferedImage fee = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/FreezeChocolate(49).png"));
-            int type = coffee.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : coffee.getType();
-            int type1 = tea.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : tea.getType();
-            int type2 = banhmi.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : banhmi.getType();
-            int type3 = banhngot.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : banhngot.getType();
-            int type4 = fee.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : fee.getType();
-            HinhAnh = new ReSizehelper().buffImage(coffee, type, 70, 60);
-            HinhAnh2 = new ReSizehelper().buffImage(tea, type1, 60, 40);
-            HinhAnh3 = new ReSizehelper().buffImage(banhmi, type2, 60, 50);
-            HinhAnh4 = new ReSizehelper().buffImage(banhngot, type3, 60, 50);
-            HinhAnh5 = new ReSizehelper().buffImage(fee, type4, 60, 40);
-            ImageIcon icon = new ImageIcon(HinhAnh);
-            ImageIcon icon2 = new ImageIcon(HinhAnh2);
-            ImageIcon icon3 = new ImageIcon(HinhAnh3);
-            ImageIcon icon4 = new ImageIcon(HinhAnh4);
-             ImageIcon icon5 = new ImageIcon(HinhAnh5);
-            lblcoffe.setIcon(icon);
-            lbltea.setIcon(icon2);
-            lblbanhmi.setIcon(icon3);
-            lblbanhngot.setIcon(icon4);
-             lblfee.setIcon(icon5);
-        } catch (Exception e) {
-        }
-
-    }
-
-    public void LoadDataSanPham() {
-
-        try {
-            jpnDSsanpham.setLayout(new GridLayout(9, 4, 3, 3));
-            testSQL sql = new testSQL();
-            int start = 0;
-            int end = 9;
-            // List Show sp từ dữ liệu SQL
-
-            if (sql.select().size() < 9) {
-                end = sql.select().size();
-                //jpnDSsanpham.setLayout(new GridLayout(2, 3, 4, 4));
-            }
-            Designhelper designhelper = new Designhelper();
-            designhelper.DesignPage(jpnNext, sql.select());
-            list = designhelper.LimitPage(sql.select(), start, end);
-            designhelper.DesignSanPham(jpnDSsanpham, testSQL.select());
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-    }
-
-    public String AutogetMaHD() {
-        HoaDonDAO hdDao = new HoaDonDAO();
-        String chuoi = "";
-        List<HoaDon> list = hdDao.selectAll();
-        if (list.isEmpty()) {
-            chuoi = "HD001";
-            lblbuton_thanhToan.setToolTipText(chuoi);
-            return lblbuton_thanhToan.getToolTipText();
-        } else {
-            int index = list.size() - 1;
-            int so = Integer.parseInt(list.get(index).getMaHoaDon().substring(2)) + 1;
-            switch (String.valueOf(so).length()) {
-                case 1:
-                    chuoi = "HD00" + so;
-                    break;
-                case 2:
-                    chuoi = "HD0" + so;
-                    break;
-                case 3:
-                    chuoi = "HD" + so;
-                    break;
-            }
-            lblbuton_thanhToan.setToolTipText(chuoi);
-            return lblbuton_thanhToan.getToolTipText();
-        }
-    }
-
-    public void getTongTien() {
-        double tongtien = 0;
-        for (int i = 0; i < DongCTHD.size(); i++) {
-            tongtien += (DongCTHD.get(i).getMaHoaDon().getTongTien());
-        }
-        double ChietKhau;
-        if (txtChietKhau.getText().trim().equals("")) {
-            ChietKhau = 0;
-            lblThanhTien.setText(String.valueOf(chuyentien.format(tongtien * (100 - ChietKhau) / 100)) + " VNĐ");
-            lblThanhTien.setName(String.valueOf(tongtien * (100 - ChietKhau) / 100));
-            lblThanhTien.setToolTipText(String.valueOf(tongtien * (100 - ChietKhau) / 100));
-        } else {
-            ChietKhau = Double.parseDouble(txtChietKhau.getText().substring(1));
-            lblThanhTien.setText(String.valueOf(chuyentien.format(tongtien * (100 - ChietKhau) / 100)) + " VNĐ");
-            lblThanhTien.setName(String.valueOf(tongtien * (100 - ChietKhau) / 100));
-            lblThanhTien.setToolTipText(String.valueOf(tongtien * (100 - ChietKhau) / 100));
-        }
-
-    }
-
-    public void GetHD() {
-        java.sql.Timestamp date = new java.sql.Timestamp(System.currentTimeMillis());
-        HoaDon hoadon = new HoaDon();
-        KhachHang kh = new KhachHang();
-        NguoiDung nd = new NguoiDung();
-        hoadon.setMaHoaDon(AutogetMaHD());
-        nd.setMaNguoidung("ND001");
-        double ChietKhau = Double.parseDouble(txtChietKhau.getText());
-        hoadon.setChietKhau(ChietKhau);
-        hoadon.setTongTien(Double.parseDouble(lblThanhTien.getToolTipText()));
-        System.out.println(lblThanhTien.getToolTipText());
-        kh.setMakh(lbltenKH.getName());
-        hoadon.setMaKhachHang(kh);
-        hoadon.setTrangThai(true);
-        hoadon.setMaNguoiDung(nd);
-        hoadon.setNgayHD(date);
-        hd.add(hoadon);
-
-    }
-
-    public void DongGoiHD() {
-        HoaDon hoadon = new HoaDon();
-        for (int i = 0; i < hd.size(); i++) {
-            hoadon.setMaHoaDon(hd.get(i).getMaHoaDon());
-            hoadon.setChietKhau(hd.get(i).getChietKhau());
-            hoadon.setMaNguoiDung(hd.get(i).getMaNguoiDung());
-            hoadon.setMaKhachHang(hd.get(i).getMaKhachHang());
-            hoadon.setTrangThai(hd.get(i).isTrangThai());
-            hoadon.setTongTien(hd.get(i).getTongTien());
-            hoadon.setNgayHD(hd.get(i).getNgayHD());
-
-        }
-        SavehoaDon.add(hoadon);
-    }
-
-    public void InsertHD() {
-        try {
-            HoaDon hd = new HoaDon();
-            for (int i = 0; i < SavehoaDon.size(); i++) {
-                HoaDonDAO in = new HoaDonDAO();
-                hd.setMaHoaDon(SavehoaDon.get(i).getMaHoaDon());
-                hd.setMaKhachHang(SavehoaDon.get(i).getMaKhachHang());
-                hd.setMaNguoiDung(SavehoaDon.get(i).getMaNguoiDung());
-                hd.setChietKhau(SavehoaDon.get(i).getChietKhau());
-                hd.setTongTien(SavehoaDon.get(i).getTongTien());
-                hd.setTrangThai(SavehoaDon.get(i).isTrangThai());
-                hd.setNgayHD(SavehoaDon.get(i).getNgayHD());
-                in.insert(hd);
-
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-
-    public void InsertHDCT() {
-        try {
-
-            CTHoaDon cthd = new CTHoaDon();
-            for (int i = 0; i < DongCTHD.size(); i++) {
-                CTHoaDonDAO insert = new CTHoaDonDAO();
-                cthd.setMaHoaDon(DongCTHD.get(i).getMaHoaDon());
-                cthd.setMaSanPham(DongCTHD.get(i).getMaSanPham());
-                cthd.setSoLuong(DongCTHD.get(i).getSoLuong());
-                cthd.setSizeSP(DongCTHD.get(i).getSizeSP());
-                cthd.setExtra(DongCTHD.get(i).getExtra());
-                insert.insert(cthd);
-                System.out.println(DongCTHD.get(i).getMaSanPham().getMaSanPham());
-
-            }
-        } catch (Exception e) {
-            System.out.println("Not: " + e);
-        }
-    }
-
-    public void Reset() {
-        jpldonhang.removeAll();
-        DongCTHD.removeAll(DongCTHD);
-        SavehoaDon.removeAll(SavehoaDon);
-        lblTamTinh.setText("0 VNĐ");
-        lblThanhTien.setText("0 VNĐ");
-        lblThanhTien.setToolTipText("0");
-        lbltenKH.setText(" x Khách lẻ");
-        lbltenKH.setName("KH001");
-        txtChietKhau.setText("-0");
-    }
-
-    public void CountSoLuongHoaDonTrenWeb() {
-
-        Timehelper time = new Timehelper();
-        time.DatLichTimer(lblorderweb, "EXEC dbo.SoLuongDatMuaTrenWeb");
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -295,7 +97,7 @@ public class FormBanHang extends javax.swing.JPanel {
         lblAn_BanHang = new javax.swing.JLabel();
         lblOutBangHang = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTimKiem = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         lblfee = new javax.swing.JLabel();
@@ -305,7 +107,7 @@ public class FormBanHang extends javax.swing.JPanel {
         lblbanhmi = new javax.swing.JLabel();
         lbltea = new javax.swing.JLabel();
         lblbanhngot = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jplDonHang = new javax.swing.JPanel();
         jSDonHang = new javax.swing.JScrollPane();
@@ -494,7 +296,7 @@ public class FormBanHang extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 255));
 
-        jTextField1.setText("Tìm kiếm");
+        txtTimKiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -508,24 +310,36 @@ public class FormBanHang extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField1)
+            .addComponent(txtTimKiem)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        txtTimKiem.setText("Tìm kiếm");
+        txtTimKiem.setForeground(Color.gray);
+        XuLy.placeHolder(txtTimKiem, "Tìm kiếm");
+
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setOpaque(false);
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblfee.setBackground(new java.awt.Color(255, 255, 255));
         lblfee.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblfee.setToolTipText("Freeze");
         lblfee.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lblfee.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblfee.setName("ML005"); // NOI18N
         lblfee.setOpaque(true);
+        lblfee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblfeeMousePressed(evt);
+            }
+        });
         jPanel9.add(lblfee, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 80, 40));
 
         lblorderweb.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -539,6 +353,7 @@ public class FormBanHang extends javax.swing.JPanel {
         lblShoworderweb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblShoworderweb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/cartWeb.png"))); // NOI18N
         lblShoworderweb.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblShoworderweb.setOpaque(true);
         lblShoworderweb.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblShoworderwebMousePressed(evt);
@@ -548,34 +363,73 @@ public class FormBanHang extends javax.swing.JPanel {
 
         lblcoffe.setBackground(new java.awt.Color(255, 255, 255));
         lblcoffe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblcoffe.setToolTipText("Cà Phê");
         lblcoffe.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lblcoffe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblcoffe.setName("ML001"); // NOI18N
         lblcoffe.setOpaque(true);
+        lblcoffe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblcoffeMousePressed(evt);
+            }
+        });
         jPanel9.add(lblcoffe, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 40));
 
         lblbanhmi.setBackground(new java.awt.Color(255, 255, 255));
         lblbanhmi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblbanhmi.setToolTipText("Bánh");
         lblbanhmi.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lblbanhmi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblbanhmi.setName("ML003"); // NOI18N
         lblbanhmi.setOpaque(true);
+        lblbanhmi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblbanhmiMousePressed(evt);
+            }
+        });
         jPanel9.add(lblbanhmi, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 80, 40));
 
         lbltea.setBackground(new java.awt.Color(255, 255, 255));
         lbltea.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbltea.setToolTipText("Trà ");
         lbltea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lbltea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbltea.setName("ML002"); // NOI18N
         lbltea.setOpaque(true);
+        lbltea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblteaMousePressed(evt);
+            }
+        });
         jPanel9.add(lbltea, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 80, 40));
 
         lblbanhngot.setBackground(new java.awt.Color(255, 255, 255));
         lblbanhngot.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblbanhngot.setToolTipText("Bánh Ngọt");
         lblbanhngot.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lblbanhngot.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblbanhngot.setName("ML004"); // NOI18N
         lblbanhngot.setOpaque(true);
+        lblbanhngot.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblbanhngotMousePressed(evt);
+            }
+        });
         jPanel9.add(lblbanhngot, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 80, 40));
 
-        jLabel4.setText("Khác");
-        jPanel9.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, -1, 40));
+        jLabel6.setBackground(new java.awt.Color(0, 102, 255));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("LOAD");
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.setOpaque(true);
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel6MousePressed(evt);
+            }
+        });
+        jPanel9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 50, 40));
 
         javax.swing.GroupLayout jpnToolbar19Layout = new javax.swing.GroupLayout(jpnToolbar19);
         jpnToolbar19.setLayout(jpnToolbar19Layout);
@@ -599,8 +453,8 @@ public class FormBanHang extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jpnToolbar19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblOutBangHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(lblOutBangHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jfBangHang.add(jpnToolbar19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 50));
@@ -699,6 +553,9 @@ public class FormBanHang extends javax.swing.JPanel {
             }
         });
         jplHoaDon.add(txtTimSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 215, 31));
+        txtTimSDT.setText("Tìm SĐT KH");
+        txtTimSDT.setForeground(Color.gray);
+        XuLy.placeHolder(txtTimSDT, "Tìm SĐT KH");
 
         lblTamTinh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTamTinh.setText("....");
@@ -845,11 +702,11 @@ public class FormBanHang extends javax.swing.JPanel {
         jpnNext.setLayout(jpnNextLayout);
         jpnNextLayout.setHorizontalGroup(
             jpnNextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 453, Short.MAX_VALUE)
         );
         jpnNextLayout.setVerticalGroup(
             jpnNextLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 35, Short.MAX_VALUE)
+            .addGap(0, 36, Short.MAX_VALUE)
         );
 
         jSSanPham.setBackground(Color.decode("#e6e6e6"));
@@ -1074,17 +931,12 @@ public class FormBanHang extends javax.swing.JPanel {
 
     private void txtTimSDTFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTimSDTFocusGained
         // TODO add your handling code here:
-        if (txtTimSDT.getText().equals("Tìm SĐT KH")) {
-            txtTimSDT.setText("");
-        }
+
     }//GEN-LAST:event_txtTimSDTFocusGained
 
     private void txtTimSDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTimSDTFocusLost
         // TODO add your handling code here:
-        if (txtTimSDT.getText().equals("")) {
-            txtTimSDT.setText("Tìm SĐT KH");
 
-        }
 
     }//GEN-LAST:event_txtTimSDTFocusLost
 
@@ -1119,6 +971,268 @@ public class FormBanHang extends javax.swing.JPanel {
         hd.setVisible(true);
     }//GEN-LAST:event_lblShoworderwebMousePressed
 
+    private void lblcoffeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblcoffeMousePressed
+        // TODO add your handling code here:
+        lblThongBao.setForeground(Color.GREEN);
+        lblThongBao.setText("Đang Tải...");
+        Click_Logo(lblcoffe);
+
+    }//GEN-LAST:event_lblcoffeMousePressed
+
+    private void lblteaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblteaMousePressed
+        // TODO add your handling code here:
+       
+        lblThongBao.setForeground(Color.GREEN);
+         lblThongBao.setText("Đang Tải...");
+        Click_Logo(lbltea);
+    }//GEN-LAST:event_lblteaMousePressed
+
+    private void lblbanhmiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbanhmiMousePressed
+        // TODO add your handling code here:
+        lblThongBao.setForeground(Color.GREEN);
+         lblThongBao.setText("Đang Tải...");
+        Click_Logo(lblbanhmi);
+    }//GEN-LAST:event_lblbanhmiMousePressed
+
+    private void lblbanhngotMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbanhngotMousePressed
+        // TODO add your handling code here:
+        lblThongBao.setForeground(Color.GREEN);
+         lblThongBao.setText("Đang Tải...");
+        Click_Logo(lblbanhngot);
+    }//GEN-LAST:event_lblbanhngotMousePressed
+
+    private void lblfeeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblfeeMousePressed
+        // TODO add your handling code here:
+        lblThongBao.setForeground(Color.GREEN);
+         lblThongBao.setText("Đang Tải...");
+        Click_Logo(lblfee);
+    }//GEN-LAST:event_lblfeeMousePressed
+
+    private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
+        // TODO add your handling code here:
+        
+        LoadDataSanPham();
+    }//GEN-LAST:event_jLabel6MousePressed
+    public void RezieImageGroupLogo() {
+        try {
+            BufferedImage HinhAnh, HinhAnh2, HinhAnh3, HinhAnh4, HinhAnh5;
+            BufferedImage coffee = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/Americano(44).png"));
+            BufferedImage tea = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/TraThachVai(39).png"));
+            BufferedImage banhmi = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/GaXeNuocTuong(19).png"));
+            BufferedImage banhngot = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/PhoMaiTraXanh(29).jpg"));
+            BufferedImage fee = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/FreezeChocolate(49).png"));
+            int type = coffee.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : coffee.getType();
+            int type1 = tea.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : tea.getType();
+            int type2 = banhmi.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : banhmi.getType();
+            int type3 = banhngot.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : banhngot.getType();
+            int type4 = fee.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : fee.getType();
+            HinhAnh = new ReSizehelper().buffImage(coffee, type, 70, 60);
+            HinhAnh2 = new ReSizehelper().buffImage(tea, type1, 60, 40);
+            HinhAnh3 = new ReSizehelper().buffImage(banhmi, type2, 60, 50);
+            HinhAnh4 = new ReSizehelper().buffImage(banhngot, type3, 60, 50);
+            HinhAnh5 = new ReSizehelper().buffImage(fee, type4, 60, 40);
+            ImageIcon icon = new ImageIcon(HinhAnh);
+            ImageIcon icon2 = new ImageIcon(HinhAnh2);
+            ImageIcon icon3 = new ImageIcon(HinhAnh3);
+            ImageIcon icon4 = new ImageIcon(HinhAnh4);
+            ImageIcon icon5 = new ImageIcon(HinhAnh5);
+            lblcoffe.setIcon(icon);
+            lbltea.setIcon(icon2);
+            lblbanhmi.setIcon(icon3);
+            lblbanhngot.setIcon(icon4);
+            lblfee.setIcon(icon5);
+        } catch (Exception e) {
+        }
+
+    }
+
+    public void Click_Logo(JLabel lbllogo) {
+        Timehelper timehelper = new Timehelper();
+        timehelper.TimerLoad(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                lblThongBao.setText("");
+                jpnDSsanpham.setLayout(new GridLayout(2, 3, 4, 4));
+                int start = 0;
+                int end = 8;
+                // List Show sp từ dữ liệu SQL
+                SanPhamDAO s = new SanPhamDAO();
+                if (s.selecttheoLoai(lbllogo.getName()).size() < 8) {
+                    end = s.selecttheoLoai(lbllogo.getToolTipText()).size();
+                }
+                Designhelper designhelper = new Designhelper();
+                list = designhelper.LimitPage(s.selecttheoLoai(lbllogo.getName()), start, end);
+                designhelper.DesignPage(jpnNext, s.selecttheoLoai(lbllogo.getName()));
+                designhelper.DesignSanPham(jpnDSsanpham, s.selecttheoLoai(lbllogo.getName()));
+      
+                timehelper.t.stop();
+            }
+        });
+    }
+
+    public void LoadDataSanPham() {
+
+        try {
+            jpnDSsanpham.setLayout(new GridLayout(9, 4, 3, 3));
+            testSQL sql = new testSQL();
+            int start = 0;
+            int end = 9;
+            // List Show sp từ dữ liệu SQL
+
+            if (sql.select().size() < 9) {
+                end = sql.select().size();
+                //jpnDSsanpham.setLayout(new GridLayout(2, 3, 4, 4));
+            }
+            Designhelper designhelper = new Designhelper();
+            designhelper.DesignPage(jpnNext, sql.select());
+            list = designhelper.LimitPage(sql.select(), start, end);
+            designhelper.DesignSanPham(jpnDSsanpham, testSQL.select());
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    public String AutogetMaHD() {
+        HoaDonDAO hdDao = new HoaDonDAO();
+        String chuoi = "";
+        List<HoaDon> list = hdDao.selectAll();
+        if (list.isEmpty()) {
+            chuoi = "HD001";
+            lblbuton_thanhToan.setToolTipText(chuoi);
+            return lblbuton_thanhToan.getToolTipText();
+        } else {
+            int index = list.size() - 1;
+            int so = Integer.parseInt(list.get(index).getMaHoaDon().substring(2)) + 1;
+            switch (String.valueOf(so).length()) {
+                case 1:
+                    chuoi = "HD00" + so;
+                    break;
+                case 2:
+                    chuoi = "HD0" + so;
+                    break;
+                case 3:
+                    chuoi = "HD" + so;
+                    break;
+            }
+            lblbuton_thanhToan.setToolTipText(chuoi);
+            return lblbuton_thanhToan.getToolTipText();
+        }
+    }
+
+    public void getTongTien() {
+        double tongtien = 0;
+        for (int i = 0; i < DongCTHD.size(); i++) {
+            tongtien += (DongCTHD.get(i).getMaHoaDon().getTongTien());
+        }
+        double ChietKhau;
+        if (txtChietKhau.getText().trim().equals("")) {
+            ChietKhau = 0;
+            lblThanhTien.setText(String.valueOf(chuyentien.format(tongtien * (100 - ChietKhau) / 100)) + " VNĐ");
+            lblThanhTien.setName(String.valueOf(tongtien * (100 - ChietKhau) / 100));
+            lblThanhTien.setToolTipText(String.valueOf(tongtien * (100 - ChietKhau) / 100));
+        } else {
+            ChietKhau = Double.parseDouble(txtChietKhau.getText().substring(1));
+            lblThanhTien.setText(String.valueOf(chuyentien.format(tongtien * (100 - ChietKhau) / 100)) + " VNĐ");
+            lblThanhTien.setName(String.valueOf(tongtien * (100 - ChietKhau) / 100));
+            lblThanhTien.setToolTipText(String.valueOf(tongtien * (100 - ChietKhau) / 100));
+        }
+
+    }
+
+    public void GetHD() {
+        java.sql.Timestamp date = new java.sql.Timestamp(System.currentTimeMillis());
+        HoaDon hoadon = new HoaDon();
+        KhachHang kh = new KhachHang();
+        NguoiDung nd = new NguoiDung();
+        hoadon.setMaHoaDon(AutogetMaHD());
+        nd.setMaNguoidung("ND001");
+        double ChietKhau = Double.parseDouble(txtChietKhau.getText());
+        hoadon.setChietKhau(ChietKhau);
+        hoadon.setTongTien(Double.parseDouble(lblThanhTien.getToolTipText()));
+        System.out.println(lblThanhTien.getToolTipText());
+        kh.setMakh(lbltenKH.getName());
+        hoadon.setMaKhachHang(kh);
+        hoadon.setTrangThai(true);
+        hoadon.setMaNguoiDung(nd);
+        hoadon.setNgayHD(date);
+        hd.add(hoadon);
+
+    }
+
+    public void DongGoiHD() {
+        HoaDon hoadon = new HoaDon();
+        for (int i = 0; i < hd.size(); i++) {
+            hoadon.setMaHoaDon(hd.get(i).getMaHoaDon());
+            hoadon.setChietKhau(hd.get(i).getChietKhau());
+            hoadon.setMaNguoiDung(hd.get(i).getMaNguoiDung());
+            hoadon.setMaKhachHang(hd.get(i).getMaKhachHang());
+            hoadon.setTrangThai(hd.get(i).isTrangThai());
+            hoadon.setTongTien(hd.get(i).getTongTien());
+            hoadon.setNgayHD(hd.get(i).getNgayHD());
+
+        }
+        SavehoaDon.add(hoadon);
+    }
+
+    public void InsertHD() {
+        try {
+            HoaDon hd = new HoaDon();
+            for (int i = 0; i < SavehoaDon.size(); i++) {
+                HoaDonDAO in = new HoaDonDAO();
+                hd.setMaHoaDon(SavehoaDon.get(i).getMaHoaDon());
+                hd.setMaKhachHang(SavehoaDon.get(i).getMaKhachHang());
+                hd.setMaNguoiDung(SavehoaDon.get(i).getMaNguoiDung());
+                hd.setChietKhau(SavehoaDon.get(i).getChietKhau());
+                hd.setTongTien(SavehoaDon.get(i).getTongTien());
+                hd.setTrangThai(SavehoaDon.get(i).isTrangThai());
+                hd.setNgayHD(SavehoaDon.get(i).getNgayHD());
+                in.insert(hd);
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void InsertHDCT() {
+        try {
+
+            CTHoaDon cthd = new CTHoaDon();
+            for (int i = 0; i < DongCTHD.size(); i++) {
+                CTHoaDonDAO insert = new CTHoaDonDAO();
+                cthd.setMaHoaDon(DongCTHD.get(i).getMaHoaDon());
+                cthd.setMaSanPham(DongCTHD.get(i).getMaSanPham());
+                cthd.setSoLuong(DongCTHD.get(i).getSoLuong());
+                cthd.setSizeSP(DongCTHD.get(i).getSizeSP());
+                cthd.setExtra(DongCTHD.get(i).getExtra());
+                insert.insert(cthd);
+                System.out.println(DongCTHD.get(i).getMaSanPham().getMaSanPham());
+
+            }
+        } catch (Exception e) {
+            System.out.println("Not: " + e);
+        }
+    }
+
+    public void Reset() {
+        jpldonhang.removeAll();
+        DongCTHD.removeAll(DongCTHD);
+        SavehoaDon.removeAll(SavehoaDon);
+        lblTamTinh.setText("0 VNĐ");
+        lblThanhTien.setText("0 VNĐ");
+        lblThanhTien.setToolTipText("0");
+        lbltenKH.setText(" x Khách lẻ");
+        lbltenKH.setName("KH001");
+        txtChietKhau.setText("-0");
+    }
+
+    public void CountSoLuongHoaDonTrenWeb() {
+
+        Timehelper time = new Timehelper();
+        time.DatLichTimer(lblorderweb, "EXEC dbo.SoLuongDatMuaTrenWeb");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JPanel Card;
@@ -1131,8 +1245,8 @@ public class FormBanHang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1144,7 +1258,6 @@ public class FormBanHang extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jSDonHang;
     private javax.swing.JScrollPane jSSanPham;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     protected static javax.swing.JPanel jfBangHang;
     private javax.swing.JPanel jplDonHang;
@@ -1177,6 +1290,7 @@ public class FormBanHang extends javax.swing.JPanel {
     private javax.swing.JLabel lbltenKH;
     private javax.swing.JLabel lbltimSDT;
     private javax.swing.JTextField txtChietKhau;
+    private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtTimSDT;
     // End of variables declaration//GEN-END:variables
 }

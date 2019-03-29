@@ -9,20 +9,24 @@ import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.JTextField;
+import javax.swing.text.AbstractDocument;
 
 /**
  *
  * @author Kanbi
  */
 public class XuLy {
-    public static void placeHolder(JTextField field, String msg){
+
+    public static void placeHolder(JTextField field, String msg) {
         field.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
                 if (field.getText().equals(msg)) {
                     field.setText("");
                     field.setForeground(Color.BLACK);
+
                 }
+         
             }
 
             @Override
@@ -30,6 +34,7 @@ public class XuLy {
                 if (field.getText().isEmpty()) {
                     field.setForeground(Color.GRAY);
                     field.setText(msg);
+
                 }
             }
         });
