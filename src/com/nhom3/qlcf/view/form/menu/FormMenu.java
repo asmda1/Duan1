@@ -695,6 +695,9 @@ public class FormMenu extends javax.swing.JPanel {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblBanHangMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblBanHangMousePressed(evt);
+            }
         });
 
         lblBanHang_txt.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -1121,18 +1124,7 @@ public class FormMenu extends javax.swing.JPanel {
 
     private void lblBanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBanHangMouseClicked
         // TODO add your handling code here:
-        FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormBanHang());
-        FormLogin.login.Card.repaint();
-        FormLogin.login.Card.revalidate();
-        FormLogin.login.Card.show();
-    
-            
-        //mp3 = new Soundhelper("src/QLBHcafe/mp3/Night-Of-The-Piano.mp3");
-//        mp3.play();
-        jfMain.hide();
 
-        // jpnMenOutBanHang.hide();
 
     }//GEN-LAST:event_lblBanHangMouseClicked
 
@@ -1365,6 +1357,22 @@ public class FormMenu extends javax.swing.JPanel {
         FormLogin.login.Card.show();
         jfMain.hide();
     }//GEN-LAST:event_lblThemNhaCungCapMousePressed
+
+    private void lblBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBanHangMousePressed
+        // TODO add your handling code here:
+
+        FormLogin.login.Card.removeAll();
+        FormLogin.login.Card.add(new FormBanHang());
+        FormLogin.login.Card.repaint();
+        FormLogin.login.Card.revalidate();
+        FormLogin.login.Card.show();
+
+        //mp3 = new Soundhelper("src/QLBHcafe/mp3/Night-Of-The-Piano.mp3");
+//        mp3.play();
+        jfMain.hide();
+
+        // jpnMenOutBanHang.hide();
+    }//GEN-LAST:event_lblBanHangMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

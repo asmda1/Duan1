@@ -8,33 +8,22 @@ package com.nhom3.qlcf.view.form.banhang;
 import com.nhom3.qlcf.dao.CTHoaDonDAO;
 import com.nhom3.qlcf.dao.HoaDonDAO;
 import com.nhom3.qlcf.dao.KhachHangDAO;
-import com.nhom3.qlcf.dao.NguoiDungDAO;
 import com.nhom3.qlcf.dao.SanPhamDAO;
-import com.nhom3.qlcf.helper.Soundhelper;
 import com.nhom3.qlcf.helper.Designhelper;
-import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.ReSizehelper;
 import com.nhom3.qlcf.helper.Timehelper;
 import com.nhom3.qlcf.helper.XuLy;
-import com.nhom3.qlcf.helper.limitKiTuHelper;
 import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.HoaDon;
 import com.nhom3.qlcf.model.KhachHang;
 import com.nhom3.qlcf.model.NguoiDung;
 import com.nhom3.qlcf.model.SanPham;
-
-import com.nhom3.qlcf.test.testInsert;
 import com.nhom3.qlcf.test.testSQL;
 import com.nhom3.qlcf.view.form.login.FormLogin;
-
 import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
-
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -5,12 +5,28 @@
  */
 package com.nhom3.qlcf.view.form.doanhthu;
 
+import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
-import javax.swing.JFrame;
+import java.awt.Font;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
+import org.jfree.chart.labels.CategoryItemLabelGenerator;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
+import org.jfree.chart.title.TextTitle;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -18,6 +34,8 @@ import javax.swing.JFrame;
  */
 public class FormThongKe extends javax.swing.JPanel {
 
+    private DefaultCategoryDataset barChartLoadata; // set du lieu cho bieu do hinh line
+    private JFreeChart Chart; // Hien thi do hoa,cot, ten cot, hinh
     /**
      * Creates new form FormLogin
      */
@@ -28,6 +46,100 @@ public class FormThongKe extends javax.swing.JPanel {
         // jpnLogin1.setBackground(new Color(0, 0, 0, 134));
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
         login = this;
+        Loadcombo();
+    }
+
+    public void Bieu_Do_Duong_Line() {
+
+        Chart = ChartFactory.createLineChart("BIỂU ĐỒ LINE", "DOANH THU THEO TỪNG THÁNG", "(VNĐ)", barChartLoadata, PlotOrientation.VERTICAL, true, true, true);
+        TextTitle charttitle = new TextTitle("BIỂU ĐỒ THỐNG KÊ DOANH THU", new Font("Verdana", Font.ITALIC, 14));
+        charttitle.setPaint(Color.blue);
+        Chart.setTitle(charttitle);
+        CategoryPlot chart = Chart.getCategoryPlot(); // tao bieu do
+        chart.setBackgroundPaint(Color.white); // nen bieu trang
+        //chart.setRangeGridlinePaint(Color.GREEN); // duong vach
+        //chart.setDomainGridlinePaint(Color.GREEN);
+        chart.setOutlineStroke(null); // loai bo khung bieu dieu
+        //set tickunit Domain
+        CategoryAxis axis = chart.getDomainAxis();
+        Font font = new Font("Dialog", Font.BOLD, 13);
+        axis.setTickLabelFont(font);
+        axis.setTickLabelPaint(Color.blue);
+        //set tickunit Domain
+        axis.setLabelFont(font);
+        axis.setLabelPaint(Color.red);
+        //set text cho lin
+        LineAndShapeRenderer ren = new LineAndShapeRenderer();
+
+        chart = (CategoryPlot) Chart.getPlot();
+        ren = (LineAndShapeRenderer) chart.getRenderer();
+        ren.setBaseItemLabelsVisible(Boolean.TRUE);
+        ren.setBaseItemLabelGenerator((CategoryItemLabelGenerator) new StandardCategoryItemLabelGenerator());
+        ren.setBaseItemLabelPaint(Color.blue);
+        ren.setBaseItemLabelFont(new Font("Dialog", 1, 9));
+
+        //set tickunit Range Axis     
+        NumberAxis range = (NumberAxis) chart.getRangeAxis();
+        range.setTickUnit(new NumberTickUnit(10000000));// phạm vi 
+        Font font2 = new Font("Dialog", Font.BOLD, 15);
+        range.setTickLabelFont(font);
+        range.setTickLabelPaint(Color.blue);
+        //set label Range Axis 
+        Font font3 = new Font("Dialog", Font.ITALIC, 15);
+        range.setLabelPaint(Color.blue);
+        range.setLabelFont(font3);
+
+        ChartPanel barPanel = new ChartPanel(Chart);
+        barPanel.setVisible(true);
+        barPanel.setSize(1000, 500);
+        jpnBieuDoLINE.removeAll();
+        jpnBieuDoLINE.add(barPanel);
+        jpnBieuDoLINE.updateUI();
+    }
+
+    public void LoadData() {
+        try {
+            int min, max;
+            if (Integer.parseInt(cbotunam.getSelectedItem().toString()) <= Integer.parseInt(cbodennam.getSelectedItem().toString())) {
+                min = Integer.parseInt(cbotunam.getSelectedItem().toString());
+                max = Integer.parseInt(cbodennam.getSelectedItem().toString());
+
+            } else {
+                min = Integer.parseInt(cbodennam.getSelectedItem().toString());
+                max = Integer.parseInt(cbotunam.getSelectedItem().toString());
+
+            }
+            ResultSet re = JDBCHelper.executeQuery("EXEC BieuDoDoanhSo");
+            barChartLoadata = new DefaultCategoryDataset();
+            while (re.next()) {
+                for (int i = min; i <= max; i++) {
+                    if (re.getString(2).equals(Integer.toString(i))) {
+                        barChartLoadata.addValue(Double.parseDouble(re.getString(3)), "Doanh thu năm " + i, re.getString(1));
+                    }
+                }
+            
+            }
+               Bieu_Do_Duong_Line();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void Loadcombo() {
+        try {
+            ResultSet re = JDBCHelper.executeQuery("SELECT year(dbo.hoaDon.ngayHD), SUM(giaBan) AS gia FROM dbo.hoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = hoaDon.maHD JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp\n"
+                    + "                                      GROUP BY year(dbo.hoaDon.ngayHD)");
+
+            while (re.next()) {
+                cbotunam.addItem(re.getString(1));
+                cbodennam.addItem(re.getString(1));
+
+            }
+            LoadData();
+        } catch (Exception e) {
+
+        }
     }
 
     /**
@@ -56,7 +168,7 @@ public class FormThongKe extends javax.swing.JPanel {
         jpnNen = new javax.swing.JPanel();
         lblthongkedoangthu = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jpnBieuDoLINE = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -75,6 +187,11 @@ public class FormThongKe extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jPanel9 = new javax.swing.JPanel();
+        cbodennam = new javax.swing.JComboBox<>();
+        jLabel47 = new javax.swing.JLabel();
+        cbotunam = new javax.swing.JComboBox<>();
+        jLabel48 = new javax.swing.JLabel();
         lblanhGiaoDien = new javax.swing.JLabel();
         Card = new javax.swing.JPanel();
 
@@ -288,23 +405,12 @@ public class FormThongKe extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         jLabel1.setText("Biểu Đồ");
-        jpnNen.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 147, 38));
+        jpnNen.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 147, 38));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 588, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
-        );
-
-        jpnNen.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 590, 520));
+        jpnBieuDoLINE.setBackground(new java.awt.Color(255, 255, 255));
+        jpnBieuDoLINE.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jpnBieuDoLINE.setLayout(new javax.swing.BoxLayout(jpnBieuDoLINE, javax.swing.BoxLayout.LINE_AXIS));
+        jpnNen.add(jpnBieuDoLINE, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 590, 520));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -448,7 +554,65 @@ public class FormThongKe extends javax.swing.JPanel {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        jpnNen.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, 150, -1));
+        jpnNen.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 150, 30));
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+
+        cbodennam.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbodennamItemStateChanged(evt);
+            }
+        });
+        cbodennam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbodennamActionPerformed(evt);
+            }
+        });
+
+        jLabel47.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel47.setText("Thống kê từ năm:");
+
+        cbotunam.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbotunamItemStateChanged(evt);
+            }
+        });
+        cbotunam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbotunamActionPerformed(evt);
+            }
+        });
+
+        jLabel48.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel48.setText("đến năm");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbotunam, 0, 53, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbodennam, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addGap(0, 25, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel47)
+                    .addComponent(cbotunam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel48)
+                    .addComponent(cbodennam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        jpnNen.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 320, -1));
 
         jfThongKe.add(jpnNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 630));
 
@@ -465,7 +629,7 @@ public class FormThongKe extends javax.swing.JPanel {
 
     private void lblAn_BanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAn_BanHangMouseClicked
         // TODO add your handling code here:
-        Run.main.setState(JFrame.ICONIFIED);
+
     }//GEN-LAST:event_lblAn_BanHangMouseClicked
 
     private void lblOutBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOutBangHangMouseClicked
@@ -579,9 +743,29 @@ public class FormThongKe extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void cbodennamItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbodennamItemStateChanged
+        // TODO add your handling code here:
+        LoadData();
+    }//GEN-LAST:event_cbodennamItemStateChanged
+
+    private void cbodennamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbodennamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbodennamActionPerformed
+
+    private void cbotunamItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbotunamItemStateChanged
+        // TODO add your handling code here:
+        LoadData();
+    }//GEN-LAST:event_cbotunamItemStateChanged
+
+    private void cbotunamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbotunamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbotunamActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JPanel Card;
+    private javax.swing.JComboBox<String> cbodennam;
+    private javax.swing.JComboBox<String> cbotunam;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -591,12 +775,13 @@ public class FormThongKe extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -604,8 +789,10 @@ public class FormThongKe extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JTextField jTextField1;
     protected static javax.swing.JPanel jfThongKe;
+    private javax.swing.JPanel jpnBieuDoLINE;
     private javax.swing.JPanel jpnDangXuat;
     private javax.swing.JPanel jpnNen;
     private javax.swing.JPanel jpnQuayVe;
