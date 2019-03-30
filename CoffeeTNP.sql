@@ -1387,5 +1387,120 @@ GO
 EXEC HoaDonChuaThanhToan
 GO 
 
-SELECT * FROM KhachHang
+SELECT  *
+FROM    dbo.KhachHang
 
+CREATE PROC KhachDatOnline
+AS
+
+    SELECT  maHD ,
+            tenKh ,
+            dienThoai ,
+            diaChi ,
+            ngayHD ,
+            tongTien,
+			HoaDon.trangThai
+    FROM    dbo.HoaDon
+            JOIN dbo.KhachHang ON KhachHang.maKh = HoaDon.maKH
+    WHERE   HoaDon.trangThai =0
+
+GO 
+
+CREATE PROC ChitietKHdatSP (@maHD varchar(10))
+AS
+BEGIN 
+    SELECT  tenSp ,
+            giaBan ,
+            maSize ,
+            soLuong ,
+            hinhAnh
+    FROM    dbo.CTHoaDon
+            JOIN dbo.HoaDon ON HoaDon.maHD = CTHoaDon.maHD
+            JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp
+    WHERE   CTHoaDon.maHD = @maHD
+	END 
+GO 
+
+
+IF OBJECT_ID('BieuDoDoanhSo') IS NOT NULL
+	DROP PROC BieuDoDoanhSo
+GO
+CREATE PROC BieuDoDoanhSo
+	AS BEGIN
+		 SELECT month(dbo.hoaDon.ngayHD),year(dbo.hoaDon.ngayHD) , SUM(tongTien) AS tongdoanhthu
+                    		FROM dbo.hoaDon JOIN dbo.CTHoaDon
+                    			ON CTHoaDon.maHD = hoaDon.maHD JOIN dbo.sanPham
+                    				ON SanPham.maSp = CTHoaDon.maSp
+                    					GROUP BY month(dbo.hoaDon.ngayHD),year(dbo.hoaDon.ngayHD)
+	END
+GO
+
+EXEC BieuDoDoanhSo 
+
+
+SELECT * FROM dbo.KhachHang
+SELECT * FROM dbo.HoaDon
+SELECT * FROM dbo.CTHoaDon
+
+INSERT INTO dbo.HoaDon
+        ( maHD ,
+          maNguoiDung ,
+          maKH ,
+          chietKhau ,
+          ngayHD ,
+          tongTien ,
+          trangThai
+        )
+VALUES  ( 'HD057' , -- maHD - varchar(10)
+          'ND001' , -- maNguoiDung - varchar(10)
+          'KH002' , -- maKH - varchar(10)
+          NULL , -- chietKhau - money
+         '2019-02-22' , -- ngayHD - date
+          200090 , -- tongTien - money
+          1  -- trangThai - bit
+        )
+
+		GO 
+
+		INSERT INTO dbo.CTHoaDon
+		        ( maHD, maSp, maSize, extra, soLuong )
+		VALUES  ( 'HD057', -- maHD - varchar(10)
+		          'SP002', -- maSp - varchar(10)
+		          'M', -- maSize - varchar(5)
+		          'EX001', -- extra - varchar(10)
+		          5  -- soLuong - int
+		          )
+
+				  GO 
+
+		INSERT INTO dbo.HoaDon
+        ( maHD ,
+          maNguoiDung ,
+          maKH ,
+          chietKhau ,
+          ngayHD ,
+          tongTien ,
+          trangThai
+        )
+VALUES  ( 'HD058' , -- maHD - varchar(10)
+          'ND001' , -- maNguoiDung - varchar(10)
+          'KH003' , -- maKH - varchar(10)
+          NULL , -- chietKhau - money
+         '2019-01-22' , -- ngayHD - date
+          200090 , -- tongTien - money
+          1  -- trangThai - bit
+        )
+
+		GO 
+
+		
+		INSERT INTO dbo.CTHoaDon
+		        ( maHD, maSp, maSize, extra, soLuong )
+		VALUES  ( 'HD058', -- maHD - varchar(10)
+		          'SP004', -- maSp - varchar(10)
+		          'M', -- maSize - varchar(5)
+		          'EX001', -- extra - varchar(10)
+		          2  -- soLuong - int
+		          )
+
+				  GO 
