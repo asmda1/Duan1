@@ -8,6 +8,7 @@ package com.nhom3.qlcf.view.form.banhang;
 import com.nhom3.qlcf.dao.ExtraDAO;
 import com.nhom3.qlcf.dao.HoaDonDAO;
 import com.nhom3.qlcf.helper.Designhelper;
+import com.nhom3.qlcf.helper.ReSizehelper;
 import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.Extra;
 import com.nhom3.qlcf.model.HoaDon;
@@ -31,6 +32,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.lblTamTinh;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.lblThanhTien;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -170,7 +173,15 @@ public class Datmon extends javax.swing.JDialog {
         lblgiagoc.setName(String.valueOf(showSP.get(0).getGiaBan()));
         lblgia.setToolTipText(String.valueOf(showSP.get(0).getGiaBan()));
         lblgia.setName(String.valueOf(showSP.get(0).getGiaBan()));
-        lblimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/" + showSP.get(0).getHinhAnh())));
+        try {
+            BufferedImage image = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/" + showSP.get(0).getHinhAnh()));
+            int type = image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType();
+            BufferedImage hinhAnh = new ReSizehelper().buffImage(image, type, 150, 150);
+            ImageIcon icon = new ImageIcon(hinhAnh);
+            lblimg.setIcon(icon);
+        } catch (Exception e) {
+        }
+
         //SQL
         Designhelper designhelper = new Designhelper();
 //        tienex = Double.parseDouble(lblgiaExtra.getName());
@@ -420,7 +431,7 @@ public class Datmon extends javax.swing.JDialog {
                 i.remove();
             }
 
-        }*/ 
+        }*/
         FormBanHang.banhang.AutogetMaHD();
         getCTHD();
         DongGoiHDCT();
