@@ -967,7 +967,7 @@ public class FormBanHang extends javax.swing.JPanel {
     private void lblShoworderwebMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblShoworderwebMousePressed
         // TODO add your handling code here:
 
-        CapNhatHoaDon hd = new CapNhatHoaDon(null, true);
+        KhachDatOnline hd = new KhachDatOnline(null, true);
         hd.setVisible(true);
     }//GEN-LAST:event_lblShoworderwebMousePressed
 

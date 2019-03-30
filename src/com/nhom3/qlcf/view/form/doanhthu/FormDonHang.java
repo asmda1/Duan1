@@ -654,8 +654,24 @@ public class FormDonHang extends javax.swing.JPanel {
                 }
                 break;
             case 3:
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy ");
+                    Calendar day = Calendar.getInstance();
+                    day.add(Calendar.DATE, 0);
+                    String sql = "SELECT tenSp, giaBan FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham  ON SanPham.maSp = CTHoaDon.maSp WHERE ngayHD ='" + sdf.format(day.getTime()) + "'";
+                    ResultSet rs = JDBCHelper.executeQuery(sql);
+                    DefaultTableModel model = (DefaultTableModel) tblHangBanChay.getModel();
+                    model.setRowCount(0);
+                    while (rs.next()) {
+                        Object[] row = new Object[]{rs.getString(1), rs.getDouble(2)};
+                        model.addRow(row);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 4:
+               
                 break;
         }
     }//GEN-LAST:event_cboDateProductActionPerformed
