@@ -6,7 +6,6 @@
 package com.nhom3.qlcf.view.form.banhang;
 
 import com.nhom3.qlcf.dao.ExtraDAO;
-import com.nhom3.qlcf.dao.HoaDonDAO;
 import com.nhom3.qlcf.helper.Designhelper;
 import com.nhom3.qlcf.helper.ReSizehelper;
 import com.nhom3.qlcf.model.CTHoaDon;
@@ -20,7 +19,6 @@ import com.nhom3.qlcf.view.form.banhang.FormBanHang;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.DongCTHD;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.SavehoaDon;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.jpldonhang;
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.awt.Color;
 import java.sql.Array;
 import java.text.DecimalFormat;
@@ -42,7 +40,7 @@ import javax.imageio.ImageIO;
 public class Datmon extends javax.swing.JDialog {
 
     /**
-     * Creates new form Datmon
+     * Creates new form Datmon d
      */
     public Datmon(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
