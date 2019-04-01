@@ -38,7 +38,7 @@ public class FormDonHang extends javax.swing.JPanel {
         initComponents();
         // jpnLogin1.setBackground(new Color(0, 0, 0, 134));
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
-        String[] items = {"Tháng trước", "7 ngày trước", "Hôm qua", "Hôm nay", "Chọn ngày..."};
+        String[] items = {"Tháng trước", "7 ngày trước", "Hôm qua", "Hôm nay"};
         for (String item : items) {
             cboDateProduct.addItem(item);
         }
@@ -209,6 +209,9 @@ public class FormDonHang extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblAn_BanHangMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblAn_BanHangMousePressed(evt);
+            }
         });
 
         lblOutBangHang.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -349,8 +352,8 @@ public class FormDonHang extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("Hàng Bán Chạy");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel3.setText("Sản Phẩm Bán Được:");
 
         tblHangBanChay.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         tblHangBanChay.setModel(new javax.swing.table.DefaultTableModel(
@@ -358,7 +361,7 @@ public class FormDonHang extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Sản phẩm", "Giá bán"
+                "Sản phẩm", "Số Lượng"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -373,8 +376,9 @@ public class FormDonHang extends javax.swing.JPanel {
         tblHangBanChay.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblHangBanChay);
         if (tblHangBanChay.getColumnModel().getColumnCount() > 0) {
-            tblHangBanChay.getColumnModel().getColumn(0).setResizable(false);
-            tblHangBanChay.getColumnModel().getColumn(1).setResizable(false);
+            tblHangBanChay.getColumnModel().getColumn(1).setMinWidth(90);
+            tblHangBanChay.getColumnModel().getColumn(1).setPreferredWidth(90);
+            tblHangBanChay.getColumnModel().getColumn(1).setMaxWidth(90);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -382,10 +386,9 @@ public class FormDonHang extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cboDateProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cboDateProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
@@ -446,7 +449,7 @@ public class FormDonHang extends javax.swing.JPanel {
 
     private void lblAn_BanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAn_BanHangMouseClicked
         // TODO add your handling code here:
-        Run.main.setState(JFrame.ICONIFIED);
+
     }//GEN-LAST:event_lblAn_BanHangMouseClicked
 
     private void lblOutBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOutBangHangMouseClicked
@@ -606,13 +609,13 @@ public class FormDonHang extends javax.swing.JPanel {
                     } else {
                         lastMonth = month;
                     }
-                    String sql = "SELECT tenSp, giaBan FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham  ON SanPham.maSp = CTHoaDon.maSp WHERE MONTH(ngayHD)=?";
+                    String sql = "SELECT tenSp, SUM(soluong) FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham  ON SanPham.maSp = CTHoaDon.maSp WHERE MONTH(ngayHD)=? AND HoaDon.trangThai=1 GROUP BY tenSp";
                     ResultSet rs = JDBCHelper.executeQuery(sql, lastMonth);
                     DefaultTableModel model = (DefaultTableModel) tblHangBanChay.getModel();
                     model.setRowCount(0);
 
                     while (rs.next()) {
-                        Object[] row = new Object[]{rs.getString(1), rs.getDouble(2)};
+                        Object[] row = new Object[]{rs.getString(1), rs.getInt(2)};
                         model.addRow(row);
                     }
                 } catch (SQLException e) {
@@ -624,12 +627,12 @@ public class FormDonHang extends javax.swing.JPanel {
                     SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy ");
                     Calendar day = Calendar.getInstance();
                     day.add(Calendar.DAY_OF_YEAR, -6);
-                    String sql = "SELECT tenSp, giaBan FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham  ON SanPham.maSp = CTHoaDon.maSp WHERE ngayHD Between '" + sdf.format(day.getTime()) + "' and GETDATE()";
+                    String sql = "SELECT tenSp, SUM(soluong) FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham  ON SanPham.maSp = CTHoaDon.maSp WHERE ngayHD Between '" + sdf.format(day.getTime()) + "' and GETDATE() AND HoaDon.trangThai=1 GROUP BY tenSp";
                     ResultSet rs = JDBCHelper.executeQuery(sql);
                     DefaultTableModel model = (DefaultTableModel) tblHangBanChay.getModel();
                     model.setRowCount(0);
                     while (rs.next()) {
-                        Object[] row = new Object[]{rs.getString(1), rs.getDouble(2)};
+                        Object[] row = new Object[]{rs.getString(1), rs.getInt(2)};
                         model.addRow(row);
                     }
                 } catch (SQLException e) {
@@ -641,12 +644,12 @@ public class FormDonHang extends javax.swing.JPanel {
                     SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy ");
                     Calendar day = Calendar.getInstance();
                     day.add(Calendar.DATE, -1);
-                    String sql = "SELECT tenSp, giaBan FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham  ON SanPham.maSp = CTHoaDon.maSp WHERE ngayHD ='" + sdf.format(day.getTime()) + "'";
+                    String sql = "SELECT tenSp, SUM(soluong) FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham  ON SanPham.maSp = CTHoaDon.maSp WHERE ngayHD ='" + sdf.format(day.getTime()) + "' AND HoaDon.trangThai=1 GROUP BY tenSp";
                     ResultSet rs = JDBCHelper.executeQuery(sql);
                     DefaultTableModel model = (DefaultTableModel) tblHangBanChay.getModel();
                     model.setRowCount(0);
                     while (rs.next()) {
-                        Object[] row = new Object[]{rs.getString(1), rs.getDouble(2)};
+                        Object[] row = new Object[]{rs.getString(1), rs.getInt(2)};
                         model.addRow(row);
                     }
                 } catch (SQLException e) {
@@ -658,12 +661,12 @@ public class FormDonHang extends javax.swing.JPanel {
                     SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy ");
                     Calendar day = Calendar.getInstance();
                     day.add(Calendar.DATE, 0);
-                    String sql = "SELECT tenSp, giaBan FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham  ON SanPham.maSp = CTHoaDon.maSp WHERE ngayHD ='" + sdf.format(day.getTime()) + "'";
+                    String sql = "SELECT tenSp, SUM(soluong) FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham  ON SanPham.maSp = CTHoaDon.maSp WHERE ngayHD ='" + sdf.format(day.getTime()) + "' AND HoaDon.trangThai=1 GROUP BY tenSp";
                     ResultSet rs = JDBCHelper.executeQuery(sql);
                     DefaultTableModel model = (DefaultTableModel) tblHangBanChay.getModel();
                     model.setRowCount(0);
                     while (rs.next()) {
-                        Object[] row = new Object[]{rs.getString(1), rs.getDouble(2)};
+                        Object[] row = new Object[]{rs.getString(1), rs.getInt(2)};
                         model.addRow(row);
                     }
                 } catch (SQLException e) {
@@ -671,10 +674,16 @@ public class FormDonHang extends javax.swing.JPanel {
                 }
                 break;
             case 4:
-               
+
                 break;
         }
     }//GEN-LAST:event_cboDateProductActionPerformed
+
+    private void lblAn_BanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAn_BanHangMousePressed
+        // TODO add your handling code here:
+
+        Run.main.setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_lblAn_BanHangMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

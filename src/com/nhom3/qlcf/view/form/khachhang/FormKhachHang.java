@@ -22,13 +22,13 @@ public class FormKhachHang extends javax.swing.JPanel {
     /**
      * Creates new form FormLogin
      */
-    public static FormKhachHang login;
+    public static FormKhachHang frkh;
 
     public FormKhachHang() {
         initComponents();
         // jpnLogin1.setBackground(new Color(0, 0, 0, 134));
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
-        login = this;
+        frkh = this;
         tblKhachHang.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
         tblKhachHang.setFont(new Font("Tohoma", Font.PLAIN, 12));
         tblKhachHang.getTableHeader().setOpaque(false);
@@ -450,6 +450,9 @@ public class FormKhachHang extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel6MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel6MousePressed(evt);
             }
@@ -694,6 +697,10 @@ public class FormKhachHang extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jLabel6MousePressed
 
+    private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel6MouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CardLayout;
@@ -707,10 +714,10 @@ public class FormKhachHang extends javax.swing.JPanel {
     protected static javax.swing.JPanel jfKhachHang;
     private javax.swing.JPanel jpnBack_TableChinh_Button;
     private javax.swing.JPanel jpnBack_button;
-    protected static javax.swing.JPanel jpnDangKyForm;
+    public static javax.swing.JPanel jpnDangKyForm;
     private javax.swing.JPanel jpnDangKyHV_Buuton;
     private javax.swing.JPanel jpnDangXuat;
-    private javax.swing.JPanel jpnGiaoDien;
+    public static javax.swing.JPanel jpnGiaoDien;
     private javax.swing.JPanel jpnHV_button;
     private javax.swing.JPanel jpnHV_button1;
     private javax.swing.JPanel jpnKHOnline_Button;
@@ -721,7 +728,7 @@ public class FormKhachHang extends javax.swing.JPanel {
     private javax.swing.JPanel jpnToolbar19;
     private javax.swing.JScrollPane jscDanhSachKH;
     private javax.swing.JLabel lblAn_BanHang;
-    private javax.swing.JLabel lblBack;
+    public static javax.swing.JLabel lblBack;
     private javax.swing.JLabel lblDangXuatBangHang;
     private javax.swing.JLabel lblFormDangKy;
     private javax.swing.JLabel lblOutBangHang;

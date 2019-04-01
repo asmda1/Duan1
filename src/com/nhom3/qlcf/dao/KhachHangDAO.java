@@ -88,5 +88,18 @@ public class KhachHangDAO implements DAO<KhachHang> {
         List<KhachHang> list = select(sql, ID);
         return list.size() > 0 ? list.get(0) : null;
     }
+    //bổ sung
+      public boolean checkSDT(String sdt) {
+        String sql = "Select * from dbo.KhachHang WHERE dienThoai ='"+ sdt+ "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }

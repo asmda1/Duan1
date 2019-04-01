@@ -7,6 +7,7 @@ package com.nhom3.qlcf.view.form.menu;
 
 import com.nhom3.qlcf.helper.Designhelper;
 import com.nhom3.qlcf.helper.Soundhelper;
+import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.hanghoa.FormKiemTraHangHoa;
 import com.nhom3.qlcf.view.form.hanghoa.FormNhapThemHangHoa;
 import com.nhom3.qlcf.view.form.hanghoa.FormSuaHangHoa_admin;
@@ -27,6 +28,7 @@ import java.awt.Color;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import javax.swing.JFrame;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
@@ -874,6 +876,9 @@ public class FormMenu extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel11MouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel11MousePressed(evt);
+            }
         });
 
         lblOut.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -1189,6 +1194,7 @@ public class FormMenu extends javax.swing.JPanel {
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         // TODO add your handling code here:
         // setState(JFrame.ICONIFIED);
+        
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void lblOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOutMouseClicked
@@ -1373,6 +1379,11 @@ public class FormMenu extends javax.swing.JPanel {
 
         // jpnMenOutBanHang.hide();
     }//GEN-LAST:event_lblBanHangMousePressed
+
+    private void jLabel11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MousePressed
+        // TODO add your handling code here:
+         Run.main.setState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jLabel11MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

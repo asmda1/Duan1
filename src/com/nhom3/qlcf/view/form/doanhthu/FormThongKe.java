@@ -6,6 +6,7 @@
 package com.nhom3.qlcf.view.form.doanhthu;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
@@ -19,6 +20,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -60,26 +62,99 @@ public class FormThongKe extends javax.swing.JPanel {
         tblHoatDongBanHang.getTableHeader().setBackground(new Color(0, 0, 0));
         tblHoatDongBanHang.getTableHeader().setForeground(new Color(255, 255, 255));
         tblHoatDongBanHang.setRowHeight(25);
+        String[] items = {"Hôm Nay", "Hôm Qua", "7 Ngày Trước", "Chọn Trong Ngày "};
+        for (String item : items) {
+            cboDate.addItem(item);
+        }
+        cboDate.setSelectedIndex(0);
+         for(int i =1; i<32;i++){
+            coxngay.addItem(String.valueOf(i));
+        }
+        coxngay.setSelectedIndex(0);
         ThongkeHomNay();
+       
     }
 
     public void ThongkeHomNay() {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy ");
-            Calendar day = Calendar.getInstance();
-            day.add(Calendar.DATE, 0);
-            String sql = " SELECT tenSp, SUM(soLuong),SUM(giaBan*soLuong) FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp\n"
-                    + "												 WHERE ngayHD Between '" + sdf.format(day.getTime()) + "' and GETDATE() AND HoaDon.trangThai=1 GROUP BY tenSp,giaBan ";
-            ResultSet rs = JDBCHelper.executeQuery(sql);
-            DefaultTableModel model = (DefaultTableModel) tblHoatDongBanHang.getModel();
-            model.setRowCount(0);
-            while (rs.next()) {
-                Object[] row = new Object[]{rs.getString(1), rs.getInt(2), chuyentien.format(rs.getDouble(3)) + " VNĐ"};
-                model.addRow(row);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        int index = cboDate.getSelectedIndex();
+
+        switch (index) {
+            case 0:
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy ");
+                    Calendar day = Calendar.getInstance();
+                    day.add(Calendar.DATE, 0);
+                    lblngay.setText(String.valueOf(day.getTime()));
+                    coxngay.hide();
+                    String sql = " SELECT tenSp, SUM(soLuong),SUM(giaBan*soLuong) FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp\n"
+                            + "												 WHERE ngayHD Between '" + sdf.format(day.getTime()) + "' and GETDATE() AND HoaDon.trangThai=1 GROUP BY tenSp,giaBan ";
+                    ResultSet rs = JDBCHelper.executeQuery(sql);
+                    DefaultTableModel model = (DefaultTableModel) tblHoatDongBanHang.getModel();
+                    model.setRowCount(0);
+                    double loinhuan = 0;
+                    while (rs.next()) {
+                        Object[] row = new Object[]{rs.getString(1), rs.getInt(2), chuyentien.format(rs.getDouble(3)) + " VNĐ"};
+                        loinhuan += rs.getDouble(3);
+                        model.addRow(row);
+                        lblloiNhuan.setText(String.valueOf(chuyentien.format(loinhuan)) + " VNĐ");
+                    }
+                } catch (Exception e) {
+                }
+
+                break;
+            case 1:
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy ");
+                    Calendar day = Calendar.getInstance();
+                    day.add(Calendar.DATE, -1);
+                    lblngay.setText(String.valueOf(day.getTime()));
+                    coxngay.hide();
+                    String sql = " SELECT tenSp, SUM(soLuong),SUM(giaBan*soLuong) FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp\n"
+                            + "												 WHERE ngayHD Between '" + sdf.format(day.getTime()) + "' and GETDATE() AND HoaDon.trangThai=1 GROUP BY tenSp,giaBan ";
+                    ResultSet rs = JDBCHelper.executeQuery(sql);
+                    DefaultTableModel model = (DefaultTableModel) tblHoatDongBanHang.getModel();
+                    model.setRowCount(0);
+                    double loinhuan = 0;
+                    while (rs.next()) {
+                        Object[] row = new Object[]{rs.getString(1), rs.getInt(2), chuyentien.format(rs.getDouble(3)) + " VNĐ"};
+                        loinhuan += rs.getDouble(3);
+                        model.addRow(row);
+                        lblloiNhuan.setText(String.valueOf(chuyentien.format(loinhuan)) + " VNĐ");
+                    }
+                } catch (Exception e) {
+                }
+                break;
+            case 2:
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy ");
+                    Calendar day = Calendar.getInstance();
+                    day.add(Calendar.DAY_OF_YEAR, -6);
+                    lblngay.setText(String.valueOf(day.getTime()));
+                    coxngay.hide();
+                    String sql = " SELECT tenSp, SUM(soLuong),SUM(giaBan*soLuong) FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp\n"
+                            + "												 WHERE ngayHD Between '" + sdf.format(day.getTime()) + "' and GETDATE() AND HoaDon.trangThai=1 GROUP BY tenSp,giaBan ";
+                    ResultSet rs = JDBCHelper.executeQuery(sql);
+                    DefaultTableModel model = (DefaultTableModel) tblHoatDongBanHang.getModel();
+                    model.setRowCount(0);
+                    double loinhuan = 0;
+                    while (rs.next()) {
+                        Object[] row = new Object[]{rs.getString(1), rs.getInt(2), chuyentien.format(rs.getDouble(3)) + " VNĐ"};
+                        loinhuan += rs.getDouble(3);
+                        model.addRow(row);
+                        lblloiNhuan.setText(String.valueOf(chuyentien.format(loinhuan)) + " VNĐ");
+                    }
+                } catch (Exception e) {
+                }
+
+                break;
+            case 3:
+                try {
+                    coxngay.show();
+                } catch (Exception e) {
+                }
+                break;
         }
+
     }
 
     public void Bieu_Do_Duong_Line() {
@@ -156,7 +231,7 @@ public class FormThongKe extends javax.swing.JPanel {
             Bieu_Do_Duong_Line();
 
         } catch (Exception e) {
-            System.out.println(e);
+        
         }
     }
 
@@ -206,11 +281,17 @@ public class FormThongKe extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHoatDongBanHang = new javax.swing.JTable();
+        lblngay = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lblloiNhuan = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         cbodennam = new javax.swing.JComboBox<>();
         jLabel47 = new javax.swing.JLabel();
         cbotunam = new javax.swing.JComboBox<>();
         jLabel48 = new javax.swing.JLabel();
+        cboDate = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        coxngay = new javax.swing.JComboBox<>();
         lblanhGiaoDien = new javax.swing.JLabel();
         Card = new javax.swing.JPanel();
 
@@ -393,12 +474,12 @@ public class FormThongKe extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         jLabel1.setText("Biểu Đồ");
-        jpnNen.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 147, 38));
+        jpnNen.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 147, 38));
 
         jpnBieuDoLINE.setBackground(new java.awt.Color(255, 255, 255));
         jpnBieuDoLINE.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jpnBieuDoLINE.setLayout(new javax.swing.BoxLayout(jpnBieuDoLINE, javax.swing.BoxLayout.LINE_AXIS));
-        jpnNen.add(jpnBieuDoLINE, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 760, 520));
+        jpnNen.add(jpnBieuDoLINE, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 750, 520));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -408,7 +489,7 @@ public class FormThongKe extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Hoạt Động Hôm Nay");
+        jLabel9.setText("Hoạt Động Trong Tháng");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -431,7 +512,7 @@ public class FormThongKe extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Sản phẩm", "Số Lượng", "Doanh Thu"
+                "Sản phẩm", "SL", "Doanh Thu"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -445,6 +526,22 @@ public class FormThongKe extends javax.swing.JPanel {
         tblHoatDongBanHang.setOpaque(false);
         tblHoatDongBanHang.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblHoatDongBanHang);
+        if (tblHoatDongBanHang.getColumnModel().getColumnCount() > 0) {
+            tblHoatDongBanHang.getColumnModel().getColumn(1).setMinWidth(40);
+            tblHoatDongBanHang.getColumnModel().getColumn(1).setPreferredWidth(40);
+            tblHoatDongBanHang.getColumnModel().getColumn(1).setMaxWidth(40);
+            tblHoatDongBanHang.getColumnModel().getColumn(2).setMinWidth(80);
+            tblHoatDongBanHang.getColumnModel().getColumn(2).setPreferredWidth(80);
+            tblHoatDongBanHang.getColumnModel().getColumn(2).setMaxWidth(80);
+        }
+
+        lblngay.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setText("Lợi Nhuận Tạm Tính: ");
+
+        lblloiNhuan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblloiNhuan.setForeground(new java.awt.Color(255, 0, 51));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -454,11 +551,18 @@ public class FormThongKe extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(lblngay, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 12, Short.MAX_VALUE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblloiNhuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,12 +570,18 @@ public class FormThongKe extends javax.swing.JPanel {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblngay, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblloiNhuan, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jpnNen.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 290, 520));
+        jpnNen.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 300, 520));
 
         jPanel9.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -530,6 +640,30 @@ public class FormThongKe extends javax.swing.JPanel {
         );
 
         jpnNen.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 40, 320, -1));
+
+        cboDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cboDateMousePressed(evt);
+            }
+        });
+        cboDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboDateActionPerformed(evt);
+            }
+        });
+        jpnNen.add(cboDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 110, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("Tùy Chọn:");
+        jpnNen.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, 20));
+
+        coxngay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                coxngayActionPerformed(evt);
+            }
+        });
+        jpnNen.add(coxngay, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 50, -1));
+        coxngay.hide();
 
         jfThongKe.add(jpnNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1080, 630));
 
@@ -674,13 +808,59 @@ public class FormThongKe extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbotunamActionPerformed
 
+    private void cboDateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboDateMousePressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_cboDateMousePressed
+
+    private void cboDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDateActionPerformed
+        // TODO add your handling code here:
+        ThongkeHomNay();
+    }//GEN-LAST:event_cboDateActionPerformed
+
+    private void coxngayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coxngayActionPerformed
+        // TODO add your handling code here:
+     
+           try {
+              int ngay = coxngay.getSelectedIndex()+1;
+ 
+                Calendar day = Calendar.getInstance();
+                    day.add(Calendar.DATE, ngay);
+                    lblngay.setText("Ngày " + String.valueOf(ngay) + " trong tháng (  " + String.valueOf(day.getTime()).substring(24) + ")");
+                    String sql = " SELECT tenSp, SUM(soLuong),SUM(giaBan*soLuong) FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp\n"
+                            + "												 WHERE Day(ngayHD)=? AND HoaDon.trangThai=1 GROUP BY tenSp,giaBan ";
+                    ResultSet rs = JDBCHelper.executeQuery(sql, ngay);
+                    DefaultTableModel model = (DefaultTableModel) tblHoatDongBanHang.getModel();
+                    model.setRowCount(0);
+                    double loinhuan = 0;
+                    while (rs.next()) {
+                        Object[] row = new Object[]{rs.getString(1), rs.getInt(2), chuyentien.format(rs.getDouble(3)) + " VNĐ"};
+                        loinhuan += rs.getDouble(3);
+                        model.addRow(row);
+                  
+                       
+                      
+                       
+                    }
+                      lblloiNhuan.setText(String.valueOf(chuyentien.format(loinhuan)) + " VNĐ");
+           } catch (Exception e) {
+           }
+       
+        
+        
+    }//GEN-LAST:event_coxngayActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JPanel Card;
+    private javax.swing.JComboBox<String> cboDate;
     private javax.swing.JComboBox<String> cbodennam;
     private javax.swing.JComboBox<String> cbotunam;
+    private javax.swing.JComboBox<String> coxngay;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel9;
@@ -702,6 +882,8 @@ public class FormThongKe extends javax.swing.JPanel {
     private javax.swing.JLabel lblQuayVeBangHang;
     private javax.swing.JLabel lblTenDangNhapBangHang;
     private javax.swing.JLabel lblanhGiaoDien;
+    private javax.swing.JLabel lblloiNhuan;
+    private javax.swing.JLabel lblngay;
     private javax.swing.JLabel lblthongkedoangthu;
     private javax.swing.JTable tblHoatDongBanHang;
     // End of variables declaration//GEN-END:variables

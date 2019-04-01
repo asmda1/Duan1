@@ -10,6 +10,7 @@ import com.nhom3.qlcf.dao.HoaDonDAO;
 import com.nhom3.qlcf.dao.KhachHangDAO;
 import com.nhom3.qlcf.dao.SanPhamDAO;
 import com.nhom3.qlcf.helper.Designhelper;
+import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.ReSizehelper;
 import com.nhom3.qlcf.helper.Timehelper;
 import com.nhom3.qlcf.helper.XuLy;
@@ -21,13 +22,22 @@ import com.nhom3.qlcf.model.SanPham;
 import com.nhom3.qlcf.test.testSQL;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.Run;
+import com.nhom3.qlcf.view.form.khachhang.FormKhachHang;
+import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnDangKyForm;
+import com.nhom3.qlcf.view.form.khachhang.ThemKH;
+import com.nhom3.qlcf.view.form.khachhang.jdialogThemKH;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
+import com.nhom3.qlcf.view.form.nhacungcap.FormDanhSachNhaCC;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -36,6 +46,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -117,6 +128,7 @@ public class FormBanHang extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        lbldiemThuong = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
@@ -286,12 +298,22 @@ public class FormBanHang extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(51, 51, 255));
 
         txtTimKiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKiemActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Tìm Kiếm");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -332,11 +354,18 @@ public class FormBanHang extends javax.swing.JPanel {
         jPanel9.add(lblfee, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 80, 40));
 
         lblorderweb.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblorderweb.setForeground(new java.awt.Color(255, 102, 0));
+        lblorderweb.setForeground(new java.awt.Color(255, 0, 0));
         lblorderweb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblorderweb.setText("0");
-        jPanel9.add(lblorderweb, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 40, 20));
+        lblorderweb.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblorderweb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblorderwebMousePressed(evt);
+            }
+        });
+        jPanel9.add(lblorderweb, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 40, 10));
 
+        lblShoworderweb.setBackground(new java.awt.Color(255, 255, 255));
         lblShoworderweb.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblShoworderweb.setForeground(new java.awt.Color(255, 255, 255));
         lblShoworderweb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -527,7 +556,6 @@ public class FormBanHang extends javax.swing.JPanel {
         jLabel11.setText("Ngày tạo:");
         jplHoaDon.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 42, 131, -1));
 
-        txtTimSDT.setText("Tìm SĐT KH");
         txtTimSDT.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtTimSDTFocusGained(evt);
@@ -610,6 +638,14 @@ public class FormBanHang extends javax.swing.JPanel {
             }
         });
         jplHoaDon.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 30, 20));
+
+        lbldiemThuong.setBackground(new java.awt.Color(0, 51, 204));
+        lbldiemThuong.setForeground(new java.awt.Color(255, 255, 255));
+        lbldiemThuong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbldiemThuong.setText("Điểm");
+        lbldiemThuong.setOpaque(true);
+        jplHoaDon.add(lbldiemThuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 50, 20));
+        lbldiemThuong.hide();
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -891,6 +927,7 @@ public class FormBanHang extends javax.swing.JPanel {
         Reset();
         Designhelper designhelper = new Designhelper();
         designhelper.DesigDonHang(jpldonhang, DongCTHD);
+        lblThongBao.setText("Thanh Toán Thành Công!");
     }//GEN-LAST:event_lblbuton_thanhToanMousePressed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -907,9 +944,43 @@ public class FormBanHang extends javax.swing.JPanel {
     private void lbltimSDTMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltimSDTMousePressed
         // TODO add your handling code here:
         KhachHangDAO khDao = new KhachHangDAO();
-        nd = khDao.selectID(txtTimSDT.getText());
-        lbltenKH.setText(nd.getTenKh());
-        lbltenKH.setName(nd.getMakh());
+        if (txtTimSDT.getText().trim().equals("") || txtTimSDT.getText().trim().equals("Tìm SĐT KH")) {
+            lbltenKH.setText("Nhập số điện thoại khách hàng!");
+            lbltenKH.setCursor(null);
+        } else if (!txtTimSDT.getText().matches("[0-9]+")) {
+            lbltenKH.setText("Lỗi! phải nhập bằng số!");
+            lbltenKH.setCursor(null);
+        } else if (txtTimSDT.getText().length() < 9 || txtTimSDT.getText().length() > 13) {
+            lbltenKH.setText("SĐT phải là [9-13] số!");
+            lbltenKH.setCursor(null);
+
+        } else if (khDao.checkSDT(txtTimSDT.getText()) == false) {
+            lbltenKH.setText("SĐT này chưa đăng ký");
+            lbltenKH.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            lbltenKH.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    if (lbltenKH.getText().equals("SĐT này chưa đăng ký")) {
+                        jdialogThemKH themKH = new jdialogThemKH(null, true);
+                        themKH.setVisible(true);
+
+                    } else {
+
+                    }
+
+                }
+            });
+
+        } else {
+            lbltenKH.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            nd = khDao.selectID(txtTimSDT.getText());
+            lbltenKH.setText(nd.getTenKh());
+            lbltenKH.setName(nd.getMakh());
+            lbldiemThuong.show();
+
+        }
+
+
     }//GEN-LAST:event_lbltimSDTMousePressed
 
     private void txtTimSDTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTimSDTMouseEntered
@@ -970,38 +1041,56 @@ public class FormBanHang extends javax.swing.JPanel {
 
     private void lblteaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblteaMousePressed
         // TODO add your handling code here:
-       
+
         lblThongBao.setForeground(Color.GREEN);
-         lblThongBao.setText("Đang Tải...");
+        lblThongBao.setText("Đang Tải...");
         Click_Logo(lbltea);
     }//GEN-LAST:event_lblteaMousePressed
 
     private void lblbanhmiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbanhmiMousePressed
         // TODO add your handling code here:
         lblThongBao.setForeground(Color.GREEN);
-         lblThongBao.setText("Đang Tải...");
+        lblThongBao.setText("Đang Tải...");
         Click_Logo(lblbanhmi);
     }//GEN-LAST:event_lblbanhmiMousePressed
 
     private void lblbanhngotMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbanhngotMousePressed
         // TODO add your handling code here:
         lblThongBao.setForeground(Color.GREEN);
-         lblThongBao.setText("Đang Tải...");
+        lblThongBao.setText("Đang Tải...");
         Click_Logo(lblbanhngot);
     }//GEN-LAST:event_lblbanhngotMousePressed
 
     private void lblfeeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblfeeMousePressed
         // TODO add your handling code here:
         lblThongBao.setForeground(Color.GREEN);
-         lblThongBao.setText("Đang Tải...");
+        lblThongBao.setText("Đang Tải...");
         Click_Logo(lblfee);
     }//GEN-LAST:event_lblfeeMousePressed
 
     private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
         // TODO add your handling code here:
-        
+
         LoadDataSanPham();
     }//GEN-LAST:event_jLabel6MousePressed
+
+    private void lblorderwebMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblorderwebMousePressed
+        // TODO add your handling code here:
+        Timehelper time = new Timehelper();
+        time.DatLichTimer(lblorderweb, "EXEC dbo.SoLuongDatMuaTrenWeb");
+    }//GEN-LAST:event_lblorderwebMousePressed
+
+    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKiemActionPerformed
+
+    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+        // TODO add your handling code here:\
+        lblThongBao.setForeground(Color.GREEN);
+        lblThongBao.setText("Đang Tải...");
+        Search(txtTimKiem);
+
+    }//GEN-LAST:event_jLabel3MousePressed
     public void RezieImageGroupLogo() {
         try {
             BufferedImage HinhAnh, HinhAnh2, HinhAnh3, HinhAnh4, HinhAnh5;
@@ -1053,7 +1142,31 @@ public class FormBanHang extends javax.swing.JPanel {
                 list = designhelper.LimitPage(s.selecttheoLoai(lbllogo.getName()), start, end);
                 designhelper.DesignPage(jpnNext, s.selecttheoLoai(lbllogo.getName()));
                 designhelper.DesignSanPham(jpnDSsanpham, s.selecttheoLoai(lbllogo.getName()));
-      
+
+                timehelper.t.stop();
+            }
+        });
+    }
+
+    public void Search(JTextField Search) {
+        Timehelper timehelper = new Timehelper();
+        timehelper.TimerLoad(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                lblThongBao.setText("");
+                jpnDSsanpham.setLayout(new GridLayout(2, 3, 4, 4));
+                int start = 0;
+                int end = 8;
+                // List Show sp từ dữ liệu SQL
+                SanPhamDAO s = new SanPhamDAO();
+                if (s.selectSearch(Search.getText()).size() < 8) {
+                    end = s.selectSearch(Search.getText()).size();
+                }
+                Designhelper designhelper = new Designhelper();
+                list = designhelper.LimitPage(s.selectSearch(Search.getText()), start, end);
+                designhelper.DesignPage(jpnNext, s.selectSearch(Search.getText()));
+                designhelper.DesignSanPham(jpnDSsanpham, s.selectSearch(Search.getText()));
+
                 timehelper.t.stop();
             }
         });
@@ -1273,6 +1386,7 @@ public class FormBanHang extends javax.swing.JPanel {
     private javax.swing.JLabel lblbanhngot;
     protected static javax.swing.JLabel lblbuton_thanhToan;
     private javax.swing.JLabel lblcoffe;
+    private javax.swing.JLabel lbldiemThuong;
     private javax.swing.JLabel lblfee;
     private javax.swing.JLabel lblorderweb;
     private javax.swing.JLabel lbltea;

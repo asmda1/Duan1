@@ -101,5 +101,10 @@ public class SanPhamDAO implements DAO<SanPham> {
         String sql = "Select * from SanPham where maLoai =?";
         return select(sql, loai);
     }
+//bổ sung
 
+    public List<SanPham> selectSearch(String loai) {
+        String sql = "Select * from dbo.SanPham where tenSp like '%" + loai +"%'";
+        return select(sql);
+    }
 }
