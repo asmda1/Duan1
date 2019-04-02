@@ -12,14 +12,22 @@ import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.khachhang.ThemKH;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import com.nhom3.qlcf.view.form.sanpham.ThemSanPham;
+import com.toedter.calendar.JDateChooser;
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,7 +46,7 @@ public class FormDonHang extends javax.swing.JPanel {
         initComponents();
         // jpnLogin1.setBackground(new Color(0, 0, 0, 134));
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
-        String[] items = {"Tháng trước", "7 ngày trước", "Hôm qua", "Hôm nay"};
+        String[] items = {"Tháng trước", "7 ngày trước", "Hôm qua", "Hôm nay", "Chọn ngày"};
         for (String item : items) {
             cboDateProduct.addItem(item);
         }
@@ -674,6 +682,31 @@ public class FormDonHang extends javax.swing.JPanel {
                 }
                 break;
             case 4:
+                Date[] date = new Date[2];
+                for (int i = 0; i < 2; i++) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+                    JDateChooser jdc = new JDateChooser();
+                    JPanel pnl = new JPanel(new FlowLayout());
+                    pnl.add(jdc);
+                    if (JOptionPane.showConfirmDialog(this, pnl, "", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
+                        date[i] = jdc.getDate();
+                    }
+                    System.out.println("date " + date[i]);
+                }
+                if (date.length != 0) {
+                    try {
+                        String sql = "SELECT tenSp, SUM(soluong) FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham  ON SanPham.maSp = CTHoaDon.maSp WHERE ngayHD BETWEEN ? AND ? AND HoaDon.trangThai=1 GROUP BY tenSp";
+                        ResultSet rs = JDBCHelper.executeQuery(sql, date[0], date[1]);
+                        DefaultTableModel model = (DefaultTableModel) tblHangBanChay.getModel();
+                        model.setRowCount(0);
+
+                        while (rs.next()) {
+                            Object[] row = new Object[]{rs.getString(1), rs.getInt(2)};
+                            model.addRow(row);
+                        }
+                    } catch (Exception e) {
+                    }
+                }
 
                 break;
         }
