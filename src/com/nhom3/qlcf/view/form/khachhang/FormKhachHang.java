@@ -5,13 +5,19 @@
  */
 package com.nhom3.qlcf.view.form.khachhang;
 
+import com.nhom3.qlcf.dao.KhachHangDAO;
+import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.model.KhachHang;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,6 +29,8 @@ public class FormKhachHang extends javax.swing.JPanel {
      * Creates new form FormLogin
      */
     public static FormKhachHang frkh;
+    List<KhachHang> listKH = new ArrayList<>();
+    DefaultTableModel model = null;
 
     public FormKhachHang() {
         initComponents();
@@ -35,9 +43,23 @@ public class FormKhachHang extends javax.swing.JPanel {
         tblKhachHang.getTableHeader().setBackground(new Color(0, 0, 0));
         tblKhachHang.getTableHeader().setForeground(new Color(255, 255, 255));
         tblKhachHang.setRowHeight(25);
-
         jpnBack_button.hide();
+        showDataKH();
+   
 
+    }
+
+    public void showDataKH() {
+        KhachHangDAO daoKH = new KhachHangDAO();
+        listKH = daoKH.selectAll();
+        model = (DefaultTableModel) tblKhachHang.getModel();
+        model.setRowCount(0);
+        for (KhachHang kh : listKH) {
+            Object[] row = new Object[]{
+            kh.getMakh(),kh.getTenKh(),kh.getEmail(),kh.getDiaChi(),kh.getDienThoai(),kh.isTrangThai()  == true ? "Hội viên" : "Khách Online"
+            };
+            model.addRow(row);
+        }
     }
 
     /**
@@ -412,13 +434,13 @@ public class FormKhachHang extends javax.swing.JPanel {
         tblKhachHang.setForeground(new java.awt.Color(51, 51, 51));
         tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã Khách Hàng", "Tên", "Email", "Địa Chỉ", "Điện Thoại", "Loại Khách"
+                "Mã Khách Hàng", "Tên", "Email", "Địa Chỉ", "Điện Thoại"
             }
         ));
         tblKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

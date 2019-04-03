@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1b5f6102-30ae-4b06-97f1-ef79d0831f75">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="7f98d665-b893-4ee0-87e3-e964c03d8b8c"/>
+	<parameter name="SoLuongTon" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[HangHoa_TonKho $P{SoLuongTon}]]>
+	</queryString>
+	<field name="MaHang" class="java.lang.String"/>
+	<field name="TenHang" class="java.lang.String"/>
+	<field name="ID_NhomHang" class="java.lang.Integer"/>
+	<field name="SoLuong" class="java.lang.Integer"/>
+	<field name="DVT" class="java.lang.String"/>
+	<field name="BaoHanh" class="java.lang.Integer"/>
+	<field name="GiaMua" class="java.math.BigDecimal"/>
+	<field name="GiaBan" class="java.math.BigDecimal"/>
+	<field name="GhiChu" class="java.lang.String"/>
+	<field name="MoTa" class="java.lang.String"/>
+	<variable name="total_trigia" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{SoLuong}.intValue()*$F{GiaMua}.doubleValue()]]></variableExpression>
+	</variable>
+	<variable name="tong_sl" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{SoLuong}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="149" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="79" width="555" height="36" uuid="9cd2ad04-c556-426f-9d88-5c38a85e4586"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="18" isBold="true" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[DANH SÁCH HÀNG TỒN KHO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="406" y="0" width="41" height="20" uuid="304b5280-8c39-4538-a93e-7f72b5a1f36e"/>
+				<textElement>
+					<font fontName="Tahoma" size="12" isBold="true" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Ngày:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="447" y="0" width="108" height="20" uuid="dbcc4ce3-7d28-42a5-b953-4fbd06bd3376"/>
+				<textElement>
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="84" y="40" width="302" height="20" uuid="ac0815ca-f96e-4fb0-9e87-0ccb42b03450"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="11" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[ĐT: 0905899657]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="0" width="302" height="20" uuid="af2f13b7-5f6f-425d-a646-bea51077cbb4"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12" isBold="true" pdfFontName="Times-Roman" pdfEncoding="Cp1258" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Công ty TNHH TM & DV Phúc Mobile]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="59" width="302" height="20" uuid="66708bb6-7b94-481e-b71e-f4b55cbc4b8e"/>
+				<textElement>
+					<font size="11" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Website: www.phucmobile.com.vn]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="20" width="302" height="20" uuid="b2982414-5865-4ef0-b7e3-72333419eba4"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="11" pdfFontName="Times-Roman" pdfEncoding="Cp1258" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ: 02 Nguyễn Đình Chiểu, Nha Trang, Khánh Hòa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="115" width="91" height="20" uuid="96bd13c4-f318-4053-8a06-975701a731e2"/>
+				<textElement>
+					<font fontName="Tahoma" size="14" isItalic="true" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[(Số lượng QĐ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="292" y="115" width="62" height="20" uuid="167211c8-572f-4f0f-bd1d-9df60c22e991"/>
+				<textElement>
+					<font fontName="Tahoma" size="14" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SoLuongTon}.toString() + ")"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="84" height="48" uuid="2b0e207a-6838-40ec-96cd-326f2e4b14aa"/>
+				<imageExpression><![CDATA["D:\\OneDrive\\TLHT_NAM_3_KY_II\\LT_JAVA\\Java_code\\MobileShopManagement\\src\\Resources\\Logo_3.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="38" height="28" uuid="b838973e-56e4-4867-b7ac-5d3deff2d277"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isBold="true" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[STT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="38" y="0" width="59" height="28" uuid="14559a24-3c7c-4af0-8836-2835ef0f9cb4"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isBold="true" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Mã hàng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="97" y="0" width="160" height="28" uuid="699d0466-6463-4082-979f-147e29d5de10"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isBold="true" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Tên hàng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="0" width="35" height="28" uuid="9d9063cd-c96a-4fbd-86a9-0f235cc5a439"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isBold="true" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[SL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="0" width="45" height="28" uuid="a1dc2e5d-6cd3-4d64-bf16-d85906b44fc7"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isBold="true" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[ĐVT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="0" width="84" height="28" uuid="94c15feb-7694-4d75-9193-4c3b7f8a2fcd"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isBold="true" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Giá nhập]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="421" y="0" width="134" height="28" uuid="a017b610-3cff-40e5-9b4e-c2ffe7fa2ba2"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isBold="true" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Trị giá]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="38" height="20" uuid="bf5e1982-65f6-4f03-8278-dd7cf5f5c1e3"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.75" lineStyle="Dashed"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="38" y="0" width="59" height="20" uuid="6e6b551e-38e2-4773-b5fb-41a35ee765fb"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.75" lineStyle="Dashed"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MaHang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="97" y="0" width="160" height="20" uuid="fddd4857-d88f-412c-b490-a8f2493d921b"/>
+				<box leftPadding="5">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.75" lineStyle="Dashed"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TenHang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="257" y="0" width="35" height="20" uuid="aa1dd586-6e79-41c8-8cef-54e2862337ab"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.75" lineStyle="Dashed"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SoLuong}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="292" y="0" width="45" height="20" uuid="8fbeed9c-4717-4eb6-9545-c2b89e809f65"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.75" lineStyle="Dashed"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DVT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###">
+				<reportElement x="337" y="0" width="84" height="20" uuid="249448d7-afb8-4024-9943-80deb6f6752b"/>
+				<box rightPadding="5">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.75" lineStyle="Dashed"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GiaMua}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###">
+				<reportElement x="421" y="0" width="134" height="20" uuid="02e7ab38-c10b-4bf3-8a49-5c9baf9ecbc3"/>
+				<box rightPadding="5">
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.75" lineStyle="Dashed"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SoLuong}.intValue()*$F{GiaMua}.doubleValue()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="182" splitType="Stretch">
+			<textField pattern="#,### VNĐ">
+				<reportElement x="421" y="-1" width="134" height="33" uuid="95e23298-4f10-4446-a320-dff6ba18b013"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_trigia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="337" y="50" width="118" height="20" uuid="70ffe761-e87a-4ca4-a6b5-346af7009df9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="14" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Người Lập Phiếu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="70" width="118" height="20" uuid="b00db882-8e47-4f19-9384-89d008a96fd5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="14" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[(Ký, họ tên)]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="257" y="-1" width="35" height="33" uuid="a0c3ae02-2815-4f94-a484-446735013da2"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tong_sl}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="-1" width="257" height="33" uuid="8fbb8296-2872-4154-ab70-3063344d744e"/>
+				<box leftPadding="5">
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isBold="true" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Tổng số lượng:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="-1" width="129" height="33" uuid="0c461839-6ada-48e3-a81c-fcd017142bd0"/>
+				<box rightPadding="5">
+					<pen lineColor="#000000"/>
+					<topPen lineWidth="1.0" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isBold="true" pdfFontName="Times-Roman" pdfEncoding="Cp1258"/>
+				</textElement>
+				<text><![CDATA[Tổng trị giá:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

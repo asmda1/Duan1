@@ -5,12 +5,15 @@
  */
 package com.nhom3.qlcf.view.form.nhacungcap;
 
+import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
+import java.sql.ResultSet;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,13 +24,30 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
     /**
      * Creates new form FormLogin
      */
-    public static FormDanhSachNhaCC login;
+    public static FormDanhSachNhaCC nhacc;
 
     public FormDanhSachNhaCC() {
         initComponents();
         // jpnLogin1.setBackground(new Color(0, 0, 0, 134));
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
-        login = this;
+        nhacc = this;
+        showKHHV();
+    }
+    DefaultTableModel model = null;
+
+    public void showKHHV() {
+        ResultSet rs = JDBCHelper.executeQuery("SELECT * FROM NhaCungCap");
+        model = (DefaultTableModel) tblnhacungcap.getModel();
+        model.setRowCount(0);
+        try {
+            while (rs.next()) {
+                Object[] row = new Object[]{
+                    rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBoolean(5) == true? "Hợp Tác": "Không Hợp Tác"
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -52,7 +72,7 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
         lblOutBangHang = new javax.swing.JLabel();
         jpnNen = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblKhachHang2 = new javax.swing.JTable();
+        tblnhacungcap = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -234,8 +254,8 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
 
         jScrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        tblKhachHang2.setForeground(new java.awt.Color(51, 51, 51));
-        tblKhachHang2.setModel(new javax.swing.table.DefaultTableModel(
+        tblnhacungcap.setForeground(new java.awt.Color(51, 51, 51));
+        tblnhacungcap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -243,20 +263,20 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "MNCC", "Tên", "Điện Thoại", "Chi Nhánh", "Loại Hàng SX"
+                "MNCC", "Tên", "Điện Thoại", "Chi Nhánh", "Trạng Thái"
             }
         ));
-        tblKhachHang2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tblKhachHang2.setFocusable(false);
-        tblKhachHang2.setGridColor(new java.awt.Color(0, 0, 0));
-        tblKhachHang2.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        tblKhachHang2.setRowHeight(25);
-        tblKhachHang2.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        tblKhachHang2.setShowHorizontalLines(false);
-        tblKhachHang2.setShowVerticalLines(false);
-        tblKhachHang2.setSurrendersFocusOnKeystroke(true);
-        tblKhachHang2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(tblKhachHang2);
+        tblnhacungcap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblnhacungcap.setFocusable(false);
+        tblnhacungcap.setGridColor(new java.awt.Color(0, 0, 0));
+        tblnhacungcap.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tblnhacungcap.setRowHeight(25);
+        tblnhacungcap.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tblnhacungcap.setShowHorizontalLines(false);
+        tblnhacungcap.setShowVerticalLines(false);
+        tblnhacungcap.setSurrendersFocusOnKeystroke(true);
+        tblnhacungcap.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(tblnhacungcap);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 255));
 
@@ -479,6 +499,6 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
     private javax.swing.JLabel lblQuayVeBangHang;
     private javax.swing.JLabel lblTenDangNhapBangHang;
     private javax.swing.JLabel lblanhGiaoDien;
-    private javax.swing.JTable tblKhachHang2;
+    private javax.swing.JTable tblnhacungcap;
     // End of variables declaration//GEN-END:variables
 }

@@ -56,9 +56,6 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
         jpnToolbar19 = new javax.swing.JPanel();
         lblAn_BanHang = new javax.swing.JLabel();
         lblOutBangHang = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jpnNen = new javax.swing.JPanel();
         jpldanhmuc = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -222,40 +219,12 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
             }
         });
 
-        jPanel3.setBackground(new java.awt.Color(51, 51, 255));
-
-        jTextField1.setText("Tìm kiếm");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Tìm Kiếm");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField1)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout jpnToolbar19Layout = new javax.swing.GroupLayout(jpnToolbar19);
         jpnToolbar19.setLayout(jpnToolbar19Layout);
         jpnToolbar19Layout.setHorizontalGroup(
             jpnToolbar19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnToolbar19Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 604, Short.MAX_VALUE)
+                .addContainerGap(996, Short.MAX_VALUE)
                 .addComponent(lblAn_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblOutBangHang)
@@ -264,9 +233,6 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
         jpnToolbar19Layout.setVerticalGroup(
             jpnToolbar19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblAn_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(jpnToolbar19Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(lblOutBangHang, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
@@ -292,6 +258,7 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("  QUẢN LÝ NHÂN VIÊN");
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel5MousePressed(evt);
@@ -304,6 +271,7 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("TẠO TÀI KHOẢN");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel6MousePressed(evt);
@@ -316,6 +284,7 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("CHỈNH SỬA TÀI KHOẢN");
         jLabel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel8MousePressed(evt);
@@ -519,13 +488,10 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JPanel Card;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
     protected static javax.swing.JPanel jfTSuaXoa;
     private javax.swing.JPanel jpldanhmuc;
     private javax.swing.JPanel jpltable;

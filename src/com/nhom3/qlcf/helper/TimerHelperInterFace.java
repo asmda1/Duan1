@@ -16,6 +16,7 @@ import javax.swing.Timer;
 public interface TimerHelperInterFace {
 
     public void TimerLoad(ActionListener action);
-    public void DatLichTimer(JLabel lbl, String sql);
+    public void DatLichTimer(JLabel lbl,JLabel sound, String sql);
      public void LoadTime5s();
+     public boolean datlich(JLabel lbl, JLabel sound, String sql);
 }

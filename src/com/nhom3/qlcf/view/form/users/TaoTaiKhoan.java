@@ -75,17 +75,18 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
                 txtUsersActionPerformed(evt);
             }
         });
-        jPanel1.add(txtUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 102, 259, 40));
+        jPanel1.add(txtUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 259, 30));
 
         lblvien.setText("___________________________________________");
         jPanel1.add(lblvien, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 114, 260, 30));
 
         lblvien1.setText("___________________________________________");
-        jPanel1.add(lblvien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 260, 30));
+        jPanel1.add(lblvien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 260, 40));
 
+        txtMatKhau.setBackground(new java.awt.Color(153, 255, 0));
         txtMatKhau.setBorder(null);
         txtMatKhau.setOpaque(false);
-        jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 259, 40));
+        jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 259, 30));
 
         lblpass.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblpass.setText("Password*:");
@@ -97,7 +98,7 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
 
         txtTen.setBorder(null);
         txtTen.setOpaque(false);
-        jPanel1.add(txtTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 259, 40));
+        jPanel1.add(txtTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 259, 40));
 
         lblpass1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblpass1.setText("Họ Tên*:");
@@ -108,7 +109,7 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
 
         txtSDT.setBorder(null);
         txtSDT.setOpaque(false);
-        jPanel1.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 259, 40));
+        jPanel1.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 259, 40));
 
         lblpass2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblpass2.setText("Vài Trò:");

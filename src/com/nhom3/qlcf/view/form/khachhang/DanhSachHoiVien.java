@@ -5,8 +5,11 @@
  */
 package com.nhom3.qlcf.view.form.khachhang;
 
+import com.nhom3.qlcf.helper.JDBCHelper;
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,17 +17,36 @@ import java.awt.Font;
  */
 public class DanhSachHoiVien extends javax.swing.JPanel {
 
+    DefaultTableModel model = null;
+
     /**
      * Creates new form FormDanhSachHoiVien
      */
     public DanhSachHoiVien() {
         initComponents();
-        tblKhachHang2.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
-        tblKhachHang2.setFont(new Font("Tohoma", Font.PLAIN, 12));
-        tblKhachHang2.getTableHeader().setOpaque(false);
-        tblKhachHang2.getTableHeader().setBackground(new Color(0, 0, 0));
-        tblKhachHang2.getTableHeader().setForeground(new Color(255, 255, 255));
-        tblKhachHang2.setRowHeight(25);
+        tblKhHV.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
+        tblKhHV.setFont(new Font("Tohoma", Font.PLAIN, 12));
+        tblKhHV.getTableHeader().setOpaque(false);
+        tblKhHV.getTableHeader().setBackground(new Color(0, 0, 0));
+        tblKhHV.getTableHeader().setForeground(new Color(255, 255, 255));
+        tblKhHV.setRowHeight(25);
+        showKHHV();
+    }
+
+    public void showKHHV() {
+        ResultSet rs = JDBCHelper.executeQuery("SELECT * FROM dbo.KhachHang WHERE maKh NOT IN (SELECT makh FROM dbo.KhachHang WHERE maKh='KH000') AND trangThai =1");
+        model = (DefaultTableModel) tblKhHV.getModel();
+        model.setRowCount(0);
+        try {
+            while (rs.next()) {
+                Object[] row = new Object[]{
+                    rs.getString("maKh"), rs.getString("tenkh"), rs.getString("diachi"), rs.getString("dienthoai"), rs.getInt(8)
+
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -38,35 +60,35 @@ public class DanhSachHoiVien extends javax.swing.JPanel {
 
         jpnDShoivien = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblKhachHang2 = new javax.swing.JTable();
+        tblKhHV = new javax.swing.JTable();
 
         jpnDShoivien.setLayout(new java.awt.CardLayout());
 
         jScrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        tblKhachHang2.setForeground(new java.awt.Color(51, 51, 51));
-        tblKhachHang2.setModel(new javax.swing.table.DefaultTableModel(
+        tblKhHV.setForeground(new java.awt.Color(51, 51, 51));
+        tblKhHV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã Khách Hàng", "Tên", "Địa Chỉ", "Điện Thoại", "Điểm Thưởng", "Dư Nợ"
+                "Mã Khách Hàng", "Tên", "Địa Chỉ", "Điện Thoại", "Điểm Thưởng"
             }
         ));
-        tblKhachHang2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tblKhachHang2.setFocusable(false);
-        tblKhachHang2.setGridColor(new java.awt.Color(0, 0, 0));
-        tblKhachHang2.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        tblKhachHang2.setRowHeight(25);
-        tblKhachHang2.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        tblKhachHang2.setShowHorizontalLines(false);
-        tblKhachHang2.setShowVerticalLines(false);
-        tblKhachHang2.setSurrendersFocusOnKeystroke(true);
-        tblKhachHang2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(tblKhachHang2);
+        tblKhHV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblKhHV.setFocusable(false);
+        tblKhHV.setGridColor(new java.awt.Color(0, 0, 0));
+        tblKhHV.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tblKhHV.setRowHeight(25);
+        tblKhHV.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tblKhHV.setShowHorizontalLines(false);
+        tblKhHV.setShowVerticalLines(false);
+        tblKhHV.setSurrendersFocusOnKeystroke(true);
+        tblKhHV.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(tblKhHV);
 
         jpnDShoivien.add(jScrollPane3, "card2");
 
@@ -96,6 +118,6 @@ public class DanhSachHoiVien extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel jpnDShoivien;
-    private javax.swing.JTable tblKhachHang2;
+    private javax.swing.JTable tblKhHV;
     // End of variables declaration//GEN-END:variables
 }

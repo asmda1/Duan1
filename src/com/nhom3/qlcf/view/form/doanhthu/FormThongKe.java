@@ -237,7 +237,7 @@ public class FormThongKe extends javax.swing.JPanel {
 
     public void Loadcombo() {
         try {
-            ResultSet re = JDBCHelper.executeQuery("SELECT year(dbo.hoaDon.ngayHD), SUM(tongtien) AS gia FROM dbo.hoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = hoaDon.maHD JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp\n"
+            ResultSet re = JDBCHelper.executeQuery("SELECT year(dbo.hoaDon.ngayHD), SUM(giaBan* soluong) AS gia FROM dbo.hoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = hoaDon.maHD JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp\n"
                     + "                                      GROUP BY year(dbo.hoaDon.ngayHD)");
 
             while (re.next()) {
