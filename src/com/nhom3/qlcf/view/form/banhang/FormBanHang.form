@@ -1142,6 +1142,7 @@
                             </Property>
                             <Property name="horizontalAlignment" type="int" value="0"/>
                             <Property name="text" type="java.lang.String" value="THANH TO&#xc1;N"/>
+                            <Property name="toolTipText" type="java.lang.String" value="AutogetMaHD"/>
                             <Property name="name" type="java.lang.String" value="AutogetMaHD" noResource="true"/>
                           </Properties>
                           <Events>

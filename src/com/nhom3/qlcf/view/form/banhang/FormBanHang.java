@@ -75,6 +75,9 @@ public class FormBanHang extends javax.swing.JPanel {
         getTongTien();
         CountSoLuongHoaDonTrenWeb();
         RezieImageGroupLogo();
+  
+        lblbuton_thanhToan.setName(AutogetMaHD());
+        
     }
 
     /**
@@ -684,6 +687,7 @@ public class FormBanHang extends javax.swing.JPanel {
         lblbuton_thanhToan.setForeground(new java.awt.Color(255, 255, 255));
         lblbuton_thanhToan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblbuton_thanhToan.setText("THANH TOÁN");
+        lblbuton_thanhToan.setToolTipText("AutogetMaHD");
         lblbuton_thanhToan.setName("AutogetMaHD"); // NOI18N
         lblbuton_thanhToan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -945,22 +949,23 @@ public class FormBanHang extends javax.swing.JPanel {
 
     private void lblbuton_thanhToanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbuton_thanhToanMousePressed
         // TODO add your handling code here:
-        if(!DongCTHD.isEmpty() || !SavehoaDon.isEmpty()){
-               GetHD();
-        DongGoiHD();
-        InsertHD();
-        InsertHDCT();
-        Designhelper designhelper = new Designhelper();
-        designhelper.DesigDonHang(jpldonhang, DongCTHD);
-        lblThongBao.setText("Thanh Toán Thành Công!");
-        InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(),lbltenKH.getText());
-        show.setVisible(true);
-        Reset();
-            
-        }else{
-             lblThongBao.setText("Không có hóa đơn để thanh toán, thử lại!");
+        if (!DongCTHD.isEmpty() || !SavehoaDon.isEmpty()) {
+            GetHD();
+            DongGoiHD();
+            InsertHD();
+            InsertHDCT();
+            updateDiem();
+            Designhelper designhelper = new Designhelper();
+            designhelper.DesigDonHang(jpldonhang, DongCTHD);
+            lblThongBao.setText("Thanh Toán Thành Công!");
+            InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(), lbltenKH.getText());
+            show.setVisible(true);
+            Reset();
+
+        } else {
+            lblThongBao.setText("Không có hóa đơn để thanh toán, thử lại!");
         }
-     
+
     }//GEN-LAST:event_lblbuton_thanhToanMousePressed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -1326,7 +1331,7 @@ public class FormBanHang extends javax.swing.JPanel {
         HoaDon hoadon = new HoaDon();
         KhachHang kh = new KhachHang();
         NguoiDung nd = new NguoiDung();
-        hoadon.setMaHoaDon(AutogetMaHD());
+        hoadon.setMaHoaDon(lblbuton_thanhToan.getToolTipText());
         nd.setMaNguoidung("ND001");
         double ChietKhau = Double.parseDouble(txtChietKhau.getText());
         hoadon.setChietKhau(ChietKhau);
@@ -1354,6 +1359,11 @@ public class FormBanHang extends javax.swing.JPanel {
 
         }
         SavehoaDon.add(hoadon);
+    }
+
+    public void updateDiem() {
+        JDBCHelper.executeUpdate("  UPDATE dbo.KhachHang SET diemThuong = ' " + txtdiem.getText() + "' where makh ='" + lbltenKH.getName() + "'");
+
     }
 
     public void InsertHD() {
