@@ -5,13 +5,19 @@
  */
 package com.nhom3.qlcf.view.form.doanhthu;
 
+import com.nhom3.qlcf.dao.HoaDonDAO;
+import com.nhom3.qlcf.dao.KhachHangDAO;
+import com.nhom3.qlcf.helper.DetailsForm;
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.XuLy;
+import com.nhom3.qlcf.model.HoaDon;
+import com.nhom3.qlcf.model.KhachHang;
 import java.awt.Color;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,8 +25,6 @@ import javax.swing.table.DefaultTableModel;
  * @author baotri1998
  */
 public class KhachHangTheoDon extends javax.swing.JPanel {
-
-    double tongDoanhThu = 0;
 
     /**
      * Creates new form LichSuMuaHang
@@ -30,22 +34,22 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
         txtSearch.setText("Tìm kiếm khách hàng");
         txtSearch.setForeground(Color.gray);
         XuLy.placeHolder(txtSearch, "Tìm kiếm khách hàng");
+        fillToTable("");
     }
 
-    private void fillToTable() {
-        ResultSet rs = JDBCHelper.executeQuery("SELECT HoaDon.maKh, tenKh, maHD, KhachHang.trangThai, ngayHD, tongTien, diemThuong FROM dbo.HoaDon JOIN  dbo.KhachHang"
-                + " on HoaDon.maKH = KhachHang.maKh WHERE  tenKh LIKE N'%" + txtSearch.getText().trim() + "%'");
+    private void fillToTable(String tenKH) {
+        List<KhachHang> listKH;
+        if (tenKH.isEmpty()) {
+            listKH = new KhachHangDAO().select("Select DISTINCT dbo.KhachHang.* FROM dbo.KhachHang JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh");
+        } else {
+            listKH = new KhachHangDAO().select("Select DISTINCT dbo.KhachHang.* FROM dbo.KhachHang JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh where tenKh like N'%" + tenKH + "%'");
+        }
+
         DefaultTableModel model = (DefaultTableModel) tblKHTheoDon.getModel();
         model.setRowCount(0);
-        try {
-            while (rs.next()) {
-                Object[] row = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4) == true ? "Hội viên" : "Khách lẻ", rs.getDate(5), rs.getDouble(6), rs.getInt(7)};
-                model.addRow(row);
-                tongDoanhThu += rs.getDouble(6);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        listKH.stream().map((khachHang) -> new Object[]{khachHang.getTenKh(), khachHang.getDienThoai(), khachHang.isTrangThai() ? "Hội viên" : "Khách lẻ", khachHang.isTrangThai() ? khachHang.getDiemThuong() : "Không có"}).forEachOrdered((row) -> {
+            model.addRow(row);
+        });
     }
 
     /**
@@ -79,17 +83,17 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
         tblKHTheoDon.setForeground(new java.awt.Color(51, 51, 51));
         tblKHTheoDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Mã số", "Anh/Chị", "maHD", "Loại Khách", "Ngày Hóa Đơn", "Tổng Tiền", "Điểm thưởng"
+                "Anh/Chị", "Mã số", "Loại Khách", "Điểm thưởng (Hội viên)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -102,6 +106,7 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
         tblKHTheoDon.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tblKHTheoDon.setRowHeight(25);
         tblKHTheoDon.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tblKHTheoDon.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblKHTheoDon.setShowHorizontalLines(false);
         tblKHTheoDon.setShowVerticalLines(false);
         tblKHTheoDon.setSurrendersFocusOnKeystroke(true);
@@ -117,9 +122,6 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
             tblKHTheoDon.getColumnModel().getColumn(1).setResizable(false);
             tblKHTheoDon.getColumnModel().getColumn(2).setResizable(false);
             tblKHTheoDon.getColumnModel().getColumn(3).setResizable(false);
-            tblKHTheoDon.getColumnModel().getColumn(4).setResizable(false);
-            tblKHTheoDon.getColumnModel().getColumn(5).setResizable(false);
-            tblKHTheoDon.getColumnModel().getColumn(6).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -193,7 +195,7 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
                                 .addGap(20, 20, 20))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(107, 107, 107)
-                                .addComponent(lblTongDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblTongDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -217,23 +219,22 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
 
     private void lblSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSearchMouseClicked
         // TODO add your handling code here:
-        fillToTable();
+        String tenKH = txtSearch.getText().trim();
+        fillToTable(tenKH);
     }//GEN-LAST:event_lblSearchMouseClicked
 
     private void tblKHTheoDonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKHTheoDonMousePressed
         // TODO add your handling code here:
-        int index = tblKHTheoDon.getSelectedRow();
-        String maKH = (String) tblKHTheoDon.getValueAt(index, 0);
-        ResultSet rs = JDBCHelper.executeQuery("SELECT tenKh, SUM(tongTien) FROM dbo.HoaDon, dbo.KhachHang WHERE HoaDon.maKH = KhachHang.maKh "
-                + "AND HoaDon.maKH='" + maKH + "' GROUP BY tenKh");
-        try {
-            if (rs.next()) {
-                lblTenKH.setText("Tên Khách Hàng: " + rs.getString(1));
-                lblTongDoanhThu.setText("Tổng Hóa Đơn: " + rs.getDouble(2));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+        
+        
+//        ResultSet rs = JDBCHelper.executeQuery("SELECT HoaDon.maHD, ngayHD, tenSp, maSize, ten, soLuong FROM dbo.KhachHang"
+//                + " JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh"
+//                + " JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD"
+//                + " JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp"
+//                + " JOIN dbo.Extra ON Extra.id = CTHoaDon.extra"
+//                + " WHERE HoaDon.maKH = ?", maKH);
+        
+
     }//GEN-LAST:event_tblKHTheoDonMousePressed
 
 

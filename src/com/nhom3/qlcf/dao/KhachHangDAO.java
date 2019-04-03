@@ -69,7 +69,7 @@ public class KhachHangDAO implements DAO<KhachHang> {
         try {
             model.setMakh(rs.getString(1));
             model.setTenKh(rs.getString(2));
-              model.setMatKhau(rs.getString(3));
+            model.setMatKhau(rs.getString(3));
             model.setEmail(rs.getString(4));
             model.setDienThoai(rs.getString(5));
             model.setDiaChi(rs.getString(6));
@@ -88,9 +88,10 @@ public class KhachHangDAO implements DAO<KhachHang> {
         List<KhachHang> list = select(sql, ID);
         return list.size() > 0 ? list.get(0) : null;
     }
+
     //bổ sung
-      public boolean checkSDT(String sdt) {
-        String sql = "Select * from dbo.KhachHang WHERE dienThoai ='"+ sdt+ "'";
+    public boolean checkSDT(String sdt) {
+        String sql = "Select * from dbo.KhachHang WHERE dienThoai ='" + sdt + "'";
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
             while (rs.next()) {

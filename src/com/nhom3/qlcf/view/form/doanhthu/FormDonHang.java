@@ -17,6 +17,9 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -688,7 +691,7 @@ public class FormDonHang extends javax.swing.JPanel {
                     JDateChooser jdc = new JDateChooser();
                     JPanel pnl = new JPanel(new FlowLayout());
                     pnl.add(jdc);
-                    if (JOptionPane.showConfirmDialog(this, pnl, "", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
+                    if (JOptionPane.showConfirmDialog(this, pnl, "Chọn ngày thứ" + (i + 1), JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
                         date[i] = jdc.getDate();
                     }
                     System.out.println("date " + date[i]);
@@ -704,7 +707,8 @@ public class FormDonHang extends javax.swing.JPanel {
                             Object[] row = new Object[]{rs.getString(1), rs.getInt(2)};
                             model.addRow(row);
                         }
-                    } catch (Exception e) {
+                    } catch (SQLException e) {
+                        e.printStackTrace();
                     }
                 }
 

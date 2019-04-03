@@ -1389,6 +1389,7 @@ GO
 
 SELECT  *
 FROM    dbo.KhachHang
+GO
 
 CREATE PROC KhachDatOnline
 AS
@@ -1504,3 +1505,5 @@ VALUES  ( 'HD058' , -- maHD - varchar(10)
 		          )
 
 				  GO 
+
+SELECT HoaDon.maHD, ngayHD, tenSp, maSize, ten, soLuong FROM dbo.KhachHang JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp JOIN dbo.Extra ON Extra.id = CTHoaDon.extra WHERE HoaDon.maKH = 'KH001'
