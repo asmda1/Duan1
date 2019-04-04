@@ -960,7 +960,7 @@ public class FormBanHang extends javax.swing.JPanel {
                     null,
                     opObjects,
                     opObjects[0])) {
-                     GetHD();
+                GetHD();
                 DongGoiHD();
                 InsertHD();
                 InsertHDCT();
@@ -971,8 +971,7 @@ public class FormBanHang extends javax.swing.JPanel {
                 lblThongBao.setForeground(Color.GREEN);
                 InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(), lbltenKH.getToolTipText(), txtdiem.getName());
                 show.setVisible(true);
-                Reset(); 
-           
+                Reset();
 
             }
 
@@ -1145,6 +1144,7 @@ public class FormBanHang extends javax.swing.JPanel {
     private void lblShoworderwebMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblShoworderwebMousePressed
         // TODO add your handling code here:
         if (!lblorderweb.getText().equals("0")) {
+            lblThongBao.setText("");
             KhachDatOnline hd = new KhachDatOnline(null, true);
             hd.setVisible(true);
         } else {
