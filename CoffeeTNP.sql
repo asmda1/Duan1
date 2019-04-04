@@ -516,6 +516,28 @@ VALUES  ( 'ND003' ,
           0
         )
  GO
+ INSERT  INTO dbo.KhachHang
+        ( maKh ,
+          tenKh ,
+          matKhau ,
+          email ,
+          dienThoai ,
+          diaChi ,
+          trangThai ,
+          diemThuong
+			
+        )
+VALUES  ( 'KH000' , -- maKh - varchar(10)
+          N'Khách Lẻ' , -- tenKh - nvarchar(50)
+          N'' , -- matKhau - nvarchar(50)
+          '' , -- email - varchar(50)
+          '' , -- dienThoai - varchar(13)
+          N'' , -- diaChi - nvarchar(50)
+          0 , -- trangThai - bit
+          0  -- diemThuong - int
+			
+        );
+					GO 
  
 INSERT  INTO dbo.KhachHang
         ( maKh ,
