@@ -46,13 +46,12 @@ public class Timehelper implements TimerHelperInterFace {
                         lbl.setText(rs.getString(1));
                         Soundhelper mp3;
                         mp3 = new Soundhelper("src/com/nhom3/qlcf/mp3/RengReng.mp3");
-                        if (lbl.getText().equals("0") || lblsound.getName().equals("sound")) {
-                            lblsound.setName("mute");
+                        if (lbl.getText().equals("0") || lblsound.getName().equals("mute")) {
+                            lblsound.setName("sound");
                             lblsound.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/mute.png")));
                             mp3.stop();
                         } else {
                             mp3.play();
-                            lblsound.setName("sound");
                             lblsound.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/sound.png")));
                         }
                     }
@@ -63,7 +62,7 @@ public class Timehelper implements TimerHelperInterFace {
             }
         };
 
-        if (!lbl.getText().equals("0") || lblsound.getName().equals("mute")) {
+        if (lblsound.getName().equals("sound")) {
             long period = 24 * 150;  //tinh theo giay 
             java.util.Timer timer = new java.util.Timer();
             timer.schedule(timerTask, dateSchedule, period);
