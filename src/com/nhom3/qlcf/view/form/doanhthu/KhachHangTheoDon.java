@@ -5,19 +5,22 @@
  */
 package com.nhom3.qlcf.view.form.doanhthu;
 
-import com.nhom3.qlcf.dao.HoaDonDAO;
+
 import com.nhom3.qlcf.dao.KhachHangDAO;
-import com.nhom3.qlcf.helper.DetailsForm;
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.XuLy;
-import com.nhom3.qlcf.model.HoaDon;
 import com.nhom3.qlcf.model.KhachHang;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -47,7 +50,7 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) tblKHTheoDon.getModel();
         model.setRowCount(0);
-        listKH.stream().map((khachHang) -> new Object[]{khachHang.getTenKh(), khachHang.getDienThoai(), khachHang.isTrangThai() ? "Hội viên" : "Khách lẻ", khachHang.isTrangThai() ? khachHang.getDiemThuong() : "Không có"}).forEachOrdered((row) -> {
+        listKH.stream().map((khachHang) -> new Object[]{khachHang.getTenKh(), khachHang.getMakh(), khachHang.getDienThoai(), khachHang.isTrangThai() ? "Hội viên" : "Khách lẻ", khachHang.isTrangThai() ? khachHang.getDiemThuong() : "Không có"}).forEachOrdered((row) -> {
             model.addRow(row);
         });
     }
@@ -83,17 +86,17 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
         tblKHTheoDon.setForeground(new java.awt.Color(51, 51, 51));
         tblKHTheoDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Anh/Chị", "Mã số", "Loại Khách", "Điểm thưởng (Hội viên)"
+                "Anh/Chị", "Mã số", "Điện thoại", "Loại Khách", "Điểm thưởng (Hội viên)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -104,6 +107,7 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
         tblKHTheoDon.setFocusable(false);
         tblKHTheoDon.setGridColor(new java.awt.Color(0, 0, 0));
         tblKHTheoDon.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tblKHTheoDon.setName(""); // NOI18N
         tblKHTheoDon.setRowHeight(25);
         tblKHTheoDon.setSelectionForeground(new java.awt.Color(0, 0, 0));
         tblKHTheoDon.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -122,6 +126,7 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
             tblKHTheoDon.getColumnModel().getColumn(1).setResizable(false);
             tblKHTheoDon.getColumnModel().getColumn(2).setResizable(false);
             tblKHTheoDon.getColumnModel().getColumn(3).setResizable(false);
+            tblKHTheoDon.getColumnModel().getColumn(4).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -225,15 +230,40 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
 
     private void tblKHTheoDonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKHTheoDonMousePressed
         // TODO add your handling code here:
+
+        String[] column = {"Mã HĐ", "Ngày lập", "Tên SP", "Size", "Extra", "Số lượng"};
+        DefaultTableModel table = new DefaultTableModel(column, ABORT);
+        JScrollPane scp = new JScrollPane();
+        JTable tbl = new JTable(table); 
+        scp.setViewportView(tbl);
+        scp.setPreferredSize(new Dimension(580, 550)); 
+        JPanel pnl = new JPanel(new BorderLayout(5, 5));
         
-        
-//        ResultSet rs = JDBCHelper.executeQuery("SELECT HoaDon.maHD, ngayHD, tenSp, maSize, ten, soLuong FROM dbo.KhachHang"
-//                + " JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh"
-//                + " JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD"
-//                + " JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp"
-//                + " JOIN dbo.Extra ON Extra.id = CTHoaDon.extra"
-//                + " WHERE HoaDon.maKH = ?", maKH);
-        
+        pnl.add(scp, BorderLayout.NORTH);
+        JDialog dl = new JDialog(SwingUtilities.windowForComponent(this));
+//        dl.setModal(true); 
+        dl.setSize(new Dimension(600, 600));
+        dl.add(pnl);
+        dl.setVisible(true);
+        dl.setLocationRelativeTo(null);
+        int index = tblKHTheoDon.getSelectedRow();
+        String maKH = (String) tblKHTheoDon.getValueAt(index, 1);
+        ResultSet rs = JDBCHelper.executeQuery("SELECT HoaDon.maHD, ngayHD, tenSp, maSize, ten, soLuong FROM dbo.KhachHang"
+                + " JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh"
+                + " JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD"
+                + " JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp"
+                + " JOIN dbo.Extra ON Extra.id = CTHoaDon.extra"
+                + " WHERE HoaDon.maKH = ?", maKH);
+        DefaultTableModel model = (DefaultTableModel) tbl.getModel();
+        model.setRowCount(0);
+        try {
+            while (rs.next()) {
+                Object[] row = new Object[]{rs.getString(1), rs.getDate(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)};
+                model.addRow(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }//GEN-LAST:event_tblKHTheoDonMousePressed
 
