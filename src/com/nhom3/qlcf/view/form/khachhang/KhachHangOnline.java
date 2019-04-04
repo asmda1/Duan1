@@ -5,10 +5,17 @@
  */
 package com.nhom3.qlcf.view.form.khachhang;
 
+import com.nhom3.qlcf.dao.KhachHangDAO;
 import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.model.KhachHang;
+import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnBack_button;
+import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnDangKyForm;
+import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnGiaoDien;
+import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.lblBack;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.ResultSet;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class KhachHangOnline extends javax.swing.JPanel {
 
     DefaultTableModel model = null;
+    List<KhachHang> listKH;
 
     /**
      * Creates new form FormKhachHangOnline
@@ -35,16 +43,17 @@ public class KhachHangOnline extends javax.swing.JPanel {
     }
 
     public void showKHon() {
-        ResultSet rs = JDBCHelper.executeQuery("SELECT * FROM dbo.KhachHang WHERE maKh NOT IN (SELECT makh FROM dbo.KhachHang WHERE maKh='KH000') AND trangThai =0");
+
         model = (DefaultTableModel) tblKhachHangOn.getModel();
+        listKH = new KhachHangDAO().select("SELECT * FROM dbo.KhachHang WHERE maKh NOT IN (SELECT makh FROM dbo.KhachHang WHERE maKh='KH000') AND trangThai =0");
         model.setRowCount(0);
         try {
-            while (rs.next()) {
-              Object[] row = new Object[]{
-                  rs.getString("maKh"),rs.getString("tenkh"),rs.getString("diachi"),rs.getString("dienthoai")
-                  
-              };
-              model.addRow(row);
+            for (KhachHang kh : listKH) {
+
+                Object[] row = new Object[]{
+                    kh.getMakh(), kh.getTenKh(), kh.getEmail(), kh.getDiaChi(), kh.getDienThoai()
+                };
+                model.addRow(row);
             }
         } catch (Exception e) {
         }
@@ -70,13 +79,13 @@ public class KhachHangOnline extends javax.swing.JPanel {
         tblKhachHangOn.setForeground(new java.awt.Color(51, 51, 51));
         tblKhachHangOn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã Khách Hàng", "Tên", "Địa Chỉ Ship", "Điện Thoại"
+                "Mã Khách Hàng", "Tên", "Email", "Địa Chỉ Ship", "Điện Thoại"
             }
         ));
         tblKhachHangOn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -89,6 +98,11 @@ public class KhachHangOnline extends javax.swing.JPanel {
         tblKhachHangOn.setShowVerticalLines(false);
         tblKhachHangOn.setSurrendersFocusOnKeystroke(true);
         tblKhachHangOn.getTableHeader().setReorderingAllowed(false);
+        tblKhachHangOn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblKhachHangOnMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblKhachHangOn);
 
         jpnKHonline.add(jScrollPane2, "card2");
@@ -115,10 +129,24 @@ public class KhachHangOnline extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblKhachHangOnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangOnMousePressed
+        // TODO add your handling code here:
+        int index = tblKhachHangOn.getSelectedRow();
+        listKH = new KhachHangDAO().select("SELECT * FROM dbo.KhachHang WHERE maKh NOT IN (SELECT makh FROM dbo.KhachHang WHERE maKh='KH000') AND trangThai =0");
+        String sdt = listKH.get(index).getDienThoai();
+        jpnDangKyForm.removeAll();
+        jpnDangKyForm.add(new DangKyHoiVien(sdt));
+        jpnDangKyForm.repaint();
+        jpnDangKyForm.revalidate();
+        jpnDangKyForm.show();
+        jpnGiaoDien.hide();
+      jpnBack_button.show();
+    }//GEN-LAST:event_tblKhachHangOnMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpnKHonline;
-    private javax.swing.JTable tblKhachHangOn;
+    protected static javax.swing.JTable tblKhachHangOn;
     // End of variables declaration//GEN-END:variables
 }

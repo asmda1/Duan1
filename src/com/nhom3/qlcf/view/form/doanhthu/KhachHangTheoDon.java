@@ -40,9 +40,9 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
     private void fillToTable(String tenKH) {
         List<KhachHang> listKH;
         if (tenKH.isEmpty()) {
-            listKH = new KhachHangDAO().select("Select DISTINCT dbo.KhachHang.* FROM dbo.KhachHang JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh");
+            listKH = new KhachHangDAO().select("Select DISTINCT dbo.KhachHang.* FROM dbo.KhachHang JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh where  KhachHang.maKh  NOT IN (SELECT makh FROM dbo.KhachHang WHERE maKh='KH000')");
         } else {
-            listKH = new KhachHangDAO().select("Select DISTINCT dbo.KhachHang.* FROM dbo.KhachHang JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh where tenKh like N'%" + tenKH + "%'");
+            listKH = new KhachHangDAO().select("Select DISTINCT dbo.KhachHang.* FROM dbo.KhachHang JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh where tenKh like N'%" + tenKH + "%' and KhachHang.maKh  NOT IN (SELECT makh FROM dbo.KhachHang WHERE maKh='KH000')");
         }
 
         DefaultTableModel model = (DefaultTableModel) tblKHTheoDon.getModel();
@@ -225,15 +225,13 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
 
     private void tblKHTheoDonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKHTheoDonMousePressed
         // TODO add your handling code here:
-        
-        
+
 //        ResultSet rs = JDBCHelper.executeQuery("SELECT HoaDon.maHD, ngayHD, tenSp, maSize, ten, soLuong FROM dbo.KhachHang"
 //                + " JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh"
 //                + " JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD"
 //                + " JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp"
 //                + " JOIN dbo.Extra ON Extra.id = CTHoaDon.extra"
 //                + " WHERE HoaDon.maKH = ?", maKH);
-        
 
     }//GEN-LAST:event_tblKHTheoDonMousePressed
 

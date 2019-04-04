@@ -39,7 +39,7 @@ public class KhachHangDAO implements DAO<KhachHang> {
 
     @Override
     public List<KhachHang> selectAll() {
-        String sql = "Select * from dbo.KhachHang";
+        String sql = "SELECT * FROM dbo.KhachHang WHERE maKh NOT IN (SELECT makh FROM dbo.KhachHang WHERE maKh='KH000')";
         return select(sql);
     }
 

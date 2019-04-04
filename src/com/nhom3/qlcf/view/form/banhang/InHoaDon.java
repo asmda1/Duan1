@@ -57,7 +57,7 @@ public class InHoaDon extends javax.swing.JDialog {
         fillChiTietSP("HD002");
     }
 
-    public InHoaDon(java.awt.Frame parent, boolean modal, String hd, String thanhTien, String tenkh) {
+    public InHoaDon(java.awt.Frame parent, boolean modal, String hd, String thanhTien, String tenkh, String sdt) {
         super(parent, modal);
         initComponents();
         this.hdString = hd;
@@ -74,6 +74,11 @@ public class InHoaDon extends javax.swing.JDialog {
         lblmahd.setText(hdString);
         lblten.setText(tenkh);
         lblngay.setText(String.valueOf(date));
+        if (sdt == null) {
+            lblsdt.setText("");
+        } else {
+            lblsdt.setText(sdt);
+        }
 
     }
 
@@ -96,7 +101,7 @@ public class InHoaDon extends javax.swing.JDialog {
                 cthd.setSizeSP(sz);
                 cthd.setMaSanPham(sp);
                 listCTHD.add(cthd);
-                Object[] row = new Object[]{rs.getString(1), rs.getDouble(2), rs.getString(3), rs.getInt(4),};
+                Object[] row = new Object[]{rs.getString(1), chuyentien.format(rs.getDouble(2)) + " VND", rs.getString(3), rs.getInt(4),};
                 model.addRow(row);
             }
 
@@ -132,6 +137,7 @@ public class InHoaDon extends javax.swing.JDialog {
         lblmahd = new javax.swing.JLabel();
         lblten = new javax.swing.JLabel();
         lblngay = new javax.swing.JLabel();
+        lblsdt = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -259,10 +265,13 @@ public class InHoaDon extends javax.swing.JDialog {
         jPanel2.add(lblmahd, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 66, 136, -1));
 
         lblten.setText("..");
-        jPanel2.add(lblten, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 80, 200, 20));
+        jPanel2.add(lblten, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 200, 20));
 
         lblngay.setText("...");
         jPanel2.add(lblngay, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 140, -1));
+
+        lblsdt.setText("..");
+        jPanel2.add(lblsdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 150, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -286,7 +295,19 @@ public class InHoaDon extends javax.swing.JDialog {
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
         // TODO add your handling code here:
-        dispose();
+        String opObjects[] = {"Đồng Ý", "Trở Lại"};
+
+        if (0 == JOptionPane.showOptionDialog(null,
+                "Bạn có chắc chắn không in hóa đơn?",
+                "Cảnh Báo!",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                opObjects,
+                opObjects[0])) {
+            dispose();
+        }
+
     }//GEN-LAST:event_jLabel4MousePressed
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
@@ -339,6 +360,8 @@ public class InHoaDon extends javax.swing.JDialog {
                     FontFactory.getFont(FontFactory.HELVETICA, 8, Font.BOLD));
             Paragraph Ten = new Paragraph("Ten Khach Hang: " + lblten.getText(),
                     FontFactory.getFont(FontFactory.HELVETICA, 8, Font.BOLD));
+            Paragraph SDTKH = new Paragraph("Dien Thoai: " + lblsdt.getText(),
+                    FontFactory.getFont(FontFactory.HELVETICA, 8, Font.BOLD));
             Paragraph ngay = new Paragraph("Ngay Tao: " + lblngay.getText(),
                     FontFactory.getFont(FontFactory.HELVETICA, 7, Font.ITALIC));
             ngay.setAlignment(Element.ALIGN_RIGHT);
@@ -352,12 +375,15 @@ public class InHoaDon extends javax.swing.JDialog {
             document.add(SDT);
             document.add(maHD);
             document.add(Ten);
+            document.add(SDTKH);
             document.add(ngay);
             document.add(tieudeHD);
             document.add(table);
             //Thanh Tiền
             Paragraph title1 = new Paragraph("Thanh Tien: " + lblThanhTien.getText(),
-                    FontFactory.getFont(FontFactory.HELVETICA, 13, Font.BOLD, new CMYKColor(0, 255, 255, 17)));
+                    FontFactory.getFont(FontFactory.HELVETICA, 13, Font.BOLD));
+            title1.setAlignment(Element.ALIGN_RIGHT);
+            title1.setIndentationRight(45);
             Chapter chapter1 = new Chapter(title1, 1);
             document.add(title1);
             document.add(chapter1);
@@ -449,6 +475,7 @@ public class InHoaDon extends javax.swing.JDialog {
     private javax.swing.JLabel lblThanhTien;
     private javax.swing.JLabel lblmahd;
     private javax.swing.JLabel lblngay;
+    private javax.swing.JLabel lblsdt;
     private javax.swing.JLabel lblten;
     private javax.swing.JTable tblInHoaDon;
     // End of variables declaration//GEN-END:variables

@@ -17,7 +17,7 @@ public class jdialogThemKH extends javax.swing.JDialog {
     /**
      * Creates new form jdialogThemKH
      */
-    public jdialogThemKH(java.awt.Frame parent, boolean modal) {
+    public jdialogThemKH(java.awt.Frame parent, boolean modal,String sdt) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -27,8 +27,23 @@ public class jdialogThemKH extends javax.swing.JDialog {
         jplthemKH.add(new ThemKH());
         jplthemKH.repaint();
         jplthemKH.revalidate();
+        ThemKH.txtDienThoai.setText(sdt);
+        ThemKH.txtDienThoai.setForeground(Color.BLUE);
+        
     }
-
+      public jdialogThemKH(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        getContentPane().setBackground(new Color(0, 0, 0, 0));
+        setBackground(new Color(0, 0, 0, 0));
+        jplthemKH.removeAll();
+        jplthemKH.add(new ThemKH());
+        jplthemKH.repaint();
+        jplthemKH.revalidate();
+  
+    }
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
