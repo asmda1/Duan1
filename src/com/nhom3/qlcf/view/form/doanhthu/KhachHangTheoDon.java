@@ -50,7 +50,7 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) tblKHTheoDon.getModel();
         model.setRowCount(0);
-        listKH.stream().map((khachHang) -> new Object[]{khachHang.getTenKh(), khachHang.getMakh(), khachHang.getDienThoai(), khachHang.getDiaChi(), khachHang.getDiemThuong()}).forEachOrdered((row) -> {
+        listKH.stream().map((khachHang) -> new Object[]{khachHang.getTenKh(), khachHang.getMakh(), khachHang.getDienThoai(), khachHang.getDiaChi(), khachHang.isTrangThai() ? "Hội viên" : "Khách online", khachHang.getDiemThuong()}).forEachOrdered((row) -> {
             model.addRow(row);
         });
     }
@@ -86,17 +86,17 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
         tblKHTheoDon.setForeground(new java.awt.Color(51, 51, 51));
         tblKHTheoDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Anh/Chị", "Mã số", "Điện thoại", "Địa chỉ", "Điểm thưởng (Hội viên)"
+                "Anh/Chị", "Mã số", "Điện thoại", "Địa chỉ", "Loại khách", "Điểm thưởng (Hội viên)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -127,6 +127,7 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
             tblKHTheoDon.getColumnModel().getColumn(2).setResizable(false);
             tblKHTheoDon.getColumnModel().getColumn(3).setResizable(false);
             tblKHTheoDon.getColumnModel().getColumn(4).setResizable(false);
+            tblKHTheoDon.getColumnModel().getColumn(5).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);

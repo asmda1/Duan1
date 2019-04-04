@@ -11,18 +11,19 @@ package com.nhom3.qlcf.model;
  */
 public class KhachHang {
   private  String makh,tenKh,email,dienThoai,diaChi, matKhau;
+  private boolean trangThai;
   private  int diemThuong;
 
-    public KhachHang(String makh, String tenKh, String email, String dienThoai, String diaChi, String matKhau, int diemThuong) {
+    public KhachHang(String makh, String tenKh, String email, String dienThoai, String diaChi, String matKhau, boolean trangThai, int diemThuong) {
         this.makh = makh;
         this.tenKh = tenKh;
         this.email = email;
         this.dienThoai = dienThoai;
         this.diaChi = diaChi;
         this.matKhau = matKhau;
+        this.trangThai = trangThai;
         this.diemThuong = diemThuong;
     }
-
 
     public KhachHang() {
     }
@@ -81,6 +82,14 @@ public class KhachHang {
 
     public void setMatKhau(String matKhau) {
         this.matKhau = matKhau;
+    }
+
+    public boolean isTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(boolean trangThai) {
+        this.trangThai = trangThai;
     }
     
     

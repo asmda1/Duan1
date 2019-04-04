@@ -44,7 +44,7 @@ public class DanhSachHoiVien extends javax.swing.JPanel {
     }
 
     public void showKHHV() {
-        ResultSet rs = JDBCHelper.executeQuery("SELECT * FROM dbo.KhachHang WHERE maKh !='KH000'");
+        ResultSet rs = JDBCHelper.executeQuery("SELECT * FROM dbo.KhachHang WHERE trangThai = 1 and maKh !='KH000'");
         model = (DefaultTableModel) tblKhHV.getModel();
         model.setRowCount(0);
         try {

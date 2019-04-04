@@ -6,15 +6,12 @@
 package com.nhom3.qlcf.view.form.khachhang;
 
 import com.nhom3.qlcf.dao.KhachHangDAO;
-import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.model.KhachHang;
 import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnBack_button;
 import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnDangKyForm;
 import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnGiaoDien;
-import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.lblBack;
 import java.awt.Color;
 import java.awt.Font;
-import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -45,17 +42,16 @@ public class KhachHangOnline extends javax.swing.JPanel {
     public void showKHon() {
 
         model = (DefaultTableModel) tblKhachHangOn.getModel();
-        listKH = new KhachHangDAO().select("SELECT * FROM dbo.KhachHang WHERE maKh != 'KH000'");
+        listKH = new KhachHangDAO().select("SELECT * FROM dbo.KhachHang WHERE trangThai = 0 and  maKh != 'KH000'");
         model.setRowCount(0);
         try {
-            for (KhachHang kh : listKH) {
-
-                Object[] row = new Object[]{
-                    kh.getMakh(), kh.getTenKh(), kh.getEmail(), kh.getDiaChi(), kh.getDienThoai()
-                };
+            listKH.stream().map((kh) -> new Object[]{
+                kh.getMakh(), kh.getTenKh(), kh.getEmail(), kh.getDiaChi(), kh.getDienThoai()
+            }).forEachOrdered((row) -> {
                 model.addRow(row);
-            }
+            });
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -85,9 +81,17 @@ public class KhachHangOnline extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Mã Khách Hàng", "Tên", "Email", "Địa Chỉ Ship", "Điện Thoại"
+                "Mã Khách Hàng", "Tên", "Email", "Địa Chỉ", "Điện Thoại"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblKhachHangOn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblKhachHangOn.setFocusable(false);
         tblKhachHangOn.setGridColor(new java.awt.Color(0, 0, 0));
@@ -104,6 +108,13 @@ public class KhachHangOnline extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(tblKhachHangOn);
+        if (tblKhachHangOn.getColumnModel().getColumnCount() > 0) {
+            tblKhachHangOn.getColumnModel().getColumn(0).setResizable(false);
+            tblKhachHangOn.getColumnModel().getColumn(1).setResizable(false);
+            tblKhachHangOn.getColumnModel().getColumn(2).setResizable(false);
+            tblKhachHangOn.getColumnModel().getColumn(3).setResizable(false);
+            tblKhachHangOn.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jpnKHonline.add(jScrollPane2, "card2");
 
@@ -132,7 +143,7 @@ public class KhachHangOnline extends javax.swing.JPanel {
     private void tblKhachHangOnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangOnMousePressed
         // TODO add your handling code here:
         int index = tblKhachHangOn.getSelectedRow();
-        listKH = new KhachHangDAO().select("SELECT * FROM dbo.KhachHang WHERE maKh !='KH000'");
+        listKH = new KhachHangDAO().select("SELECT * FROM dbo.KhachHang WHERE trangThai=0 and maKh !='KH000'");
         String sdt = listKH.get(index).getDienThoai();
         jpnDangKyForm.removeAll();
         jpnDangKyForm.add(new DangKyHoiVien(sdt));
@@ -140,7 +151,7 @@ public class KhachHangOnline extends javax.swing.JPanel {
         jpnDangKyForm.revalidate();
         jpnDangKyForm.show();
         jpnGiaoDien.hide();
-      jpnBack_button.show();
+        jpnBack_button.show();
     }//GEN-LAST:event_tblKhachHangOnMousePressed
 
 
