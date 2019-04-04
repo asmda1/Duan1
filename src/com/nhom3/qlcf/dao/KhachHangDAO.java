@@ -21,8 +21,8 @@ public class KhachHangDAO implements DAO<KhachHang> {
 
     @Override
     public boolean insert(KhachHang t) {
-        String sql = "Insert dbo.KhachHang values (?,?,?,?,?,?,?,?)";
-        return JDBCHelper.executeUpdate(sql, t.getMakh(), t.getTenKh(), t.getMatKhau(), t.getEmail(), t.getDienThoai(), t.getDiaChi(), t.isTrangThai(), t.getDiemThuong());
+        String sql = "Insert dbo.KhachHang values (?,?,?,?,?,?,?)";
+        return JDBCHelper.executeUpdate(sql, t.getMakh(), t.getTenKh(), t.getMatKhau(), t.getEmail(), t.getDienThoai(), t.getDiaChi(), t.getDiemThuong());
     }
 
     @Override
@@ -33,13 +33,13 @@ public class KhachHangDAO implements DAO<KhachHang> {
 
     @Override
     public boolean update(KhachHang t) {
-        String sql = "Update dbo.KhachHang set tenKh=?, matKhau=?, email=?, dienThoai=?, diaChi=?, trangThai=?, diemThuong=? where maKh=?";
-        return JDBCHelper.executeUpdate(sql, t.getTenKh(), t.getMatKhau(), t.getEmail(), t.getDienThoai(), t.getDiaChi(), t.isTrangThai(), t.getDiemThuong(), t.getMakh());
+        String sql = "Update dbo.KhachHang set tenKh=?, matKhau=?, email=?, dienThoai=?, diaChi=?, diemThuong=? where maKh=?";
+        return JDBCHelper.executeUpdate(sql, t.getTenKh(), t.getMatKhau(), t.getEmail(), t.getDienThoai(), t.getDiaChi(), t.getDiemThuong(), t.getMakh());
     }
 
     @Override
     public List<KhachHang> selectAll() {
-        String sql = "Select * from dbo.KhachHang";
+        String sql = "SELECT * FROM dbo.KhachHang";
         return select(sql);
     }
 
@@ -55,7 +55,7 @@ public class KhachHangDAO implements DAO<KhachHang> {
                     list.add(model);
                 }
             } finally {
-                rs.getStatement().getConnection().close();
+//                rs.getStatement().getConnection().close();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -73,8 +73,7 @@ public class KhachHangDAO implements DAO<KhachHang> {
             model.setEmail(rs.getString(4));
             model.setDienThoai(rs.getString(5));
             model.setDiaChi(rs.getString(6));
-            model.setTrangThai(rs.getBoolean(7));
-            model.setDiemThuong(rs.getInt(8));
+            model.setDiemThuong(rs.getInt(7));
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }

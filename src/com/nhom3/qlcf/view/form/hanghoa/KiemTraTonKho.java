@@ -5,9 +5,13 @@
  */
 package com.nhom3.qlcf.view.form.hanghoa;
 
-import com.nhom3.qlcf.view.form.login.Login;
+import com.nhom3.qlcf.dao.HangHoaDAO;
+import com.nhom3.qlcf.helper.XuLy;
+import com.nhom3.qlcf.model.HangHoa;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,19 +24,34 @@ public class KiemTraTonKho extends javax.swing.JPanel {
      */
     public KiemTraTonKho() {
         initComponents();
-        tblTonKho.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
-        tblTonKho.setFont(new Font("Tohoma", Font.PLAIN, 12));
-        tblTonKho.getTableHeader().setOpaque(false);
-        tblTonKho.getTableHeader().setBackground(new Color(0, 0, 0));
-        tblTonKho.getTableHeader().setForeground(new Color(255, 255, 255));
-        tblTonKho.setRowHeight(25);
-          tblChiTietTonKho.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
-        tblChiTietTonKho.setFont(new Font("Tohoma", Font.PLAIN, 12));
-        tblChiTietTonKho.getTableHeader().setOpaque(false);
-        tblChiTietTonKho.getTableHeader().setBackground(new Color(0, 0, 0));
-        tblChiTietTonKho.getTableHeader().setForeground(new Color(255, 255, 255));
-        tblChiTietTonKho.setRowHeight(25);
+        tblKhoHang.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
+        tblKhoHang.setFont(new Font("Tohoma", Font.PLAIN, 12));
+        tblKhoHang.getTableHeader().setOpaque(false);
+        tblKhoHang.getTableHeader().setBackground(new Color(0, 0, 0));
+        tblKhoHang.getTableHeader().setForeground(new Color(255, 255, 255));
+        tblKhoHang.setRowHeight(25);
+        tblKhoHangTheoNgay.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
+        tblKhoHangTheoNgay.setFont(new Font("Tohoma", Font.PLAIN, 12));
+        tblKhoHangTheoNgay.getTableHeader().setOpaque(false);
+        tblKhoHangTheoNgay.getTableHeader().setBackground(new Color(0, 0, 0));
+        tblKhoHangTheoNgay.getTableHeader().setForeground(new Color(255, 255, 255));
+        tblKhoHangTheoNgay.setRowHeight(25);
+        XuLy.placeHolder(txtSearch, "Tìm kiếm mặt hàng");
 
+    }
+
+    private void fillToTable(String tenHH) {
+        List<HangHoa> list;
+        if (tenHH.isEmpty()){
+            list = new HangHoaDAO().selectAll();
+        } else {
+            list = new HangHoaDAO().select("Select * from dbo.HangHoa where tenHangHoa", tenHH);
+        }
+        DefaultTableModel table1 = (DefaultTableModel) tblKhoHang.getModel();
+        DefaultTableModel table2 = (DefaultTableModel) tblKhoHangTheoNgay.getModel();
+        
+        
+        
     }
 
     /**
@@ -45,18 +64,16 @@ public class KiemTraTonKho extends javax.swing.JPanel {
     private void initComponents() {
 
         jpnNenTimKiem = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        txtSearch = new javax.swing.JTextField();
+        lblSearch = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
         jpnButton_xemTable = new javax.swing.JPanel();
-        lblXemTheoNgay_button = new javax.swing.JLabel();
+        lblXemTheoNgay = new javax.swing.JLabel();
         jpnNenTable = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblTonKho = new javax.swing.JTable();
+        tblKhoHang = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblChiTietTonKho = new javax.swing.JTable();
+        tblKhoHangTheoNgay = new javax.swing.JTable();
         jpnButton_xemTable1 = new javax.swing.JPanel();
         lblKiemKe = new javax.swing.JLabel();
 
@@ -65,42 +82,34 @@ public class KiemTraTonKho extends javax.swing.JPanel {
 
         jpnNenTimKiem.setBackground(new java.awt.Color(51, 51, 255));
         jpnNenTimKiem.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpnNenTimKiem.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 143, 29));
 
-        jTextField1.setText("Tìm kiếm mặt hàng");
-        jpnNenTimKiem.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 143, 29));
+        lblSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblSearch.setForeground(new java.awt.Color(255, 255, 255));
+        lblSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSearch.setText("Tìm Kiếm");
+        lblSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jpnNenTimKiem.add(lblSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 0, 69, 29));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Tìm Kiếm");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpnNenTimKiem.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 0, 69, 29));
-
-        add(jpnNenTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        add(jpnNenTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Giá Trị Kho Hàng");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 20, 576, -1));
-
-        jLabel2.setText("Xem Theo Nhóm:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 62, -1, -1));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Táo", "Bia", "Cam", "Đào", "Bơ" }));
-        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 55, 144, 28));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 576, -1));
 
         jpnButton_xemTable.setBackground(new java.awt.Color(255, 255, 255));
         jpnButton_xemTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
 
-        lblXemTheoNgay_button.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblXemTheoNgay_button.setForeground(new java.awt.Color(0, 0, 255));
-        lblXemTheoNgay_button.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblXemTheoNgay_button.setText("Xem Theo Ngày");
-        lblXemTheoNgay_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblXemTheoNgay_button.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblXemTheoNgay.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblXemTheoNgay.setForeground(new java.awt.Color(0, 0, 255));
+        lblXemTheoNgay.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblXemTheoNgay.setText("Xem Theo Ngày");
+        lblXemTheoNgay.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblXemTheoNgay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblXemTheoNgay_buttonMousePressed(evt);
+                lblXemTheoNgayMousePressed(evt);
             }
         });
 
@@ -108,11 +117,11 @@ public class KiemTraTonKho extends javax.swing.JPanel {
         jpnButton_xemTable.setLayout(jpnButton_xemTableLayout);
         jpnButton_xemTableLayout.setHorizontalGroup(
             jpnButton_xemTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblXemTheoNgay_button, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+            .addComponent(lblXemTheoNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
         );
         jpnButton_xemTableLayout.setVerticalGroup(
             jpnButton_xemTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblXemTheoNgay_button, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+            .addComponent(lblXemTheoNgay, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
         );
 
         add(jpnButton_xemTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 55, -1, -1));
@@ -121,41 +130,52 @@ public class KiemTraTonKho extends javax.swing.JPanel {
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        tblTonKho.setForeground(new java.awt.Color(51, 51, 51));
-        tblTonKho.setModel(new javax.swing.table.DefaultTableModel(
+        tblKhoHang.setForeground(new java.awt.Color(51, 51, 51));
+        tblKhoHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Loại", "Tên Loại Hàng", "Tên Mặt Hàng", "Nhà Cung Cấp", "Số Lượng Tồn", "Giá Vốn", "Tổng Tiền Mặt Hàng"
+                "Tên Mặt Hàng", "Nhà Cung Cấp", "Đơn vị tính", "Số Lượng Tồn", "Giá Vốn", "Tổng Tiền Mặt Hàng"
             }
-        ));
-        tblTonKho.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tblTonKho.setFocusable(false);
-        tblTonKho.setGridColor(new java.awt.Color(0, 0, 0));
-        tblTonKho.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        tblTonKho.setRowHeight(25);
-        tblTonKho.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        tblTonKho.setShowHorizontalLines(false);
-        tblTonKho.setShowVerticalLines(false);
-        tblTonKho.setSurrendersFocusOnKeystroke(true);
-        tblTonKho.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(tblTonKho);
-        if (tblTonKho.getColumnModel().getColumnCount() > 0) {
-            tblTonKho.getColumnModel().getColumn(1).setResizable(false);
-            tblTonKho.getColumnModel().getColumn(1).setHeaderValue("Tên Loại Hàng");
-            tblTonKho.getColumnModel().getColumn(6).setHeaderValue("Tổng Tiền Mặt Hàng");
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblKhoHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblKhoHang.setFocusable(false);
+        tblKhoHang.setGridColor(new java.awt.Color(0, 0, 0));
+        tblKhoHang.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tblKhoHang.setRowHeight(25);
+        tblKhoHang.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tblKhoHang.setShowHorizontalLines(false);
+        tblKhoHang.setShowVerticalLines(false);
+        tblKhoHang.setSurrendersFocusOnKeystroke(true);
+        tblKhoHang.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tblKhoHang);
+        if (tblKhoHang.getColumnModel().getColumnCount() > 0) {
+            tblKhoHang.getColumnModel().getColumn(0).setResizable(false);
+            tblKhoHang.getColumnModel().getColumn(1).setResizable(false);
+            tblKhoHang.getColumnModel().getColumn(2).setResizable(false);
+            tblKhoHang.getColumnModel().getColumn(3).setResizable(false);
+            tblKhoHang.getColumnModel().getColumn(4).setResizable(false);
+            tblKhoHang.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jpnNenTable.add(jScrollPane2, "card2");
 
         jScrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        tblChiTietTonKho.setForeground(new java.awt.Color(51, 51, 51));
-        tblChiTietTonKho.setModel(new javax.swing.table.DefaultTableModel(
+        tblKhoHangTheoNgay.setForeground(new java.awt.Color(51, 51, 51));
+        tblKhoHangTheoNgay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -166,17 +186,17 @@ public class KiemTraTonKho extends javax.swing.JPanel {
                 "Mã Hàng Hóa", "Mã Phiếu", "Tên Mặt Hàng", "Nhà Cung Cấp", "Số Lượng Tồn", "Giá Vốn", "Ngày Nhập"
             }
         ));
-        tblChiTietTonKho.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tblChiTietTonKho.setFocusable(false);
-        tblChiTietTonKho.setGridColor(new java.awt.Color(0, 0, 0));
-        tblChiTietTonKho.setIntercellSpacing(new java.awt.Dimension(0, 0));
-        tblChiTietTonKho.setRowHeight(25);
-        tblChiTietTonKho.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        tblChiTietTonKho.setShowHorizontalLines(false);
-        tblChiTietTonKho.setShowVerticalLines(false);
-        tblChiTietTonKho.setSurrendersFocusOnKeystroke(true);
-        tblChiTietTonKho.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(tblChiTietTonKho);
+        tblKhoHangTheoNgay.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tblKhoHangTheoNgay.setFocusable(false);
+        tblKhoHangTheoNgay.setGridColor(new java.awt.Color(0, 0, 0));
+        tblKhoHangTheoNgay.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tblKhoHangTheoNgay.setRowHeight(25);
+        tblKhoHangTheoNgay.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tblKhoHangTheoNgay.setShowHorizontalLines(false);
+        tblKhoHangTheoNgay.setShowVerticalLines(false);
+        tblKhoHangTheoNgay.setSurrendersFocusOnKeystroke(true);
+        tblKhoHangTheoNgay.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(tblKhoHangTheoNgay);
 
         jpnNenTable.add(jScrollPane3, "card2");
 
@@ -213,26 +233,26 @@ public class KiemTraTonKho extends javax.swing.JPanel {
         add(jpnButton_xemTable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 55, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblXemTheoNgay_buttonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblXemTheoNgay_buttonMousePressed
+    private void lblXemTheoNgayMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblXemTheoNgayMousePressed
         // TODO add your handling code here:
-        if (lblXemTheoNgay_button.getText().trim().equals("Xem Theo Ngày")) {
+        if (lblXemTheoNgay.getText().trim().equals("Xem Theo Ngày")) {
             jpnNenTable.removeAll();
             jpnNenTable.add(jScrollPane3);
             jpnNenTable.repaint();
             jpnNenTable.revalidate();
             jScrollPane2.hide();
-            lblXemTheoNgay_button.setText("Xem Theo Loại");
+            lblXemTheoNgay.setText("Xem Theo Loại");
         } else {
             jpnNenTable.removeAll();
             jpnNenTable.add(jScrollPane2);
             jpnNenTable.repaint();
             jpnNenTable.revalidate();
             jScrollPane3.hide();
-            lblXemTheoNgay_button.setText("Xem Theo Ngày");
+            lblXemTheoNgay.setText("Xem Theo Ngày");
         }
 
 
-    }//GEN-LAST:event_lblXemTheoNgay_buttonMousePressed
+    }//GEN-LAST:event_lblXemTheoNgayMousePressed
 
     private void lblKiemKeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblKiemKeMousePressed
         // TODO add your handling code here:
@@ -240,28 +260,26 @@ public class KiemTraTonKho extends javax.swing.JPanel {
 
     private void lblKiemKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblKiemKeMouseClicked
         // TODO add your handling code here:
-       hide();
-       FormKiemTraHangHoa.kiemtrahanghoa.jpnNen.hide();
-       FormKiemTraHangHoa.kiemtrahanghoa.jpnNenKiemKe.show();
-        
+        hide();
+        FormKiemTraHangHoa.kiemtrahanghoa.jpnNen.hide();
+        FormKiemTraHangHoa.kiemtrahanghoa.jpnNenKiemKe.show();
+
     }//GEN-LAST:event_lblKiemKeMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel jpnButton_xemTable;
     private javax.swing.JPanel jpnButton_xemTable1;
     private javax.swing.JPanel jpnNenTable;
     private javax.swing.JPanel jpnNenTimKiem;
     private javax.swing.JLabel lblKiemKe;
-    private javax.swing.JLabel lblXemTheoNgay_button;
-    private javax.swing.JTable tblChiTietTonKho;
-    private javax.swing.JTable tblTonKho;
+    private javax.swing.JLabel lblSearch;
+    private javax.swing.JLabel lblXemTheoNgay;
+    private javax.swing.JTable tblKhoHang;
+    private javax.swing.JTable tblKhoHangTheoNgay;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

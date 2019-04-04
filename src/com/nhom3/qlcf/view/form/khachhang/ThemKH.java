@@ -30,6 +30,15 @@ public class ThemKH extends javax.swing.JPanel {
         txtTenKH.setName(AutogetKH());
         txtTenKH.setToolTipText(AutogetKH());
     }
+      public ThemKH(String sdt) {
+        initComponents();
+        mousefouse();
+        txtTenKH.setName(AutogetKH());
+        txtTenKH.setToolTipText(AutogetKH());
+        txtDienThoai.setText(sdt);
+        txtDienThoai.setForeground(Color.blue);
+        
+    }
 
     public void mousefouse() {
         txtTenKH.setText("Tên Khách Hàng");
@@ -75,33 +84,44 @@ public class ThemKH extends javax.swing.JPanel {
     }
 
     public boolean check() {
-        if (txtTenKH.getText().trim().equals("") || txtTenKH.getText().trim().equals("Tên Khách Hàng")
-                || txtEmail.getText().trim().equals("Email vd: abc@gmail.com") || txtEmail.getText().trim().equals("")
-                || txtDienThoai.getText().trim().equals("Số Điện Thoại [10-13]") || txtDienThoai.getText().trim().equals("")
-                || txtDiemThuong.getText().trim().equals("Điểm tối thiểu 200 - tối đa 5000") || txtDiemThuong.getText().trim().equals("")) {
-            lbldiemthuong.setText("Điểm thưởng tối thiểu 200");
-            lbldienthoai.setText("SĐT là bắt buột");
-            lblemail.setText("Email là bắt buột");
+        String emails = "[\\w\\.]+@[\\w+]+\\.+[\\.\\w+]+";
+        if (txtTenKH.getText().trim().equals("Tên Khách Hàng") || txtTenKH.getText().trim().equals("")) {
+            lbldiemthuong.setText("");
+            lbldienthoai.setText("");
+            lblemail.setText("");
             lbltenkh.setText("Tên Khách Hàng là bắt buột");
+            lbltenkh.setForeground(Color.red);
             return false;
         } else {
-            if (txtTenKH.getText().trim().equals("")) {
+            if (txtEmail.getText().trim().equals("Email vd: abc@gmail.com") || txtEmail.getText().trim().equals("")) {
                 lbldiemthuong.setText("");
                 lbldienthoai.setText("");
-                lblemail.setText("");
-                lbltenkh.setText("Tên Khách Hàng là bắt buột");
+                lblemail.setText("Email là bắt buột");
+                lbltenkh.setText("");
                 return false;
             } else {
-                if (txtEmail.getText().trim().equals("Email vd: abc@gmail.com") || txtEmail.getText().trim().equals("")) {
+                if (!txtEmail.getText().matches(emails)) {
                     lbldiemthuong.setText("");
                     lbldienthoai.setText("");
-                    lblemail.setText("Email là bắt buột");
+                    lblemail.setText("Sai định dạng Email");
                     lbltenkh.setText("");
                     return false;
                 } else {
                     if (txtDienThoai.getText().trim().equals("Số Điện Thoại [10-13]") || txtDienThoai.getText().trim().equals("")) {
                         lbldiemthuong.setText("");
                         lbldienthoai.setText("SĐT là bắt buột");
+                        lblemail.setText("");
+                        lbltenkh.setText("");
+                        return false;
+                    } else if (txtDienThoai.getText().length() < 9 || txtDienThoai.getText().length() > 13) {
+                        lbldiemthuong.setText("");
+                        lbldienthoai.setText("SĐT chỉ nhập là [10-13] số");
+                        lblemail.setText("");
+                        lbltenkh.setText("");
+                        return false;
+                    } else if (!txtDienThoai.getText().matches("[0-9]+")) {
+                        lbldiemthuong.setText("");
+                        lbldienthoai.setText("SĐT phải nhập là số");
                         lblemail.setText("");
                         lbltenkh.setText("");
                         return false;
@@ -112,8 +132,24 @@ public class ThemKH extends javax.swing.JPanel {
                             lblemail.setText("");
                             lbltenkh.setText("");
                             return false;
+                        } else {
+                            int so = Integer.parseInt(txtDiemThuong.getText());
+                            if (so > 5000 || so < 200) {
+                                lbldiemthuong.setText("Điểm thưởng phải nhập khoảng 200 - 5000");
+                                lbldienthoai.setText("");
+                                lblemail.setText("");
+                                lbltenkh.setText("");
+                                return false;
+                            } else if (!txtDiemThuong.getText().matches("[0-9]+")) {
+                                lbldiemthuong.setText("Điểm thưởng phải nhập là số");
+                                lbldienthoai.setText("");
+                                lblemail.setText("");
+                                lbltenkh.setText("");
+                                return false;
+                            }
+                            return true;
+
                         }
-                        return true;
                     }
                 }
             }
@@ -129,9 +165,10 @@ public class ThemKH extends javax.swing.JPanel {
         kh.setDiaChi(txtdiachi.getText());
         kh.setDiemThuong(Integer.parseInt(txtDiemThuong.getText()));
         kh.setMatKhau(txtDienThoai.getText());
-        kh.setTrangThai(true);
         KhachHangDAO khD = new KhachHangDAO();
         khD.insert(kh);
+        lbltenkh.setText("Thêm Thành công!");
+        lbltenkh.setForeground(Color.green);
     }
 
     /**
@@ -273,10 +310,6 @@ public class ThemKH extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbldiemthuong, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblemail, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -293,7 +326,12 @@ public class ThemKH extends javax.swing.JPanel {
                                 .addComponent(lbltenkh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(txtDiemThuong, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(69, 69, 69))))
+                        .addGap(69, 69, 69))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbldiemthuong, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,17 +379,21 @@ public class ThemKH extends javax.swing.JPanel {
 
         if (check()) {
             insert();
+
         }
 
     }//GEN-LAST:event_jLabel10MousePressed
 
     private void jLabel9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MousePressed
         // TODO add your handling code here:
-        txtDiemThuong.setText("");
-        txtEmail.setText("");
-        txtTenKH.setText("");
-        txtDienThoai.setText("");
-        txtdiachi.setText("");
+        txtTenKH.setText("Tên Khách Hàng");
+        txtTenKH.setForeground(Color.gray);
+        txtDienThoai.setText("Số Điện Thoại [10-13]");
+        txtDienThoai.setForeground(Color.gray);
+        txtDiemThuong.setText("Điểm tối thiểu 200 - tối đa 5000");
+        txtDiemThuong.setForeground(Color.gray);
+        txtEmail.setText("Email vd: abc@gmail.com");
+        txtEmail.setForeground(Color.gray);
 
 
     }//GEN-LAST:event_jLabel9MousePressed
@@ -374,7 +416,7 @@ public class ThemKH extends javax.swing.JPanel {
     private javax.swing.JLabel lblemail;
     private javax.swing.JLabel lbltenkh;
     private javax.swing.JTextField txtDiemThuong;
-    private javax.swing.JTextField txtDienThoai;
+    public static javax.swing.JTextField txtDienThoai;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtTenKH;
     private javax.swing.JTextArea txtdiachi;

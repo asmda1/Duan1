@@ -32,9 +32,8 @@ CREATE TABLE KhachHang
       tenKh NVARCHAR(50) NOT NULL ,
       matKhau NVARCHAR(50) NOT NULL ,
       email VARCHAR(50) ,
-      dienThoai VARCHAR(13) NOT NULL ,
+      dienThoai VARCHAR(13),
       diaChi NVARCHAR(50) ,
-      trangThai BIT NOT NULL ,
       diemThuong INT CHECK ( diemThuong >= 0 )
     )
 
@@ -517,6 +516,24 @@ VALUES  ( 'ND003' ,
         )
  GO
  
+
+ INSERT INTO dbo.KhachHang
+         ( maKh ,
+           tenKh ,
+           matKhau ,
+           email ,
+           dienThoai ,
+           diaChi ,
+           diemThuong
+         )
+ VALUES  ( 'KH000' ,
+           N'Khách lẻ' , 
+           N'123' , 
+           '' , 
+           '' , 
+           N'' ,
+           0 
+         )
 INSERT  INTO dbo.KhachHang
         ( maKh ,
           tenKh ,
@@ -524,7 +541,6 @@ INSERT  INTO dbo.KhachHang
           email ,
           dienThoai ,
           diaChi ,
-          trangThai ,
           diemThuong
         )
 VALUES  ( 'KH001' ,
@@ -533,7 +549,6 @@ VALUES  ( 'KH001' ,
           'nghiamn@gmail.com' ,
           '0811111111' ,
           N'Quận 1' ,
-          1 ,
           100
         )
 INSERT  INTO dbo.KhachHang
@@ -543,7 +558,6 @@ INSERT  INTO dbo.KhachHang
           email ,
           dienThoai ,
           diaChi ,
-          trangThai ,
           diemThuong
         )
 VALUES  ( 'KH002' ,
@@ -552,7 +566,6 @@ VALUES  ( 'KH002' ,
           'trivd@gmail.com' ,
           '07123456778' ,
           N'Quận 8' ,
-          1 ,
           90
         )
 INSERT  INTO dbo.KhachHang
@@ -562,7 +575,6 @@ INSERT  INTO dbo.KhachHang
           email ,
           dienThoai ,
           diaChi ,
-          trangThai ,
           diemThuong
         )
 VALUES  ( 'KH003' ,
@@ -571,7 +583,6 @@ VALUES  ( 'KH003' ,
           'hungpm@gmail.com' ,
           '0615236985' ,
           N'Quận Bình Tân' ,
-          1 ,
           80
         )
 INSERT  INTO dbo.KhachHang
@@ -581,7 +592,6 @@ INSERT  INTO dbo.KhachHang
           email ,
           dienThoai ,
           diaChi ,
-          trangThai ,
           diemThuong
         )
 VALUES  ( 'KH004' ,
@@ -590,7 +600,6 @@ VALUES  ( 'KH004' ,
           NULL ,
           '0753215863' ,
           N'Thái Nguyên' ,
-          0 ,
           0
         )
 INSERT  INTO dbo.KhachHang
@@ -600,7 +609,6 @@ INSERT  INTO dbo.KhachHang
           email ,
           dienThoai ,
           diaChi ,
-          trangThai ,
           diemThuong
         )
 VALUES  ( 'KH005' ,
@@ -609,7 +617,6 @@ VALUES  ( 'KH005' ,
           'thanhnp@gmail.com' ,
           '0687125832' ,
           N'Huyện Bình Chánh' ,
-          1 ,
           20
         )
  GO
@@ -1506,4 +1513,6 @@ VALUES  ( 'HD058' , -- maHD - varchar(10)
 
 				  GO 
 
-SELECT HoaDon.maHD, ngayHD, tenSp, maSize, ten, soLuong FROM dbo.KhachHang JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp JOIN dbo.Extra ON Extra.id = CTHoaDon.extra WHERE HoaDon.maKH = 'KH001'
+SELECT DISTINCT dbo.KhachHang.* FROM dbo.KhachHang 
+JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh 
+WHERE  KhachHang.maKh  != 'KH000'

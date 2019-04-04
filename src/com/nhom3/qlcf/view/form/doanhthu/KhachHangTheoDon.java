@@ -50,7 +50,7 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) tblKHTheoDon.getModel();
         model.setRowCount(0);
-        listKH.stream().map((khachHang) -> new Object[]{khachHang.getTenKh(), khachHang.getMakh(), khachHang.getDienThoai(), khachHang.isTrangThai() ? "Hội viên" : "Khách lẻ", khachHang.isTrangThai() ? khachHang.getDiemThuong() : "Không có"}).forEachOrdered((row) -> {
+        listKH.stream().map((khachHang) -> new Object[]{khachHang.getTenKh(), khachHang.getMakh(), khachHang.getDienThoai(), khachHang.getDiaChi(), khachHang.getDiemThuong()}).forEachOrdered((row) -> {
             model.addRow(row);
         });
     }
@@ -92,7 +92,7 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Anh/Chị", "Mã số", "Điện thoại", "Loại Khách", "Điểm thưởng (Hội viên)"
+                "Anh/Chị", "Mã số", "Điện thoại", "Địa chỉ", "Điểm thưởng (Hội viên)"
             }
         ) {
             boolean[] canEdit = new boolean [] {

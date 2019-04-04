@@ -7,9 +7,11 @@ package com.nhom3.qlcf.view.form.khachhang;
 
 import com.nhom3.qlcf.dao.KhachHangDAO;
 import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.model.KhachHang;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.Run;
+import static com.nhom3.qlcf.view.form.khachhang.KhachHangOnline.tblKhachHangOn;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
@@ -44,8 +46,10 @@ public class FormKhachHang extends javax.swing.JPanel {
         tblKhachHang.getTableHeader().setForeground(new Color(255, 255, 255));
         tblKhachHang.setRowHeight(25);
         jpnBack_button.hide();
+        txtTenKH.setText("Tên Khách Hàng");
+        txtTenKH.setForeground(Color.gray);
+        XuLy.placeHolder(txtTenKH, "Tên Khách Hàng");
         showDataKH();
-   
 
     }
 
@@ -56,7 +60,7 @@ public class FormKhachHang extends javax.swing.JPanel {
         model.setRowCount(0);
         for (KhachHang kh : listKH) {
             Object[] row = new Object[]{
-            kh.getMakh(),kh.getTenKh(),kh.getEmail(),kh.getDiaChi(),kh.getDienThoai(),kh.isTrangThai()  == true ? "Hội viên" : "Khách Online"
+                kh.getMakh(), kh.getTenKh(), kh.getEmail(), kh.getDiaChi(), kh.getDienThoai()
             };
             model.addRow(row);
         }
@@ -92,15 +96,14 @@ public class FormKhachHang extends javax.swing.JPanel {
         jpnHV_button = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jpnTimKiem = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTenKH = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jpnBack_TableChinh_Button = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         CardLayout = new javax.swing.JPanel();
         jscDanhSachKH = new javax.swing.JScrollPane();
         tblKhachHang = new javax.swing.JTable();
         jpnHV_button1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jpnDangKyForm = new javax.swing.JPanel();
         lblFormDangKy = new javax.swing.JLabel();
 
@@ -311,7 +314,7 @@ public class FormKhachHang extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Đăng Ký Hội Viên");
+        jLabel1.setText("Cập Nhật Hội Viên");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -380,14 +383,22 @@ public class FormKhachHang extends javax.swing.JPanel {
         );
 
         jpnTimKiem.setBackground(new java.awt.Color(51, 51, 255));
-
-        jTextField1.setText("Tìm kiếm khách hàng");
+        jpnTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jpnTimKiemMousePressed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Tìm Kiếm");
+        jLabel3.setText("Tìm Tên KH");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpnTimKiemLayout = new javax.swing.GroupLayout(jpnTimKiem);
         jpnTimKiem.setLayout(jpnTimKiemLayout);
@@ -395,7 +406,7 @@ public class FormKhachHang extends javax.swing.JPanel {
             jpnTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnTimKiemLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTenKH, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -403,28 +414,7 @@ public class FormKhachHang extends javax.swing.JPanel {
         jpnTimKiemLayout.setVerticalGroup(
             jpnTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-
-        jLabel8.setText("<<");
-        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jpnBack_TableChinh_ButtonLayout = new javax.swing.GroupLayout(jpnBack_TableChinh_Button);
-        jpnBack_TableChinh_Button.setLayout(jpnBack_TableChinh_ButtonLayout);
-        jpnBack_TableChinh_ButtonLayout.setHorizontalGroup(
-            jpnBack_TableChinh_ButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnBack_TableChinh_ButtonLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jpnBack_TableChinh_ButtonLayout.setVerticalGroup(
-            jpnBack_TableChinh_ButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+            .addComponent(txtTenKH, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         CardLayout.setLayout(new java.awt.CardLayout());
@@ -453,6 +443,11 @@ public class FormKhachHang extends javax.swing.JPanel {
         tblKhachHang.setShowVerticalLines(false);
         tblKhachHang.setSurrendersFocusOnKeystroke(true);
         tblKhachHang.getTableHeader().setReorderingAllowed(false);
+        tblKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblKhachHangMousePressed(evt);
+            }
+        });
         jscDanhSachKH.setViewportView(tblKhachHang);
         if (tblKhachHang.getColumnModel().getColumnCount() > 0) {
             tblKhachHang.getColumnModel().getColumn(2).setResizable(false);
@@ -491,6 +486,17 @@ public class FormKhachHang extends javax.swing.JPanel {
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("<<");
+        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnGiaoDienLayout = new javax.swing.GroupLayout(jpnGiaoDien);
         jpnGiaoDien.setLayout(jpnGiaoDienLayout);
         jpnGiaoDienLayout.setHorizontalGroup(
@@ -504,28 +510,27 @@ public class FormKhachHang extends javax.swing.JPanel {
                 .addComponent(jpnHV_button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
                 .addComponent(jpnHV_button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jpnBack_TableChinh_Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(51, 51, 51)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
                 .addComponent(jpnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 26, Short.MAX_VALUE))
+                .addGap(0, 1, Short.MAX_VALUE))
             .addComponent(CardLayout, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jpnGiaoDienLayout.setVerticalGroup(
             jpnGiaoDienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnGiaoDienLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpnGiaoDienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpnGiaoDienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jpnDangKyHV_Buuton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jpnHV_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jpnKHOnline_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jpnTimKiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jpnHV_button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jpnBack_TableChinh_Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpnGiaoDienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jpnDangKyHV_Buuton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpnHV_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpnKHOnline_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpnTimKiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpnHV_button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(CardLayout, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jfKhachHang.add(jpnGiaoDien, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 620));
@@ -672,18 +677,9 @@ public class FormKhachHang extends javax.swing.JPanel {
         CardLayout.revalidate();
         CardLayout.show();
         jscDanhSachKH.hide();
+        tblKhachHang.hide();
+        
     }//GEN-LAST:event_jLabel5MouseClicked
-
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        // TODO add your handling code here:
-        CardLayout.removeAll();
-        CardLayout.add(jscDanhSachKH);
-        CardLayout.repaint();
-        CardLayout.revalidate();
-        CardLayout.show();
-
-
-    }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
@@ -723,6 +719,55 @@ public class FormKhachHang extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel6MouseExited
 
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        // TODO add your handling code here:
+        CardLayout.removeAll();
+        CardLayout.add(jscDanhSachKH);
+        CardLayout.repaint();
+        CardLayout.revalidate();
+        CardLayout.show();
+    tblKhachHang.show();
+
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jpnTimKiemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnTimKiemMousePressed
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_jpnTimKiemMousePressed
+
+    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+        // TODO add your handling code here:
+        List<KhachHang> listKH;
+        if (txtTenKH.getText().isEmpty()) {
+            listKH = new KhachHangDAO().select("Select DISTINCT dbo.KhachHang.* FROM dbo.KhachHang where  KhachHang.maKh  != 'KH000'");
+        } else {
+            listKH = new KhachHangDAO().select("Select DISTINCT dbo.KhachHang.* FROM dbo.KhachHang  where tenKh like N'%" + txtTenKH.getText() + "%' and KhachHang.maKh  !='KH000'");
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblKhachHang.getModel();
+        model.setRowCount(0);
+        listKH.stream().map((khachHang) -> new Object[]{khachHang.getMakh(), khachHang.getTenKh(), khachHang.getEmail(), khachHang.getDiaChi(), khachHang.getDienThoai()}).forEachOrdered((row) -> {
+            model.addRow(row);
+        });
+
+    }//GEN-LAST:event_jLabel3MousePressed
+
+    private void tblKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMousePressed
+        // TODO add your handling code here:
+        int index = tblKhachHang.getSelectedRow();
+        listKH = new KhachHangDAO().selectAll();
+        String sdt = listKH.get(index).getDienThoai();
+        jpnDangKyForm.removeAll();
+        jpnDangKyForm.add(new DangKyHoiVien(sdt));
+        jpnDangKyForm.repaint();
+        jpnDangKyForm.revalidate();
+        jpnDangKyForm.show();
+        jpnGiaoDien.hide();
+        jpnBack_button.show();
+       
+    }//GEN-LAST:event_tblKhachHangMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CardLayout;
@@ -732,10 +777,8 @@ public class FormKhachHang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField1;
     protected static javax.swing.JPanel jfKhachHang;
-    private javax.swing.JPanel jpnBack_TableChinh_Button;
-    private javax.swing.JPanel jpnBack_button;
+    protected static javax.swing.JPanel jpnBack_button;
     public static javax.swing.JPanel jpnDangKyForm;
     private javax.swing.JPanel jpnDangKyHV_Buuton;
     private javax.swing.JPanel jpnDangXuat;
@@ -757,5 +800,6 @@ public class FormKhachHang extends javax.swing.JPanel {
     private javax.swing.JLabel lblQuayVeBangHang;
     private javax.swing.JLabel lblTenDangNhapBangHang;
     private javax.swing.JTable tblKhachHang;
+    private javax.swing.JTextField txtTenKH;
     // End of variables declaration//GEN-END:variables
 }

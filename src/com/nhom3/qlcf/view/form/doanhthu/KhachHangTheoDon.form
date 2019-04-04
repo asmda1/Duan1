@@ -127,7 +127,7 @@
                         <Column editable="false" title="Anh/Ch&#x1ecb;" type="java.lang.Object"/>
                         <Column editable="false" title="M&#xe3; s&#x1ed1;" type="java.lang.Object"/>
                         <Column editable="false" title="&#x110;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.Object"/>
-                        <Column editable="false" title="Lo&#x1ea1;i Kh&#xe1;ch" type="java.lang.Object"/>
+                        <Column editable="false" title="&#x110;&#x1ecb;a ch&#x1ec9;" type="java.lang.Object"/>
                         <Column editable="false" title="&#x110;i&#x1ec3;m th&#x1b0;&#x1edf;ng (H&#x1ed9;i vi&#xea;n)" type="java.lang.Object"/>
                       </Table>
                     </Property>

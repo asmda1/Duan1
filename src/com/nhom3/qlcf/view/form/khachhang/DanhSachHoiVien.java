@@ -5,10 +5,18 @@
  */
 package com.nhom3.qlcf.view.form.khachhang;
 
+import com.nhom3.qlcf.dao.KhachHangDAO;
 import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.model.KhachHang;
+import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnBack_button;
+import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnDangKyForm;
+import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnGiaoDien;
+import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.lblBack;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,6 +30,7 @@ public class DanhSachHoiVien extends javax.swing.JPanel {
     /**
      * Creates new form FormDanhSachHoiVien
      */
+    public static DanhSachHoiVien dshv;
     public DanhSachHoiVien() {
         initComponents();
         tblKhHV.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
@@ -30,11 +39,12 @@ public class DanhSachHoiVien extends javax.swing.JPanel {
         tblKhHV.getTableHeader().setBackground(new Color(0, 0, 0));
         tblKhHV.getTableHeader().setForeground(new Color(255, 255, 255));
         tblKhHV.setRowHeight(25);
+        dshv=this;
         showKHHV();
     }
 
     public void showKHHV() {
-        ResultSet rs = JDBCHelper.executeQuery("SELECT * FROM dbo.KhachHang WHERE maKh NOT IN (SELECT makh FROM dbo.KhachHang WHERE maKh='KH000') AND trangThai =1");
+        ResultSet rs = JDBCHelper.executeQuery("SELECT * FROM dbo.KhachHang WHERE maKh !='KH000'");
         model = (DefaultTableModel) tblKhHV.getModel();
         model.setRowCount(0);
         try {
@@ -45,7 +55,8 @@ public class DanhSachHoiVien extends javax.swing.JPanel {
                 };
                 model.addRow(row);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -88,6 +99,11 @@ public class DanhSachHoiVien extends javax.swing.JPanel {
         tblKhHV.setShowVerticalLines(false);
         tblKhHV.setSurrendersFocusOnKeystroke(true);
         tblKhHV.getTableHeader().setReorderingAllowed(false);
+        tblKhHV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblKhHVMousePressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblKhHV);
 
         jpnDShoivien.add(jScrollPane3, "card2");
@@ -114,10 +130,24 @@ public class DanhSachHoiVien extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblKhHVMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhHVMousePressed
+        // TODO add your handling code here:
+         int index = tblKhHV.getSelectedRow();
+        List<KhachHang> listKH = new KhachHangDAO().selectAll();
+        String sdt = listKH.get(index).getDienThoai();
+        jpnDangKyForm.removeAll();
+        jpnDangKyForm.add(new DangKyHoiVien(sdt));
+        jpnDangKyForm.repaint();
+        jpnDangKyForm.revalidate();
+        jpnDangKyForm.show();
+          jpnBack_button.show();
+        jpnGiaoDien.hide();
+    }//GEN-LAST:event_tblKhHVMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel jpnDShoivien;
-    private javax.swing.JTable tblKhHV;
+    protected static javax.swing.JTable tblKhHV;
     // End of variables declaration//GEN-END:variables
 }

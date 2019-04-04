@@ -5,6 +5,7 @@
  */
 package com.nhom3.qlcf.view.form.banhang;
 
+import com.nhom3.qlcf.dao.KhachHangDAO;
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.ReSizehelper;
 import com.nhom3.qlcf.helper.Soundhelper;
@@ -14,10 +15,14 @@ import com.nhom3.qlcf.model.HoaDon;
 import com.nhom3.qlcf.model.KhachHang;
 import com.nhom3.qlcf.model.SanPham;
 import com.nhom3.qlcf.model.SizeSP;
+import com.nhom3.qlcf.view.form.khachhang.jdialogThemKH;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
@@ -205,7 +210,7 @@ public class KhachDatOnline extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jplchiTietSP = new javax.swing.JPanel();
         txttimsdt = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        lblbuttontim = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -294,7 +299,7 @@ public class KhachDatOnline extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(0, 102, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Khách Đặt Online");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(281, 1, 660, 36));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 940, 36));
 
         lbltongtien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbltongtien.setText("...");
@@ -336,19 +341,19 @@ public class KhachDatOnline extends javax.swing.JDialog {
         txttimsdt.setForeground(Color.gray);
         XuLy.placeHolder(txttimsdt, "Tìm SĐT");
 
-        jLabel4.setBackground(new java.awt.Color(0, 102, 204));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Tìm");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.setOpaque(true);
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblbuttontim.setBackground(new java.awt.Color(0, 102, 204));
+        lblbuttontim.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblbuttontim.setForeground(new java.awt.Color(255, 255, 255));
+        lblbuttontim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblbuttontim.setText("Tìm");
+        lblbuttontim.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblbuttontim.setOpaque(true);
+        lblbuttontim.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel4MousePressed(evt);
+                lblbuttontimMousePressed(evt);
             }
         });
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 60, 30));
+        jPanel1.add(lblbuttontim, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 60, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -399,35 +404,59 @@ public class KhachDatOnline extends javax.swing.JDialog {
 
     }//GEN-LAST:event_lblthanhToanMousePressed
 
-    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+    private void lblbuttontimMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbuttontimMousePressed
         // TODO add your handling code here:
-        ResultSet rs = JDBCHelper.executeQuery("Exec TimKhachHang @SDT ='" + txttimsdt.getText() + "'");
-        model = (DefaultTableModel) tblkhachdatonline.getModel();
-        listHD = new ArrayList<HoaDon>();
-        listHD.clear();
-        try {
-            model.setRowCount(0);
-            while (rs.next()) {
-                HoaDon hd = new HoaDon();
-                KhachHang kh = new KhachHang();
-                kh.setTenKh(rs.getString(2));
-                kh.setDienThoai(rs.getString(3));
-                kh.setDiaChi(rs.getString(4));
-                hd.setMaHoaDon(rs.getString(1));
-                hd.setMaKhachHang(kh);
-                hd.setTongTien(rs.getDouble(6));
-                hd.setTrangThai(rs.getBoolean(7));
-                Object[] row = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-                    rs.getString(5), rs.getDouble(6), rs.getBoolean(7) == false ? "Chưa Thanh toán" : "Thanh Toán"};
-                model.addRow(row);
-                listHD.add(hd);
+        KhachHangDAO khDao = new KhachHangDAO();
+        if (txttimsdt.getText().trim().equals("") || txttimsdt.getText().trim().equals("Tìm SĐT KH")) {
+            lblThongBao.setText("Nhập số điện thoại khách hàng!");
+            lblThongBao.setForeground(Color.red);
+            lblThongBao.setCursor(null);
+            lblThongBao.setName("KH000");
+        } else if (!txttimsdt.getText().matches("[0-9]+")) {
+            lblThongBao.setText("Lỗi! phải nhập bằng số!");
+            lblThongBao.setForeground(Color.red);
+            lblThongBao.setCursor(null);
+            lblThongBao.setName("KH000");
 
+        } else if (txttimsdt.getText().length() < 9 || txttimsdt.getText().length() > 13) {
+            lblThongBao.setText("SĐT phải là [9-13] số!");
+            lblThongBao.setForeground(Color.red);
+            lblThongBao.setCursor(null);
+
+        } else if (khDao.checkSDT(txttimsdt.getText()) == false) {
+            lblThongBao.setText("SĐT này không có trong danh sách");
+            lblThongBao.setForeground(Color.red);
+            lblThongBao.setCursor(null);
+
+        } else {
+            ResultSet rs = JDBCHelper.executeQuery("Exec TimKhachHang @SDT ='" + txttimsdt.getText() + "'");
+            model = (DefaultTableModel) tblkhachdatonline.getModel();
+            listHD = new ArrayList<HoaDon>();
+            listHD.clear();
+            try {
+                model.setRowCount(0);
+                while (rs.next()) {
+                    HoaDon hd = new HoaDon();
+                    KhachHang kh = new KhachHang();
+                    kh.setTenKh(rs.getString(2));
+                    kh.setDienThoai(rs.getString(3));
+                    kh.setDiaChi(rs.getString(4));
+                    hd.setMaHoaDon(rs.getString(1));
+                    hd.setMaKhachHang(kh);
+                    hd.setTongTien(rs.getDouble(6));
+                    hd.setTrangThai(rs.getBoolean(7));
+                    Object[] row = new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getDouble(6), rs.getBoolean(7) == false ? "Chưa Thanh toán" : "Thanh Toán"};
+                    model.addRow(row);
+                    listHD.add(hd);
+
+                }
+
+            } catch (Exception e) {
+                System.out.println(e);
             }
-
-        } catch (Exception e) {
-            System.out.println(e);
         }
-    }//GEN-LAST:event_jLabel4MousePressed
+    }//GEN-LAST:event_lblbuttontimMousePressed
 
     /**
      * @param args the command line arguments
@@ -476,13 +505,13 @@ public class KhachDatOnline extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel jplchiTietSP;
     private javax.swing.JLabel lblKH;
     private javax.swing.JLabel lblThongBao;
+    private javax.swing.JLabel lblbuttontim;
     private javax.swing.JLabel lblmaHD;
     private javax.swing.JLabel lblsdt;
     private javax.swing.JLabel lblthanhToan;
