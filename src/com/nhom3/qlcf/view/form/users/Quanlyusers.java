@@ -9,6 +9,7 @@ import com.nhom3.qlcf.dao.NguoiDungDAO;
 import com.nhom3.qlcf.model.NguoiDung;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -100,10 +101,12 @@ public class Quanlyusers extends javax.swing.JPanel {
             pnlUDetail.add(lblUdetail);
             pnlUsers[i].add(lblName);
             pnlUsers[i].add(pnlUDetail);
+            pnlUsers[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
             pnlUDetail.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-
+                         DetailUser u = new DetailUser(null, true,e.getComponent().getName());
+                         u.setVisible(true);
                 }
             });
             pnlUsers[i].add(lblName);

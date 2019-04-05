@@ -26,11 +26,12 @@ import javax.swing.table.DefaultTableModel;
 public class DanhSachHoiVien extends javax.swing.JPanel {
 
     DefaultTableModel model = null;
-
+    List<KhachHang> listKH = null;
     /**
      * Creates new form FormDanhSachHoiVien
      */
     public static DanhSachHoiVien dshv;
+
     public DanhSachHoiVien() {
         initComponents();
         tblKhHV.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
@@ -39,25 +40,24 @@ public class DanhSachHoiVien extends javax.swing.JPanel {
         tblKhHV.getTableHeader().setBackground(new Color(0, 0, 0));
         tblKhHV.getTableHeader().setForeground(new Color(255, 255, 255));
         tblKhHV.setRowHeight(25);
-        dshv=this;
+        dshv = this;
         showKHHV();
     }
 
     public void showKHHV() {
-        ResultSet rs = JDBCHelper.executeQuery("SELECT * FROM dbo.KhachHang WHERE trangThai = 1 and maKh !='KH000'");
+        listKH = new KhachHangDAO().select("SELECT * FROM dbo.KhachHang WHERE trangThai = 1 and maKh !='KH000'");
         model = (DefaultTableModel) tblKhHV.getModel();
         model.setRowCount(0);
         try {
-            while (rs.next()) {
-                Object[] row = new Object[]{
-                    rs.getString("maKh"), rs.getString("tenkh"), rs.getString("diachi"), rs.getString("dienthoai"), rs.getInt(8)
-
-                };
+            listKH.stream().map((kh) -> new Object[]{
+                kh.getMakh(), kh.getTenKh(), kh.getDiaChi(), kh.getDienThoai(), kh.getDiemThuong()
+            }).forEachOrdered((row) -> {
                 model.addRow(row);
-            }
-        } catch (SQLException e) {
+            });
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     /**
@@ -132,16 +132,17 @@ public class DanhSachHoiVien extends javax.swing.JPanel {
 
     private void tblKhHVMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhHVMousePressed
         // TODO add your handling code here:
-         int index = tblKhHV.getSelectedRow();
-        List<KhachHang> listKH = new KhachHangDAO().selectAll();
+        int index = tblKhHV.getSelectedRow();
+        listKH = new KhachHangDAO().select("SELECT * FROM dbo.KhachHang WHERE trangThai = 1 and maKh !='KH000'");
         String sdt = listKH.get(index).getDienThoai();
         jpnDangKyForm.removeAll();
         jpnDangKyForm.add(new DangKyHoiVien(sdt));
         jpnDangKyForm.repaint();
         jpnDangKyForm.revalidate();
         jpnDangKyForm.show();
-          jpnBack_button.show();
+        jpnBack_button.show();
         jpnGiaoDien.hide();
+
     }//GEN-LAST:event_tblKhHVMousePressed
 
 

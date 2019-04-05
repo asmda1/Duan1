@@ -81,7 +81,6 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
 
     @Override
     public NguoiDung selectID(String ID) {
-
         String sql = "Select * from dbo.NguoiDung where maNguoiDung=?";
         List<NguoiDung> list = select(sql, ID);
         return list.size() > 0 ? list.get(0) : null;

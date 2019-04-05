@@ -6,11 +6,13 @@
 package com.nhom3.qlcf.view.form.banhang;
 
 import com.nhom3.qlcf.dao.ExtraDAO;
+import com.nhom3.qlcf.dao.KhachHangDAO;
 import com.nhom3.qlcf.helper.Designhelper;
 import com.nhom3.qlcf.helper.ReSizehelper;
 import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.Extra;
 import com.nhom3.qlcf.model.HoaDon;
+import com.nhom3.qlcf.model.KhachHang;
 import com.nhom3.qlcf.model.SanPham;
 import com.nhom3.qlcf.model.SizeSP;
 import com.nhom3.qlcf.test.SelectSIze;
@@ -197,6 +199,11 @@ public class Datmon extends javax.swing.JDialog {
 
         lblTamTinh.setText(String.valueOf(chuyentien.format(tongtien)) + " VNĐ");
         lblThanhTien.setText(String.valueOf(chuyentien.format(tongtien)) + " VNĐ");
+        FormBanHang.banhang.txtChietKhau.setText("0");
+        if (!FormBanHang.banhang.txtTimSDT.getText().trim().equals("") && !FormBanHang.banhang.lbltenKH.getName().equals("KH000")) {
+            FormBanHang.banhang.searchSDT();
+        }
+
     }
 
     /**
@@ -438,6 +445,7 @@ public class Datmon extends javax.swing.JDialog {
         Designhelper designhelper = new Designhelper();
         designhelper.DesigDonHang(jpldonhang, DongCTHD);
         FormBanHang.banhang.lblThongBao.setText("");
+        FormBanHang.banhang.diemtichluy();
         dispose();
 
     }//GEN-LAST:event_lblbutonThemMousePressed

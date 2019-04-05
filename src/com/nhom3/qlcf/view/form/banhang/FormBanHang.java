@@ -135,6 +135,8 @@ public class FormBanHang extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         txtdiem = new javax.swing.JTextField();
         lbldiem = new javax.swing.JLabel();
+        lbldiemtichluy = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         txttienkhach = new javax.swing.JTextField();
@@ -561,7 +563,7 @@ public class FormBanHang extends javax.swing.JPanel {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel11.setText("Ngày tạo:");
-        jplHoaDon.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 42, 131, -1));
+        jplHoaDon.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 40, 100, -1));
 
         txtTimSDT.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -583,7 +585,7 @@ public class FormBanHang extends javax.swing.JPanel {
 
         lblTamTinh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTamTinh.setText("....");
-        jplHoaDon.add(lblTamTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 190, 30));
+        jplHoaDon.add(lblTamTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 140, 30));
 
         lblThanhTien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblThanhTien.setText("0 VNĐ");
@@ -659,6 +661,12 @@ public class FormBanHang extends javax.swing.JPanel {
         lbldiem.setOpaque(true);
         jplHoaDon.add(lbldiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 40, 20));
         lbldiem.hide();
+
+        lbldiemtichluy.setText("...");
+        jplHoaDon.add(lbldiemtichluy, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 70, 20));
+
+        jLabel4.setText("+");
+        jplHoaDon.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 10, 20));
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -952,8 +960,8 @@ public class FormBanHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         String opObjects[] = {"Tiếp tục", "Quay Lại"};
         if (!DongCTHD.isEmpty() || !SavehoaDon.isEmpty()) {
-            if (!txttienkhach.getText().trim().equals("") || 0 == JOptionPane.showOptionDialog(null,
-                    "Cảnh báo, bạn chưa nhập tiền khách trả, vẫn tiếp tục?",
+            if (!txttienkhach.getText().trim().equals("") && !lbltienthua.getText().equals("0") || 0 == JOptionPane.showOptionDialog(null,
+                    "Cảnh báo, bạn chưa nhập tiền khách trả hoặc chưa quy ra tiền thối, vẫn tiếp tục?",
                     "Cảnh Báo!",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.INFORMATION_MESSAGE,
@@ -969,7 +977,8 @@ public class FormBanHang extends javax.swing.JPanel {
                 designhelper.DesigDonHang(jpldonhang, DongCTHD);
                 lblThongBao.setText("Thanh Toán Thành Công!");
                 lblThongBao.setForeground(Color.GREEN);
-                InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(), lbltenKH.getToolTipText(), txtdiem.getName());
+                InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(), lbltenKH.getToolTipText(), txtdiem.getName(),
+                        txttienkhach.getText(), lbltienthua.getText());
                 show.setVisible(true);
                 Reset();
 
@@ -1063,19 +1072,10 @@ public class FormBanHang extends javax.swing.JPanel {
             txtdiem.hide();
             lbldiem.hide();
         } else {
-            lbltenKH.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            lbltenKH.setForeground(Color.BLUE);
-            nd = khDao.selectID(txtTimSDT.getText());
-            lbltenKH.setText(nd.getTenKh());
-            txtdiem.setText(String.valueOf(nd.getDiemThuong()));
-            txtdiem.setName(nd.getDienThoai());
-            lbltenKH.setName(nd.getMakh());
-            txtChietKhau.setText("0");
-            txtdiem.show();
-            lbldiem.show();
 
+            searchSDT();
         }
-
+        diemtichluy();
 
     }//GEN-LAST:event_lbltimSDTMousePressed
 
@@ -1095,13 +1095,33 @@ public class FormBanHang extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_txtTimSDTFocusLost
-
-    private void jLabel15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MousePressed
-        // TODO add your handling code here:
+    public void ChietKhauTang() {
         so = Integer.parseInt(txtChietKhau.getText());
+        int diem = Integer.parseInt(txtdiem.getText());
+
+        lbldiemtichluy.setText("0");
+
+        if (lbldiemtichluy.getText().equals("0") && lbltenKH.getText().equals("KH000")) {
+            KhachHangDAO khdao = new KhachHangDAO();
+            nd = khdao.selectID(txtTimSDT.getText());
+            txtdiem.setText(String.valueOf(nd.getDiemThuong()));
+        }
 
         if (so < 100) {
-            if (!txtdiem.getText().equals("0") && Integer.parseInt(txtdiem.getText()) >= 1000) {
+            double tongtien = 0;
+            for (int i = 0; i < DongCTHD.size(); i++) {
+                tongtien += (DongCTHD.get(i).getMaHoaDon().getTongTien());
+            }
+            //khách tích lủy 1000 ms dc giảm giá, 
+            if (!txtdiem.getText().equals("0") && so < 10 && diem > 1000 && tongtien > 200000 && tongtien < 1000000) {
+                so++;
+                txtChietKhau.setText(String.valueOf((so + 5) - 1));
+                int quydiem = Integer.parseInt(txtChietKhau.getText()) * 100;
+                diem = quydiem - (Integer.parseInt(txtdiem.getText()));
+                if (-diem >= 0) {
+                    txtdiem.setText(String.valueOf(-(diem)));
+                }
+            } else if (!txtdiem.getText().equals("0") && so < 5 && diem > 1000 && tongtien > 1000000) {
                 so++;
                 txtChietKhau.setText(String.valueOf((so + 5) - 1));
                 int quydiem = Integer.parseInt(txtChietKhau.getText()) * 100;
@@ -1123,7 +1143,10 @@ public class FormBanHang extends javax.swing.JPanel {
             getTongTien();
 
         }
-
+    }
+    private void jLabel15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MousePressed
+        // TODO add your handling code here:
+        ChietKhauTang();
 
     }//GEN-LAST:event_jLabel15MousePressed
 
@@ -1133,6 +1156,7 @@ public class FormBanHang extends javax.swing.JPanel {
         so = Integer.parseInt(txtChietKhau.getText());
         if (so != 0 && so != 1) {
             so--;
+            diemtichluy();
             diem = Integer.parseInt(txtChietKhau.getText()) * 100 + (Integer.parseInt(txtdiem.getText()));
             txtChietKhau.setText(String.valueOf(so - 4));
             txtdiem.setText(String.valueOf(diem));
@@ -1296,6 +1320,21 @@ public class FormBanHang extends javax.swing.JPanel {
         return true;
     }
 
+    public void searchSDT() {
+        KhachHangDAO khDao = new KhachHangDAO();
+        lbltenKH.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        lbltenKH.setForeground(Color.BLUE);
+        nd = khDao.selectID(txtTimSDT.getText());
+        lbltenKH.setText(nd.getTenKh());
+        txtdiem.setText(String.valueOf(nd.getDiemThuong()));
+        txtdiem.setName(nd.getDienThoai());
+        lbltenKH.setName(nd.getMakh());
+        lbltenKH.setToolTipText(nd.getTenKh());
+        txtChietKhau.setText("0");
+        txtdiem.show();
+        lbldiem.show();
+    }
+
     public void Search(JTextField Search) {
         Timehelper timehelper = new Timehelper();
         timehelper.TimerLoad(new ActionListener() {
@@ -1426,8 +1465,50 @@ public class FormBanHang extends javax.swing.JPanel {
         SavehoaDon.add(hoadon);
     }
 
+    public void diemtichluy() {
+        double tongtien = 0;
+        lbldiemtichluy.setText("0");
+        for (int i = 0; i < DongCTHD.size(); i++) {
+            tongtien += (DongCTHD.get(i).getMaHoaDon().getTongTien());
+            if (lblThanhTien.getText().equals("0 VNĐ") && !lbltenKH.getName().equals("KH000")) {
+                lbldiemtichluy.setText("0");
+            } else if (tongtien >= 30000 && tongtien < 50000 && !lbltenKH.getName().equals("KH000")) {
+                lbldiemtichluy.setText("35");
+            } else if (tongtien >= 50000 && tongtien < 100000 && !lbltenKH.getName().equals("KH000")) {
+                lbldiemtichluy.setText("55");
+            } else if (tongtien >= 100000 && tongtien < 200000 && !lbltenKH.getName().equals("KH000")) {
+                lbldiemtichluy.setText("105");
+            } else if (tongtien >= 250000 && tongtien < 350000 && !lbltenKH.getName().equals("KH000")) {
+                lbldiemtichluy.setText("205");
+            } else if (tongtien >= 400000 && tongtien < 500000 && !lbltenKH.getName().equals("KH000")) {
+                lbldiemtichluy.setText("335");
+            } else if (tongtien >= 550000 && tongtien < 1000000 && !lbltenKH.getName().equals("KH000")) {
+                lbldiemtichluy.setText("555");
+            } else if (tongtien >= 1100000 && tongtien < 1500000 && !lbltenKH.getName().equals("KH000")) {
+                lbldiemtichluy.setText("805");
+            } else if (tongtien >= 1100000 && tongtien < 2500000 && !lbltenKH.getName().equals("KH000")) {
+                lbldiemtichluy.setText("1005");
+            } else if (tongtien >= 2550000 && tongtien < 5050000 && !lbltenKH.getName().equals("KH000")) {
+                lbldiemtichluy.setText("1500");
+            } else if (tongtien >= 5550000 && !lbltenKH.getName().equals("KH000")) {
+                lbldiemtichluy.setText("1700");
+
+            }
+
+        }
+
+    }
+
     public void updateDiem() {
-        JDBCHelper.executeUpdate("  UPDATE dbo.KhachHang SET diemThuong = ' " + txtdiem.getText() + "' where makh ='" + lbltenKH.getName() + "'");
+        int diemTichLuy = 0;
+        diemTichLuy += Integer.parseInt(txtdiem.getText()) + Integer.parseInt(lbldiemtichluy.getText());
+        String thanhdiem = String.valueOf(diemTichLuy);
+        int gioiHan = Integer.parseInt(txtdiem.getText());
+        if (gioiHan >= 5000) {
+            txtdiem.setForeground(Color.red);
+        } else {
+            JDBCHelper.executeUpdate(" UPDATE dbo.KhachHang SET diemThuong = ' " + thanhdiem + "' where makh ='" + lbltenKH.getName() + "'");
+        }
 
     }
 
@@ -1483,6 +1564,7 @@ public class FormBanHang extends javax.swing.JPanel {
         txtChietKhau.setText("0");
         txttienkhach.setText("");
         lbltienthua.setText("0");
+        lbldiemtichluy.setText("0");
         txtdiem.hide();
         lbldiem.hide();
     }
@@ -1503,6 +1585,7 @@ public class FormBanHang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1542,17 +1625,18 @@ public class FormBanHang extends javax.swing.JPanel {
     protected static javax.swing.JLabel lblbuton_thanhToan;
     private javax.swing.JLabel lblcoffe;
     private javax.swing.JLabel lbldiem;
+    private javax.swing.JLabel lbldiemtichluy;
     private javax.swing.JLabel lblfee;
     private javax.swing.JLabel lblorderweb;
     private javax.swing.JLabel lblsound;
     private javax.swing.JLabel lbltea;
-    private javax.swing.JLabel lbltenKH;
+    protected static javax.swing.JLabel lbltenKH;
     private javax.swing.JLabel lbltenTienthua;
     private javax.swing.JLabel lbltienthua;
     private javax.swing.JLabel lbltimSDT;
-    private javax.swing.JTextField txtChietKhau;
+    protected static javax.swing.JTextField txtChietKhau;
     private javax.swing.JTextField txtTimKiem;
-    private javax.swing.JTextField txtTimSDT;
+    protected static javax.swing.JTextField txtTimSDT;
     private javax.swing.JTextField txtdiem;
     private javax.swing.JTextField txttienkhach;
     // End of variables declaration//GEN-END:variables

@@ -10,6 +10,7 @@ import com.nhom3.qlcf.model.Extra;
 import com.nhom3.qlcf.model.SanPham;
 import com.nhom3.qlcf.model.SizeSP;
 import com.nhom3.qlcf.view.form.banhang.Datmon;
+import com.nhom3.qlcf.view.form.banhang.FormBanHang;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -82,7 +83,7 @@ public class Designhelper implements DesignInterFace {
                 lblImg = new JLabel();
                 BufferedImage image = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/" + data.get(i).getHinhAnh()));
                 int type = image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType();
-                BufferedImage HinhAnh = new ReSizehelper().buffImage(image, type,150,150);
+                BufferedImage HinhAnh = new ReSizehelper().buffImage(image, type, 150, 150);
                 ImageIcon icon = new ImageIcon(HinhAnh);
                 lblImg.setIcon(icon);
                 pnlSanPham[i].setName(this.data.get(i).getMaSanPham());
@@ -232,7 +233,7 @@ public class Designhelper implements DesignInterFace {
             //show Extra
             JLabel lblghiChu = new JLabel("Ghi Chú: " + CTHD.get(i).getExtra().getTen() + " ( " + chuyentien.format(CTHD.get(i).getExtra().getGia()) + " VNĐ)");
             if (!lblghiChu.getText().equals("Ghi Chú: Trống ( 0 VNĐ)")) {
-                lblghiChu.setText("Ghi Chú: " + CTHD.get(i).getExtra().getTen() + " ( " + chuyentien.format(CTHD.get(i).getExtra().getGia())+ " VNĐ*"+ lblsoluong.getText() +")" );
+                lblghiChu.setText("Ghi Chú: " + CTHD.get(i).getExtra().getTen() + " ( " + chuyentien.format(CTHD.get(i).getExtra().getGia()) + " VNĐ*" + lblsoluong.getText() + ")");
             }
             lblghiChu.setName(CTHD.get(i).getExtra().getId());
             lblghiChu.setForeground(Color.GRAY);
@@ -249,6 +250,8 @@ public class Designhelper implements DesignInterFace {
                     CTHD.remove(CTHD.get(Integer.parseInt(e.getComponent().getName())));
                     Datmon d = new Datmon(null, true);
                     d.getTamTinh();
+                    FormBanHang.banhang.diemtichluy();
+            
                     DesigDonHang(donhangUI, CTHD);
                 }
 
@@ -309,7 +312,6 @@ public class Designhelper implements DesignInterFace {
     public JDialog DesignDatMon() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 
     @Override
     public void DesignSizeSP(JPanel size, List<SizeSP> dataSize, List<SanPham> dataSP, JLabel giaSize, JLabel showSize, int so, JTextField txtsoluong, JLabel giaEtra) {

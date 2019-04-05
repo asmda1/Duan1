@@ -666,6 +666,7 @@ public class FormKhachHang extends javax.swing.JPanel {
         CardLayout.revalidate();
         CardLayout.show();
         jscDanhSachKH.hide();
+        tblKhachHang.hide();
 
     }//GEN-LAST:event_jLabel4MouseClicked
 
@@ -678,6 +679,7 @@ public class FormKhachHang extends javax.swing.JPanel {
         CardLayout.show();
         jscDanhSachKH.hide();
         tblKhachHang.hide();
+         tblKhachHang.hide();
         
     }//GEN-LAST:event_jLabel5MouseClicked
 
@@ -799,7 +801,7 @@ public class FormKhachHang extends javax.swing.JPanel {
     private javax.swing.JLabel lblOutBangHang;
     private javax.swing.JLabel lblQuayVeBangHang;
     private javax.swing.JLabel lblTenDangNhapBangHang;
-    private javax.swing.JTable tblKhachHang;
+    protected static javax.swing.JTable tblKhachHang;
     private javax.swing.JTextField txtTenKH;
     // End of variables declaration//GEN-END:variables
 }

@@ -54,7 +54,7 @@ public class KhachDatOnline extends javax.swing.JDialog {
     int index = 0;
     NumberFormat chuyentien = new DecimalFormat("#,###,###");
     JLabel tenSP, giaBan, maSize, soLuong, HinhAnh;
-
+    
     public KhachDatOnline(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -67,9 +67,9 @@ public class KhachDatOnline extends javax.swing.JDialog {
         tblkhachdatonline.setRowHeight(25);
         filltoTable();
     }
-
+    
     public void filltoTable() {
-
+        
         ResultSet rs = JDBCHelper.executeQuery("EXEC dbo. KhachDatOnline");
         model = (DefaultTableModel) tblkhachdatonline.getModel();
         listHD = new ArrayList<HoaDon>();
@@ -90,9 +90,9 @@ public class KhachDatOnline extends javax.swing.JDialog {
                     rs.getString(5), rs.getDouble(6), rs.getBoolean(7) == false ? "Chưa Thanh toán" : "Thanh Toán"};
                 model.addRow(row);
                 listHD.add(hd);
-
+                
             }
-
+            
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -101,7 +101,7 @@ public class KhachDatOnline extends javax.swing.JDialog {
     //
     public void update() {
         JDBCHelper.executeUpdate("UPDATE dbo.HoaDon SET trangThai = 1, tongtien=" + Double.parseDouble(lbltongtien.getName()) + " WHERE maHD ='" + lblmaHD.getName() + "'");
-
+        
         if (listHD.isEmpty()) {
             lblThongBao.setText("Không Có Hóa Đơn Nào!");
             lblThongBao.setForeground(Color.red);
@@ -119,9 +119,9 @@ public class KhachDatOnline extends javax.swing.JDialog {
             lblsdt.setText("");
             lbltongtien.setText("");
         }
-
+        
     }
-
+    
     public void fillChiTietSP() {
         ResultSet rs = JDBCHelper.executeQuery("EXEC dbo.ChitietKHdatSP @maHD ='" + lblmaHD.getName() + "'");
         listCTHD = new ArrayList<>();
@@ -140,13 +140,13 @@ public class KhachDatOnline extends javax.swing.JDialog {
                 listCTHD.add(cthd);
                 jplChiTietSP();
             }
-
+            
         } catch (Exception e) {
         }
     }
-
+    
     public void jplChiTietSP() {
-
+        
         jplchiTietSP.removeAll();
         jplchiTietSP.updateUI();
         jplchiTietSP.setVisible(true);
@@ -179,9 +179,9 @@ public class KhachDatOnline extends javax.swing.JDialog {
                 pnl[i].add(maSize);
                 jplchiTietSP.add(pnl[i]);
                 jplchiTietSP.updateUI();
-
+                
             }
-
+            
         } catch (Exception e) {
         }
     }
@@ -375,11 +375,13 @@ public class KhachDatOnline extends javax.swing.JDialog {
         HoaDon hd = listHD.get(index);
         tblkhachdatonline.setToolTipText("Anh/Chị: " + hd.getMaKhachHang().getTenKh() + ", Địa Chỉ Giao Hàng: "
                 + hd.getMaKhachHang().getDiaChi());
-
+        
         lblmaHD.setText("Mã HĐ:" + hd.getMaHoaDon());
         lblmaHD.setName(hd.getMaHoaDon());
         lblKH.setText("Anh/Chị: " + hd.getMaKhachHang().getTenKh());
+        lblKH.setName(hd.getMaKhachHang().getTenKh());
         lblsdt.setText("SĐT: " + hd.getMaKhachHang().getDienThoai());
+        lblsdt.setName(hd.getMaKhachHang().getDienThoai());
         fillChiTietSP();
         int tongtien = 0;
         for (int i = 0; i < listCTHD.size(); i++) {
@@ -401,7 +403,8 @@ public class KhachDatOnline extends javax.swing.JDialog {
     private void lblthanhToanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblthanhToanMousePressed
         // TODO add your handling code here:
         update();
-
+        InHoaDon in = new InHoaDon(null, rootPaneCheckingEnabled, lblmaHD.getName(), lbltongtien.getName(), lblKH.getName(), lblsdt.getName(),null,null);
+        in.setVisible(true);
     }//GEN-LAST:event_lblthanhToanMousePressed
 
     private void lblbuttontimMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbuttontimMousePressed
@@ -417,17 +420,17 @@ public class KhachDatOnline extends javax.swing.JDialog {
             lblThongBao.setForeground(Color.red);
             lblThongBao.setCursor(null);
             lblThongBao.setName("KH000");
-
+            
         } else if (txttimsdt.getText().length() < 9 || txttimsdt.getText().length() > 13) {
             lblThongBao.setText("SĐT phải là [9-13] số!");
             lblThongBao.setForeground(Color.red);
             lblThongBao.setCursor(null);
-
+            
         } else if (khDao.checkSDT(txttimsdt.getText()) == false) {
             lblThongBao.setText("SĐT này không có trong danh sách");
             lblThongBao.setForeground(Color.red);
             lblThongBao.setCursor(null);
-
+            
         } else {
             ResultSet rs = JDBCHelper.executeQuery("Exec TimKhachHang @SDT ='" + txttimsdt.getText() + "'");
             model = (DefaultTableModel) tblkhachdatonline.getModel();
@@ -449,9 +452,9 @@ public class KhachDatOnline extends javax.swing.JDialog {
                         rs.getString(5), rs.getDouble(6), rs.getBoolean(7) == false ? "Chưa Thanh toán" : "Thanh Toán"};
                     model.addRow(row);
                     listHD.add(hd);
-
+                    
                 }
-
+                
             } catch (Exception e) {
                 System.out.println(e);
             }

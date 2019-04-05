@@ -57,7 +57,7 @@ public class InHoaDon extends javax.swing.JDialog {
         fillChiTietSP("HD002");
     }
 
-    public InHoaDon(java.awt.Frame parent, boolean modal, String hd, String thanhTien, String tenkh, String sdt) {
+    public InHoaDon(java.awt.Frame parent, boolean modal, String hd, String thanhTien, String tenkh, String sdt, String tienkhach, String tienthoi) {
         super(parent, modal);
         initComponents();
         this.hdString = hd;
@@ -70,7 +70,7 @@ public class InHoaDon extends javax.swing.JDialog {
         tblInHoaDon.setRowHeight(25);
         fillChiTietSP(hdString);
         double tien = Double.parseDouble(thanhTien);
-        lblThanhTien.setText(String.valueOf(chuyentien.format(tien)) + " VND");
+        lblthanhtienhd.setText(String.valueOf(chuyentien.format(tien)) + " VND");
         lblmahd.setText(hdString);
         lblten.setText(tenkh);
         lblngay.setText(String.valueOf(date));
@@ -78,6 +78,15 @@ public class InHoaDon extends javax.swing.JDialog {
             lblsdt.setText("");
         } else {
             lblsdt.setText(sdt);
+        }
+         double tienkhach1 = Double.parseDouble(tienkhach);
+        if (tienkhach == null || tienthoi == null || tienkhach1==0) {
+            lbltienkhach.setText("0");
+            lblTienthoi.setText("0");
+        } else {
+           
+            lbltienkhach.setText(String.valueOf(chuyentien.format(tienkhach1)) + " VND");
+            lblTienthoi.setText(tienthoi);
         }
 
     }
@@ -120,11 +129,12 @@ public class InHoaDon extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        lblThanhTien2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblInHoaDon = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        lblThanhTien = new javax.swing.JLabel();
+        lblthanhtienhd = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -138,6 +148,10 @@ public class InHoaDon extends javax.swing.JDialog {
         lblten = new javax.swing.JLabel();
         lblngay = new javax.swing.JLabel();
         lblsdt = new javax.swing.JLabel();
+        lblTienthoi = new javax.swing.JLabel();
+        lbltienkhach = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,6 +163,9 @@ public class InHoaDon extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 363, Short.MAX_VALUE)
         );
+
+        lblThanhTien2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblThanhTien2.setText("...");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -189,15 +206,15 @@ public class InHoaDon extends javax.swing.JDialog {
         });
         jScrollPane3.setViewportView(tblInHoaDon);
 
-        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 128, -1, 327));
+        jPanel2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 128, -1, 300));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Tổng Tiền:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 466, -1, 48));
+        jLabel1.setText(" Tiền Thối:");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, 70, 20));
 
-        lblThanhTien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblThanhTien.setText("...");
-        jPanel2.add(lblThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 466, 119, 48));
+        lblthanhtienhd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblthanhtienhd.setText("...");
+        jPanel2.add(lblthanhtienhd, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, 119, 20));
 
         jLabel2.setBackground(new java.awt.Color(0, 51, 255));
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -211,7 +228,7 @@ public class InHoaDon extends javax.swing.JDialog {
                 jLabel2MousePressed(evt);
             }
         });
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 72, 28));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, 72, 28));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 255));
@@ -237,7 +254,7 @@ public class InHoaDon extends javax.swing.JDialog {
         jLabel5.setText("WORD");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel5.setOpaque(true);
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 520, 72, 28));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 530, 72, 28));
 
         jLabel6.setBackground(new java.awt.Color(0, 51, 255));
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -246,7 +263,7 @@ public class InHoaDon extends javax.swing.JDialog {
         jLabel6.setText("EXCE");
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel6.setOpaque(true);
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, 72, 28));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 530, 72, 28));
 
         jLabel7.setText("Mã HD: ");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 63, -1, 20));
@@ -272,6 +289,22 @@ public class InHoaDon extends javax.swing.JDialog {
 
         lblsdt.setText("..");
         jPanel2.add(lblsdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 150, 20));
+
+        lblTienthoi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTienthoi.setText("...");
+        jPanel2.add(lblTienthoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 490, 119, 30));
+
+        lbltienkhach.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbltienkhach.setText("...");
+        jPanel2.add(lbltienkhach, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 119, 20));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel11.setText("Tổng Tiền:");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, -1, 20));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setText("Tiền Khách:");
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 470, -1, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -379,15 +412,26 @@ public class InHoaDon extends javax.swing.JDialog {
             document.add(ngay);
             document.add(tieudeHD);
             document.add(table);
-            //Thanh Tiền
-            Paragraph title1 = new Paragraph("Thanh Tien: " + lblThanhTien.getText(),
-                    FontFactory.getFont(FontFactory.HELVETICA, 13, Font.BOLD));
+              //Thanh Tiền
+            Paragraph title1 = new Paragraph("Tong Tien: " + lblthanhtienhd.getText(),
+                    FontFactory.getFont(FontFactory.HELVETICA, 11, Font.BOLD));
             title1.setAlignment(Element.ALIGN_RIGHT);
             title1.setIndentationRight(45);
-            Chapter chapter1 = new Chapter(title1, 1);
             document.add(title1);
-            document.add(chapter1);
-            chapter1.setNumberDepth(0);
+            //
+            Paragraph title2 = new Paragraph("Tien Khach: " + lbltienkhach.getText(),
+                    FontFactory.getFont(FontFactory.HELVETICA, 11, Font.BOLD));
+            title2.setAlignment(Element.ALIGN_RIGHT);
+            title2.setIndentationRight(45);
+            document.add(title2);
+            //
+            Paragraph title3 = new Paragraph("Tien Thoi: " + lblTienthoi.getText(),
+                    FontFactory.getFont(FontFactory.HELVETICA, 11, Font.BOLD));
+            title3.setAlignment(Element.ALIGN_RIGHT);
+            title3.setIndentationRight(65);
+            document.add(title3);
+          
+
             // Đóng File
             document.close();
 
@@ -461,6 +505,8 @@ public class InHoaDon extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -472,11 +518,14 @@ public class InHoaDon extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblThanhTien;
+    private javax.swing.JLabel lblThanhTien2;
+    private javax.swing.JLabel lblTienthoi;
     private javax.swing.JLabel lblmahd;
     private javax.swing.JLabel lblngay;
     private javax.swing.JLabel lblsdt;
     private javax.swing.JLabel lblten;
+    private javax.swing.JLabel lblthanhtienhd;
+    private javax.swing.JLabel lbltienkhach;
     private javax.swing.JTable tblInHoaDon;
     // End of variables declaration//GEN-END:variables
 }
