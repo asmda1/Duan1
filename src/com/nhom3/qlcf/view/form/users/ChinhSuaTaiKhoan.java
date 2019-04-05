@@ -38,6 +38,7 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
             nd.setTrangThai(true);
             NguoiDungDAO ndDAO = new NguoiDungDAO();
             ndDAO.update(nd);
+            lblthongbao.setText("Cập Nhật Thành Công");
 
         } catch (Exception e) {
             System.out.println(e);
@@ -84,6 +85,7 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         lblTen = new javax.swing.JLabel();
         lblMaNhanVien1 = new javax.swing.JLabel();
+        lblthongbao = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -144,6 +146,7 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Câp Nhật");
         jLabel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel7.setOpaque(true);
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -159,6 +162,11 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         lblMaNhanVien1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblMaNhanVien1.setText("Mã Nhân Viên:");
         jPanel1.add(lblMaNhanVien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 100, 43));
+
+        lblthongbao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblthongbao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblthongbao.setText(".");
+        jPanel1.add(lblthongbao, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 10, 360, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -237,6 +245,7 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JLabel lblTenDangNhap;
     private javax.swing.JLabel lblpass1;
     private javax.swing.JLabel lblpass3;
+    private javax.swing.JLabel lblthongbao;
     private javax.swing.JLabel lblvien2;
     private javax.swing.JLabel lblvien3;
     private javax.swing.JTextField txtSDT;

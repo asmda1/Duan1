@@ -676,11 +676,23 @@ public class FormBanHang extends javax.swing.JPanel {
         jLabel9.setText("Tiền Khách Trả:");
         jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 14, -1, 34));
 
+        txttienkhach.setText("0");
         txttienkhach.setBorder(null);
         txttienkhach.setOpaque(false);
         txttienkhach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txttienkhachActionPerformed(evt);
+            }
+        });
+        txttienkhach.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txttienkhachKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txttienkhachKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txttienkhachKeyTyped(evt);
             }
         });
         jPanel7.add(txttienkhach, new org.netbeans.lib.awtextra.AbsoluteConstraints(99, 15, 155, 34));
@@ -960,6 +972,7 @@ public class FormBanHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         String opObjects[] = {"Tiếp tục", "Quay Lại"};
         if (!DongCTHD.isEmpty() || !SavehoaDon.isEmpty()) {
+
             if (!txttienkhach.getText().trim().equals("") && !lbltienthua.getText().equals("0") || 0 == JOptionPane.showOptionDialog(null,
                     "Cảnh báo, bạn chưa nhập tiền khách trả hoặc chưa quy ra tiền thối, vẫn tiếp tục?",
                     "Cảnh Báo!",
@@ -977,9 +990,13 @@ public class FormBanHang extends javax.swing.JPanel {
                 designhelper.DesigDonHang(jpldonhang, DongCTHD);
                 lblThongBao.setText("Thanh Toán Thành Công!");
                 lblThongBao.setForeground(Color.GREEN);
-                InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(), lbltenKH.getToolTipText(), txtdiem.getName(),
-                        txttienkhach.getText(), lbltienthua.getText());
-                show.setVisible(true);
+                if (txttienkhach.getText().trim().equals("")) {
+                    txttienkhach.setText("0");
+                    InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(), lbltenKH.getToolTipText(), txtdiem.getName(),
+                            txttienkhach.getText(), lbltienthua.getText());
+                    show.setVisible(true);
+                }
+
                 Reset();
 
             }
@@ -1251,6 +1268,50 @@ public class FormBanHang extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_lblsoundMousePressed
+
+    private void txttienkhachKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttienkhachKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txttienkhachKeyPressed
+
+    private void txttienkhachKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttienkhachKeyTyped
+        // TODO add your handling code here:
+        if (txttienkhach.getText().equals("")) {
+            lbltienthua.setForeground(Color.black);
+            lbltenTienthua.setText("Tiền Thối: ");
+            lbltienthua.setText("0 VNĐ");
+
+        }
+
+    }//GEN-LAST:event_txttienkhachKeyTyped
+
+    private void txttienkhachKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttienkhachKeyReleased
+        // TODO add your handling code here:
+        if (CheckTienKhach()) {
+
+            int tienThoi = 0;
+            tienThoi += Double.parseDouble(txttienkhach.getText()) - Double.parseDouble(lblThanhTien.getToolTipText());
+
+            if (Double.parseDouble(txttienkhach.getText()) < Double.parseDouble(lblThanhTien.getToolTipText())) {
+                lbltienthua.setForeground(Color.red);
+                lbltenTienthua.setText("Tiền Thiếu: ");
+                lbltienthua.setText(String.valueOf(chuyentien.format(tienThoi)) + "  VNĐ");
+            } else if (Double.parseDouble(txttienkhach.getText()) == 0) {
+                lbltienthua.setForeground(Color.black);
+                lbltenTienthua.setText("Tiền Thối: ");
+                lbltienthua.setText("0 VNĐ");
+            } else if (txttienkhach.getText().equals("")) {
+                lbltienthua.setForeground(Color.black);
+                lbltenTienthua.setText("Tiền Thối: ");
+                lbltienthua.setText("0 VNĐ");
+            } else {
+
+                lbltienthua.setForeground(Color.black);
+                lbltenTienthua.setText("Tiền Thối: ");
+                lbltienthua.setText(String.valueOf(chuyentien.format(tienThoi)) + "  VNĐ");
+            }
+        }
+    }//GEN-LAST:event_txttienkhachKeyReleased
     public void RezieImageGroupLogo() {
         try {
             BufferedImage HinhAnh, HinhAnh2, HinhAnh3, HinhAnh4, HinhAnh5;

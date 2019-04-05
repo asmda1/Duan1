@@ -18,6 +18,7 @@ CREATE TABLE NguoiDung
       maNguoiDung VARCHAR(10) PRIMARY KEY ,
       taiKhoan VARCHAR(20) NOT NULL ,
       matKhau VARCHAR(50) NOT NULL ,
+	  email VARCHAR(50),
       hoTen NVARCHAR(50) ,
       dienThoai VARCHAR(13) ,
       vaiTro VARCHAR(20) NOT NULL ,
@@ -34,7 +35,9 @@ CREATE TABLE KhachHang
       email VARCHAR(50) ,
       dienThoai VARCHAR(13),
       diaChi NVARCHAR(50) ,
+	  trangThai BIT DEFAULT 0,
       diemThuong INT CHECK ( diemThuong >= 0 )
+	 
     )
 
 CREATE TABLE HangHoa
@@ -467,6 +470,7 @@ INSERT  INTO dbo.NguoiDung
         ( maNguoiDung ,
           taiKhoan ,
           matKhau ,
+		   email,
           hoTen ,
           dienThoai ,
           vaiTro ,
@@ -475,6 +479,7 @@ INSERT  INTO dbo.NguoiDung
 VALUES  ( 'ND001' ,
           'admin' ,
           '123' ,
+		   'phongthps08236@fpt.edu.vn',
           N'Trần Admin' ,
           '0911111111' ,
           'Administration' ,
@@ -484,7 +489,10 @@ INSERT  INTO dbo.NguoiDung
         ( maNguoiDung ,
           taiKhoan ,
           matKhau ,
+
+email,
           hoTen ,
+		  
           dienThoai ,
           vaiTro ,
           trangThai
@@ -492,6 +500,7 @@ INSERT  INTO dbo.NguoiDung
 VALUES  ( 'ND002' ,
           'user1' ,
           '123' ,
+		    'nghianhps08235@fpt.edu.vn',
           N'Nguyễn Hiếu Nghĩa' ,
           '0922222222' ,
           'Staff' ,
@@ -501,6 +510,7 @@ INSERT  INTO dbo.NguoiDung
         ( maNguoiDung ,
           taiKhoan ,
           matKhau ,
+		  email,
           hoTen ,
           dienThoai ,
           vaiTro ,
@@ -509,6 +519,7 @@ INSERT  INTO dbo.NguoiDung
 VALUES  ( 'ND003' ,
           'user2' ,
           '123' ,
+		  'tridbps08177@fpt.edu.vn',
           N'Đổ Bảo Trị' ,
           '0933333333' ,
           'Staff' ,
@@ -1516,3 +1527,6 @@ VALUES  ( 'HD058' , -- maHD - varchar(10)
 SELECT DISTINCT dbo.KhachHang.* FROM dbo.KhachHang 
 JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh 
 WHERE  KhachHang.maKh  != 'KH000'
+
+SELECT * FROM dbo.KhachHang
+

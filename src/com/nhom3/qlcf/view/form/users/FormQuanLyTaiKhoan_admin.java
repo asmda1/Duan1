@@ -494,7 +494,7 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     protected static javax.swing.JPanel jfTSuaXoa;
     private javax.swing.JPanel jpldanhmuc;
-    private javax.swing.JPanel jpltable;
+    public static javax.swing.JPanel jpltable;
     private javax.swing.JPanel jpnDangXuat;
     private javax.swing.JPanel jpnNen;
     private javax.swing.JPanel jpnQuayVe;

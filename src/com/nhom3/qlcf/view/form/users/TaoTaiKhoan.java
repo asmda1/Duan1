@@ -50,6 +50,9 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         cbxVaiTro = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        lblvien4 = new javax.swing.JLabel();
+        lblpass4 = new javax.swing.JLabel();
+        txtemail = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -128,7 +131,7 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
                 cbxVaiTroActionPerformed(evt);
             }
         });
-        jPanel1.add(cbxVaiTro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 210, -1));
+        jPanel1.add(cbxVaiTro, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 210, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -136,7 +139,7 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         jLabel3.setText("Reset");
         jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel3.setOpaque(true);
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 110, 40));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 110, 40));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -149,7 +152,19 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
                 jLabel4MousePressed(evt);
             }
         });
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 110, 40));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 110, 40));
+
+        lblvien4.setText("___________________________________________");
+        jPanel1.add(lblvien4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 260, 30));
+
+        lblpass4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblpass4.setText("Email:");
+        jPanel1.add(lblpass4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 70, 20));
+
+        txtemail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtemail.setBorder(null);
+        txtemail.setOpaque(false);
+        jPanel1.add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 260, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -164,8 +179,8 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -188,6 +203,7 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         nd.setMatKhau(txtMatKhau.getText());
         nd.setDienThoai(txtSDT.getText());
         nd.setHoTen(txtTen.getText());
+        nd.setEmail(txtemail.getText());
         nd.setVaiTro((String) cbxVaiTro.getSelectedItem());
         nd.setTrangThai(true);
         NguoiDungDAO ndDAO = new NguoiDungDAO();
@@ -212,14 +228,17 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JLabel lblpass1;
     private javax.swing.JLabel lblpass2;
     private javax.swing.JLabel lblpass3;
+    private javax.swing.JLabel lblpass4;
     private javax.swing.JLabel lbluser;
     private javax.swing.JLabel lblvien;
     private javax.swing.JLabel lblvien1;
     private javax.swing.JLabel lblvien2;
     private javax.swing.JLabel lblvien3;
+    private javax.swing.JLabel lblvien4;
     private javax.swing.JTextField txtMatKhau;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTen;
     private javax.swing.JTextField txtUsers;
+    private javax.swing.JTextField txtemail;
     // End of variables declaration//GEN-END:variables
 }

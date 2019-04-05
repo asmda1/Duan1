@@ -20,8 +20,8 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
 
     @Override
     public boolean insert(NguoiDung t) {
-        String sql = "Insert dbo.NguoiDung values (?,?,?,?,?,?,?)";
-        return JDBCHelper.executeUpdate(sql, t.getMaNguoidung(), t.getTaiKhoan(), t.getMatKhau(), t.getHoTen(), t.getDienThoai(), t.getVaiTro(), t.isTrangThai());
+        String sql = "Insert dbo.NguoiDung values (?,?,?,?,?,?,?,?)";
+        return JDBCHelper.executeUpdate(sql, t.getMaNguoidung(), t.getTaiKhoan(), t.getMatKhau(),t.getEmail(), t.getHoTen(), t.getDienThoai(), t.getVaiTro(), t.isTrangThai());
     }
 
     @Override
@@ -32,8 +32,8 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
 
     @Override
     public boolean update(NguoiDung t) {
-        String sql = "Update dbo.NguoiDung set taiKhoan=?,matKhau=?, hoTen=?, dienThoai=?, vaiTro=?, trangThai=? where maNguoiDung=?";
-        return JDBCHelper.executeUpdate(sql, t.getTaiKhoan(),t.getMatKhau(), t.getHoTen(), t.getDienThoai(), t.getVaiTro(), t.isTrangThai(), t.getMaNguoidung());
+        String sql = "Update dbo.NguoiDung set taiKhoan=?,matKhau=?, email=?, hoTen=?, dienThoai=?, vaiTro=?, trangThai=? where maNguoiDung=?";
+        return JDBCHelper.executeUpdate(sql, t.getTaiKhoan(),t.getMatKhau(),t.getEmail(), t.getHoTen(), t.getDienThoai(), t.getVaiTro(), t.isTrangThai(), t.getMaNguoidung());
     }
 
     @Override
@@ -69,10 +69,11 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
             model.setMaNguoidung(rs.getString(1));
             model.setTaiKhoan(rs.getString(2));
             model.setMatKhau(rs.getString(3));
-            model.setHoTen(rs.getString(4));
-            model.setDienThoai(rs.getString(5));
-            model.setVaiTro(rs.getString(6));
-            model.setTrangThai(rs.getBoolean(7));
+            model.setEmail(rs.getString(4));
+            model.setHoTen(rs.getString(5));
+            model.setDienThoai(rs.getString(6));
+            model.setVaiTro(rs.getString(7));
+            model.setTrangThai(rs.getBoolean(8));
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }

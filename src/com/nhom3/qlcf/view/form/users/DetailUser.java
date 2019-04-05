@@ -7,6 +7,7 @@ package com.nhom3.qlcf.view.form.users;
 
 import com.nhom3.qlcf.dao.NguoiDungDAO;
 import com.nhom3.qlcf.model.NguoiDung;
+import static com.nhom3.qlcf.view.form.users.FormQuanLyTaiKhoan_admin.jpltable;
 
 /**
  *
@@ -35,6 +36,7 @@ public class DetailUser extends javax.swing.JDialog {
         txtUsers.setText(nd.getTaiKhoan());
         ttxhoten.setText(nd.getHoTen());
         txtSDT.setText(nd.getDienThoai());
+        txtemail.setText(nd.getEmail());
         cbxVaiTro.setSelectedItem(nd.getVaiTro());
         txtSDT.setName(nd.getMatKhau());
 
@@ -50,9 +52,11 @@ public class DetailUser extends javax.swing.JDialog {
             nd.setVaiTro(cbxVaiTro.getSelectedItem().toString());
             nd.setMatKhau(txtSDT.getName());
             nd.setTaiKhoan(txtUsers.getText());
+            nd.setEmail(txtemail.getText());
             nd.setTrangThai(true);
             NguoiDungDAO ndDAO = new NguoiDungDAO();
             ndDAO.update(nd);
+            lblthongbao.setText("Cập Nhật Thành Công");
 
         } catch (Exception e) {
             System.out.println(e);
@@ -86,6 +90,10 @@ public class DetailUser extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        lblthongbao = new javax.swing.JLabel();
+        lblpass4 = new javax.swing.JLabel();
+        txtemail = new javax.swing.JTextField();
+        lblvien4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -134,7 +142,7 @@ public class DetailUser extends javax.swing.JDialog {
         jPanel1.add(lblpass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 80, 20));
 
         lblvien2.setText("___________________________________________");
-        jPanel1.add(lblvien2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 260, 30));
+        jPanel1.add(lblvien2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 260, 30));
 
         txtSDT.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtSDT.setBorder(null);
@@ -142,8 +150,8 @@ public class DetailUser extends javax.swing.JDialog {
         jPanel1.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 259, 40));
 
         lblpass2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblpass2.setText("Vài Trò:");
-        jPanel1.add(lblpass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 80, 20));
+        lblpass2.setText("Email:");
+        jPanel1.add(lblpass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 70, 20));
 
         lblvien3.setText("___________________________________________");
         jPanel1.add(lblvien3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 260, 30));
@@ -158,14 +166,20 @@ public class DetailUser extends javax.swing.JDialog {
                 cbxVaiTroActionPerformed(evt);
             }
         });
-        jPanel1.add(cbxVaiTro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 210, -1));
+        jPanel1.add(cbxVaiTro, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 210, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Cập Nhật");
         jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel3.setOpaque(true);
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
+        });
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 130, 40));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -173,6 +187,7 @@ public class DetailUser extends javax.swing.JDialog {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Lấy Lại Mật Khẩu");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel4.setOpaque(true);
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -191,6 +206,24 @@ public class DetailUser extends javax.swing.JDialog {
             }
         });
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(294, 440, 70, -1));
+
+        lblthongbao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblthongbao.setForeground(new java.awt.Color(51, 204, 0));
+        lblthongbao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblthongbao.setText("....");
+        jPanel1.add(lblthongbao, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 380, -1));
+
+        lblpass4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblpass4.setText("Vài Trò:");
+        jPanel1.add(lblpass4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 80, 20));
+
+        txtemail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtemail.setBorder(null);
+        txtemail.setOpaque(false);
+        jPanel1.add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 260, 40));
+
+        lblvien4.setText("___________________________________________");
+        jPanel1.add(lblvien4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 260, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -216,13 +249,28 @@ public class DetailUser extends javax.swing.JDialog {
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
         // TODO add your handling code here:
-
+       LayLaiMatKhau l = new LayLaiMatKhau(null, rootPaneCheckingEnabled, txtemail.getText());
+       l.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jLabel4MousePressed
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
         // TODO add your handling code here:
+
         dispose();
     }//GEN-LAST:event_jLabel2MousePressed
+
+    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+        // TODO add your handling code here:
+
+        update();
+        
+        FormQuanLyTaiKhoan_admin.quanlynhanvien.jpltable.removeAll();
+        jpltable.updateUI();
+        jpltable.add(new Quanlyusers());
+        jpltable.repaint();
+        jpltable.updateUI();
+
+    }//GEN-LAST:event_jLabel3MousePressed
 
     /**
      * @param args the command line arguments
@@ -276,12 +324,16 @@ public class DetailUser extends javax.swing.JDialog {
     private javax.swing.JLabel lblpass1;
     private javax.swing.JLabel lblpass2;
     private javax.swing.JLabel lblpass3;
+    private javax.swing.JLabel lblpass4;
+    private javax.swing.JLabel lblthongbao;
     private javax.swing.JLabel lbluser;
     private javax.swing.JLabel lblvien;
     private javax.swing.JLabel lblvien2;
     private javax.swing.JLabel lblvien3;
+    private javax.swing.JLabel lblvien4;
     private javax.swing.JTextField ttxhoten;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtUsers;
+    private javax.swing.JTextField txtemail;
     // End of variables declaration//GEN-END:variables
 }

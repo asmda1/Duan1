@@ -23,7 +23,9 @@ import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.SanPham;
 import com.nhom3.qlcf.model.SizeSP;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.ResultSet;
@@ -79,12 +81,14 @@ public class InHoaDon extends javax.swing.JDialog {
         } else {
             lblsdt.setText(sdt);
         }
-         double tienkhach1 = Double.parseDouble(tienkhach);
-        if (tienkhach == null || tienthoi == null || tienkhach1==0) {
+
+    
+        double tienkhach1 = Double.parseDouble(tienkhach);
+        if (tienkhach == null || tienthoi == null || tienkhach1 == 0) {
             lbltienkhach.setText("0");
             lblTienthoi.setText("0");
         } else {
-           
+
             lbltienkhach.setText(String.valueOf(chuyentien.format(tienkhach1)) + " VND");
             lblTienthoi.setText(tienthoi);
         }
@@ -350,7 +354,7 @@ public class InHoaDon extends javax.swing.JDialog {
         try {
 
             // Tạo đối tượng PdfWriter
-            PdfWriter.getInstance(document, new FileOutputStream("HoaDon.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("src/com/nhom3/qlcf/HoaDon.pdf"));
             // Mở file để thực hiện ghi
             document.open();
             PdfPTable table = new PdfPTable(4);
@@ -412,7 +416,7 @@ public class InHoaDon extends javax.swing.JDialog {
             document.add(ngay);
             document.add(tieudeHD);
             document.add(table);
-              //Thanh Tiền
+            //Thanh Tiền
             Paragraph title1 = new Paragraph("Tong Tien: " + lblthanhtienhd.getText(),
                     FontFactory.getFont(FontFactory.HELVETICA, 11, Font.BOLD));
             title1.setAlignment(Element.ALIGN_RIGHT);
@@ -428,9 +432,8 @@ public class InHoaDon extends javax.swing.JDialog {
             Paragraph title3 = new Paragraph("Tien Thoi: " + lblTienthoi.getText(),
                     FontFactory.getFont(FontFactory.HELVETICA, 11, Font.BOLD));
             title3.setAlignment(Element.ALIGN_RIGHT);
-            title3.setIndentationRight(65);
+            title3.setIndentationRight(60);
             document.add(title3);
-          
 
             // Đóng File
             document.close();
@@ -443,6 +446,15 @@ public class InHoaDon extends javax.swing.JDialog {
                     null,
                     opObjects,
                     opObjects[0]);
+
+            if (Desktop.isDesktopSupported()) {
+                File pdf = new File("src/com/nhom3/qlcf/HoaDon.pdf");
+                try {
+                    Desktop.getDesktop().open(pdf);
+                } catch (Exception e) {
+                }
+
+            }
             dispose();
         } catch (FileNotFoundException e) {
             JOptionPane.showOptionDialog(null,
