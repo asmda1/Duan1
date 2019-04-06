@@ -5,19 +5,107 @@
  */
 package com.nhom3.qlcf.view.form.nhacungcap;
 
+import com.nhom3.qlcf.dao.NhaCungCapDAO;
+import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.helper.XuLy;
+import com.nhom3.qlcf.model.NhaCungCap;
 import com.nhom3.qlcf.view.form.users.*;
+import java.awt.Color;
+import java.util.List;
 
 /**
  *
  * @author baotri1998
  */
 public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
+    
+    public static ChinhSuaNhaCungCap csncc;
 
     /**
      * Creates new form Quanlyusers
      */
     public ChinhSuaNhaCungCap() {
         initComponents();
+        csncc = this;
+    }
+    
+    public ChinhSuaNhaCungCap(String ma) {
+        initComponents();
+        csncc = this;
+        txttimnhacc.setText(ma);
+        
+    }
+    
+    public void timNhaCungCap() {
+        List<NhaCungCap> list = new NhaCungCapDAO().select("Select * from NhaCungCap where maNhaCungCap ='" + txttimnhacc.getText() + "' or dienThoai ='" + txttimnhacc.getText() + "'");
+        lblTen.setName(list.get(0).getMaNhaCungCap());
+        txtTen.setText(list.get(0).getTenNhaCC());
+        lblTen.setText(list.get(0).getTenNhaCC());
+        lblSDT.setText(list.get(0).getDienThoai());
+        txtSDT.setText(list.get(0).getDienThoai());
+        txtDiachi.setText(list.get(0).getDiaChi());
+        txtDiachi.setName(list.get(0).getDiaChi());
+        if (list.get(0).isTrangThai() == true) {
+            lblTinhtrang.setText("Hợp Tác");
+            coxTrangThai.setSelectedIndex(1);
+        } else {
+            lblTinhtrang.setText("Không Hợp Tác");
+            coxTrangThai.setSelectedIndex(0);
+        }
+        
+    }
+    
+    public boolean check() {
+        if (txttimnhacc.getText().equals("Tìm SĐT Hoặc Mã Nhà Cung Cấp") || txttimnhacc.getText().trim().equals("")) {
+            lbltb.setText("Bạn phải nhập SĐT hoặc Mã Nhà CC");
+            lbltb.setForeground(Color.red);
+            return false;
+        } else if (!txtSDT.getText().matches("[0-9]+")) {
+            lbltb.setText("SĐT phải nhập là số");
+            lbltb.setForeground(Color.ORANGE);
+            return false;
+        } else if (lblTen.getText().isEmpty()) {
+            lbltb.setText("Lỗi, Hãy tìm nhà cung cấp");
+            lbltb.setForeground(Color.ORANGE);
+            return false;
+        }
+        return true;
+    }
+    
+    public void update() {
+        NhaCungCap ncc = new NhaCungCap();
+        ncc.setMaNhaCungCap(lblTen.getName());
+        
+        if (txtDiachi.getText().trim().equals("") || txtSDT.getText().trim().equals("") || txtTen.getText().trim().equals("")) {
+            lbltb.setText("Bạn bỏ trống thông tin, hệ thống sẽ lấy dữ liệu củ");
+            lbltb.setForeground(Color.ORANGE);
+            ncc.setDienThoai(lblSDT.getText());
+            ncc.setTenNhaCC(lblTen.getText());
+            ncc.setDiaChi(txtDiachi.getName());
+            
+        } else {
+            lbltb.setForeground(Color.GREEN);
+            lbltb.setText("Thành công!");
+            ncc.setDienThoai(txtSDT.getText());
+            ncc.setTenNhaCC(txtTen.getText());
+            ncc.setDiaChi(txtDiachi.getText());
+            
+        }
+        if (coxTrangThai.getSelectedIndex() == 1) {
+            ncc.setTrangThai(true);
+        } else {
+            ncc.setTrangThai(false);
+        }
+        NhaCungCapDAO dao = new NhaCungCapDAO();
+        dao.update(ncc);
+        lblTen.setName("");
+        txtTen.setText("");
+        lblTen.setText("");
+        lblSDT.setText("");
+        txtSDT.setText("");
+        txtDiachi.setText("");
+        lblTinhtrang.setText("");
+        
     }
 
     /**
@@ -44,11 +132,15 @@ public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
         lblDiachi = new javax.swing.JLabel();
         txtDiachi = new javax.swing.JTextField();
         lblvien4 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        coxTrangThai = new javax.swing.JComboBox<>();
         lblThaydoiSDT = new javax.swing.JLabel();
+        lblTen1 = new javax.swing.JLabel();
+        lblSDT1 = new javax.swing.JLabel();
+        lblTinhtrang1 = new javax.swing.JLabel();
+        lbltb = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        txttimnhacc = new javax.swing.JTextField();
+        lblbuton_tim = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -57,12 +149,12 @@ public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTinhtrang.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblTinhtrang.setText("Tình Trạng: Hợp Tác");
-        jPanel1.add(lblTinhtrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 331, 43));
+        lblTinhtrang.setText("....");
+        jPanel1.add(lblTinhtrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 240, 40));
 
         lblTen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblTen.setText("Tên Đối Tác: ABC");
-        jPanel1.add(lblTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 331, 43));
+        lblTen.setText("...");
+        jPanel1.add(lblTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 220, 43));
 
         lblCapNhatTragThai.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCapNhatTragThai.setText("Cập Nhật Trạng Thái :");
@@ -89,22 +181,34 @@ public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
         lblButonReset.setBackground(new java.awt.Color(255, 255, 255));
         lblButonReset.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblButonReset.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblButonReset.setText("Reset");
+        lblButonReset.setText("Hiển Thị Danh Sách");
         lblButonReset.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblButonReset.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblButonReset.setOpaque(true);
-        jPanel1.add(lblButonReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 110, 40));
+        lblButonReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblButonResetMousePressed(evt);
+            }
+        });
+        jPanel1.add(lblButonReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, 150, 40));
 
         lblButonCapNhat.setBackground(new java.awt.Color(255, 255, 255));
         lblButonCapNhat.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblButonCapNhat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblButonCapNhat.setText("Câp Nhật");
         lblButonCapNhat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblButonCapNhat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblButonCapNhat.setOpaque(true);
-        jPanel1.add(lblButonCapNhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 110, 40));
+        lblButonCapNhat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblButonCapNhatMousePressed(evt);
+            }
+        });
+        jPanel1.add(lblButonCapNhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 120, 40));
 
         lblSDT.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblSDT.setText("Số ĐT: 090090090");
-        jPanel1.add(lblSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 331, 43));
+        lblSDT.setText("...");
+        jPanel1.add(lblSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, 250, 43));
 
         lblDiachi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblDiachi.setText("Địa Chỉ:");
@@ -117,19 +221,43 @@ public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
         lblvien4.setText("___________________________________________");
         jPanel1.add(lblvien4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 260, 30));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Không Hợp Tác", "Hợp Tác" }));
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 210, -1));
+        coxTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Không Hợp Tác", "Hợp Tác" }));
+        jPanel1.add(coxTrangThai, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 210, -1));
 
         lblThaydoiSDT.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblThaydoiSDT.setText("Thay Đổi Số ĐT :");
         jPanel1.add(lblThaydoiSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 140, 20));
 
+        lblTen1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTen1.setText("Tên Đối Tác:");
+        jPanel1.add(lblTen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 80, 43));
+
+        lblSDT1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblSDT1.setText("Số ĐT:");
+        jPanel1.add(lblSDT1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 40, 43));
+
+        lblTinhtrang1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTinhtrang1.setText("Tình Trạng: ");
+        jPanel1.add(lblTinhtrang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, 40));
+
+        lbltb.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbltb.setForeground(new java.awt.Color(255, 0, 0));
+        lbltb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbltb.setText(".");
+        jPanel1.add(lbltb, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 370, -1));
+
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Tìm Kiếm");
+        lblbuton_tim.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblbuton_tim.setForeground(new java.awt.Color(255, 255, 255));
+        lblbuton_tim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblbuton_tim.setText("Tìm Kiếm");
+        lblbuton_tim.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblbuton_tim.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblbuton_timMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -137,16 +265,19 @@ public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txttimnhacc, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblbuton_tim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+            .addComponent(txttimnhacc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(lblbuton_tim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        txttimnhacc.setText("Tìm SĐT Hoặc Mã Nhà Cung Cấp");
+        txttimnhacc.setForeground(Color.gray);
+        XuLy.placeHolder(txttimnhacc, "Tìm SĐT Hoặc Mã Nhà Cung Cấp");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -156,8 +287,8 @@ public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
                 .addGap(180, 180, 180)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE))
-                .addContainerGap(140, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,27 +301,60 @@ public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lblbuton_timMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbuton_timMousePressed
+        // TODO add your handling code here:
+        NhaCungCapDAO ncc = new NhaCungCapDAO();
+        if (txttimnhacc.getText().equals("Tìm SĐT Hoặc Mã Nhà Cung Cấp") || txttimnhacc.getText().trim().equals("")) {
+            lbltb.setText("Bạn phải nhập SĐT hoặc Mã Nhà CC");
+            lbltb.setForeground(Color.red);
+        } else if (ncc.checkMa(txttimnhacc.getText()) == false) {
+            lbltb.setText("Mã hoặc SĐT này không tồn tại");
+            lbltb.setForeground(Color.red);
+        } else {
+            timNhaCungCap();
+        }
+
+    }//GEN-LAST:event_lblbuton_timMousePressed
+
+    private void lblButonCapNhatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblButonCapNhatMousePressed
+        // TODO add your handling code here:
+
+        if (check()) {
+            update();
+        }
+    }//GEN-LAST:event_lblButonCapNhatMousePressed
+
+    private void lblButonResetMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblButonResetMousePressed
+        // TODO add your handling code here:
+        DanhSachSuaNhaCC d = new DanhSachSuaNhaCC(null, true);
+        d.setVisible(true);
+    }//GEN-LAST:event_lblButonResetMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> coxTrangThai;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblButonCapNhat;
     private javax.swing.JLabel lblButonReset;
     private javax.swing.JLabel lblCapNhatTragThai;
     private javax.swing.JLabel lblDiachi;
     private javax.swing.JLabel lblSDT;
+    private javax.swing.JLabel lblSDT1;
     private javax.swing.JLabel lblTen;
+    private javax.swing.JLabel lblTen1;
     private javax.swing.JLabel lblThayDiten;
     private javax.swing.JLabel lblThaydoiSDT;
     private javax.swing.JLabel lblTinhtrang;
+    private javax.swing.JLabel lblTinhtrang1;
+    private javax.swing.JLabel lblbuton_tim;
+    private javax.swing.JLabel lbltb;
     private javax.swing.JLabel lblvien2;
     private javax.swing.JLabel lblvien3;
     private javax.swing.JLabel lblvien4;
     private javax.swing.JTextField txtDiachi;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTen;
+    protected static javax.swing.JTextField txttimnhacc;
     // End of variables declaration//GEN-END:variables
 }
