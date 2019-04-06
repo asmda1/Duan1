@@ -161,13 +161,14 @@ public class LayLaiMatKhau extends javax.swing.JDialog {
                         .addGap(6, 6, 6)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtcode, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)))
-                .addGap(33, 33, 33)
+                        .addComponent(jLabel2)
+                        .addGap(45, 45, 45))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtcode, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                        .addGap(36, 36, 36)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -216,8 +217,16 @@ public class LayLaiMatKhau extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jLabel3MousePressed
     public boolean check() {
-        if (txtcode.getText().trim().equals("")) {
+        if (txtemail.getText().trim().equals("")) {
+            lblthongbao.setText("Không thể bỏ email của bạn");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (txtcode.getText().trim().equals("")) {
             lblthongbao.setText("Chưa nhập mã code!");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (!txtemail.getText().matches("[\\w\\.]+@[\\w+]+\\.+[\\.\\w+]+")) {
+            lblthongbao.setText("Email phải đúng định dạng VD: abc@gmail.com!");
             lblthongbao.setForeground(Color.red);
             return false;
         } else if (!txtcode.getText().equals(code)) {
