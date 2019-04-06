@@ -403,7 +403,9 @@ public class KhachDatOnline extends javax.swing.JDialog {
     private void lblthanhToanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblthanhToanMousePressed
         // TODO add your handling code here:
         update();
-        InHoaDon in = new InHoaDon(null, rootPaneCheckingEnabled, lblmaHD.getName(), lbltongtien.getName(), lblKH.getName(), lblsdt.getName(),null,null);
+        String tienkhach ="0";
+        String tienthoi ="0";
+        InHoaDon in = new InHoaDon(null, rootPaneCheckingEnabled, lblmaHD.getName(), lbltongtien.getName(), lblKH.getName(), lblsdt.getName());
         in.setVisible(true);
     }//GEN-LAST:event_lblthanhToanMousePressed
 

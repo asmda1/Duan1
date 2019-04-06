@@ -709,6 +709,7 @@ public class FormBanHang extends javax.swing.JPanel {
         lblbuton_thanhToan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblbuton_thanhToan.setText("THANH TOÁN");
         lblbuton_thanhToan.setToolTipText("AutogetMaHD");
+        lblbuton_thanhToan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblbuton_thanhToan.setName("AutogetMaHD"); // NOI18N
         lblbuton_thanhToan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -836,7 +837,7 @@ public class FormBanHang extends javax.swing.JPanel {
 
         lblsound.setName("sound");
 
-        jfBangHang.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 630));
+        jfBangHang.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 1080, 630));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenThuNgan.png"))); // NOI18N
         jfBangHang.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, -1));
@@ -995,6 +996,10 @@ public class FormBanHang extends javax.swing.JPanel {
                     InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(), lbltenKH.getToolTipText(), txtdiem.getName(),
                             txttienkhach.getText(), lbltienthua.getText());
                     show.setVisible(true);
+                } else {
+                    InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(), lbltenKH.getToolTipText(), txtdiem.getName(),
+                            txttienkhach.getText(), lbltienthua.getText());
+                    show.setVisible(true);
                 }
 
                 Reset();
@@ -1115,9 +1120,6 @@ public class FormBanHang extends javax.swing.JPanel {
     public void ChietKhauTang() {
         so = Integer.parseInt(txtChietKhau.getText());
         int diem = Integer.parseInt(txtdiem.getText());
-
-        lbldiemtichluy.setText("0");
-
         if (lbldiemtichluy.getText().equals("0") && lbltenKH.getText().equals("KH000")) {
             KhachHangDAO khdao = new KhachHangDAO();
             nd = khdao.selectID(txtTimSDT.getText());
@@ -1130,24 +1132,16 @@ public class FormBanHang extends javax.swing.JPanel {
                 tongtien += (DongCTHD.get(i).getMaHoaDon().getTongTien());
             }
             //khách tích lủy 1000 ms dc giảm giá, 
-            if (!txtdiem.getText().equals("0") && so < 10 && diem > 1000 && tongtien > 200000 && tongtien < 1000000) {
+            if (!txtdiem.getText().equals("0") && so < 5 && diem > 1000 && tongtien > 200000) {
                 so++;
                 txtChietKhau.setText(String.valueOf((so + 5) - 1));
-                int quydiem = Integer.parseInt(txtChietKhau.getText()) * 100;
-                diem = quydiem - (Integer.parseInt(txtdiem.getText()));
-                if (-diem >= 0) {
-                    txtdiem.setText(String.valueOf(-(diem)));
-                }
-            } else if (!txtdiem.getText().equals("0") && so < 5 && diem > 1000 && tongtien > 1000000) {
-                so++;
-                txtChietKhau.setText(String.valueOf((so + 5) - 1));
+                lbldiemtichluy.setText("0");
                 int quydiem = Integer.parseInt(txtChietKhau.getText()) * 100;
                 diem = quydiem - (Integer.parseInt(txtdiem.getText()));
                 if (-diem >= 0) {
                     txtdiem.setText(String.valueOf(-(diem)));
                 }
             } else {//
-
                 if (lbltenKH.getText().equals(" x Khách lẻ")
                         || lbltenKH.getText().equals("SĐT này chưa đăng ký")
                         || lbltenKH.getText().equals("Nhập số điện thoại khách hàng!")

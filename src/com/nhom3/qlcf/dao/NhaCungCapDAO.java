@@ -6,6 +6,7 @@
 package com.nhom3.qlcf.dao;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.model.NguoiDung;
 import com.nhom3.qlcf.model.NhaCungCap;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -79,11 +80,11 @@ public class NhaCungCapDAO implements DAO<NhaCungCap> {
         return model;
     }
 
- 
-
     @Override
     public NhaCungCap selectID(String ID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "Select * from dbo.NhaCungCap where dienThoai=?";
+        List<NhaCungCap> list = select(sql, ID);
+        return list.size() > 0 ? list.get(0) : null;
     }
 
 }

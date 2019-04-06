@@ -6,12 +6,10 @@
 package com.nhom3.qlcf.view.form.khachhang;
 
 import com.nhom3.qlcf.dao.KhachHangDAO;
-import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.model.KhachHang;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.Run;
-import static com.nhom3.qlcf.view.form.khachhang.KhachHangOnline.tblKhachHangOn;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
@@ -60,7 +58,7 @@ public class FormKhachHang extends javax.swing.JPanel {
         model.setRowCount(0);
         for (KhachHang kh : listKH) {
             Object[] row = new Object[]{
-                kh.getMakh(), kh.getTenKh(), kh.getEmail(), kh.getDiaChi(), kh.getDienThoai()
+                kh.getMakh(), kh.getTenKh(), kh.getEmail(), kh.getDiaChi(), kh.getDienThoai(), kh.isTrangThai() == true ? "Hội Viên" : "Khách Online"
             };
             model.addRow(row);
         }
@@ -424,13 +422,13 @@ public class FormKhachHang extends javax.swing.JPanel {
         tblKhachHang.setForeground(new java.awt.Color(51, 51, 51));
         tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Khách Hàng", "Tên", "Email", "Địa Chỉ", "Điện Thoại"
+                "Mã Khách Hàng", "Tên", "Email", "Địa Chỉ", "Điện Thoại", "Loại Khách"
             }
         ));
         tblKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -679,8 +677,8 @@ public class FormKhachHang extends javax.swing.JPanel {
         CardLayout.show();
         jscDanhSachKH.hide();
         tblKhachHang.hide();
-         tblKhachHang.hide();
-        
+        tblKhachHang.hide();
+
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
@@ -728,7 +726,7 @@ public class FormKhachHang extends javax.swing.JPanel {
         CardLayout.repaint();
         CardLayout.revalidate();
         CardLayout.show();
-    tblKhachHang.show();
+        tblKhachHang.show();
 
     }//GEN-LAST:event_jLabel8MouseClicked
 
@@ -767,7 +765,10 @@ public class FormKhachHang extends javax.swing.JPanel {
         jpnDangKyForm.show();
         jpnGiaoDien.hide();
         jpnBack_button.show();
-       
+        DangKyHoiVien.lbltitle.setText("Chỉnh Sửa Nhân Viên");
+        DangKyHoiVien.txtdiem.setEditable(false);
+         DangKyHoiVien.lblbuton_dky.setText("Cập Nhật");
+
     }//GEN-LAST:event_tblKhachHangMousePressed
 
 

@@ -5,7 +5,10 @@
  */
 package com.nhom3.qlcf.view.form.nhacungcap;
 
+import com.nhom3.qlcf.dao.NhaCungCapDAO;
 import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.helper.XuLy;
+import com.nhom3.qlcf.model.NhaCungCap;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
@@ -42,7 +45,7 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
         try {
             while (rs.next()) {
                 Object[] row = new Object[]{
-                    rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBoolean(5) == true? "Hợp Tác": "Không Hợp Tác"
+                    rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBoolean(5) == true ? "Hợp Tác" : "Không Hợp Tác"
                 };
                 model.addRow(row);
             }
@@ -73,10 +76,8 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
         jpnNen = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblnhacungcap = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txttimnhacc = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         lblanhGiaoDien = new javax.swing.JLabel();
         Card = new javax.swing.JPanel();
@@ -278,35 +279,18 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
         tblnhacungcap.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tblnhacungcap);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 255));
-
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Sắp Xếp Theo Loại Hàng");
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-        );
-
         jPanel3.setBackground(new java.awt.Color(51, 51, 255));
-
-        jTextField1.setText("Tìm kiếm ten nha cc");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Tìm Kiếm");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -314,16 +298,20 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txttimnhacc, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField1)
+            .addComponent(txttimnhacc, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        txttimnhacc.setText("Tìm SĐT Nhà Cung Cấp");
+        txttimnhacc.setForeground(Color.gray);
+        XuLy.placeHolder(txttimnhacc, "Tìm SĐT Nhà Cung Cấp");
 
         javax.swing.GroupLayout jpnNenLayout = new javax.swing.GroupLayout(jpnNen);
         jpnNen.setLayout(jpnNenLayout);
@@ -332,8 +320,6 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnNenLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnNenLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -344,12 +330,10 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
             jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnNenLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jfThemNhaCungCap.add(jpnNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 1080, 630));
@@ -477,15 +461,35 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
         jpnShowMenuOut.hide();
     }//GEN-LAST:event_jpnShowMenuOutMouseExited
 
+    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+        // TODO add your handling code here:
+        ResultSet rs = null;
+        if (txttimnhacc.getText().trim().equals("")) {
+            rs = JDBCHelper.executeQuery("SELECT * FROM NhaCungCap");
+        } else {
+
+            rs = JDBCHelper.executeQuery("SELECT * FROM NhaCungCap where dienThoai ='" + txttimnhacc.getText() + "'");
+        }
+
+        model = (DefaultTableModel) tblnhacungcap.getModel();
+        model.setRowCount(0);
+        try {
+            while (rs.next()) {
+                Object[] row = new Object[]{
+                    rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBoolean(5) == true ? "Hợp Tác" : "Không Hợp Tác"
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jLabel3MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JPanel Card;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
     protected static javax.swing.JPanel jfThemNhaCungCap;
     private javax.swing.JPanel jpnDangXuat;
     private javax.swing.JPanel jpnNen;
@@ -500,5 +504,6 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
     private javax.swing.JLabel lblTenDangNhapBangHang;
     private javax.swing.JLabel lblanhGiaoDien;
     private javax.swing.JTable tblnhacungcap;
+    private javax.swing.JTextField txttimnhacc;
     // End of variables declaration//GEN-END:variables
 }

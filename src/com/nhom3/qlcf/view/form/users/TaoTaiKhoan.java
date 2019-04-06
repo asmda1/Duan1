@@ -7,6 +7,7 @@ package com.nhom3.qlcf.view.form.users;
 
 import com.nhom3.qlcf.dao.NguoiDungDAO;
 import com.nhom3.qlcf.model.NguoiDung;
+import java.awt.Color;
 import java.util.stream.Stream;
 
 /**
@@ -21,6 +22,49 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
     public TaoTaiKhoan() {
         initComponents();
         AutogetMaND();
+    }
+
+    public boolean check() {
+        String emails = "[\\w\\.]+@[\\w+]+\\.+[\\.\\w+]+";
+        if (txtUsers.getText().trim().equals("")) {
+            lblthongbao.setText("Users không được bỏ trống");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (txtMatKhau.getText().trim().equals("")) {
+            lblthongbao.setText("Mật Khẩu không được bỏ trống");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (txtMatKhau.getText().length() < 6) {
+            lblthongbao.setText("Mật Khẩu ít nhất 6 kí tự");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (txtTen.getText().trim().equals("")) {
+            lblthongbao.setText("Tên không được bỏ trống");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (txtSDT.getText().trim().equals("")) {
+            lblthongbao.setText("SĐT không được bỏ trống");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (!txtSDT.getText().matches("[0-9]+")) {
+            lblthongbao.setText("SĐT phải là số");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (txtSDT.getText().length() < 10 && txtSDT.getText().length() > 13) {
+            lblthongbao.setText("SĐT phải từ [10-13] số");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (txtemail.getText().equals("")) {
+            lblthongbao.setText("Email không được bỏ trống!");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (!txtemail.getText().matches(emails)) {
+            lblthongbao.setText("Email phải đúng định dạng VD: abc@gmail.com!");
+            lblthongbao.setForeground(Color.red);
+            return false;
+
+        }
+        return true;
     }
 
     /**
@@ -53,6 +97,7 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         lblvien4 = new javax.swing.JLabel();
         lblpass4 = new javax.swing.JLabel();
         txtemail = new javax.swing.JTextField();
+        lblthongbao = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -166,6 +211,12 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         txtemail.setOpaque(false);
         jPanel1.add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 260, 40));
 
+        lblthongbao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblthongbao.setForeground(new java.awt.Color(51, 204, 0));
+        lblthongbao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblthongbao.setText("....");
+        jPanel1.add(lblthongbao, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 380, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,7 +245,9 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
         // TODO add your handling code here:
-        InsertUser();
+        if (check()) {
+            InsertUser();
+        }
     }//GEN-LAST:event_jLabel4MousePressed
     public void InsertUser() {
         NguoiDung nd = new NguoiDung();
@@ -229,6 +282,7 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JLabel lblpass2;
     private javax.swing.JLabel lblpass3;
     private javax.swing.JLabel lblpass4;
+    private javax.swing.JLabel lblthongbao;
     private javax.swing.JLabel lbluser;
     private javax.swing.JLabel lblvien;
     private javax.swing.JLabel lblvien1;

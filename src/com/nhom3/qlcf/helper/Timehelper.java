@@ -49,7 +49,7 @@ public class Timehelper implements TimerHelperInterFace {
                         if (lbl.getText().equals("0") || lblsound.getName().equals("mute")) {
                             lblsound.setName("sound");
                             lblsound.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/mute.png")));
-                            mp3.stop();
+                                mp3.stop();
                         } else {
                             mp3.play();
                             lblsound.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/sound.png")));

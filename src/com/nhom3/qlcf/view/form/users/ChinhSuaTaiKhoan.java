@@ -6,7 +6,9 @@
 package com.nhom3.qlcf.view.form.users;
 
 import com.nhom3.qlcf.dao.NguoiDungDAO;
+import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.model.NguoiDung;
+import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
 
@@ -25,6 +27,43 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         initComponents();
     }
 
+    public boolean check() {
+        String emails = "[\\w\\.]+@[\\w+]+\\.+[\\.\\w+]+";
+        if (txtTimKiem.getText().trim().equals("Tìm Mã Nhân Viên") || txtTimKiem.getText().trim().equals("")) {
+            lblthongbao.setText("Nhập Mã NV là bắt buột");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else {
+            if (txtten.getText().trim().equals("")) {
+                lblthongbao.setText("Tên không được bỏ trống");
+                lblthongbao.setForeground(Color.red);
+                return false;
+            } else if (txtSDT.getText().trim().equals("")) {
+                lblthongbao.setText("SĐT không được bỏ trống");
+                lblthongbao.setForeground(Color.red);
+                return false;
+            } else if (!txtSDT.getText().matches("[0-9]+")) {
+                lblthongbao.setText("SĐT phải là số");
+                lblthongbao.setForeground(Color.red);
+                return false;
+            } else if (txtSDT.getText().length() > 10 && txtSDT.getText().length() < 13) {
+                lblthongbao.setText("SĐT phải từ [10-13] số");
+                lblthongbao.setForeground(Color.red);
+                return false;
+            } else if (txtemail.getText().equals("")) {
+                lblthongbao.setText("Email không được bỏ trống!");
+                lblthongbao.setForeground(Color.red);
+                return false;
+            } else if (!txtemail.getText().matches(emails)) {
+                lblthongbao.setText("Email phải đúng định dạng VD: abc@gmail.com!");
+                lblthongbao.setForeground(Color.red);
+                return false;
+            }
+
+        }
+        return true;
+    }
+
     public void update() {
 
         try {
@@ -35,6 +74,7 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
             nd.setVaiTro(cbxNhanVien.getSelectedItem().toString());
             nd.setMatKhau(ndung.getMatKhau());
             nd.setTaiKhoan(lblTenDangNhap.getText());
+            nd.setEmail(txtemail.getText());
             nd.setTrangThai(true);
             NguoiDungDAO ndDAO = new NguoiDungDAO();
             ndDAO.update(nd);
@@ -57,8 +97,7 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         cbxNhanVien.setSelectedItem(ndung.getVaiTro());
         txtten.setText(ndung.getHoTen());
         txtSDT.setText(ndung.getDienThoai());
-       
-
+        txtemail.setText(ndung.getEmail());
     }
 
     /**
@@ -86,6 +125,9 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         lblTen = new javax.swing.JLabel();
         lblMaNhanVien1 = new javax.swing.JLabel();
         lblthongbao = new javax.swing.JLabel();
+        lblpass2 = new javax.swing.JLabel();
+        txtemail = new javax.swing.JTextField();
+        lblvien4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         txtTimKiem = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -113,7 +155,7 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
 
         lblpass3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblpass3.setText("Số ĐT :");
-        jPanel1.add(lblpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 80, 20));
+        jPanel1.add(lblpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 80, 20));
 
         txtten.setBorder(null);
         txtten.setOpaque(false);
@@ -127,11 +169,11 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         jPanel1.add(lblpass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 100, 20));
 
         lblvien3.setText("___________________________________________");
-        jPanel1.add(lblvien3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 260, 30));
+        jPanel1.add(lblvien3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 260, 30));
 
         txtSDT.setBorder(null);
         txtSDT.setOpaque(false);
-        jPanel1.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 259, 40));
+        jPanel1.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 259, 40));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -139,7 +181,7 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         jLabel6.setText("Reset");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel6.setOpaque(true);
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 110, 40));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 110, 40));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -153,7 +195,7 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
                 jLabel7MousePressed(evt);
             }
         });
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 110, 40));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 110, 40));
 
         lblTen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTen.setText("Tên Đăng Nhập:");
@@ -167,6 +209,18 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         lblthongbao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblthongbao.setText(".");
         jPanel1.add(lblthongbao, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 10, 360, -1));
+
+        lblpass2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblpass2.setText("Email:");
+        jPanel1.add(lblpass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 70, 20));
+
+        txtemail.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtemail.setBorder(null);
+        txtemail.setOpaque(false);
+        jPanel1.add(txtemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 260, 40));
+
+        lblvien4.setText("___________________________________________");
+        jPanel1.add(lblvien4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 260, 30));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -188,14 +242,17 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        txtTimKiem.setText("Tìm Mã Nhân Viên");
+        txtTimKiem.setForeground(Color.gray);
+        XuLy.placeHolder(txtTimKiem, "Tìm Mã Nhân Viên");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -214,8 +271,8 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -226,8 +283,11 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
 
     private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
         // TODO add your handling code here:
+        if (check()) {
+            lblthongbao.setForeground(Color.GREEN);
+            update();
+        }
 
-        update();
     }//GEN-LAST:event_jLabel7MousePressed
 
 
@@ -244,12 +304,15 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JLabel lblTen;
     private javax.swing.JLabel lblTenDangNhap;
     private javax.swing.JLabel lblpass1;
+    private javax.swing.JLabel lblpass2;
     private javax.swing.JLabel lblpass3;
     private javax.swing.JLabel lblthongbao;
     private javax.swing.JLabel lblvien2;
     private javax.swing.JLabel lblvien3;
+    private javax.swing.JLabel lblvien4;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTimKiem;
+    private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtten;
     // End of variables declaration//GEN-END:variables
 }

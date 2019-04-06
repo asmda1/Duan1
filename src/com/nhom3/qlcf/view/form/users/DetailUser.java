@@ -8,6 +8,7 @@ package com.nhom3.qlcf.view.form.users;
 import com.nhom3.qlcf.dao.NguoiDungDAO;
 import com.nhom3.qlcf.model.NguoiDung;
 import static com.nhom3.qlcf.view.form.users.FormQuanLyTaiKhoan_admin.jpltable;
+import java.awt.Color;
 
 /**
  *
@@ -23,6 +24,37 @@ public class DetailUser extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(parent);
 
+    }
+
+    public boolean check() {
+       String emails = "[\\w\\.]+@[\\w+]+\\.+[\\.\\w+]+";
+        if (ttxhoten.getText().trim().equals("")) {
+            lblthongbao.setText("Tên không được bỏ trống");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (txtSDT.getText().trim().equals("")) {
+            lblthongbao.setText("SĐT không được bỏ trống");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (!txtSDT.getText().matches("[0-9]+")) {
+            lblthongbao.setText("SĐT phải là số");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (txtSDT.getText().length() > 10 && txtSDT.getText().length() < 13) {
+            lblthongbao.setText("SĐT phải từ [10-13] số");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (txtemail.getText().equals("")) {
+            lblthongbao.setText("Email không được bỏ trống!");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (!txtemail.getText().matches(emails)) {
+            lblthongbao.setText("Email phải đúng định dạng VD: abc@gmail.com!");
+            lblthongbao.setForeground(Color.red);
+            return false;
+
+        }
+        return true;
     }
 
     public DetailUser(java.awt.Frame parent, boolean modal, String user) {
@@ -249,8 +281,8 @@ public class DetailUser extends javax.swing.JDialog {
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
         // TODO add your handling code here:
-       LayLaiMatKhau l = new LayLaiMatKhau(null, rootPaneCheckingEnabled, txtemail.getText());
-       l.setVisible(rootPaneCheckingEnabled);
+        LayLaiMatKhau l = new LayLaiMatKhau(null, rootPaneCheckingEnabled, txtemail.getText());
+        l.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jLabel4MousePressed
 
     private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
@@ -261,14 +293,16 @@ public class DetailUser extends javax.swing.JDialog {
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
+        if (check()) {
+            lblthongbao.setForeground(Color.GREEN);
+            update();
 
-        update();
-        
-        FormQuanLyTaiKhoan_admin.quanlynhanvien.jpltable.removeAll();
-        jpltable.updateUI();
-        jpltable.add(new Quanlyusers());
-        jpltable.repaint();
-        jpltable.updateUI();
+            FormQuanLyTaiKhoan_admin.quanlynhanvien.jpltable.removeAll();
+            jpltable.updateUI();
+            jpltable.add(new Quanlyusers());
+            jpltable.repaint();
+            jpltable.updateUI();
+        }
 
     }//GEN-LAST:event_jLabel3MousePressed
 

@@ -94,7 +94,32 @@ public class InHoaDon extends javax.swing.JDialog {
         }
 
     }
+ public InHoaDon(java.awt.Frame parent, boolean modal, String hd, String thanhTien, String tenkh, String sdt) {
+        super(parent, modal);
+        initComponents();
+        this.hdString = hd;
+        setLocationRelativeTo(parent);
+        tblInHoaDon.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
+        tblInHoaDon.setFont(new Font("Tohoma", Font.PLAIN, 12));
+        tblInHoaDon.getTableHeader().setOpaque(false);
+        tblInHoaDon.getTableHeader().setBackground(new Color(0, 0, 0));
+        tblInHoaDon.getTableHeader().setForeground(new Color(255, 255, 255));
+        tblInHoaDon.setRowHeight(25);
+        fillChiTietSP(hdString);
+        double tien = Double.parseDouble(thanhTien);
+        lblthanhtienhd.setText(String.valueOf(chuyentien.format(tien)) + " VND");
+        lblmahd.setText(hdString);
+        lblten.setText(tenkh);
+        lblngay.setText(String.valueOf(date));
+        if (sdt == null) {
+            lblsdt.setText("");
+        } else {
+            lblsdt.setText(sdt);
+        }
 
+   
+
+    }
     public void fillChiTietSP(String hd) {
         ResultSet rs = JDBCHelper.executeQuery("EXEC dbo.ChitietKHdatSP @maHD ='" + hd + "'");
         model = (DefaultTableModel) tblInHoaDon.getModel();

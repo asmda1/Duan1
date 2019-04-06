@@ -49,12 +49,11 @@ public class Quanlyusers extends javax.swing.JPanel {
         NguoiDungDAO nd = new NguoiDungDAO();
         listUser = null;
         listUser = nd.selectAll();
-        int x = Integer.parseInt(String.valueOf(listUser.size() / 3));
-        pnlAccounts.setLayout(new GridLayout(x + 1, 3, 20, 20));
+        pnlAccounts.setLayout(new GridLayout(4, 2, 20, 20));
         JPanel[] pnlUsers = new JPanel[listUser.size()];
         for (int i = 0; i < listUser.size(); i++) {
             pnlUsers[i] = new JPanel();
-            pnlUsers[i].setPreferredSize(new Dimension(300, 200)); //w = 200 hei = 250
+            pnlUsers[i].setPreferredSize(new Dimension(350, 300)); //w = 200 hei = 250
             pnlUsers[i].setLayout(null);
             pnlUsers[i].setBackground(new Color(255, 255, 255));
             pnlUsers[i].setBorder(new LineBorder(Color.BLACK, 1));
@@ -129,7 +128,7 @@ public class Quanlyusers extends javax.swing.JPanel {
 
         jSSanPham.setBackground(Color.decode("#e6e6e6"));
         jSSanPham.setBorder(null);
-        jSSanPham.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jSSanPham.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         pnlAccounts.setBackground(new java.awt.Color(255, 255, 255));
         pnlAccounts.setAutoscrolls(true);

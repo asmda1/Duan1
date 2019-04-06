@@ -39,7 +39,7 @@ public class KhachHangDAO implements DAO<KhachHang> {
 
     @Override
     public List<KhachHang> selectAll() {
-        String sql = "SELECT * FROM dbo.KhachHang";
+        String sql = "SELECT * FROM dbo.KhachHang where maKh != 'KH000' ";
         return select(sql);
     }
 

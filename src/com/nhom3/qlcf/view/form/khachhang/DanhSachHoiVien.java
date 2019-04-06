@@ -132,7 +132,7 @@ public class DanhSachHoiVien extends javax.swing.JPanel {
 
     private void tblKhHVMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhHVMousePressed
         // TODO add your handling code here:
-        int index = tblKhHV.getSelectedRow();
+      /*  int index = tblKhHV.getSelectedRow();
         listKH = new KhachHangDAO().select("SELECT * FROM dbo.KhachHang WHERE trangThai = 1 and maKh !='KH000'");
         String sdt = listKH.get(index).getDienThoai();
         jpnDangKyForm.removeAll();
@@ -141,7 +141,7 @@ public class DanhSachHoiVien extends javax.swing.JPanel {
         jpnDangKyForm.revalidate();
         jpnDangKyForm.show();
         jpnBack_button.show();
-        jpnGiaoDien.hide();
+        jpnGiaoDien.hide();*/
 
     }//GEN-LAST:event_tblKhHVMousePressed
 
