@@ -30,14 +30,15 @@ public class ThemKH extends javax.swing.JPanel {
         txtTenKH.setName(AutogetKH());
         txtTenKH.setToolTipText(AutogetKH());
     }
-      public ThemKH(String sdt) {
+
+    public ThemKH(String sdt) {
         initComponents();
         mousefouse();
         txtTenKH.setName(AutogetKH());
         txtTenKH.setToolTipText(AutogetKH());
         txtDienThoai.setText(sdt);
         txtDienThoai.setForeground(Color.blue);
-        
+
     }
 
     public void mousefouse() {
@@ -84,6 +85,7 @@ public class ThemKH extends javax.swing.JPanel {
     }
 
     public boolean check() {
+        KhachHangDAO khDao = new KhachHangDAO();
         String emails = "[\\w\\.]+@[\\w+]+\\.+[\\.\\w+]+";
         if (txtTenKH.getText().trim().equals("Tên Khách Hàng") || txtTenKH.getText().trim().equals("")) {
             lbldiemthuong.setText("");
@@ -91,6 +93,7 @@ public class ThemKH extends javax.swing.JPanel {
             lblemail.setText("");
             lbltenkh.setText("Tên Khách Hàng là bắt buột");
             lbltenkh.setForeground(Color.red);
+            
             return false;
         } else {
             if (txtEmail.getText().trim().equals("Email vd: abc@gmail.com") || txtEmail.getText().trim().equals("")) {
@@ -100,55 +103,69 @@ public class ThemKH extends javax.swing.JPanel {
                 lbltenkh.setText("");
                 return false;
             } else {
-                if (!txtEmail.getText().matches(emails)) {
+                if (khDao.checkEmail(txtEmail.getText())) {
+                    lblemail.setText("Email: " + txtEmail.getText() + " này đã có rồi! ");
                     lbldiemthuong.setText("");
                     lbldienthoai.setText("");
-                    lblemail.setText("Sai định dạng Email");
                     lbltenkh.setText("");
                     return false;
                 } else {
-                    if (txtDienThoai.getText().trim().equals("Số Điện Thoại [10-13]") || txtDienThoai.getText().trim().equals("")) {
+                    if (!txtEmail.getText().matches(emails)) {
                         lbldiemthuong.setText("");
-                        lbldienthoai.setText("SĐT là bắt buột");
-                        lblemail.setText("");
-                        lbltenkh.setText("");
-                        return false;
-                    } else if (txtDienThoai.getText().length() < 9 || txtDienThoai.getText().length() > 13) {
-                        lbldiemthuong.setText("");
-                        lbldienthoai.setText("SĐT chỉ nhập là [10-13] số");
-                        lblemail.setText("");
-                        lbltenkh.setText("");
-                        return false;
-                    } else if (!txtDienThoai.getText().matches("[0-9]+")) {
-                        lbldiemthuong.setText("");
-                        lbldienthoai.setText("SĐT phải nhập là số");
-                        lblemail.setText("");
+                        lbldienthoai.setText("");
+                        lblemail.setText("Sai định dạng Email");
                         lbltenkh.setText("");
                         return false;
                     } else {
-                        if (txtDiemThuong.getText().trim().equals("Điểm tối thiểu 200 - tối đa 5000") || txtDiemThuong.getText().trim().equals("")) {
-                            lbldiemthuong.setText("Điểm thưởng tối thiểu 200");
-                            lbldienthoai.setText("");
+                        if (txtDienThoai.getText().trim().equals("Số Điện Thoại [10-13]") || txtDienThoai.getText().trim().equals("")) {
+                            lbldiemthuong.setText("");
+                            lbldienthoai.setText("SĐT là bắt buột");
+                            lblemail.setText("");
+                            lbltenkh.setText("");
+                            return false;
+                        } else if (txtDienThoai.getText().length() < 9 || txtDienThoai.getText().length() > 13) {
+                            lbldiemthuong.setText("");
+                            lbldienthoai.setText("SĐT chỉ nhập là [10-13] số");
+                            lblemail.setText("");
+                            lbltenkh.setText("");
+                            return false;
+                        } else if (!txtDienThoai.getText().matches("[0-9]+")) {
+                            lbldiemthuong.setText("");
+                            lbldienthoai.setText("SĐT phải nhập là số");
+                            lblemail.setText("");
+                            lbltenkh.setText("");
+                            return false;
+                        } else if (khDao.checkSDT(txtDienThoai.getText())) {
+                            lbldienthoai.setText("SĐT này đã có rồi");
+                            lbldiemthuong.setText("");
                             lblemail.setText("");
                             lbltenkh.setText("");
                             return false;
                         } else {
-                            int so = Integer.parseInt(txtDiemThuong.getText());
-                            if (so > 5000 || so < 200) {
-                                lbldiemthuong.setText("Điểm thưởng phải nhập khoảng 200 - 5000");
+                            if (txtDiemThuong.getText().trim().equals("Điểm tối thiểu 200 - tối đa 5000") || txtDiemThuong.getText().trim().equals("")) {
+                                lbldiemthuong.setText("Điểm thưởng tối thiểu 0");
                                 lbldienthoai.setText("");
                                 lblemail.setText("");
                                 lbltenkh.setText("");
                                 return false;
-                            } else if (!txtDiemThuong.getText().matches("[0-9]+")) {
-                                lbldiemthuong.setText("Điểm thưởng phải nhập là số");
-                                lbldienthoai.setText("");
-                                lblemail.setText("");
-                                lbltenkh.setText("");
-                                return false;
-                            }
-                            return true;
+                            } else {
+                                int so = Integer.parseInt(txtDiemThuong.getText());
+                                if (so > 5000 || so < 0) {
+                                    lbldiemthuong.setText("Điểm thưởng phải nhập khoảng 0 - 5000");
+                                    lbldienthoai.setText("");
+                                    lblemail.setText("");
+                                    lbltenkh.setText("");
+                                    return false;
+                                } else if (!txtDiemThuong.getText().matches("[0-9]+")) {
+                                    lbldiemthuong.setText("Điểm thưởng phải nhập là số");
+                                    lbldienthoai.setText("");
+                                    lblemail.setText("");
+                                    lbltenkh.setText("");
+                                    return false;
+                                }
+                                return true;
 
+                            }
                         }
                     }
                 }
@@ -165,6 +182,7 @@ public class ThemKH extends javax.swing.JPanel {
         kh.setDiaChi(txtdiachi.getText());
         kh.setDiemThuong(Integer.parseInt(txtDiemThuong.getText()));
         kh.setMatKhau(txtDienThoai.getText());
+        kh.setTrangThai(true);
         KhachHangDAO khD = new KhachHangDAO();
         khD.insert(kh);
         lbltenkh.setText("Thêm Thành công!");
@@ -248,6 +266,8 @@ public class ThemKH extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
         );
+
+        txtDiemThuong.setText("0");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -379,6 +399,12 @@ public class ThemKH extends javax.swing.JPanel {
 
         if (check()) {
             insert();
+            txtDiemThuong.setText("");
+            txtDienThoai.setText("");
+            txtEmail.setText("");
+            txtdiachi.setText("");
+            txtTenKH.setText("");
+       
 
         }
 

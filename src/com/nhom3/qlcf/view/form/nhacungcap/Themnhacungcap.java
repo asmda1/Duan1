@@ -5,7 +5,14 @@
  */
 package com.nhom3.qlcf.view.form.nhacungcap;
 
+import com.nhom3.qlcf.dao.KhachHangDAO;
+import com.nhom3.qlcf.dao.NhaCungCapDAO;
+import com.nhom3.qlcf.model.KhachHang;
+import com.nhom3.qlcf.model.NhaCungCap;
 import com.nhom3.qlcf.view.form.hanghoa.*;
+import java.awt.Color;
+import java.util.List;
+import javax.print.attribute.standard.MediaSize;
 
 /**
  *
@@ -16,8 +23,92 @@ public class Themnhacungcap extends javax.swing.JPanel {
     /**
      * Creates new form SuaHangHoa
      */
+    NhaCungCapDAO dao = new NhaCungCapDAO();
+
     public Themnhacungcap() {
         initComponents();
+        txtmanhacungcap.setText(AutogetNCC());
+    }
+
+    public String AutogetNCC() {
+        NhaCungCapDAO dao = new NhaCungCapDAO();
+        String chuoi = "";
+        List<NhaCungCap> list = dao.selectAll();
+        if (list.isEmpty()) {
+            chuoi = "NCC001";
+            return chuoi;
+        } else {
+            int index = list.size() - 1;
+            int so = Integer.parseInt(list.get(index).getMaNhaCungCap().substring(3)) + 1;
+            switch (String.valueOf(so).length()) {
+                case 1:
+                    chuoi = "NCC00" + so;
+                    break;
+                case 2:
+                    chuoi = "NCC0" + so;
+                    break;
+                case 3:
+                    chuoi = "NCC" + so;
+                    break;
+            }
+
+            return chuoi;
+        }
+    }
+
+    public boolean Check() {
+        if (txtTendoitac.getText().trim().equals("")) {
+            lbltb.setText("Tên đối tác là bắt buột");
+            lbltb.setForeground(Color.red);
+            return false;
+        } if (txtTendoitac.getText().length()<6) {
+            lbltb.setText("Tên đối tác phải ít nhất 6 kí tự");
+            lbltb.setForeground(Color.red);
+            return false;
+        } else if (txtDienThoai.getText().trim().equals("")) {
+            lbltb.setText("SDT đối tác là bắt buột");
+            lbltb.setForeground(Color.red);
+            return false;
+        } else if (!txtDienThoai.getText().matches("[0-9]+")) {
+            lbltb.setText("SDT phải là số");
+            lbltb.setForeground(Color.red);
+            return false;
+        } else if (txtDienThoai.getText().length() < 10 || txtDienThoai.getText().length() > 13) {
+            lbltb.setText("SDT phải là [10-13] số");
+            lbltb.setForeground(Color.red);
+            return false;
+        } else if (dao.checkMa(txtDienThoai.getText())) {
+            lbltb.setText("SDT này đã có rồi");
+            lbltb.setForeground(Color.red);
+            return false;
+        } else if (txtdiachi.getText().trim().equals("")) {
+            lbltb.setText("Địa chỉ đối tác là bắt buột");
+            lbltb.setForeground(Color.red);
+            return false;
+        }
+        return true;
+    }
+
+    public void insert() {
+        NhaCungCapDAO dao = new NhaCungCapDAO();
+        NhaCungCap ncc = new NhaCungCap();
+        ncc.setMaNhaCungCap(txtmanhacungcap.getText());
+        ncc.setTenNhaCC(txtTendoitac.getText());
+        ncc.setDienThoai(txtDienThoai.getText());
+        ncc.setDiaChi(txtdiachi.getText());
+        if (cobTrangThai.getSelectedIndex() == 0) {
+            ncc.setTrangThai(true);
+        } else {
+            ncc.setTrangThai(false);
+        }
+        dao.insert(ncc);
+        lbltb.setText("Thêm thành công!");
+        lbltb.setForeground(Color.green);
+        txtdiachi.setText("");
+        txtDienThoai.setText("");
+        txtTendoitac.setText("");
+        txtmanhacungcap.setText("");
+
     }
 
     /**
@@ -44,9 +135,9 @@ public class Themnhacungcap extends javax.swing.JPanel {
         txtDienThoai = new javax.swing.JTextField();
         lblpass2 = new javax.swing.JLabel();
         lblvien3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        cobTrangThai = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
+        lbltb = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -63,8 +154,9 @@ public class Themnhacungcap extends javax.swing.JPanel {
         jLabel1.setMinimumSize(new java.awt.Dimension(122, 17));
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(122, 17));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 58));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 50));
 
+        txtmanhacungcap.setEditable(false);
         txtmanhacungcap.setBorder(null);
         txtmanhacungcap.setOpaque(false);
         txtmanhacungcap.addActionListener(new java.awt.event.ActionListener() {
@@ -72,8 +164,9 @@ public class Themnhacungcap extends javax.swing.JPanel {
                 txtmanhacungcapActionPerformed(evt);
             }
         });
-        jPanel1.add(txtmanhacungcap, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 102, 259, 40));
+        jPanel1.add(txtmanhacungcap, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 102, 260, 40));
 
+        lblvien.setForeground(new java.awt.Color(255, 0, 0));
         lblvien.setText("___________________________________________");
         jPanel1.add(lblvien, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 114, 260, 30));
 
@@ -130,16 +223,8 @@ public class Themnhacungcap extends javax.swing.JPanel {
         lblvien3.setText("___________________________________________");
         jPanel1.add(lblvien3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 260, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hợp Tác", "Chưa Hợp Tác" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 210, -1));
-
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Reset");
-        jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel3.setOpaque(true);
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 110, 40));
+        cobTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hợp Tác", "Chưa Hợp Tác" }));
+        jPanel1.add(cobTrangThai, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 210, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -147,7 +232,18 @@ public class Themnhacungcap extends javax.swing.JPanel {
         jLabel4.setText("Thêm");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel4.setOpaque(true);
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 110, 40));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel4MousePressed(evt);
+            }
+        });
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, 140, 40));
+
+        lbltb.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbltb.setForeground(new java.awt.Color(255, 0, 0));
+        lbltb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbltb.setText(".");
+        jPanel1.add(lbltb, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 380, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -179,17 +275,24 @@ public class Themnhacungcap extends javax.swing.JPanel {
         // TODO add your hantxtdiachihere:
     }//GEN-LAST:event_txtTendoitacActionPerformed
 
+    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+        // TODO add your handling code here:
+        if (Check()) {
+            insert();
+        }
+    }//GEN-LAST:event_jLabel4MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cobTrangThai;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblpass;
     private javax.swing.JLabel lblpass1;
     private javax.swing.JLabel lblpass2;
     private javax.swing.JLabel lblpass3;
+    private javax.swing.JLabel lbltb;
     private javax.swing.JLabel lbluser;
     private javax.swing.JLabel lblvien;
     private javax.swing.JLabel lblvien1;

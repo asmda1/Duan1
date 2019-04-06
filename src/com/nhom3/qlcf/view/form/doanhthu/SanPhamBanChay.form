@@ -140,6 +140,9 @@
                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="SanPhamBanChay_tblSanPhamBanChay"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

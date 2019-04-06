@@ -430,7 +430,15 @@ public class FormKhachHang extends javax.swing.JPanel {
             new String [] {
                 "Mã Khách Hàng", "Tên", "Email", "Địa Chỉ", "Điện Thoại", "Loại Khách"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblKhachHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblKhachHang.setFocusable(false);
         tblKhachHang.setGridColor(new java.awt.Color(0, 0, 0));
@@ -448,8 +456,12 @@ public class FormKhachHang extends javax.swing.JPanel {
         });
         jscDanhSachKH.setViewportView(tblKhachHang);
         if (tblKhachHang.getColumnModel().getColumnCount() > 0) {
+            tblKhachHang.getColumnModel().getColumn(0).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(1).setResizable(false);
             tblKhachHang.getColumnModel().getColumn(2).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(3).setResizable(false);
             tblKhachHang.getColumnModel().getColumn(4).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(5).setResizable(false);
         }
 
         CardLayout.add(jscDanhSachKH, "card2");
@@ -697,6 +709,7 @@ public class FormKhachHang extends javax.swing.JPanel {
 
         jpnGiaoDien.show();
         jpnBack_button.hide();
+        showDataKH();
     }//GEN-LAST:event_lblBackMouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -727,6 +740,7 @@ public class FormKhachHang extends javax.swing.JPanel {
         CardLayout.revalidate();
         CardLayout.show();
         tblKhachHang.show();
+        showDataKH();
 
     }//GEN-LAST:event_jLabel8MouseClicked
 
@@ -767,7 +781,7 @@ public class FormKhachHang extends javax.swing.JPanel {
         jpnBack_button.show();
         DangKyHoiVien.lbltitle.setText("Chỉnh Sửa Nhân Viên");
         DangKyHoiVien.txtdiem.setEditable(false);
-         DangKyHoiVien.lblbuton_dky.setText("Cập Nhật");
+        DangKyHoiVien.lblbuton_dky.setText("Cập Nhật");
 
     }//GEN-LAST:event_tblKhachHangMousePressed
 

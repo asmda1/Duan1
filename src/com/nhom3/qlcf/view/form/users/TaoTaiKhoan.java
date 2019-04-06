@@ -25,6 +25,7 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
     }
 
     public boolean check() {
+        NguoiDungDAO ngD = new NguoiDungDAO();
         String emails = "[\\w\\.]+@[\\w+]+\\.+[\\.\\w+]+";
         if (txtUsers.getText().trim().equals("")) {
             lblthongbao.setText("Users không được bỏ trống");
@@ -54,8 +55,16 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
             lblthongbao.setText("SĐT phải từ [10-13] số");
             lblthongbao.setForeground(Color.red);
             return false;
+        } else if (ngD.checkSDT(txtSDT.getText())) {
+            lblthongbao.setText("SĐT này đã có rồi");
+            lblthongbao.setForeground(Color.red);
+            return false;
         } else if (txtemail.getText().equals("")) {
             lblthongbao.setText("Email không được bỏ trống!");
+            lblthongbao.setForeground(Color.red);
+            return false;
+        } else if (ngD.checkEmail(txtemail.getText())) {
+            lblthongbao.setText("Email đã có rồi!");
             lblthongbao.setForeground(Color.red);
             return false;
         } else if (!txtemail.getText().matches(emails)) {

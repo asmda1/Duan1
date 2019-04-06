@@ -88,7 +88,15 @@ public class DanhSachHoiVien extends javax.swing.JPanel {
             new String [] {
                 "Mã Khách Hàng", "Tên", "Địa Chỉ", "Điện Thoại", "Điểm Thưởng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblKhHV.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblKhHV.setFocusable(false);
         tblKhHV.setGridColor(new java.awt.Color(0, 0, 0));
@@ -105,6 +113,13 @@ public class DanhSachHoiVien extends javax.swing.JPanel {
             }
         });
         jScrollPane3.setViewportView(tblKhHV);
+        if (tblKhHV.getColumnModel().getColumnCount() > 0) {
+            tblKhHV.getColumnModel().getColumn(0).setResizable(false);
+            tblKhHV.getColumnModel().getColumn(1).setResizable(false);
+            tblKhHV.getColumnModel().getColumn(2).setResizable(false);
+            tblKhHV.getColumnModel().getColumn(3).setResizable(false);
+            tblKhHV.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jpnDShoivien.add(jScrollPane3, "card2");
 

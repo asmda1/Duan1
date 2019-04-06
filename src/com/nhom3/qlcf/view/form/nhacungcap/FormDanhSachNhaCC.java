@@ -266,7 +266,15 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
             new String [] {
                 "MNCC", "Tên", "Điện Thoại", "Chi Nhánh", "Trạng Thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblnhacungcap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblnhacungcap.setFocusable(false);
         tblnhacungcap.setGridColor(new java.awt.Color(0, 0, 0));
@@ -278,6 +286,13 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
         tblnhacungcap.setSurrendersFocusOnKeystroke(true);
         tblnhacungcap.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tblnhacungcap);
+        if (tblnhacungcap.getColumnModel().getColumnCount() > 0) {
+            tblnhacungcap.getColumnModel().getColumn(0).setResizable(false);
+            tblnhacungcap.getColumnModel().getColumn(1).setResizable(false);
+            tblnhacungcap.getColumnModel().getColumn(2).setResizable(false);
+            tblnhacungcap.getColumnModel().getColumn(3).setResizable(false);
+            tblnhacungcap.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 255));
 

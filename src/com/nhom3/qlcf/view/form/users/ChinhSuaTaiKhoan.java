@@ -228,6 +228,7 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Tìm Kiếm");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel1MousePressed(evt);
@@ -278,7 +279,19 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         // TODO add your handling code here:
-        timMaNguoiDung();
+        NguoiDungDAO nd = new NguoiDungDAO();
+        if (txtTimKiem.getText().trim().equals("Tìm Mã Nhân Viên") || txtTimKiem.getText().trim().equals("")) {
+            lblthongbao.setText("Nhập Mã NV là bắt buột");
+            lblthongbao.setForeground(Color.red);
+
+        } else if (!nd.checkMa(txtTimKiem.getText())) {
+            lblthongbao.setText("Nhập Mã NV không tồn tại!");
+            lblthongbao.setForeground(Color.red);
+        } else {
+             lblthongbao.setText("");
+            timMaNguoiDung();
+        }
+
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed

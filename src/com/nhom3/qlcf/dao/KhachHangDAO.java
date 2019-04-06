@@ -102,5 +102,16 @@ public class KhachHangDAO implements DAO<KhachHang> {
         }
         return false;
     }
-
+  public static boolean checkEmail(String email) {
+        String sql = "Select * from dbo.KhachHang WHERE email ='" + email + "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

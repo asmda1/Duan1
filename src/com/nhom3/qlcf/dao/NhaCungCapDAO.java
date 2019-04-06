@@ -86,5 +86,17 @@ public class NhaCungCapDAO implements DAO<NhaCungCap> {
         List<NhaCungCap> list = select(sql, ID);
         return list.size() > 0 ? list.get(0) : null;
     }
+     public boolean checkMa(String ma) {
+        String sql = "Select * from dbo.NhaCungCap WHERE maNhaCungCap ='" + ma + "' or dienThoai='" + ma + "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }

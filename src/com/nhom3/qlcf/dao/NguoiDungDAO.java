@@ -86,5 +86,42 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
         List<NguoiDung> list = select(sql, ID);
         return list.size() > 0 ? list.get(0) : null;
     }
-
+    
+    //bổ sung
+    public boolean checkSDT(String sdt) {
+        String sql = "Select * from dbo.NguoiDung WHERE dienThoai ='" + sdt + "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+  public static boolean checkEmail(String email) {
+        String sql = "Select * from dbo.NguoiDung WHERE email ='" + email + "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+  public boolean checkMa(String ma) {
+        String sql = "Select * from dbo.NguoiDung WHERE maNguoiDung ='" + ma + "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
