@@ -954,7 +954,7 @@ public class FormBanHang extends javax.swing.JPanel {
         jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));*/
         jpnShowMenuOut.hide();
-         Login.txtPass.setText("");
+        Login.txtPass.setText("");
         Login.lblLoiDangNhap.hide();
         jpnDangXuatBanHang.setBackground(Color.white);
         lblDangXuatBangHang.setForeground(new Color(51, 102, 255));
@@ -1289,9 +1289,7 @@ public class FormBanHang extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_txttienkhachKeyTyped
-
-    private void txttienkhachKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttienkhachKeyReleased
-        // TODO add your handling code here:
+    public void tienKhach() {
         if (CheckTienKhach()) {
 
             int tienThoi = 0;
@@ -1316,6 +1314,10 @@ public class FormBanHang extends javax.swing.JPanel {
                 lbltienthua.setText(String.valueOf(chuyentien.format(tienThoi)) + "  VNĐ");
             }
         }
+    }
+    private void txttienkhachKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttienkhachKeyReleased
+        // TODO add your handling code here:
+tienKhach();
     }//GEN-LAST:event_txttienkhachKeyReleased
     public void RezieImageGroupLogo() {
         try {

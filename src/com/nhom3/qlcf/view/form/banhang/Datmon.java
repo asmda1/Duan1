@@ -442,6 +442,7 @@ public class Datmon extends javax.swing.JDialog {
         DongGoiHDCT();
         getTamTinh();
         FormBanHang.banhang.getTongTien();
+          FormBanHang.banhang.tienKhach();
         Designhelper designhelper = new Designhelper();
         designhelper.DesigDonHang(jpldonhang, DongCTHD);
         FormBanHang.banhang.lblThongBao.setText("");
