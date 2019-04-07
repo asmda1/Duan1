@@ -7,11 +7,13 @@ package com.nhom3.qlcf.view.form.nhacungcap;
 
 import com.nhom3.qlcf.dao.NhaCungCapDAO;
 import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.model.NhaCungCap;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
+import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
 import java.sql.ResultSet;
@@ -35,6 +37,7 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
         nhacc = this;
         showKHHV();
+        new Loginhelper().getLogin(lblTenDangNhapBangHang);
     }
     DefaultTableModel model = null;
 
@@ -395,12 +398,8 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
 
     private void lblQuayVeBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuayVeBangHangMouseClicked
         // TODO add your handling code here:
+new Loginhelper().QuayVe();
 
-        FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormMenu());
-        FormLogin.login.Card.repaint();
-        FormLogin.login.Card.revalidate();
-        FormLogin.login.Card.show();
         /*jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));
         jpnBanHang_Button.setBackground(new Color(0, 0, 0));
@@ -452,6 +451,8 @@ public class FormDanhSachNhaCC extends javax.swing.JPanel {
         jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));*/
         jpnShowMenuOut.hide();
+            Login.txtPass.setText("");
+        Login.lblLoiDangNhap.hide();
         jpnDangXuat.setBackground(Color.white);
         lblDangXuatBangHang.setForeground(new Color(51, 102, 255));
     }//GEN-LAST:event_lblDangXuatBangHangMouseClicked

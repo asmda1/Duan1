@@ -5,9 +5,11 @@
  */
 package com.nhom3.qlcf.view.form.sanpham;
 
+import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
+import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -28,6 +30,7 @@ public class FormThemSanPham extends javax.swing.JPanel {
         // jpnLogin1.setBackground(new Color(0, 0, 0, 134));
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
         login = this;
+           new Loginhelper().getLogin(lblTenDangNhapBangHang);
         
     }
 
@@ -294,16 +297,13 @@ public class FormThemSanPham extends javax.swing.JPanel {
     private void lblQuayVeBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuayVeBangHangMouseClicked
         // TODO add your handling code here:
 
-        FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormMenu());
-        FormLogin.login.Card.repaint();
-        FormLogin.login.Card.revalidate();
-        FormLogin.login.Card.show();
+     new Loginhelper().QuayVe();
         /*jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));
         jpnBanHang_Button.setBackground(new Color(0, 0, 0));
         jpnBanHang_Button.setOpaque(false);
         lblBanHang_txt.setForeground(Color.WHITE);*/
+        
         jpnQuayVe.setBackground(Color.white);
         lblQuayVeBangHang.setForeground(new Color(51, 102, 255));
     }//GEN-LAST:event_lblQuayVeBangHangMouseClicked
@@ -349,6 +349,8 @@ public class FormThemSanPham extends javax.swing.JPanel {
         lblLogin.setForeground(Color.white);
         jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));*/
+             Login.txtPass.setText("");
+        Login.lblLoiDangNhap.hide();
         jpnShowMenuOut.hide();
         jpnDangXuat.setBackground(Color.white);
         lblDangXuatBangHang.setForeground(new Color(51, 102, 255));

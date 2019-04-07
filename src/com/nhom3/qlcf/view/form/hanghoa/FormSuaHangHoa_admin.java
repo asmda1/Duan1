@@ -5,9 +5,11 @@
  */
 package com.nhom3.qlcf.view.form.hanghoa;
 
+import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 
 import com.nhom3.qlcf.view.Run;
+import com.nhom3.qlcf.view.form.login.Login;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 
@@ -30,6 +32,7 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
         // jpnLogin1.setBackground(new Color(0, 0, 0, 134));
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
         login = this;
+           new Loginhelper().getLogin(lblTenDangNhapBangHang);
     }
 
     /**
@@ -360,11 +363,7 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
     private void lblQuayVeBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuayVeBangHangMouseClicked
         // TODO add your handling code here:
 
-        FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormMenu());
-        FormLogin.login.Card.repaint();
-        FormLogin.login.Card.revalidate();
-        FormLogin.login.Card.show();
+    new Loginhelper().QuayVe();
         /*jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));
         jpnBanHang_Button.setBackground(new Color(0, 0, 0));
@@ -415,6 +414,8 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
         lblLogin.setForeground(Color.white);
         jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));*/
+         Login.txtPass.setText("");
+        Login.lblLoiDangNhap.hide();
         jpnShowMenuOut.hide();
         jpnDangXuat.setBackground(Color.white);
         lblDangXuatBangHang.setForeground(new Color(51, 102, 255));

@@ -412,7 +412,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Tr&#x1ed1;ng"/>
-            <Property name="toolTipText" type="java.lang.String" value="EX002"/>
+            <Property name="toolTipText" type="java.lang.String" value="EX000"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Constraints>

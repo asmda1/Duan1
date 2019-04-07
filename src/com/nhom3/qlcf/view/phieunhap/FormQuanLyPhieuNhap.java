@@ -5,10 +5,12 @@
  */
 package com.nhom3.qlcf.view.phieunhap;
 
+import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.view.form.doanhthu.*;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
+import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -29,6 +31,7 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         // jpnLogin1.setBackground(new Color(0, 0, 0, 134));
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
         login = this;
+        new Loginhelper().getLogin(lblTenDangNhapBangHang);
     }
 
     /**
@@ -63,6 +66,8 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         cbxNgay = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         lblanhGiaoDien = new javax.swing.JLabel();
         Card = new javax.swing.JPanel();
 
@@ -317,6 +322,16 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         jLabel1.setText("Xem :");
         jpnNen.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 90, 40, 20));
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/excel.png"))); // NOI18N
+        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jpnNen.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 70, 70, 50));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("IN:");
+        jpnNen.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 40, 30));
+
         jfThongKe.add(jpnNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 630));
 
         lblanhGiaoDien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenDao.png"))); // NOI18N
@@ -362,11 +377,7 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
     private void lblQuayVeBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuayVeBangHangMouseClicked
         // TODO add your handling code here:
 
-        FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormMenu());
-        FormLogin.login.Card.repaint();
-        FormLogin.login.Card.revalidate();
-        FormLogin.login.Card.show();
+      new Loginhelper().QuayVe();
         /*jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));
         jpnBanHang_Button.setBackground(new Color(0, 0, 0));
@@ -417,6 +428,8 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         lblLogin.setForeground(Color.white);
         jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));*/
+             Login.txtPass.setText("");
+        Login.lblLoiDangNhap.hide();
         jpnShowMenuOut.hide();
         jpnDangXuat.setBackground(Color.white);
         lblDangXuatBangHang.setForeground(new Color(51, 102, 255));
@@ -451,6 +464,8 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;

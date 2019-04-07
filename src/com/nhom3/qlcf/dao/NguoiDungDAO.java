@@ -61,6 +61,9 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
         }
         return list;
     }
+    
+    // 
+ 
 
     @Override
     public NguoiDung readFromResultSet(ResultSet rs) {

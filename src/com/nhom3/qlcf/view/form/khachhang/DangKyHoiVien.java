@@ -29,11 +29,7 @@ public class DangKyHoiVien extends javax.swing.JPanel {
         txtsdt.setText("Nhập SĐT KH");
         txtsdt.setForeground(Color.gray);
         XuLy.placeHolder(txtsdt, "Nhập SĐT KH");
-        if(coxLoaiKhach.getSelectedIndex()==0){
-            coxLoaiKhach.setEnabled(false);
-        }else{
-             coxLoaiKhach.setEnabled(true);
-        }
+     
 
     }
 

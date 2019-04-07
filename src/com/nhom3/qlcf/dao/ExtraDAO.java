@@ -40,7 +40,7 @@ public class ExtraDAO implements DAO<Extra> {
 
     @Override
     public List<Extra> selectAll() {
-        String sql = "Select * from dbo.Extra";
+        String sql = "Select * from dbo.Extra where id != 'EX000' ";
         return select(sql);
     }
 

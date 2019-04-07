@@ -179,7 +179,7 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         lblpass3.setText("Số ĐT *:");
         jPanel1.add(lblpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 80, 20));
 
-        cbxVaiTro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Admin" }));
+        cbxVaiTro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Staff", "Administration" }));
         cbxVaiTro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxVaiTroActionPerformed(evt);

@@ -5,9 +5,19 @@
  */
 package com.nhom3.qlcf.view.form.login;
 
+import com.nhom3.qlcf.dao.NguoiDungDAO;
+import com.nhom3.qlcf.dao.NhaCungCapDAO;
+import com.nhom3.qlcf.helper.Timehelper;
+import com.nhom3.qlcf.model.NguoiDung;
+import com.nhom3.qlcf.model.NhaCungCap;
 import static com.nhom3.qlcf.view.form.login.FormLogin.jfLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -15,6 +25,8 @@ import java.awt.Color;
  */
 public class Login extends javax.swing.JPanel {
 
+    public List<NguoiDung> list = null;
+    Pattern pattern;
     /**
      * Creates new form login
      */
@@ -24,6 +36,101 @@ public class Login extends javax.swing.JPanel {
         initComponents();
         lg = this;
         jpnNenButton_login.setBackground(new Color(0, 0, 0, 64));
+
+    }
+
+    public boolean kiemTraDangNhap(String a) {
+        try {
+            list = new NguoiDungDAO().select("Select * from NguoiDung  where taiKhoan ='" + txtManhanVien.getText() + "' and matKhau ='" + txtPass.getText() + "'");
+            for (NguoiDung u : list) {
+                u.setTaiKhoan(txtManhanVien.getText());
+                u.setMatKhau(txtPass.getText());
+                return true;
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
+    public boolean check() {
+
+        String kytudatbiet = "{6,20}";
+        pattern = Pattern.compile(kytudatbiet);
+        if (txtManhanVien.getText().trim().equals("") && txtPass.getText().trim().equals("")) {
+            lblThongBaoUser.setText("Không được bỏ trống tên đăng nhập");
+            lblThongBaoPass.setText("Không được bỏ trống mật khẩu");
+            lblLoiDangNhap.setText("");
+            lblLoiDangNhap.hide();
+            lblThongBaoUser.show();
+            lblThongBaoPass.show();
+            return false;
+        } else if (pattern.matcher(txtManhanVien.getText()).matches() && txtPass.getText().trim().equals("")) {
+            lblThongBaoUser.setText("User Không được thêm ký tự đặt biệt");
+            lblLoiDangNhap.hide();
+            lblThongBaoUser.show();
+            lblThongBaoPass.hide();
+            return false;
+        } else if (pattern.matcher(txtPass.getText()).matches() && txtManhanVien.getText().trim().equals("")) {
+            lblThongBaoPass.setText("Pass Không được thêm ký tự đặt biệt");
+            lblLoiDangNhap.hide();
+            lblThongBaoUser.hide();
+            lblThongBaoPass.show();
+
+            return false;
+        } else if (txtManhanVien.getText().trim().equals("")) {
+            lblThongBaoUser.setText("Không được bỏ trống tên đăng nhập");
+            lblLoiDangNhap.hide();
+            lblThongBaoUser.show();
+            lblThongBaoPass.hide();
+            return false;
+        } else if (txtPass.getText().trim().equals("")) {
+            lblThongBaoPass.setText("Không được bỏ trống mật khẩu");
+            lblLoiDangNhap.hide();
+            lblThongBaoUser.hide();
+            lblThongBaoPass.show();
+            return false;
+        } else if (!kiemTraDangNhap(txtManhanVien.getText()) || !kiemTraDangNhap(txtPass.getText())) {
+            lblLoiDangNhap.setForeground(Color.red);
+            lblLoiDangNhap.setText("Tên Đăng Nhập Hoặc Mật Khẩu Không đúng");
+            lblLoiDangNhap.show();
+            lblThongBaoUser.hide();
+            lblThongBaoPass.hide();
+
+            return false;
+
+        }
+
+        return true;
+    }
+
+    public void loginnv() {//
+        list = new NguoiDungDAO().select("Select * from NguoiDung  where taiKhoan ='" + txtManhanVien.getText() + "' and matKhau ='" + txtPass.getText() + "'");
+        if (list.get(0).getVaiTro().equals("Administration")) {
+            FormLogin.login.Card.removeAll();
+            FormLogin.login.Card.add(new FormMenu());
+            FormLogin.login.Card.repaint();
+            FormLogin.login.Card.revalidate();
+            FormLogin.login.Card.show();
+            jpnNenButton_login.setBackground(new Color(0, 0, 0));
+            jpnNenButton_login.setOpaque(false);
+            lblLogin.setForeground(Color.white);
+            lblLoiDangNhap.setText("Thành Công");
+            lblLoiDangNhap.show();
+            jfLogin.hide();
+        } else {
+            lblLoiDangNhap.setText("Thành Công");
+               lblLoiDangNhap.show();
+            FormLogin.login.Card.removeAll();
+            FormLogin.login.Card.add(new FormMenu(null));
+            FormLogin.login.Card.repaint();
+            FormLogin.login.Card.revalidate();
+            FormLogin.login.Card.show();
+            jpnNenButton_login.setBackground(new Color(0, 0, 0));
+            jpnNenButton_login.setOpaque(false);
+            lblLogin.setForeground(Color.white);
+            jfLogin.hide();
+        }
+
     }
 
     /**
@@ -38,14 +145,17 @@ public class Login extends javax.swing.JPanel {
         jpnLogin = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jpnBanner_login = new javax.swing.JLabel();
-        txtU = new javax.swing.JTextField();
-        txtPass = new javax.swing.JPasswordField();
         lbluserIcon = new javax.swing.JLabel();
         lblPassicon = new javax.swing.JLabel();
         jpnNenButton_login = new javax.swing.JPanel();
         lblLogin = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
+        txtPass = new javax.swing.JPasswordField();
+        txtManhanVien = new javax.swing.JTextField();
+        lblThongBaoPass = new javax.swing.JLabel();
+        lblLoiDangNhap = new javax.swing.JLabel();
+        lblThongBaoUser = new javax.swing.JLabel();
 
         setOpaque(false);
 
@@ -77,29 +187,6 @@ public class Login extends javax.swing.JPanel {
 
         jpnLogin.add(jPanel1);
         jPanel1.setBounds(0, 0, 450, 110);
-
-        txtU.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtU.setForeground(new java.awt.Color(255, 255, 255));
-        txtU.setText("nhanvien1");
-        txtU.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        txtU.setCaretColor(new java.awt.Color(255, 255, 255));
-        txtU.setOpaque(false);
-        txtU.setRequestFocusEnabled(false);
-        txtU.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUActionPerformed(evt);
-            }
-        });
-        jpnLogin.add(txtU);
-        txtU.setBounds(60, 200, 330, 50);
-
-        txtPass.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtPass.setForeground(new java.awt.Color(255, 255, 255));
-        txtPass.setText("123455");
-        txtPass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        txtPass.setOpaque(false);
-        jpnLogin.add(txtPass);
-        txtPass.setBounds(60, 290, 330, 50);
 
         lbluserIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/iconUser.png"))); // NOI18N
         jpnLogin.add(lbluserIcon);
@@ -164,6 +251,46 @@ public class Login extends javax.swing.JPanel {
         jpnLogin.add(jCheckBox1);
         jCheckBox1.setBounds(60, 360, 190, 23);
 
+        txtPass.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtPass.setForeground(new java.awt.Color(255, 255, 255));
+        txtPass.setText("123");
+        txtPass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        txtPass.setOpaque(false);
+        jpnLogin.add(txtPass);
+        txtPass.setBounds(60, 290, 330, 50);
+
+        txtManhanVien.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtManhanVien.setForeground(new java.awt.Color(255, 255, 255));
+        txtManhanVien.setText("admin");
+        txtManhanVien.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        txtManhanVien.setOpaque(false);
+        jpnLogin.add(txtManhanVien);
+        txtManhanVien.setBounds(60, 200, 330, 50);
+
+        lblThongBaoPass.setBackground(new java.awt.Color(255, 255, 255));
+        lblThongBaoPass.setForeground(new java.awt.Color(255, 0, 0));
+        lblThongBaoPass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblThongBaoPass.setOpaque(true);
+        jpnLogin.add(lblThongBaoPass);
+        lblThongBaoPass.setBounds(130, 260, 280, 30);
+        lblThongBaoPass.hide();
+
+        lblLoiDangNhap.setBackground(new java.awt.Color(255, 255, 255));
+        lblLoiDangNhap.setForeground(new java.awt.Color(255, 0, 0));
+        lblLoiDangNhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLoiDangNhap.setOpaque(true);
+        jpnLogin.add(lblLoiDangNhap);
+        lblLoiDangNhap.setBounds(0, 120, 450, 30);
+        lblLoiDangNhap.hide();
+
+        lblThongBaoUser.setBackground(new java.awt.Color(255, 255, 255));
+        lblThongBaoUser.setForeground(new java.awt.Color(255, 0, 0));
+        lblThongBaoUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblThongBaoUser.setOpaque(true);
+        jpnLogin.add(lblThongBaoUser);
+        lblThongBaoUser.setBounds(130, 180, 270, 30);
+        lblThongBaoUser.hide();
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -186,13 +313,9 @@ public class Login extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUActionPerformed
-
     private void lblLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoginMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_lblLoginMouseClicked
 
     private void lblLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoginMouseEntered
@@ -211,27 +334,39 @@ public class Login extends javax.swing.JPanel {
 
     private void jpnNenButton_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnNenButton_loginMouseClicked
         // TODO add your handling code here:
-        FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormMenu());
-        FormLogin.login.Card.repaint();
-        FormLogin.login.Card.revalidate();
-        FormLogin.login.Card.show();
-        jfLogin.hide();
+
     }//GEN-LAST:event_jpnNenButton_loginMouseClicked
 
     private void lblLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoginMousePressed
         // TODO add your handling code here:
-        
-        FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormMenu());
+
+        /* FormLogin.login.Card.removeAll();
+        FormLogin.login.Card.add(new FormMenu(null));
         FormLogin.login.Card.repaint();
         FormLogin.login.Card.revalidate();
         FormLogin.login.Card.show();
         jpnNenButton_login.setBackground(new Color(0, 0, 0));
         jpnNenButton_login.setOpaque(false);
         lblLogin.setForeground(Color.white);
+        jfLogin.hide();*/
+        Timehelper timer = new Timehelper();
+        lblLoiDangNhap.setForeground(Color.BLUE);
+        lblThongBaoUser.setText("");
+        lblThongBaoPass.setText("");
+        lblLoiDangNhap.setText("Đang đăng nhập...");
+        lblThongBaoPass.hide();
+        lblThongBaoUser.hide();
+        lblLoiDangNhap.show();
+        timer.TimerLoad(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if (check()) {
+                    loginnv();
 
-        jfLogin.hide();
+                }
+                timer.t.stop();
+            }
+        });
     }//GEN-LAST:event_lblLoginMousePressed
 
 
@@ -243,9 +378,12 @@ public class Login extends javax.swing.JPanel {
     private javax.swing.JPanel jpnLogin;
     public static javax.swing.JPanel jpnNenButton_login;
     public static javax.swing.JLabel lblLogin;
+    public static javax.swing.JLabel lblLoiDangNhap;
     private javax.swing.JLabel lblPassicon;
+    private javax.swing.JLabel lblThongBaoPass;
+    private javax.swing.JLabel lblThongBaoUser;
     private javax.swing.JLabel lbluserIcon;
-    private javax.swing.JPasswordField txtPass;
-    private javax.swing.JTextField txtU;
+    private javax.swing.JTextField txtManhanVien;
+    public static javax.swing.JPasswordField txtPass;
     // End of variables declaration//GEN-END:variables
 }

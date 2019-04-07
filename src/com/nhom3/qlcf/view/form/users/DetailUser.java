@@ -192,7 +192,7 @@ public class DetailUser extends javax.swing.JDialog {
         lblpass3.setText("Số ĐT *:");
         jPanel1.add(lblpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 80, 20));
 
-        cbxVaiTro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Admin" }));
+        cbxVaiTro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Staff", "Administration" }));
         cbxVaiTro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxVaiTroActionPerformed(evt);

@@ -24,7 +24,6 @@ public class FormLogin extends javax.swing.JPanel {
     public FormLogin() {
         initComponents();
         jpnLogin.setBackground(new Color(0, 0, 0, 134));
-       
         login = this;
         jpnLogin.add(new Login());
    

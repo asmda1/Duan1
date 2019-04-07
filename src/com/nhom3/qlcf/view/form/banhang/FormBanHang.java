@@ -11,6 +11,7 @@ import com.nhom3.qlcf.dao.KhachHangDAO;
 import com.nhom3.qlcf.dao.SanPhamDAO;
 import com.nhom3.qlcf.helper.Designhelper;
 import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.helper.ReSizehelper;
 import com.nhom3.qlcf.helper.Soundhelper;
 import com.nhom3.qlcf.helper.Timehelper;
@@ -27,6 +28,7 @@ import com.nhom3.qlcf.view.form.khachhang.FormKhachHang;
 import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnDangKyForm;
 import com.nhom3.qlcf.view.form.khachhang.ThemKH;
 import com.nhom3.qlcf.view.form.khachhang.jdialogThemKH;
+import com.nhom3.qlcf.view.form.login.Login;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import com.nhom3.qlcf.view.form.nhacungcap.FormDanhSachNhaCC;
@@ -76,7 +78,7 @@ public class FormBanHang extends javax.swing.JPanel {
         getTongTien();
         CountSoLuongHoaDonTrenWeb();
         RezieImageGroupLogo();
-
+        new Loginhelper().getLogin(lblUsers);
         lblbuton_thanhToan.setName(AutogetMaHD());
 
     }
@@ -585,7 +587,7 @@ public class FormBanHang extends javax.swing.JPanel {
 
         lblTamTinh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTamTinh.setText("....");
-        jplHoaDon.add(lblTamTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 140, 30));
+        jplHoaDon.add(lblTamTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 120, 30));
 
         lblThanhTien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblThanhTien.setText("0 VNĐ");
@@ -650,10 +652,11 @@ public class FormBanHang extends javax.swing.JPanel {
 
         txtdiem.setEditable(false);
         txtdiem.setText("0");
+        txtdiem.setName("true"); // NOI18N
         jplHoaDon.add(txtdiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 60, -1));
         txtdiem.hide();
 
-        lbldiem.setBackground(new java.awt.Color(0, 102, 255));
+        lbldiem.setBackground(new java.awt.Color(0, 51, 255));
         lbldiem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbldiem.setForeground(new java.awt.Color(255, 255, 255));
         lbldiem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -662,11 +665,19 @@ public class FormBanHang extends javax.swing.JPanel {
         jplHoaDon.add(lbldiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 40, 20));
         lbldiem.hide();
 
-        lbldiemtichluy.setText("...");
-        jplHoaDon.add(lbldiemtichluy, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 70, 20));
+        lbldiemtichluy.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbldiemtichluy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbldiemtichluy.setText("0");
+        lbldiemtichluy.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
+        lbldiemtichluy.setName("true"); // NOI18N
+        jplHoaDon.add(lbldiemtichluy, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 50, 20));
 
-        jLabel4.setText("+");
-        jplHoaDon.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 10, 20));
+        jLabel4.setBackground(new java.awt.Color(0, 51, 255));
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Điểm +:");
+        jLabel4.setOpaque(true);
+        jplHoaDon.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 50, 20));
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -884,11 +895,7 @@ public class FormBanHang extends javax.swing.JPanel {
     private void lblQuayVeBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuayVeBangHangMouseClicked
         // TODO add your handling code here:
         if (DongCTHD.isEmpty()) {
-            FormLogin.login.Card.removeAll();
-            FormLogin.login.Card.add(new FormMenu());
-            FormLogin.login.Card.repaint();
-            FormLogin.login.Card.revalidate();
-            FormLogin.login.Card.show();
+            new Loginhelper().QuayVe();
         } else {
 
             lblThongBao.setText("Hãy Thanh Toán Hóa Đơn Trước Khi Rời Khỏi");
@@ -947,6 +954,8 @@ public class FormBanHang extends javax.swing.JPanel {
         jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));*/
         jpnShowMenuOut.hide();
+         Login.txtPass.setText("");
+        Login.lblLoiDangNhap.hide();
         jpnDangXuatBanHang.setBackground(Color.white);
         lblDangXuatBangHang.setForeground(new Color(51, 102, 255));
     }//GEN-LAST:event_lblDangXuatBangHangMouseClicked
@@ -996,11 +1005,11 @@ public class FormBanHang extends javax.swing.JPanel {
                 if (txttienkhach.getText().trim().equals("")) {
                     txttienkhach.setText("0");
                     InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(), lbltenKH.getToolTipText(), txtdiem.getName(),
-                            txttienkhach.getText(), lbltienthua.getText());
+                            txttienkhach.getText(), lbltienthua.getText(), txtChietKhau.getText());
                     show.setVisible(true);
                 } else {
                     InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(), lbltenKH.getToolTipText(), txtdiem.getName(),
-                            txttienkhach.getText(), lbltienthua.getText());
+                            txttienkhach.getText(), lbltienthua.getText(), txtChietKhau.getText());
                     show.setVisible(true);
                 }
 
@@ -1134,7 +1143,7 @@ public class FormBanHang extends javax.swing.JPanel {
                 tongtien += (DongCTHD.get(i).getMaHoaDon().getTongTien());
             }
             //khách tích lủy 1000 ms dc giảm giá, 
-            if (!txtdiem.getText().equals("0") && so < 5 && diem > 1000 && tongtien > 200000) {
+            if (!txtdiem.getText().equals("0") && so < 5 && diem > 500 && tongtien > 200000) {
                 so++;
                 txtChietKhau.setText(String.valueOf((so + 5) - 1));
                 lbldiemtichluy.setText("0");
@@ -1387,6 +1396,7 @@ public class FormBanHang extends javax.swing.JPanel {
         txtdiem.setName(nd.getDienThoai());
         lbltenKH.setName(nd.getMakh());
         lbltenKH.setToolTipText(nd.getTenKh());
+        lbldiemtichluy.setName(String.valueOf(nd.isTrangThai()));
         txtChietKhau.setText("0");
         txtdiem.show();
         lbldiem.show();
@@ -1493,7 +1503,7 @@ public class FormBanHang extends javax.swing.JPanel {
         KhachHang kh = new KhachHang();
         NguoiDung nd = new NguoiDung();
         hoadon.setMaHoaDon(lblbuton_thanhToan.getToolTipText());
-        nd.setMaNguoidung("ND001");
+        nd.setMaNguoidung(lblUsers.getName());
         double ChietKhau = Double.parseDouble(txtChietKhau.getText());
         hoadon.setChietKhau(ChietKhau);
         hoadon.setTongTien(Double.parseDouble(lblThanhTien.getToolTipText()));
@@ -1525,33 +1535,34 @@ public class FormBanHang extends javax.swing.JPanel {
     public void diemtichluy() {
         double tongtien = 0;
         lbldiemtichluy.setText("0");
-        for (int i = 0; i < DongCTHD.size(); i++) {
-            tongtien += (DongCTHD.get(i).getMaHoaDon().getTongTien());
-            if (lblThanhTien.getText().equals("0 VNĐ") && !lbltenKH.getName().equals("KH000")) {
-                lbldiemtichluy.setText("0");
-            } else if (tongtien >= 30000 && tongtien < 50000 && !lbltenKH.getName().equals("KH000")) {
-                lbldiemtichluy.setText("35");
-            } else if (tongtien >= 50000 && tongtien < 100000 && !lbltenKH.getName().equals("KH000")) {
-                lbldiemtichluy.setText("55");
-            } else if (tongtien >= 100000 && tongtien < 200000 && !lbltenKH.getName().equals("KH000")) {
-                lbldiemtichluy.setText("105");
-            } else if (tongtien >= 250000 && tongtien < 350000 && !lbltenKH.getName().equals("KH000")) {
-                lbldiemtichluy.setText("205");
-            } else if (tongtien >= 400000 && tongtien < 500000 && !lbltenKH.getName().equals("KH000")) {
-                lbldiemtichluy.setText("335");
-            } else if (tongtien >= 550000 && tongtien < 1000000 && !lbltenKH.getName().equals("KH000")) {
-                lbldiemtichluy.setText("555");
-            } else if (tongtien >= 1100000 && tongtien < 1500000 && !lbltenKH.getName().equals("KH000")) {
-                lbldiemtichluy.setText("805");
-            } else if (tongtien >= 1100000 && tongtien < 2500000 && !lbltenKH.getName().equals("KH000")) {
-                lbldiemtichluy.setText("1005");
-            } else if (tongtien >= 2550000 && tongtien < 5050000 && !lbltenKH.getName().equals("KH000")) {
-                lbldiemtichluy.setText("1500");
-            } else if (tongtien >= 5550000 && !lbltenKH.getName().equals("KH000")) {
-                lbldiemtichluy.setText("1700");
+        if (lbldiemtichluy.getName().equals("true")) {
+            for (int i = 0; i < DongCTHD.size(); i++) {
+                tongtien += (DongCTHD.get(i).getMaHoaDon().getTongTien());
+                if (lblThanhTien.getText().equals("0 VNĐ")) {
+                    lbldiemtichluy.setText("0");
+                } else if (tongtien >= 30000 && tongtien < 50000 && !lbltenKH.getName().equals("KH000")) {
+                    lbldiemtichluy.setText("35");
+                } else if (tongtien >= 50000 && tongtien < 100000 && !lbltenKH.getName().equals("KH000")) {
+                    lbldiemtichluy.setText("55");
+                } else if (tongtien >= 100000 && tongtien < 200000 && !lbltenKH.getName().equals("KH000")) {
+                    lbldiemtichluy.setText("105");
+                } else if (tongtien >= 250000 && tongtien < 350000 && !lbltenKH.getName().equals("KH000")) {
+                    lbldiemtichluy.setText("205");
+                } else if (tongtien >= 400000 && tongtien < 500000 && !lbltenKH.getName().equals("KH000")) {
+                    lbldiemtichluy.setText("335");
+                } else if (tongtien >= 550000 && tongtien < 1000000 && !lbltenKH.getName().equals("KH000")) {
+                    lbldiemtichluy.setText("555");
+                } else if (tongtien >= 1100000 && tongtien < 1500000 && !lbltenKH.getName().equals("KH000")) {
+                    lbldiemtichluy.setText("805");
+                } else if (tongtien >= 1100000 && tongtien < 2500000 && !lbltenKH.getName().equals("KH000")) {
+                    lbldiemtichluy.setText("1005");
+                } else if (tongtien >= 2550000 && tongtien < 5050000 && !lbltenKH.getName().equals("KH000")) {
+                    lbldiemtichluy.setText("1500");
+                } else if (tongtien >= 5550000 && !lbltenKH.getName().equals("KH000")) {
+                    lbldiemtichluy.setText("1700");
 
+                }
             }
-
         }
 
     }

@@ -150,7 +150,7 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         jLabel5.setText("Vai Trò:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 74, 27));
 
-        cbxNhanVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân Viên", "Admin" }));
+        cbxNhanVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Staff", "Administration" }));
         jPanel1.add(cbxNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 242, -1));
 
         lblpass3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N

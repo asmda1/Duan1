@@ -5,9 +5,11 @@
  */
 package com.nhom3.qlcf.view.form.users;
 
+import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
+import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -34,6 +36,7 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
         jpltable.add(new Quanlyusers());
         jpltable.repaint();
         jpltable.updateUI();
+        new Loginhelper().getLogin(lblTenDangNhapBangHang);
     }
 
     /**
@@ -373,11 +376,7 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
     private void lblQuayVeBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuayVeBangHangMouseClicked
         // TODO add your handling code here:
 
-        FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormMenu());
-        FormLogin.login.Card.repaint();
-        FormLogin.login.Card.revalidate();
-        FormLogin.login.Card.show();
+    new Loginhelper().QuayVe();
         /*jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));
         jpnBanHang_Button.setBackground(new Color(0, 0, 0));
@@ -428,6 +427,8 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
         lblLogin.setForeground(Color.white);
         jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));*/
+             Login.txtPass.setText("");
+        Login.lblLoiDangNhap.hide();
         jpnShowMenuOut.hide();
         jpnDangXuat.setBackground(Color.white);
         lblDangXuatBangHang.setForeground(new Color(51, 102, 255));
@@ -476,12 +477,12 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
 
     private void jLabel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MousePressed
         // TODO add your handling code here:
-          lblTitle.setText("CHỈNH SỮA TÀI KHOẢN");
+        lblTitle.setText("CHỈNH SỮA TÀI KHOẢN");
         jpltable.removeAll();
         jpltable.updateUI();
         jpltable.add(new ChinhSuaTaiKhoan());
         jpltable.repaint();
-        jpltable.updateUI();    
+        jpltable.updateUI();
     }//GEN-LAST:event_jLabel8MousePressed
 
 

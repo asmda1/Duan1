@@ -6,6 +6,7 @@
 package com.nhom3.qlcf.view.form.menu;
 
 import com.nhom3.qlcf.helper.Designhelper;
+import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.helper.Soundhelper;
 import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.hanghoa.FormKiemTraHangHoa;
@@ -17,6 +18,7 @@ import com.nhom3.qlcf.view.form.doanhthu.FormThongKe;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.khachhang.FormKhachHang;
 import com.nhom3.qlcf.view.form.login.Login;
+
 import com.nhom3.qlcf.view.form.nhacungcap.FormDanhSachNhaCC;
 import com.nhom3.qlcf.view.form.nhacungcap.FormThemNhaCungCap_admin;
 import com.nhom3.qlcf.view.form.sanpham.FormSuaXoaSP_admin;
@@ -47,7 +49,18 @@ public class FormMenu extends javax.swing.JPanel {
     public FormMenu() {
         initComponents();
         trangchu = this;
+         new Loginhelper().getLogin(lblTenDangNhap);
 
+    }
+
+    public FormMenu(String nhanvien) {
+        initComponents();
+        trangchu = this;
+        jpnMenu4.hide();
+        jpnQuanLyTaiKhoan_Button.hide();
+        jpnSuaHangHoa_Button.hide();
+        jpnPhieuNhap_Button.hide();
+       new Loginhelper().getLogin(lblTenDangNhap);
     }
 
     /**
@@ -300,7 +313,7 @@ public class FormMenu extends javax.swing.JPanel {
                 .addComponent(jpnSuaXoaSP_Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jpnThemNhaCungCap_Button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(320, Short.MAX_VALUE))
+                .addContainerGap(323, Short.MAX_VALUE))
         );
 
         jfMain.add(jpnMenu4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 40, 220, 650));
@@ -944,6 +957,8 @@ public class FormMenu extends javax.swing.JPanel {
         Login.jpnNenButton_login.setBackground(new Color(0, 0, 0));
         Login.jpnNenButton_login.setOpaque(false);
         Login.lblLogin.setForeground(Color.white);
+        Login.txtPass.setText("");
+        Login.lblLoiDangNhap.hide();
         jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));
         jpnShowMenuOut.hide();
@@ -1194,7 +1209,7 @@ public class FormMenu extends javax.swing.JPanel {
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         // TODO add your handling code here:
         // setState(JFrame.ICONIFIED);
-        
+
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void lblOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOutMouseClicked
@@ -1382,7 +1397,7 @@ public class FormMenu extends javax.swing.JPanel {
 
     private void jLabel11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MousePressed
         // TODO add your handling code here:
-         Run.main.setState(JFrame.ICONIFIED);
+        Run.main.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jLabel11MousePressed
 
 

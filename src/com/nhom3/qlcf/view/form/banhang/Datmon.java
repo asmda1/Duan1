@@ -390,7 +390,7 @@ public class Datmon extends javax.swing.JDialog {
         lbltenExtra.setForeground(new java.awt.Color(255, 255, 255));
         lbltenExtra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbltenExtra.setText("Trống");
-        lbltenExtra.setToolTipText("EX002");
+        lbltenExtra.setToolTipText("EX000");
         lbltenExtra.setOpaque(true);
         jPanel1.add(lbltenExtra, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 90, 20));
 

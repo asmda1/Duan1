@@ -6,10 +6,12 @@
 package com.nhom3.qlcf.view.form.doanhthu;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.khachhang.ThemKH;
+import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import com.nhom3.qlcf.view.form.sanpham.ThemSanPham;
 import com.toedter.calendar.JDateChooser;
@@ -54,9 +56,12 @@ public class FormDonHang extends javax.swing.JPanel {
             cboDateProduct.addItem(item);
         }
         cboDateProduct.setSelectedIndex(1);
-
-        login = this;
+ 
+        login = this; 
+        new Loginhelper().getLogin(lblTenDangNhapBangHang);
     }
+
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -490,11 +495,7 @@ public class FormDonHang extends javax.swing.JPanel {
     private void lblQuayVeBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuayVeBangHangMouseClicked
         // TODO add your handling code here:
 
-        FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormMenu());
-        FormLogin.login.Card.repaint();
-        FormLogin.login.Card.revalidate();
-        FormLogin.login.Card.show();
+  new Loginhelper().QuayVe();
         /*jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));
         jpnBanHang_Button.setBackground(new Color(0, 0, 0));
@@ -545,6 +546,8 @@ public class FormDonHang extends javax.swing.JPanel {
         lblLogin.setForeground(Color.white);
         jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));*/
+         Login.txtPass.setText("");
+        Login.lblLoiDangNhap.hide();
         jpnShowMenuOut.hide();
         jpnDangXuat.setBackground(Color.white);
         lblDangXuatBangHang.setForeground(new Color(51, 102, 255));

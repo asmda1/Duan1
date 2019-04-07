@@ -6,10 +6,12 @@
 package com.nhom3.qlcf.view.form.doanhthu;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
+import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
 import java.awt.Font;
@@ -67,12 +69,13 @@ public class FormThongKe extends javax.swing.JPanel {
             cboDate.addItem(item);
         }
         cboDate.setSelectedIndex(0);
-         for(int i =1; i<32;i++){
+        for (int i = 1; i < 32; i++) {
             coxngay.addItem(String.valueOf(i));
         }
         coxngay.setSelectedIndex(0);
         ThongkeHomNay();
-       
+        new Loginhelper().getLogin(lblTenDangNhapBangHang);
+
     }
 
     public void ThongkeHomNay() {
@@ -231,7 +234,7 @@ public class FormThongKe extends javax.swing.JPanel {
             Bieu_Do_Duong_Line();
 
         } catch (Exception e) {
-        
+
         }
     }
 
@@ -710,11 +713,7 @@ public class FormThongKe extends javax.swing.JPanel {
     private void lblQuayVeBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuayVeBangHangMouseClicked
         // TODO add your handling code here:
 
-        FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormMenu());
-        FormLogin.login.Card.repaint();
-        FormLogin.login.Card.revalidate();
-        FormLogin.login.Card.show();
+        new Loginhelper().QuayVe();
         /*jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));
         jpnBanHang_Button.setBackground(new Color(0, 0, 0));
@@ -765,6 +764,8 @@ public class FormThongKe extends javax.swing.JPanel {
         lblLogin.setForeground(Color.white);
         jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));*/
+         Login.txtPass.setText("");
+        Login.lblLoiDangNhap.hide();
         jpnShowMenuOut.hide();
         jpnDangXuat.setBackground(Color.white);
         lblDangXuatBangHang.setForeground(new Color(51, 102, 255));
@@ -820,34 +821,30 @@ public class FormThongKe extends javax.swing.JPanel {
 
     private void coxngayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coxngayActionPerformed
         // TODO add your handling code here:
-     
-           try {
-              int ngay = coxngay.getSelectedIndex()+1;
- 
-                Calendar day = Calendar.getInstance();
-                    day.add(Calendar.DATE, ngay);
-                    lblngay.setText("Ngày " + String.valueOf(ngay) + " trong tháng (  " + String.valueOf(day.getTime()).substring(24) + ")");
-                    String sql = " SELECT tenSp, SUM(soLuong),SUM(giaBan*soLuong) FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp\n"
-                            + "												 WHERE Day(ngayHD)=? AND HoaDon.trangThai=1 GROUP BY tenSp,giaBan ";
-                    ResultSet rs = JDBCHelper.executeQuery(sql, ngay);
-                    DefaultTableModel model = (DefaultTableModel) tblHoatDongBanHang.getModel();
-                    model.setRowCount(0);
-                    double loinhuan = 0;
-                    while (rs.next()) {
-                        Object[] row = new Object[]{rs.getString(1), rs.getInt(2), chuyentien.format(rs.getDouble(3)) + " VNĐ"};
-                        loinhuan += rs.getDouble(3);
-                        model.addRow(row);
-                  
-                       
-                      
-                       
-                    }
-                      lblloiNhuan.setText(String.valueOf(chuyentien.format(loinhuan)) + " VNĐ");
-           } catch (Exception e) {
-           }
-       
-        
-        
+
+        try {
+            int ngay = coxngay.getSelectedIndex() + 1;
+
+            Calendar day = Calendar.getInstance();
+            day.add(Calendar.DATE, ngay);
+            lblngay.setText("Ngày " + String.valueOf(ngay) + " trong tháng (  " + String.valueOf(day.getTime()).substring(24) + ")");
+            String sql = " SELECT tenSp, SUM(soLuong),SUM(giaBan*soLuong) FROM dbo.HoaDon JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp\n"
+                    + "												 WHERE Day(ngayHD)=? AND HoaDon.trangThai=1 GROUP BY tenSp,giaBan ";
+            ResultSet rs = JDBCHelper.executeQuery(sql, ngay);
+            DefaultTableModel model = (DefaultTableModel) tblHoatDongBanHang.getModel();
+            model.setRowCount(0);
+            double loinhuan = 0;
+            while (rs.next()) {
+                Object[] row = new Object[]{rs.getString(1), rs.getInt(2), chuyentien.format(rs.getDouble(3)) + " VNĐ"};
+                loinhuan += rs.getDouble(3);
+                model.addRow(row);
+
+            }
+            lblloiNhuan.setText(String.valueOf(chuyentien.format(loinhuan)) + " VNĐ");
+        } catch (Exception e) {
+        }
+
+
     }//GEN-LAST:event_coxngayActionPerformed
 
 
