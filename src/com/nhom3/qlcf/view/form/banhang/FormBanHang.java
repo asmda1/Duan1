@@ -26,7 +26,7 @@ import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.khachhang.FormKhachHang;
 import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnDangKyForm;
-import com.nhom3.qlcf.view.form.khachhang.ThemKH;
+import com.nhom3.qlcf.view.form.khachhang.DangKyHoiVien;
 import com.nhom3.qlcf.view.form.khachhang.jdialogThemKH;
 import com.nhom3.qlcf.view.form.login.Login;
 import com.nhom3.qlcf.view.form.menu.FormMenu;

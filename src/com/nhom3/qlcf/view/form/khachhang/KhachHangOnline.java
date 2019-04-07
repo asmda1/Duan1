@@ -146,7 +146,7 @@ public class KhachHangOnline extends javax.swing.JPanel {
         listKH = new KhachHangDAO().select("SELECT * FROM dbo.KhachHang WHERE trangThai=0 and maKh !='KH000'");
         String sdt = listKH.get(index).getDienThoai();
         jpnDangKyForm.removeAll();
-        jpnDangKyForm.add(new DangKyHoiVien(sdt));
+        jpnDangKyForm.add(new CapNhatHoiVien(sdt));
         jpnDangKyForm.repaint();
         jpnDangKyForm.revalidate();
         jpnDangKyForm.show();

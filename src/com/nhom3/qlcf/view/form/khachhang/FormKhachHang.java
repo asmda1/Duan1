@@ -697,7 +697,7 @@ public class FormKhachHang extends javax.swing.JPanel {
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
         jpnDangKyForm.removeAll();
-        jpnDangKyForm.add(new DangKyHoiVien());
+        jpnDangKyForm.add(new CapNhatHoiVien());
         jpnDangKyForm.repaint();
         jpnDangKyForm.revalidate();
         jpnDangKyForm.show();
@@ -720,7 +720,7 @@ public class FormKhachHang extends javax.swing.JPanel {
     private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
         // TODO add your handling code here:
         jpnDangKyForm.removeAll();
-        jpnDangKyForm.add(new ThemKH());
+        jpnDangKyForm.add(new DangKyHoiVien());
         jpnDangKyForm.repaint();
         jpnDangKyForm.revalidate();
         jpnDangKyForm.show();
@@ -774,15 +774,15 @@ public class FormKhachHang extends javax.swing.JPanel {
         listKH = new KhachHangDAO().selectAll();
         String sdt = listKH.get(index).getDienThoai();
         jpnDangKyForm.removeAll();
-        jpnDangKyForm.add(new DangKyHoiVien(sdt));
+        jpnDangKyForm.add(new CapNhatHoiVien(sdt));
         jpnDangKyForm.repaint();
         jpnDangKyForm.revalidate();
         jpnDangKyForm.show();
         jpnGiaoDien.hide();
         jpnBack_button.show();
-        DangKyHoiVien.lbltitle.setText("Chỉnh Sửa Nhân Viên");
-        DangKyHoiVien.txtdiem.setEditable(false);
-        DangKyHoiVien.lblbuton_dky.setText("Cập Nhật");
+        CapNhatHoiVien.lbltitle.setText("Chỉnh Sửa Nhân Viên");
+        CapNhatHoiVien.txtdiem.setEditable(false);
+        CapNhatHoiVien.lblbuton_dky.setText("Cập Nhật");
 
     }//GEN-LAST:event_tblKhachHangMousePressed
 

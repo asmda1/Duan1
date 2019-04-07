@@ -24,11 +24,11 @@ public class jdialogThemKH extends javax.swing.JDialog {
         getContentPane().setBackground(new Color(0, 0, 0, 0));
         setBackground(new Color(0, 0, 0, 0));
         jplthemKH.removeAll();
-        jplthemKH.add(new ThemKH());
+        jplthemKH.add(new DangKyHoiVien());
         jplthemKH.repaint();
         jplthemKH.revalidate();
-        ThemKH.txtDienThoai.setText(sdt);
-        ThemKH.txtDienThoai.setForeground(Color.BLUE);
+        DangKyHoiVien.txtDienThoai.setText(sdt);
+        DangKyHoiVien.txtDienThoai.setForeground(Color.BLUE);
         
     }
       public jdialogThemKH(java.awt.Frame parent, boolean modal) {
@@ -38,7 +38,7 @@ public class jdialogThemKH extends javax.swing.JDialog {
         getContentPane().setBackground(new Color(0, 0, 0, 0));
         setBackground(new Color(0, 0, 0, 0));
         jplthemKH.removeAll();
-        jplthemKH.add(new ThemKH());
+        jplthemKH.add(new DangKyHoiVien());
         jplthemKH.repaint();
         jplthemKH.revalidate();
   

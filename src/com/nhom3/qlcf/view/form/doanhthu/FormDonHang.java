@@ -10,7 +10,7 @@ import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
-import com.nhom3.qlcf.view.form.khachhang.ThemKH;
+import com.nhom3.qlcf.view.form.khachhang.DangKyHoiVien;
 import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import com.nhom3.qlcf.view.form.sanpham.ThemSanPham;
