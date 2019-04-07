@@ -56,14 +56,21 @@ CREATE TABLE HangHoa
 CREATE TABLE PhieuNhap
     (
       maPhieu VARCHAR(10) PRIMARY KEY ,
-      maHangHoa VARCHAR(10) NOT NULL ,
       maNhaCungCap VARCHAR(10) NOT NULL ,
       nguoiNhap VARCHAR(10) ,
       ngayNhap DATE NOT NULL ,
-      soLuong INT CHECK ( soLuong > 0 )
-                  NOT NULL ,
       tongTien MONEY NOT NULL
     )
+
+CREATE TABLE CTPhieuNhap
+    (
+      maCTPhieuNhap INT IDENTITY
+                        PRIMARY KEY ,
+      maPhieu VARCHAR(10) NOT NULL ,
+      maHangHoa VARCHAR(10) NOT NULL ,
+      soLuong FLOAT CHECK ( soLuong > 0 )
+                  NOT NULL ,
+	)
 
 
 CREATE TABLE LoaiSanPham
@@ -76,7 +83,6 @@ CREATE TABLE SanPham
     (
       maSp VARCHAR(10) PRIMARY KEY ,
       maLoai VARCHAR(10) NOT NULL ,
-      maHangHoa VARCHAR(10) NOT NULL ,
       tenSp NVARCHAR(50) ,
       giaBan MONEY CHECK ( giaBan > 0 )
                    NOT NULL ,
@@ -136,14 +142,14 @@ CREATE TABLE CTHoaDon
 
 
 ALTER TABLE dbo.PhieuNhap ADD CONSTRAINT FK_NCC FOREIGN KEY (maNhaCungCap) REFERENCES dbo.NhaCungCap(maNhaCungCap) ON UPDATE CASCADE
-ALTER TABLE dbo.PhieuNhap ADD CONSTRAINT FK_HangHoaNhap FOREIGN KEY (maHangHoa) REFERENCES dbo.HangHoa(maHangHoa) ON UPDATE CASCADE
+ALTER TABLE dbo.PhieuNhap ADD CONSTRAINT FK_NguoiNhap FOREIGN KEY (nguoiNhap) REFERENCES dbo.NguoiDung(maNguoiDung) ON UPDATE CASCADE
+ALTER TABLE dbo.CTPhieuNhap ADD CONSTRAINT FK_HangHoaNhap FOREIGN KEY (maHangHoa) REFERENCES dbo.HangHoa(maHangHoa) ON UPDATE CASCADE
+ALTER TABLE dbo.CTPhieuNhap ADD CONSTRAINT FK_MaPhieu FOREIGN KEY (maPhieu) REFERENCES dbo.PhieuNhap(maPhieu) ON UPDATE CASCADE
 ALTER TABLE dbo.SanPham ADD CONSTRAINT FK_LoaiSP FOREIGN KEY (maLoai) REFERENCES dbo.LoaiSanPham(maLoai) ON UPDATE CASCADE
-ALTER TABLE dbo.SanPham ADD CONSTRAINT FK_HangHoa FOREIGN KEY (maHangHoa) REFERENCES dbo.HangHoa(maHangHoa) ON UPDATE CASCADE
 ALTER TABLE dbo.HoaDon ADD CONSTRAINT FK_NguoiDung FOREIGN KEY (maNguoiDung) REFERENCES dbo.NguoiDung(maNguoiDung) ON UPDATE CASCADE
 ALTER TABLE dbo.HoaDon ADD CONSTRAINT FK_KhachHang FOREIGN KEY (maKH) REFERENCES dbo.KhachHang(maKh) ON UPDATE CASCADE
 ALTER TABLE dbo.CTHoaDon ADD CONSTRAINT FK_HoaDon FOREIGN KEY (maHD) REFERENCES dbo.HoaDon ON UPDATE CASCADE
 ALTER TABLE dbo.CTHoaDon ADD CONSTRAINT FK_SanPham FOREIGN KEY (maSp) REFERENCES dbo.SanPham(maSp) ON UPDATE CASCADE
-ALTER TABLE dbo.PhieuNhap ADD CONSTRAINT FK_NguoiNhap FOREIGN KEY (nguoiNhap) REFERENCES dbo.NguoiDung(maNguoiDung) ON UPDATE CASCADE
 ALTER TABLE dbo.CTHoaDon ADD CONSTRAINT FK_Extra FOREIGN KEY (extra) REFERENCES dbo.Extra(id) ON UPDATE CASCADE
 ALTER TABLE dbo.CTHoaDon ADD CONSTRAINT FK_Size FOREIGN KEY (maSize) REFERENCES dbo.SizeSP(maSize) ON UPDATE CASCADE
 
@@ -727,7 +733,6 @@ GO
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -735,7 +740,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP001' ,
           'ML001' ,
-          'HH005' ,
           N'Americano(44)' ,
           44000 ,
           1 ,
@@ -744,7 +748,6 @@ VALUES  ( 'SP001' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -752,7 +755,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP002' ,
           'ML001' ,
-          'HH005' ,
           N'Cappuchino(54)' ,
           54000 ,
           1 ,
@@ -761,7 +763,6 @@ VALUES  ( 'SP002' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -769,7 +770,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP003' ,
           'ML001' ,
-          'HH005' ,
           N'Caramel Macchiato(59)' ,
           59000 ,
           1 ,
@@ -778,7 +778,6 @@ VALUES  ( 'SP003' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -786,7 +785,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP004' ,
           'ML001' ,
-          'HH005' ,
           N'Espersso(44)' ,
           44000 ,
           1 ,
@@ -795,7 +793,6 @@ VALUES  ( 'SP004' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -803,7 +800,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP005' ,
           'ML001' ,
-          'HH005' ,
           N'Latte(54)' ,
           54000 ,
           1 ,
@@ -812,7 +808,6 @@ VALUES  ( 'SP005' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -820,7 +815,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP006' ,
           'ML001' ,
-          'HH005' ,
           N'Mocho Macchiato(59)' ,
           59000 ,
           1 ,
@@ -829,7 +823,6 @@ VALUES  ( 'SP006' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -837,7 +830,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP007' ,
           'ML001' ,
-          'HH005' ,
           N'Phin Đen Đá(29)' ,
           29000 ,
           1 ,
@@ -846,7 +838,6 @@ VALUES  ( 'SP007' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -854,7 +845,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP008' ,
           'ML001' ,
-          'HH005' ,
           N'Phin Đen Nóng(29)' ,
           29000 ,
           1 ,
@@ -863,7 +853,6 @@ VALUES  ( 'SP008' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -871,7 +860,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP009' ,
           'ML001' ,
-          'HH005' ,
           N'Phin Sữa Nóng(29)' ,
           29000 ,
           1 ,
@@ -880,7 +868,6 @@ VALUES  ( 'SP009' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -888,7 +875,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP010' ,
           'ML001' ,
-          'HH005' ,
           N'Phin Sữa Đá(29)' ,
           29000 ,
           1 ,
@@ -897,7 +883,6 @@ VALUES  ( 'SP010' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -905,7 +890,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP011' ,
           'ML005' ,
-          'HH005' ,
           N'Caramel Phin Freeze(49)' ,
           49000 ,
           1 ,
@@ -914,7 +898,6 @@ VALUES  ( 'SP011' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -922,7 +905,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP012' ,
           'ML005' ,
-          'HH005' ,
           N'Classic Phin Freeze(49)' ,
           49000 ,
           1 ,
@@ -931,7 +913,6 @@ VALUES  ( 'SP012' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -939,7 +920,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP013' ,
           'ML005' ,
-          'HH005' ,
           N'Cookies & Cream(49)' ,
           49000 ,
           1 ,
@@ -948,7 +928,6 @@ VALUES  ( 'SP013' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -956,7 +935,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP014' ,
           'ML005' ,
-          'HH005' ,
           N'Freeze Chocolate(49)' ,
           49000 ,
           1 ,
@@ -965,7 +943,6 @@ VALUES  ( 'SP014' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -973,7 +950,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP015' ,
           'ML005' ,
-          'HH005' ,
           N'Freeze Trà Xanh(49)' ,
           49000 ,
           1 ,
@@ -982,7 +958,6 @@ VALUES  ( 'SP015' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -990,7 +965,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP016' ,
           'ML002' ,
-          'HH008' ,
           N'Trà Sen Vàng(39)' ,
           39000 ,
           1 ,
@@ -999,7 +973,6 @@ VALUES  ( 'SP016' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1007,7 +980,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP017' ,
           'ML002' ,
-          'HH008' ,
           N'Trà Thạch Đào(39)' ,
           39000 ,
           1 ,
@@ -1016,7 +988,6 @@ VALUES  ( 'SP017' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1024,7 +995,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP018' ,
           'ML002' ,
-          'HH008' ,
           N'Trà Thạch Vải(39)' ,
           39000 ,
           1 ,
@@ -1033,7 +1003,6 @@ VALUES  ( 'SP018' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1041,7 +1010,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP019' ,
           'ML002' ,
-          'HH008' ,
           N'Trà Thanh Đào(39)' ,
           39000 ,
           1 ,
@@ -1050,7 +1018,6 @@ VALUES  ( 'SP019' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1058,7 +1025,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP020' ,
           'ML003' ,
-          'HH005' ,
           N'Chả Lụa Xá Xíu(19)' ,
           19000 ,
           1 ,
@@ -1067,7 +1033,6 @@ VALUES  ( 'SP020' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1075,7 +1040,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP021' ,
           'ML003' ,
-          'HH005' ,
           N'Gà Xé Nước Tương(19)' ,
           19000 ,
           1 ,
@@ -1084,7 +1048,6 @@ VALUES  ( 'SP021' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1092,7 +1055,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP022' ,
           'ML003' ,
-          'HH005' ,
           N'Thịt Nương(19)' ,
           19000 ,
           1 ,
@@ -1101,7 +1063,6 @@ VALUES  ( 'SP022' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1109,7 +1070,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP023' ,
           'ML003' ,
-          'HH005' ,
           N'Xíu Mại(19)' ,
           19000 ,
           1 ,
@@ -1118,7 +1078,6 @@ VALUES  ( 'SP023' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1126,7 +1085,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP024' ,
           'ML004' ,
-          'HH005' ,
           N'Bánh Chuối(19)' ,
           19000 ,
           1 ,
@@ -1135,7 +1093,6 @@ VALUES  ( 'SP024' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1143,7 +1100,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP025' ,
           'ML004' ,
-          'HH005' ,
           N'Chocolate HighLand(29)' ,
           29000 ,
           1 ,
@@ -1152,7 +1108,6 @@ VALUES  ( 'SP025' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1160,7 +1115,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP026' ,
           'ML004' ,
-          'HH005' ,
           N'Mousse CaCao(29)' ,
           29000 ,
           1 ,
@@ -1169,7 +1123,6 @@ VALUES  ( 'SP026' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1177,7 +1130,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP027' ,
           'ML004' ,
-          'HH005' ,
           N'Caramel Phô Mai(29))' ,
           29000 ,
           1 ,
@@ -1186,7 +1138,6 @@ VALUES  ( 'SP027' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1194,7 +1145,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP028' ,
           'ML004' ,
-          'HH005' ,
           N'Phô Mai Chanh Dây(29)' ,
           29000 ,
           1 ,
@@ -1203,7 +1153,6 @@ VALUES  ( 'SP028' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1211,7 +1160,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP029' ,
           'ML004' ,
-          'HH005' ,
           N'Phô Mai Coffee(29)' ,
           29000 ,
           1 ,
@@ -1220,7 +1168,6 @@ VALUES  ( 'SP029' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1228,7 +1175,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP030' ,
           'ML004' ,
-          'HH005' ,
           N'Phô Mai Trà Xanh(29)' ,
           29000 ,
           1 ,
@@ -1237,7 +1183,6 @@ VALUES  ( 'SP030' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1245,7 +1190,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP031' ,
           'ML004' ,
-          'HH005' ,
           N'Tiramisu(29)' ,
           29000 ,
           1 ,
@@ -1254,7 +1198,6 @@ VALUES  ( 'SP031' ,
 INSERT  INTO dbo.SanPham
         ( maSp ,
           maLoai ,
-          maHangHoa ,
           tenSp ,
           giaBan ,
           trangThai ,
@@ -1262,7 +1205,6 @@ INSERT  INTO dbo.SanPham
         )
 VALUES  ( 'SP032' ,
           'ML004' ,
-          'HH005' ,
           N'Coffee 1kg(235)' ,
           235000 ,
           1 ,
@@ -1717,16 +1659,7 @@ VALUES  ( 'EX000', -- id - varchar(10)
 
 							GO 
 
-								 INSERT INTO dbo.CTHoaDon
-				          ( maHD, maSp, maSize, extra, soLuong )
-				  VALUES  ( 'HD075', -- maHD - varchar(10)
-				            'SP004', -- maSp - varchar(10)
-				            'L', -- maSize - varchar(5)
-				            'EX000', -- extra - varchar(10)
-				            1  -- soLuong - int
-				            )
-
-							GO 
+								
 							 INSERT INTO dbo.CTHoaDon
 				          ( maHD, maSp, maSize, extra, soLuong )
 				  VALUES  ( 'HD076', -- maHD - varchar(10)
@@ -1752,40 +1685,46 @@ VALUES  ( 'EX000', -- id - varchar(10)
 							GO 
 							INSERT INTO dbo.PhieuNhap
 							        ( maPhieu ,
-							          maHangHoa ,
 							          maNhaCungCap ,
 							          nguoiNhap ,
 							          ngayNhap ,
-							          soLuong ,
 							          tongTien
 							        )
 							VALUES  ( 'MP001' , -- maPhieu - varchar(10)
-							          'HH001' , -- maHangHoa - varchar(10)
 							          'NCC001' , -- maNhaCungCap - varchar(10)
 							          'ND001' , -- nguoiNhap - varchar(10)
 							          GETDATE() , -- ngayNhap - date
-							          6 , -- soLuong - int
 							          700000  -- tongTien - money
 							        )
 									GO 
+									INSERT INTO dbo.CTPhieuNhap
+									        ( maPhieu, maHangHoa, soLuong )
+									VALUES  ( 'MP001', -- maPhieu - varchar(10)
+									          'HH001', -- maHangHoa - varchar(10)
+									          6  -- soLuong - int
+									          )
 									INSERT INTO dbo.PhieuNhap
 							        ( maPhieu ,
-							          maHangHoa ,
 							          maNhaCungCap ,
 							          nguoiNhap ,
 							          ngayNhap ,
-							          soLuong ,
 							          tongTien
 							        )
 							VALUES  ( 'MP002' , -- maPhieu - varchar(10)
-							          'HH006' , -- maHangHoa - varchar(10)
 							          'NCC002' , -- maNhaCungCap - varchar(10)
 							          'ND002' , -- nguoiNhap - varchar(10)
 							          GETDATE() , -- ngayNhap - date
-							          6 , -- soLuong - int
 							          700000  -- tongTien - money
 							        )
-
+									GO
+                                    INSERT INTO dbo.CTPhieuNhap
+                                            ( maPhieu, maHangHoa, soLuong )
+                                    VALUES  ( 'MP002', -- maPhieu - varchar(10)
+                                              'HH006', -- maHangHoa - varchar(10)
+                                              6  -- soLuong - int
+                                              )
+											  GO
+                              -- Sửa từ khúc này     
 									SELECT * FROM dbo.HangHoa JOIN dbo.PhieuNhap ON PhieuNhap.maHangHoa = HangHoa.maHangHoa
 									IF OBJECT_ID('ChitietPhieuNhap') IS NOT NULL
 	                         DROP PROC ChitietPhieuNhap

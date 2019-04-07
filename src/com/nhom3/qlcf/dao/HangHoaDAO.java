@@ -34,7 +34,7 @@ public class HangHoaDAO implements DAO<HangHoa> {
     @Override
     public boolean update(HangHoa t) {
         String sql = "UPDATE dbo.HangHoa SET tenHangHoa=?,donViTinh=?,soLuong=?, donGia=?,moTa=? where maHangHoa=?";
-        return JDBCHelper.executeUpdate(sql, t.getTenHangHoa(), t.getDonViTinh(), t.getGiaVon(), t.getMoTa(), t.getMaHangHoa());
+        return JDBCHelper.executeUpdate(sql, t.getTenHangHoa(), t.getDonViTinh(),t.getSoLuong(), t.getGiaVon(), t.getMoTa(), t.getMaHangHoa());
 
     }
 

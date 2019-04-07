@@ -24,8 +24,8 @@ public class SanPhamDAO implements DAO<SanPham> {
 
     @Override
     public boolean insert(SanPham t) {
-        String sql = "Insert dbo.SanPham values (?,?,?,?,?,?,?)";
-        return JDBCHelper.executeUpdate(sql, t.getMaSanPham(), t.getMaLoaiSanPham().getMaLoai(), t.getMaHangHoa().getMaHangHoa(), t.getTenSp(), t.getGiaBan(), t.isTrangThai(), t.getHinhAnh());
+        String sql = "Insert dbo.SanPham values (?,?,?,?,?,?)";
+        return JDBCHelper.executeUpdate(sql, t.getMaSanPham(), t.getMaLoaiSanPham().getMaLoai(), t.getTenSp(), t.getGiaBan(), t.isTrangThai(), t.getHinhAnh());
     }
 
     @Override
@@ -36,8 +36,8 @@ public class SanPhamDAO implements DAO<SanPham> {
 
     @Override
     public boolean update(SanPham t) {
-        String sql = "Update dbo.SanPham set maLoai=?, maHangHoa=?, tenSp=?, giaBan=?, trangThai=?, hinhAnh=? where  maSp=?";
-        return JDBCHelper.executeUpdate(sql, t.getMaLoaiSanPham().getMaLoai(), t.getMaHangHoa().getMaHangHoa(), t.getTenSp(), t.getGiaBan(), t.isTrangThai(), t.getHinhAnh(), t.getMaSanPham());
+        String sql = "Update dbo.SanPham set maLoai=?, tenSp=?, giaBan=?, trangThai=?, hinhAnh=? where  maSp=?";
+        return JDBCHelper.executeUpdate(sql, t.getMaLoaiSanPham().getMaLoai(), t.getTenSp(), t.getGiaBan(), t.isTrangThai(), t.getHinhAnh(), t.getMaSanPham());
     }
 
     @Override
@@ -76,14 +76,10 @@ public class SanPhamDAO implements DAO<SanPham> {
             lsp.setMaLoai(rs.getString(2));
             model.setMaLoaiSanPham(lsp);
 
-            HangHoa hh = new HangHoa();
-            hh.setMaHangHoa(rs.getString(3));
-            model.setMaHangHoa(hh);
-
-            model.setTenSp(rs.getString(4));
-            model.setGiaBan(rs.getDouble(5));
-            model.setTrangThai(rs.getBoolean(6));
-            model.setHinhAnh(rs.getString(7));
+            model.setTenSp(rs.getString(3));
+            model.setGiaBan(rs.getDouble(4));
+            model.setTrangThai(rs.getBoolean(5));
+            model.setHinhAnh(rs.getString(6));
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }

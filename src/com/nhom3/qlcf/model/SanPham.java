@@ -15,16 +15,14 @@ public class SanPham implements Serializable{
 
     private String maSanPham;
     private LoaiSanPham maLoaiSanPham;
-    private HangHoa maHangHoa;
     private String tenSp;
     private double giaBan;
     private boolean trangThai;
     private String hinhAnh;
 
-    public SanPham(String maSanPham, LoaiSanPham maLoaiSanPham, HangHoa maHangHoa, String tenSp, double giaBan, boolean trangThai, String hinhAnh) {
+    public SanPham(String maSanPham, LoaiSanPham maLoaiSanPham, String tenSp, double giaBan, boolean trangThai, String hinhAnh) {
         this.maSanPham = maSanPham;
         this.maLoaiSanPham = maLoaiSanPham;
-        this.maHangHoa = maHangHoa;
         this.tenSp = tenSp;
         this.giaBan = giaBan;
         this.trangThai = trangThai;
@@ -50,14 +48,6 @@ public class SanPham implements Serializable{
 
     public void setMaLoaiSanPham(LoaiSanPham maLoaiSanPham) {
         this.maLoaiSanPham = maLoaiSanPham;
-    }
-
-    public HangHoa getMaHangHoa() {
-        return maHangHoa;
-    }
-
-    public void setMaHangHoa(HangHoa maHangHoa) {
-        this.maHangHoa = maHangHoa;
     }
 
     public String getTenSp() {
