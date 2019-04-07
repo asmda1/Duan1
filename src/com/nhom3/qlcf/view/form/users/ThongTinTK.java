@@ -10,6 +10,7 @@ import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.model.NguoiDung;
 import static com.nhom3.qlcf.view.form.users.FormTK.jpltable;
+import static com.nhom3.qlcf.view.form.users.FormTK.lblTitle;
 import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComponent;
@@ -262,6 +263,7 @@ public class ThongTinTK extends javax.swing.JPanel {
 
     private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
         // TODO add your handling code here:
+        lblTitle.setText("ĐỔI MẬT KHẨU");
         jpltable.removeAll();
         jpltable.updateUI();
         jpltable.add(new DoiMatKhau());

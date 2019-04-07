@@ -16,7 +16,11 @@ import com.nhom3.qlcf.model.NguoiDung;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
@@ -30,13 +34,60 @@ public class DoiMatKhau extends javax.swing.JPanel {
      * Creates new form Quanlyusers
      */
     NguoiDung ndung = null;
+    List<String> img = null;
 
     public DoiMatKhau() {
         initComponents();
-        code = Hashing.randomCode(4);
-        lblmaXN.setText(code);
+        loadImg();
+
     }
     String code;
+
+    public void loadImg() {
+        if (lblmaXN.getName().equals("code")) {
+            lblmaXN.setName("code1");
+            lblimg.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/code1.png")));
+        } else if (lblmaXN.getName().equals("code1")) {
+            lblmaXN.setName("code2");
+            lblimg.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/code2.png")));
+        } else if (lblmaXN.getName().equals("code2")) {
+            lblmaXN.setName("code3");
+            lblimg.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/code3.png")));
+        } else if (lblmaXN.getName().equals("code3")) {
+            lblmaXN.setName("code4");
+            lblimg.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/code4.png")));
+        } else if (lblmaXN.getName().equals("code4")) {
+            lblmaXN.setName("code5");
+            lblimg.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/code5.png")));
+        } else if (lblmaXN.getName().equals("code5")) {
+            lblmaXN.setName("code6");
+            lblimg.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/code6.png")));
+        } else if (lblmaXN.getName().equals("code6")) {
+            lblmaXN.setName("code7");
+            lblimg.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/code7.png")));
+        } else if (lblmaXN.getName().equals("code7")) {
+            lblmaXN.setName("code8");
+            lblimg.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/code8.png")));
+        } else if (lblmaXN.getName().equals("code8")) {
+            lblmaXN.setName("code9");
+            lblimg.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/code9.png")));
+        } else if (lblmaXN.getName().equals("code9")) {
+            lblmaXN.setName("code10");
+            lblimg.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/code10.png")));
+        } else if (lblmaXN.getName().equals("code10")) {
+            lblmaXN.setName("code11");
+            lblimg.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/code11.png")));
+        } else if (lblmaXN.getName().equals("code11")) {
+            lblmaXN.setName("code12");
+            lblimg.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/code12.png")));
+        } else {
+            lblmaXN.setName("code");
+            lblimg.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/code.png")));
+        }
+        code = Hashing.randomCode(4);
+        lblmaXN.setText(code);
+
+    }
 
     public boolean check() {
 
@@ -73,8 +124,8 @@ public class DoiMatKhau extends javax.swing.JPanel {
         } else if (!txtcode.getText().equals(code)) {
             lblthongbao.setText("Code không đúng!");
             lblthongbao.setForeground(Color.red);
-            code = Hashing.randomCode(4);
-            lblmaXN.setText(code);
+
+            loadImg();
             return false;
         }
         return true;
@@ -105,7 +156,9 @@ public class DoiMatKhau extends javax.swing.JPanel {
         txtmkcu = new javax.swing.JPasswordField();
         txtmkmoi1 = new javax.swing.JPasswordField();
         txtxnmkm = new javax.swing.JPasswordField();
+        jplimg = new javax.swing.JPanel();
         lblmaXN = new javax.swing.JLabel();
+        lblimg = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -185,19 +238,33 @@ public class DoiMatKhau extends javax.swing.JPanel {
         txtxnmkm.setOpaque(false);
         jPanel1.add(txtxnmkm, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 260, 40));
 
+        jplimg.setBackground(new java.awt.Color(255, 255, 255));
+        jplimg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         lblmaXN.setBackground(new java.awt.Color(0, 0, 0));
-        lblmaXN.setFont(new java.awt.Font("Viner Hand ITC", 1, 36)); // NOI18N
-        lblmaXN.setForeground(new java.awt.Color(255, 255, 255));
+        lblmaXN.setFont(new java.awt.Font("Viner Hand ITC", 2, 48)); // NOI18N
+        lblmaXN.setForeground(new java.awt.Color(153, 153, 255));
         lblmaXN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblmaXN.setText("....");
         lblmaXN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblmaXN.setOpaque(true);
+        lblmaXN.setName("code"); // NOI18N
         lblmaXN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblmaXNMousePressed(evt);
             }
         });
-        jPanel1.add(lblmaXN, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 260, 60));
+        jplimg.add(lblmaXN, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 60));
+
+        lblimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/code.png"))); // NOI18N
+        lblimg.setName("1"); // NOI18N
+        lblimg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblimgMousePressed(evt);
+            }
+        });
+        jplimg.add(lblimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 60));
+
+        jPanel1.add(jplimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 220, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -221,6 +288,11 @@ public class DoiMatKhau extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (check()) {
             JDBCHelper.executeUpdate("Update dbo.NguoiDung set matKhau ='" + txtxnmkm.getText() + "' where maNguoiDung ='" + new ThongTinTK().lblMa.getText() + "'");
+            txtcode.setText("");
+            txtmkcu.setText("");
+            txtxnmkm.setText("");
+            txtmkmoi1.setText("");
+            loadImg();
             lblthongbao.setText("Đổi mật khẩu thành công!");
             lblthongbao.setForeground(Color.GREEN);
         }
@@ -229,31 +301,26 @@ public class DoiMatKhau extends javax.swing.JPanel {
 
     private void lblmaXNMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblmaXNMousePressed
         // TODO add your handling code here:
-        lblthongbao.setText("Đang Đỗi...");
-        Timehelper timehelper = new Timehelper();
-        timehelper.TimerLoad(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                try {
-                    code = Hashing.randomCode(4);
-                    lblmaXN.setText(code);
-                    lblthongbao.setText("");
-                    lblthongbao.setForeground(Color.GREEN);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Lỗi");
-                }
 
-                timehelper.t.stop();
-            }
-        });
+        code = Hashing.randomCode(4);
+        lblmaXN.setText(code);
+        loadImg();
+
+
     }//GEN-LAST:event_lblmaXNMousePressed
+
+    private void lblimgMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblimgMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblimgMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblmaXN;
+    private javax.swing.JPanel jplimg;
+    protected static javax.swing.JLabel lblimg;
+    protected static javax.swing.JLabel lblmaXN;
     private javax.swing.JLabel lblpass1;
     private javax.swing.JLabel lblpass2;
     private javax.swing.JLabel lblpass3;

@@ -5,12 +5,14 @@
  */
 package com.nhom3.qlcf.view.form.users;
 
+import com.nhom3.qlcf.helper.Hashing;
 import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
+import static com.nhom3.qlcf.view.form.users.DoiMatKhau.lblmaXN;
 import java.awt.Color;
 import javax.swing.JFrame;
 
@@ -363,7 +365,7 @@ public class FormTK extends javax.swing.JPanel {
     private void lblQuayVeBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuayVeBangHangMouseClicked
         // TODO add your handling code here:
 
-    new Loginhelper().QuayVe();
+        new Loginhelper().QuayVe();
         /*jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));
         jpnBanHang_Button.setBackground(new Color(0, 0, 0));
@@ -414,7 +416,7 @@ public class FormTK extends javax.swing.JPanel {
         lblLogin.setForeground(Color.white);
         jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));*/
-             Login.txtPass.setText("");
+        Login.txtPass.setText("");
         Login.lblLoiDangNhap.hide();
         jpnShowMenuOut.hide();
         jpnDangXuat.setBackground(Color.white);
@@ -443,13 +445,14 @@ public class FormTK extends javax.swing.JPanel {
 
     private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
         // TODO add your handling code here:
-
-        lblTitle.setText("THÔNG TIN TÀI KHOẢN");
+        lblTitle.setText("THÔNG TIN TÀI KHOẢN ");
         jpltable.removeAll();
         jpltable.updateUI();
         jpltable.add(new ThongTinTK());
         jpltable.repaint();
         jpltable.updateUI();
+        new Loginhelper().getLogin(lblTenDangNhapBangHang);
+        lbltentk.setText(lblTenDangNhapBangHang.getText());
     }//GEN-LAST:event_jLabel6MousePressed
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
@@ -460,6 +463,8 @@ public class FormTK extends javax.swing.JPanel {
         jpltable.add(new DoiMatKhau());
         jpltable.repaint();
         jpltable.updateUI();
+   
+      
     }//GEN-LAST:event_jLabel5MousePressed
 
 
@@ -483,7 +488,7 @@ public class FormTK extends javax.swing.JPanel {
     private javax.swing.JLabel lblOutBangHang;
     private javax.swing.JLabel lblQuayVeBangHang;
     private javax.swing.JLabel lblTenDangNhapBangHang;
-    private javax.swing.JLabel lblTitle;
+    protected static javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblanhGiaoDien;
     private javax.swing.JLabel lbltentk;
     // End of variables declaration//GEN-END:variables
