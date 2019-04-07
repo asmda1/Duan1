@@ -18,25 +18,26 @@ import javax.swing.JFrame;
  *
  * @author baotri1998
  */
-public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
+public class FormTK extends javax.swing.JPanel {
 
     /**
      * Creates new form FormLogin
      */
-    public static FormQuanLyTaiKhoan_admin quanlynhanvien;
+    public static FormTK quanlynhanvien;
 
-    public FormQuanLyTaiKhoan_admin() {
+    public FormTK() {
         initComponents();
         // jpnLogin1.setBackground(new Color(0, 0, 0, 134));
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
         quanlynhanvien = this;
-        lblTitle.setText("QUẢN LÝ NHÂN VIÊN ");
+        lblTitle.setText("THÔNG TIN TÀI KHOẢN ");
         jpltable.removeAll();
         jpltable.updateUI();
-        jpltable.add(new Quanlyusers());
+        jpltable.add(new ThongTinTK());
         jpltable.repaint();
         jpltable.updateUI();
         new Loginhelper().getLogin(lblTenDangNhapBangHang);
+        lbltentk.setText(lblTenDangNhapBangHang.getText());
     }
 
     /**
@@ -62,13 +63,12 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
         jpnNen = new javax.swing.JPanel();
         jpldanhmuc = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lbltentk = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         lblNen = new javax.swing.JLabel();
-        jpltable = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
+        jpltable = new javax.swing.JPanel();
         lblanhGiaoDien = new javax.swing.JLabel();
         Card = new javax.swing.JPanel();
 
@@ -251,15 +251,15 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
         jLabel2.setOpaque(true);
         jpldanhmuc.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 180, 200));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Quản Lý");
-        jpldanhmuc.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 180, -1));
+        lbltentk.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbltentk.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbltentk.setText("...");
+        jpldanhmuc.add(lbltentk, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 180, -1));
 
         jLabel5.setBackground(new java.awt.Color(204, 204, 204));
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("  QUẢN LÝ NHÂN VIÊN");
+        jLabel5.setText("ĐỔI MẬT KHẨU");
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -267,12 +267,12 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
                 jLabel5MousePressed(evt);
             }
         });
-        jpldanhmuc.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 240, 40));
+        jpldanhmuc.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 240, 40));
 
         jLabel6.setBackground(new java.awt.Color(204, 204, 204));
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("TẠO TÀI KHOẢN");
+        jLabel6.setText("THÔNG TIN TÀI KHOẢN");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -280,20 +280,7 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
                 jLabel6MousePressed(evt);
             }
         });
-        jpldanhmuc.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 240, 40));
-
-        jLabel8.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("CHỈNH SỬA TÀI KHOẢN");
-        jLabel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel8MousePressed(evt);
-            }
-        });
-        jpldanhmuc.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, 240, 40));
+        jpldanhmuc.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 240, 40));
 
         lblNen.setBackground(new java.awt.Color(255, 255, 255));
         lblNen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -302,11 +289,11 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
         lblNen.setOpaque(true);
         jpldanhmuc.add(lblNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 620));
 
-        jpltable.setLayout(new java.awt.BorderLayout());
-
         lblTitle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("THÔNG TIN CỦA BẠN");
+        lblTitle.setText("THÔNG TIN TÀI KHOẢN");
+
+        jpltable.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout jpnNenLayout = new javax.swing.GroupLayout(jpnNen);
         jpnNen.setLayout(jpnNenLayout);
@@ -314,10 +301,10 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
             jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnNenLayout.createSequentialGroup()
                 .addComponent(jpldanhmuc, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpltable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE))
+                    .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
+                    .addComponent(jpltable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpnNenLayout.setVerticalGroup(
@@ -326,9 +313,9 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
             .addGroup(jpnNenLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpltable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(16, 16, 16))
         );
 
         jfTSuaXoa.add(jpnNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 630));
@@ -457,42 +444,30 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
     private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
         // TODO add your handling code here:
 
-        lblTitle.setText("TẠO TÀI KHOẢN ");
+        lblTitle.setText("THÔNG TIN TÀI KHOẢN");
         jpltable.removeAll();
         jpltable.updateUI();
-        jpltable.add(new TaoTaiKhoan());
+        jpltable.add(new ThongTinTK());
         jpltable.repaint();
         jpltable.updateUI();
     }//GEN-LAST:event_jLabel6MousePressed
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
         // TODO add your handling code here:
-        lblTitle.setText("QUẢN LÝ NHÂN VIÊN ");
+        lblTitle.setText("ĐỔI MẬT KHẨU ");
         jpltable.removeAll();
         jpltable.updateUI();
-        jpltable.add(new Quanlyusers());
+        jpltable.add(new DoiMatKhau());
         jpltable.repaint();
         jpltable.updateUI();
     }//GEN-LAST:event_jLabel5MousePressed
-
-    private void jLabel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MousePressed
-        // TODO add your handling code here:
-        lblTitle.setText("CHỈNH SỮA TÀI KHOẢN");
-        jpltable.removeAll();
-        jpltable.updateUI();
-        jpltable.add(new ChinhSuaTaiKhoan());
-        jpltable.repaint();
-        jpltable.updateUI();
-    }//GEN-LAST:event_jLabel8MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JPanel Card;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     protected static javax.swing.JPanel jfTSuaXoa;
     private javax.swing.JPanel jpldanhmuc;
     public static javax.swing.JPanel jpltable;
@@ -510,5 +485,6 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
     private javax.swing.JLabel lblTenDangNhapBangHang;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblanhGiaoDien;
+    private javax.swing.JLabel lbltentk;
     // End of variables declaration//GEN-END:variables
 }

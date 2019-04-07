@@ -115,6 +115,18 @@ public class NguoiDungDAO implements DAO<NguoiDung> {
         }
         return false;
     }
+    public static boolean checkMK(String mk) {
+        String sql = "Select * from dbo.NguoiDung WHERE matkhau ='" + mk + "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
   public boolean checkMa(String ma) {
         String sql = "Select * from dbo.NguoiDung WHERE maNguoiDung ='" + ma + "'";
         try {

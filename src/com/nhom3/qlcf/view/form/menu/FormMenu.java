@@ -24,6 +24,7 @@ import com.nhom3.qlcf.view.form.nhacungcap.FormThemNhaCungCap_admin;
 import com.nhom3.qlcf.view.form.sanpham.FormSuaXoaSP_admin;
 import com.nhom3.qlcf.view.form.sanpham.FormThemSanPham;
 import com.nhom3.qlcf.view.form.users.FormQuanLyTaiKhoan_admin;
+import com.nhom3.qlcf.view.form.users.FormTK;
 import com.nhom3.qlcf.view.form.users.FormTaiKhoan;
 import com.nhom3.qlcf.view.phieunhap.FormQuanLyPhieuNhap;
 import java.awt.Color;
@@ -1331,7 +1332,7 @@ public class FormMenu extends javax.swing.JPanel {
     private void lblTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTaiKhoanMousePressed
         // TODO add your handling code here:
         FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormTaiKhoan());
+        FormLogin.login.Card.add(new FormTK());
         FormLogin.login.Card.repaint();
         FormLogin.login.Card.revalidate();
         FormLogin.login.Card.show();

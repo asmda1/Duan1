@@ -136,7 +136,7 @@ public class DoiMatKhau extends javax.swing.JPanel {
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("CHẤP NHẬT");
+        jLabel7.setText("CHẤP NHẬN");
         jLabel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel7.setOpaque(true);

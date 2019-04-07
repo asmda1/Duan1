@@ -346,7 +346,7 @@
                               <Component id="jLabel7" min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="81" max="32767" attributes="0"/>
+                      <EmptySpace pref="84" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel9" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
