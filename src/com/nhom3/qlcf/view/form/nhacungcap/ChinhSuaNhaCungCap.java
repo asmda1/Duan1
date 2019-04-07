@@ -154,7 +154,7 @@ public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
 
         lblTen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTen.setText("...");
-        jPanel1.add(lblTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 220, 43));
+        jPanel1.add(lblTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 220, 43));
 
         lblCapNhatTragThai.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblCapNhatTragThai.setText("Cập Nhật Trạng Thái :");
@@ -230,7 +230,7 @@ public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
 
         lblTen1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTen1.setText("Tên Đối Tác:");
-        jPanel1.add(lblTen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 80, 43));
+        jPanel1.add(lblTen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 80, 43));
 
         lblSDT1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSDT1.setText("Số ĐT:");

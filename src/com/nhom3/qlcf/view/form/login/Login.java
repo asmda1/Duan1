@@ -272,7 +272,7 @@ public class Login extends javax.swing.JPanel {
         lblThongBaoPass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblThongBaoPass.setOpaque(true);
         jpnLogin.add(lblThongBaoPass);
-        lblThongBaoPass.setBounds(130, 260, 280, 30);
+        lblThongBaoPass.setBounds(120, 270, 280, 30);
         lblThongBaoPass.hide();
 
         lblLoiDangNhap.setBackground(new java.awt.Color(255, 255, 255));
@@ -288,7 +288,7 @@ public class Login extends javax.swing.JPanel {
         lblThongBaoUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblThongBaoUser.setOpaque(true);
         jpnLogin.add(lblThongBaoUser);
-        lblThongBaoUser.setBounds(130, 180, 270, 30);
+        lblThongBaoUser.setBounds(120, 190, 280, 30);
         lblThongBaoUser.hide();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
