@@ -53,6 +53,10 @@ public class DoiMatKhau extends javax.swing.JPanel {
 
             lblthongbao.setForeground(Color.red);
             return false;
+        } else if (txtxnmkm.getText().length() < 3) {
+            lblthongbao.setText("Mật khẩu phải ít nhất 3 kí tự");
+            lblthongbao.setForeground(Color.red);
+            return false;
         } else if (txtxnmkm.getText().trim().equals("")) {
             lblthongbao.setText("Chưa nhập xác nhận mật khậu");
 
@@ -62,10 +66,6 @@ public class DoiMatKhau extends javax.swing.JPanel {
             lblthongbao.setText("Mật khẩu xác nhận không đúng");
             lblthongbao.setForeground(Color.red);
             return false;
-        } else if (txtxnmkm.getText().length() > 3 || txtmkmoi1.getText().length() > 3) {
-            lblthongbao.setText("Mật khẩu phải ít nhất 3 kí tự");
-            lblthongbao.setForeground(Color.red);
-            return false;
         } else if (txtcode.getText().trim().equals("")) {
             lblthongbao.setText("Code không được bỏ trống!");
             lblthongbao.setForeground(Color.red);
@@ -73,6 +73,8 @@ public class DoiMatKhau extends javax.swing.JPanel {
         } else if (!txtcode.getText().equals(code)) {
             lblthongbao.setText("Code không đúng!");
             lblthongbao.setForeground(Color.red);
+            code = Hashing.randomCode(4);
+            lblmaXN.setText(code);
             return false;
         }
         return true;
@@ -218,7 +220,7 @@ public class DoiMatKhau extends javax.swing.JPanel {
     private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
         // TODO add your handling code here:
         if (check()) {
-            JDBCHelper.executeUpdate("Update dbo.NguoiDung set matKhau ='" + txtxnmkm.getText() + "' where maNguoiDung ='" + new ThongTinTK().lblMa.getText() +"'");
+            JDBCHelper.executeUpdate("Update dbo.NguoiDung set matKhau ='" + txtxnmkm.getText() + "' where maNguoiDung ='" + new ThongTinTK().lblMa.getText() + "'");
             lblthongbao.setText("Đổi mật khẩu thành công!");
             lblthongbao.setForeground(Color.GREEN);
         }
@@ -235,7 +237,7 @@ public class DoiMatKhau extends javax.swing.JPanel {
                 try {
                     code = Hashing.randomCode(4);
                     lblmaXN.setText(code);
-                    lblthongbao.setText("Đổi Thành Công");
+                    lblthongbao.setText("");
                     lblthongbao.setForeground(Color.GREEN);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Lỗi");
