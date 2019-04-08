@@ -5,10 +5,16 @@
  */
 package com.nhom3.qlcf.view;
 
+import com.nhom3.qlcf.view.form.banhang.FormBanHang;
 import com.nhom3.qlcf.view.form.login.FormLogin;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import javax.swing.BoxLayout;
+import javax.swing.Timer;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
@@ -22,7 +28,7 @@ public class Run extends javax.swing.JFrame {
      * Creates new form Main
      */
     public static Run main;
- 
+    Timer t;
 
     public Run() {
         initComponents();
@@ -31,8 +37,26 @@ public class Run extends javax.swing.JFrame {
         jpnNenButton_login.setBackground(new Color(0, 0, 0, 64));
         jfMain.hide();
         CardLayout.hide();*/
-        add(new FormLogin());
-       
+        getContentPane().setBackground(new Color(0, 0, 0, 0));
+        setBackground(new Color(0, 0, 0, 0));
+        ActionListener action = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int percent = proBar.getValue() + 1;
+                proBar.setValue(percent);
+                if (percent >= 100) {
+                    lblLogo.hide();
+                    proBar.hide();
+                    lblimg.hide();
+                    setLayout(new BoxLayout(getContentPane(), BoxLayout.LINE_AXIS));
+                    add(new FormLogin());
+                    t.stop();
+                }
+            }
+        };
+        t = new Timer(32, action);
+        t.start();
+
         main = this;
     }
 
@@ -45,10 +69,25 @@ public class Run extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblLogo = new javax.swing.JLabel();
+        proBar = new javax.swing.JProgressBar();
+        lblimg = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1100, 700));
         setUndecorated(true);
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/logoCafe2.gif"))); // NOI18N
+        getContentPane().add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 440, 400, -1));
+
+        proBar.setBackground(new java.awt.Color(255, 255, 255));
+        proBar.setForeground(new java.awt.Color(0, 102, 204));
+        proBar.setStringPainted(true);
+        getContentPane().add(proBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 520, 300, -1));
+
+        lblimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/logoCafe3.png"))); // NOI18N
+        getContentPane().add(lblimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 390, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -91,7 +130,10 @@ public class Run extends javax.swing.JFrame {
         });
     }
 
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblimg;
+    private javax.swing.JProgressBar proBar;
     // End of variables declaration//GEN-END:variables
 }
