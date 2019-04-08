@@ -12,6 +12,7 @@ import com.nhom3.qlcf.model.NguoiDung;
 import com.nhom3.qlcf.model.NhaCungCap;
 import static com.nhom3.qlcf.view.form.login.FormLogin.jfLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
+import com.nhom3.qlcf.view.form.users.LayLaiMatKhau;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -241,6 +242,12 @@ public class Login extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Quên Mật Khẩu?");
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel5MousePressed(evt);
+            }
+        });
         jpnLogin.add(jLabel5);
         jLabel5.setBounds(310, 360, 120, 20);
 
@@ -368,6 +375,13 @@ public class Login extends javax.swing.JPanel {
             }
         });
     }//GEN-LAST:event_lblLoginMousePressed
+
+    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
+        // TODO add your handling code here:
+        
+        QuenMatKhau laymk = new QuenMatKhau(null, true);
+        laymk.setVisible(true);
+    }//GEN-LAST:event_jLabel5MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,6 +5,10 @@
  */
 package com.nhom3.qlcf.view.form.hanghoa;
 
+import static com.nhom3.qlcf.view.form.hanghoa.FormNhapThemHangHoa.nhapThemHangHoa;
+import com.nhom3.qlcf.view.form.login.FormLogin;
+import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
+
 /**
  *
  * @author baotri1998
@@ -14,11 +18,11 @@ public class NhapHang extends javax.swing.JPanel {
     /**
      * Creates new form ThemKhachHang
      */
-    
     public static NhapHang nhapHang;
+
     public NhapHang() {
         initComponents();
-        nhapHang =this;
+        nhapHang = this;
     }
 
     /**
@@ -57,6 +61,11 @@ public class NhapHang extends javax.swing.JPanel {
         jTextField1.setText("Tìm mã Hàng hóa");
 
         jLabel1.setText("Tìm kiếm");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -214,6 +223,17 @@ public class NhapHang extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        // TODO add your handling code here:
+
+      
+        FormNhapThemHangHoa.jpnNhapHoangHoa.removeAll();
+        FormNhapThemHangHoa.jpnNhapHoangHoa.add(new ThemHang());
+        FormNhapThemHangHoa.jpnNhapHoangHoa.repaint();
+        FormNhapThemHangHoa.jpnNhapHoangHoa.revalidate();
+        new NhapHang().hide();
+    }//GEN-LAST:event_jLabel1MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

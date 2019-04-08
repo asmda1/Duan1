@@ -65,6 +65,7 @@ public class FormNhapThemHangHoa extends javax.swing.JPanel {
         jpnNhapHoangHoa = new javax.swing.JPanel();
         jpnThemHangHoa = new javax.swing.JPanel();
         lblanhGiaoDien = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         Card = new javax.swing.JPanel();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
@@ -248,6 +249,9 @@ public class FormNhapThemHangHoa extends javax.swing.JPanel {
         lblanhGiaoDien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenThuNgan.png"))); // NOI18N
         jfNhapThemHang.add(lblanhGiaoDien, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1120, 710));
 
+        jLabel1.setText("jLabel1");
+        jfNhapThemHang.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, -1, -1));
+
         add(jfNhapThemHang);
 
         Card.setBackground(new java.awt.Color(255, 255, 255));
@@ -369,9 +373,10 @@ public class FormNhapThemHangHoa extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JPanel Card;
+    private javax.swing.JLabel jLabel1;
     protected static javax.swing.JPanel jfNhapThemHang;
     private javax.swing.JPanel jpnDangXuat;
-    private javax.swing.JPanel jpnNhapHoangHoa;
+    protected static javax.swing.JPanel jpnNhapHoangHoa;
     private javax.swing.JPanel jpnQuayVe;
     private javax.swing.JPanel jpnShowMenuOut;
     private javax.swing.JPanel jpnTenDangNhap;
