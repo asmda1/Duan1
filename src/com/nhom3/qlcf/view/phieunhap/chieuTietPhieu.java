@@ -54,7 +54,6 @@ public class chieuTietPhieu extends javax.swing.JDialog {
                 hh.setGiaVon(rs.getDouble(4));
                 ncc.setTenNhaCC(rs.getString(5));
                 ncc.setDiaChi(rs.getString(6));
-                phieu.setMaHangHoa(hh);
                 phieu.setMaNhaCungCap(ncc);
                 phieu.setNgayNhap(rs.getDate(7));
                 phieu.setTongTien(rs.getDouble(8));
@@ -73,7 +72,7 @@ public class chieuTietPhieu extends javax.swing.JDialog {
             model.setRowCount(0);
             try {
                 addCTList.stream().map((kh) -> new Object[]{
-                    kh.getMaPhieu(), kh.getMaHangHoa().getMaHangHoa(), kh.getMaHangHoa().getTenHangHoa(), kh.getMaHangHoa().getGiaVon(), kh.getMaNhaCungCap().getTenNhaCC(),
+                    kh.getMaPhieu(), kh.getMaNhaCungCap().getTenNhaCC(),
                     kh.getMaNhaCungCap().getDiaChi(), kh.getNgayNhap(), kh.getTongTien()
                 }).forEachOrdered((row) -> {
                     model.addRow(row);

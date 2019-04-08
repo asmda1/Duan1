@@ -35,9 +35,7 @@ public class FormNhapThemHangHoa extends javax.swing.JPanel {
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
         nhapThemHangHoa = this;
 
-        jpnNhapHoangHoa.add(new NhapHang());
-
-        jpnThemHangHoa.add(new ThemHang());
+        jpnThemHoangHoa.add(new NhapHang());
         new Loginhelper().getLogin(lblTenDangNhapBangHang);
 
     }
@@ -51,6 +49,7 @@ public class FormNhapThemHangHoa extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Card = new javax.swing.JPanel();
         jfNhapThemHang = new javax.swing.JPanel();
         jpnShowMenuOut = new javax.swing.JPanel();
         jpnQuayVe = new javax.swing.JPanel();
@@ -59,16 +58,23 @@ public class FormNhapThemHangHoa extends javax.swing.JPanel {
         lblTenDangNhapBangHang = new javax.swing.JLabel();
         jpnDangXuat = new javax.swing.JPanel();
         lblDangXuatBangHang = new javax.swing.JLabel();
+        jpnNen = new javax.swing.JPanel();
+        jpldanhmuc = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        lblNen = new javax.swing.JLabel();
+        jpnThemHoangHoa = new javax.swing.JPanel();
         jpnToolbar19 = new javax.swing.JPanel();
         lblAn = new javax.swing.JLabel();
         lblOut = new javax.swing.JLabel();
-        jpnNhapHoangHoa = new javax.swing.JPanel();
-        jpnThemHangHoa = new javax.swing.JPanel();
         lblanhGiaoDien = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        Card = new javax.swing.JPanel();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
+
+        Card.setBackground(new java.awt.Color(255, 255, 255));
+        Card.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        Card.setLayout(new java.awt.CardLayout());
+        add(Card);
 
         jfNhapThemHang.setBackground(new java.awt.Color(255, 255, 255));
         jfNhapThemHang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -182,6 +188,55 @@ public class FormNhapThemHangHoa extends javax.swing.JPanel {
         jfNhapThemHang.add(jpnShowMenuOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 30, 170, 140));
         jpnShowMenuOut.hide();
 
+        jpnNen.setBackground(new java.awt.Color(255, 255, 255));
+
+        jpldanhmuc.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jpldanhmuc.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("NHẬP HÀNG");
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel6MousePressed(evt);
+            }
+        });
+        jpldanhmuc.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 240, 180));
+
+        lblNen.setBackground(new java.awt.Color(255, 255, 255));
+        lblNen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenAdmin.png"))); // NOI18N
+        lblNen.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        lblNen.setOpaque(true);
+        jpldanhmuc.add(lblNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 620));
+
+        jpnThemHoangHoa.setBackground(new Color(0,0,0,105)
+        );
+        jpnThemHoangHoa.setLayout(new javax.swing.BoxLayout(jpnThemHoangHoa, javax.swing.BoxLayout.LINE_AXIS));
+
+        javax.swing.GroupLayout jpnNenLayout = new javax.swing.GroupLayout(jpnNen);
+        jpnNen.setLayout(jpnNenLayout);
+        jpnNenLayout.setHorizontalGroup(
+            jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnNenLayout.createSequentialGroup()
+                .addComponent(jpldanhmuc, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(110, 110, 110)
+                .addComponent(jpnThemHoangHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(128, Short.MAX_VALUE))
+        );
+        jpnNenLayout.setVerticalGroup(
+            jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpldanhmuc, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnNenLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpnThemHoangHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+        );
+
+        jfNhapThemHang.add(jpnNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 630));
+
         jpnToolbar19.setBackground(new java.awt.Color(255, 255, 255));
         jpnToolbar19.setOpaque(false);
 
@@ -237,15 +292,6 @@ public class FormNhapThemHangHoa extends javax.swing.JPanel {
 
         jfNhapThemHang.add(jpnToolbar19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 50));
 
-        jpnNhapHoangHoa.setBackground(new Color(0,0,0,105)
-        );
-        jpnNhapHoangHoa.setLayout(new javax.swing.BoxLayout(jpnNhapHoangHoa, javax.swing.BoxLayout.LINE_AXIS));
-        jfNhapThemHang.add(jpnNhapHoangHoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 520, 580));
-
-        jpnThemHangHoa.setBackground(new Color(0,0,0,104));
-        jpnThemHangHoa.setLayout(new javax.swing.BoxLayout(jpnThemHangHoa, javax.swing.BoxLayout.LINE_AXIS));
-        jfNhapThemHang.add(jpnThemHangHoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 520, 580));
-
         lblanhGiaoDien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenThuNgan.png"))); // NOI18N
         jfNhapThemHang.add(lblanhGiaoDien, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1120, 710));
 
@@ -253,11 +299,6 @@ public class FormNhapThemHangHoa extends javax.swing.JPanel {
         jfNhapThemHang.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, -1, -1));
 
         add(jfNhapThemHang);
-
-        Card.setBackground(new java.awt.Color(255, 255, 255));
-        Card.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        Card.setLayout(new java.awt.CardLayout());
-        add(Card);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblAnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnMouseClicked
@@ -370,20 +411,27 @@ public class FormNhapThemHangHoa extends javax.swing.JPanel {
         jpnShowMenuOut.hide();
     }//GEN-LAST:event_jpnShowMenuOutMouseExited
 
+    private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel6MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JPanel Card;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel6;
     protected static javax.swing.JPanel jfNhapThemHang;
+    private javax.swing.JPanel jpldanhmuc;
     private javax.swing.JPanel jpnDangXuat;
-    protected static javax.swing.JPanel jpnNhapHoangHoa;
+    private javax.swing.JPanel jpnNen;
     private javax.swing.JPanel jpnQuayVe;
     private javax.swing.JPanel jpnShowMenuOut;
     private javax.swing.JPanel jpnTenDangNhap;
-    private javax.swing.JPanel jpnThemHangHoa;
+    protected static javax.swing.JPanel jpnThemHoangHoa;
     private javax.swing.JPanel jpnToolbar19;
     private javax.swing.JLabel lblAn;
     private javax.swing.JLabel lblDangXuatBangHang;
+    private javax.swing.JLabel lblNen;
     private javax.swing.JLabel lblOut;
     private javax.swing.JLabel lblQuayVeBangHang;
     private javax.swing.JLabel lblTenDangNhapBangHang;

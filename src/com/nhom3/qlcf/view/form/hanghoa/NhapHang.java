@@ -27,12 +27,12 @@ public class NhapHang extends javax.swing.JPanel {
 
     public NhapHang() {
         initComponents();
-        nhapHang =this;
+        nhapHang = this;
         List<NhaCungCap> listNCC = new NhaCungCapDAO().selectAll();
         listNCC.forEach((nhaCungCap) -> {
             cboNhaCungCap.addItem(nhaCungCap.getMaNhaCungCap() + " - " + nhaCungCap.getTenNhaCC());
         });
-       
+
         txtSearch.setText("Tên mặt hàng");
         txtSearch.setForeground(Color.GRAY);
         XuLy.placeHolder(txtSearch, "Tên mặt hàng");
@@ -66,8 +66,7 @@ public class NhapHang extends javax.swing.JPanel {
         txtGiaNhap = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(102, 255, 255));
-        setOpaque(false);
+        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(520, 582));
 
         jPanel1.setBackground(new java.awt.Color(51, 0, 255));
@@ -100,30 +99,24 @@ public class NhapHang extends javax.swing.JPanel {
         jPanel2.setOpaque(false);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Táo");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nhà Cung Cấp: ");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nhập Số Lượng:");
 
         lblDVT.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblDVT.setForeground(new java.awt.Color(255, 255, 255));
-        lblDVT.setText("Đơn vị: Kg");
+        lblDVT.setText("Đơn vị:");
 
         lblSoLuongKho.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblSoLuongKho.setForeground(new java.awt.Color(255, 255, 255));
         lblSoLuongKho.setText("Số Lượng Trong Kho: ");
 
         txtSoLuongNhap.setText("10");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Giá Hiện Tại: ");
 
         lblNhapHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -141,11 +134,9 @@ public class NhapHang extends javax.swing.JPanel {
         );
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Tổng Tiền Chi: 10.000.000 VNĐ");
 
         lblNgayNhap.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblNgayNhap.setForeground(new java.awt.Color(255, 255, 255));
         lblNgayNhap.setText("Ngày tạo phiếu:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -169,22 +160,21 @@ public class NhapHang extends javax.swing.JPanel {
                                     .addComponent(txtSoLuongNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(lblSoLuongKho, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addContainerGap())
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblNgayNhap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblDVT, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(84, 84, 84))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(cboNhaCungCap, 0, 199, Short.MAX_VALUE)
-                                        .addComponent(txtGiaNhap))
-                                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                                        .addComponent(cboNhaCungCap, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(lblNgayNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblDVT, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(84, 84, 84)))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,14 +186,16 @@ public class NhapHang extends javax.swing.JPanel {
                     .addComponent(lblDVT, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNgayNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cboNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(txtGiaNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
                 .addComponent(lblSoLuongKho, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -246,12 +238,12 @@ public class NhapHang extends javax.swing.JPanel {
 
     private void lblSearchMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSearchMousePressed
         // TODO add your handling code here:
+        ListHang.tenMatHang = txtSearch.getText().trim();
 
-      
-        FormNhapThemHangHoa.jpnNhapHoangHoa.removeAll();
-        FormNhapThemHangHoa.jpnNhapHoangHoa.add(new ThemHang());
-        FormNhapThemHangHoa.jpnNhapHoangHoa.repaint();
-        FormNhapThemHangHoa.jpnNhapHoangHoa.revalidate();
+        FormNhapThemHangHoa.jpnThemHoangHoa.removeAll();
+        FormNhapThemHangHoa.jpnThemHoangHoa.add(new ListHang());
+        FormNhapThemHangHoa.jpnThemHoangHoa.repaint();
+        FormNhapThemHangHoa.jpnThemHoangHoa.revalidate();
         new NhapHang().hide();
     }//GEN-LAST:event_lblSearchMousePressed
 

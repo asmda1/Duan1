@@ -59,9 +59,6 @@ public class testSQL {
         LoaiSanPham loai = new LoaiSanPham();
         loai.setMaLoai(rs.getString("maLoai"));
         model.setMaLoaiSanPham(loai);
-        HangHoa hang = new HangHoa();
-        hang.setMaHangHoa(rs.getString("maHangHoa"));
-        model.setMaHangHoa(hang);
         model.setTenSp(rs.getString("tenSP"));
         model.setGiaBan(rs.getDouble("giaBan"));
         model.setTrangThai(rs.getBoolean("TrangThai"));

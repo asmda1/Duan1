@@ -18,7 +18,7 @@ CREATE TABLE NguoiDung
       maNguoiDung VARCHAR(10) PRIMARY KEY ,
       taiKhoan VARCHAR(20) NOT NULL ,
       matKhau VARCHAR(50) NOT NULL ,
-	  email VARCHAR(50),
+      email VARCHAR(50) ,
       hoTen NVARCHAR(50) ,
       dienThoai VARCHAR(13) ,
       vaiTro VARCHAR(20) NOT NULL ,
@@ -33,18 +33,17 @@ CREATE TABLE KhachHang
       tenKh NVARCHAR(50) NOT NULL ,
       matKhau NVARCHAR(50) NOT NULL ,
       email VARCHAR(50) ,
-      dienThoai VARCHAR(13),
+      dienThoai VARCHAR(13) ,
       diaChi NVARCHAR(50) ,
-	  trangThai BIT DEFAULT 0,
+      trangThai BIT DEFAULT 0 ,
       diemThuong INT CHECK ( diemThuong >= 0 )
-	 
     )
 
 CREATE TABLE HangHoa
     (
       maHangHoa VARCHAR(10) PRIMARY KEY ,
       tenHangHoa NVARCHAR(50) ,
-      donViTinh VARCHAR(10) NOT NULL ,
+      donViTinh NVARCHAR(10) NOT NULL ,
       soLuong FLOAT NOT NULL ,
       donGia MONEY CHECK ( donGia > 0 )
                    NOT NULL ,
@@ -69,7 +68,7 @@ CREATE TABLE CTPhieuNhap
       maPhieu VARCHAR(10) NOT NULL ,
       maHangHoa VARCHAR(10) NOT NULL ,
       soLuong FLOAT CHECK ( soLuong > 0 )
-                  NOT NULL ,
+                    NOT NULL ,
 	)
 
 
@@ -165,7 +164,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH001' ,
           N'Bánh Mì Chả Lựa Xá Xíu' ,
-          'Cái' ,
+          N'Cái' ,
           10.0 ,
           150000 ,
           N''
@@ -180,7 +179,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH002' ,
           N'Bánh Mì Gà Xé Nước Tương' ,
-          'Cái' ,
+          N'Cái' ,
           10.0 ,
           150000 ,
           N''
@@ -195,7 +194,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH003' ,
           N'Bánh Mì Thịt Nướng' ,
-          'Cái' ,
+          N'Cái' ,
           10.0 ,
           150000 ,
           N''
@@ -210,7 +209,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH004' ,
           N'Bánh Mì Xíu Mại ' ,
-          'Cái' ,
+          N'Cái' ,
           10.0 ,
           15000 ,
           N''
@@ -225,7 +224,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH005' ,
           N'Coffee' ,
-          'Kg' ,
+          N'Kg' ,
           10.0 ,
           250000 ,
           N''
@@ -240,7 +239,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH006' ,
           N'Trà B' ,
-          'Hộp' ,
+          N'Hộp' ,
           15.0 ,
           40000 ,
           N''
@@ -255,7 +254,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH007' ,
           N'Sữa Tươi Không Đường ' ,
-          'Hộp' ,
+          N'Hộp' ,
           15.0 ,
           50000 ,
           N''
@@ -270,7 +269,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH008' ,
           N'Kem Béo Thực Vật RICH ' ,
-          'Hộp' ,
+          N'Hộp' ,
           15.0 ,
           30000 ,
           N''
@@ -285,7 +284,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH009' ,
           N'Kem Làm Bánh RICH ' ,
-          'Hộp' ,
+          N'Hộp' ,
           15.0 ,
           70000 ,
           N''
@@ -300,7 +299,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH010' ,
           N'Bánh Oreo ' ,
-          'Hộp' ,
+          N'Hộp' ,
           5.0 ,
           15000 ,
           N''
@@ -315,7 +314,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH011' ,
           N'Bánh Chuối ' ,
-          'Cái' ,
+          N'Cái' ,
           5.0 ,
           15000 ,
           N''
@@ -330,7 +329,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH012' ,
           N'Bánh Chocolate HighLand ' ,
-          'Cái' ,
+          N'Cái' ,
           5.0 ,
           15000 ,
           N''
@@ -345,7 +344,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH013' ,
           N'Bánh Mousse CaCao ' ,
-          'Cái' ,
+          N'Cái' ,
           5.0 ,
           15000 ,
           N''
@@ -360,7 +359,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH014' ,
           N'Bánh Caramel Phô Mai ' ,
-          'Cái' ,
+          N'Cái' ,
           5.0 ,
           15000 ,
           N''
@@ -375,7 +374,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH015' ,
           N'Bánh Phô Mai Chanh Dây ' ,
-          'Cái' ,
+          N'Cái' ,
           5.0 ,
           15000 ,
           N''
@@ -390,7 +389,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH016' ,
           N'Bánh Phô Mai Trà Xanh ' ,
-          'Cái' ,
+          N'Cái' ,
           5.0 ,
           15000 ,
           N''
@@ -405,7 +404,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH017' ,
           N'Bánh Tiramisu ' ,
-          'Cái' ,
+          N'Cái' ,
           5.0 ,
           15000 ,
           N''
@@ -420,7 +419,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH018' ,
           N'Hạt Sen Khô' ,
-          'Kg' ,
+          N'Kg' ,
           2.0 ,
           200000 ,
           N''
@@ -435,7 +434,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH019' ,
           N'Hạt Lựu Khô ' ,
-          'Kg' ,
+          N'Kg' ,
           1.0 ,
           80000 ,
           N''
@@ -450,7 +449,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH020' ,
           N'Đào Ngâm ' ,
-          'Hộp' ,
+          N'Hộp' ,
           2.0 ,
           60000 ,
           N''
@@ -465,7 +464,7 @@ INSERT  INTO dbo.HangHoa
         )
 VALUES  ( 'HH021' ,
           N'Vải Ngâm ' ,
-          'Hộp' ,
+          N'Hộp' ,
           2.0 ,
           70000 ,
           N''
@@ -476,7 +475,7 @@ INSERT  INTO dbo.NguoiDung
         ( maNguoiDung ,
           taiKhoan ,
           matKhau ,
-		   email,
+          email ,
           hoTen ,
           dienThoai ,
           vaiTro ,
@@ -485,7 +484,7 @@ INSERT  INTO dbo.NguoiDung
 VALUES  ( 'ND001' ,
           'admin' ,
           '123' ,
-		   'phongthps08236@fpt.edu.vn',
+          'phongthps08236@fpt.edu.vn' ,
           N'Trần Admin' ,
           '0911111111' ,
           'Administration' ,
@@ -495,10 +494,8 @@ INSERT  INTO dbo.NguoiDung
         ( maNguoiDung ,
           taiKhoan ,
           matKhau ,
-
-email,
+          email ,
           hoTen ,
-		  
           dienThoai ,
           vaiTro ,
           trangThai
@@ -506,7 +503,7 @@ email,
 VALUES  ( 'ND002' ,
           'user1' ,
           '123' ,
-		    'nghianhps08235@fpt.edu.vn',
+          'nghianhps08235@fpt.edu.vn' ,
           N'Nguyễn Hiếu Nghĩa' ,
           '0922222222' ,
           'Staff' ,
@@ -516,7 +513,7 @@ INSERT  INTO dbo.NguoiDung
         ( maNguoiDung ,
           taiKhoan ,
           matKhau ,
-		  email,
+          email ,
           hoTen ,
           dienThoai ,
           vaiTro ,
@@ -525,18 +522,18 @@ INSERT  INTO dbo.NguoiDung
 VALUES  ( 'ND003' ,
           'user2' ,
           '123' ,
-		  'tridbps08177@fpt.edu.vn',
+          'tridbps08177@fpt.edu.vn' ,
           N'Đổ Bảo Trị' ,
           '0933333333' ,
           'Staff' ,
           0
         )
  GO
- INSERT  INTO dbo.NguoiDung
+INSERT  INTO dbo.NguoiDung
         ( maNguoiDung ,
           taiKhoan ,
           matKhau ,
-		  email,
+          email ,
           hoTen ,
           dienThoai ,
           vaiTro ,
@@ -545,7 +542,7 @@ VALUES  ( 'ND003' ,
 VALUES  ( 'ND004' ,
           'user3' ,
           '123' ,
-		  'Hunglmps08234@fpt.edu.vn',
+          'Hunglmps08234@fpt.edu.vn' ,
           N'Lê Minh Hùng' ,
           '0933333333' ,
           'Staff' ,
@@ -553,11 +550,11 @@ VALUES  ( 'ND004' ,
         )
  GO
 
-  INSERT  INTO dbo.NguoiDung
+INSERT  INTO dbo.NguoiDung
         ( maNguoiDung ,
           taiKhoan ,
           matKhau ,
-		  email,
+          email ,
           hoTen ,
           dienThoai ,
           vaiTro ,
@@ -566,18 +563,18 @@ VALUES  ( 'ND004' ,
 VALUES  ( 'ND005' ,
           'user4' ,
           '123' ,
-		  'datntps08165@fpt.edu.vn',
+          'datntps08165@fpt.edu.vn' ,
           N'Nguyễn Tiến Đạt' ,
           '0933343333' ,
           'Staff' ,
           0
         )
  GO
-   INSERT  INTO dbo.NguoiDung
+INSERT  INTO dbo.NguoiDung
         ( maNguoiDung ,
           taiKhoan ,
           matKhau ,
-		  email,
+          email ,
           hoTen ,
           dienThoai ,
           vaiTro ,
@@ -586,7 +583,7 @@ VALUES  ( 'ND005' ,
 VALUES  ( 'ND006' ,
           'user5' ,
           '123' ,
-		  'quangntmps08166@fpt.edu.vn',
+          'quangntmps08166@fpt.edu.vn' ,
           N'Nguyễn Thị Minh Quang' ,
           '0933343333' ,
           'Staff' ,
@@ -596,25 +593,6 @@ VALUES  ( 'ND006' ,
  
  
 
- INSERT INTO dbo.KhachHang
-         ( maKh ,
-           tenKh ,
-           matKhau ,
-           email ,
-           dienThoai ,
-           diaChi ,
-		   trangThai,
-           diemThuong
-         )
- VALUES  ( 'KH000' ,
-           N'Khách lẻ' , 
-           N'123' , 
-           '' , 
-           '' , 
-           N'' ,
-		   0,
-           0 
-         )
 INSERT  INTO dbo.KhachHang
         ( maKh ,
           tenKh ,
@@ -622,7 +600,26 @@ INSERT  INTO dbo.KhachHang
           email ,
           dienThoai ,
           diaChi ,
-		  trangThai,
+          trangThai ,
+          diemThuong
+        )
+VALUES  ( 'KH000' ,
+          N'Khách lẻ' ,
+          N'123' ,
+          '' ,
+          '' ,
+          N'' ,
+          0 ,
+          0 
+        )
+INSERT  INTO dbo.KhachHang
+        ( maKh ,
+          tenKh ,
+          matKhau ,
+          email ,
+          dienThoai ,
+          diaChi ,
+          trangThai ,
           diemThuong
         )
 VALUES  ( 'KH001' ,
@@ -631,7 +628,7 @@ VALUES  ( 'KH001' ,
           'nghiamn@gmail.com' ,
           '0811111111' ,
           N'Quận 1' ,
-		  1,
+          1 ,
           100
         )
 INSERT  INTO dbo.KhachHang
@@ -641,7 +638,7 @@ INSERT  INTO dbo.KhachHang
           email ,
           dienThoai ,
           diaChi ,
-		   trangThai,
+          trangThai ,
           diemThuong
         )
 VALUES  ( 'KH002' ,
@@ -650,7 +647,7 @@ VALUES  ( 'KH002' ,
           'trivd@gmail.com' ,
           '07123456778' ,
           N'Quận 8' ,
-		  1,
+          1 ,
           90
         )
 INSERT  INTO dbo.KhachHang
@@ -660,7 +657,7 @@ INSERT  INTO dbo.KhachHang
           email ,
           dienThoai ,
           diaChi ,
-		   trangThai,
+          trangThai ,
           diemThuong
         )
 VALUES  ( 'KH003' ,
@@ -669,7 +666,7 @@ VALUES  ( 'KH003' ,
           'hungpm@gmail.com' ,
           '0615236985' ,
           N'Quận Bình Tân' ,
-		  0,
+          0 ,
           0
         )
 INSERT  INTO dbo.KhachHang
@@ -679,7 +676,7 @@ INSERT  INTO dbo.KhachHang
           email ,
           dienThoai ,
           diaChi ,
-		   trangThai,
+          trangThai ,
           diemThuong
         )
 VALUES  ( 'KH004' ,
@@ -688,7 +685,7 @@ VALUES  ( 'KH004' ,
           NULL ,
           '0753215863' ,
           N'Thái Nguyên' ,
-		  1,
+          1 ,
           0
         )
 INSERT  INTO dbo.KhachHang
@@ -698,7 +695,7 @@ INSERT  INTO dbo.KhachHang
           email ,
           dienThoai ,
           diaChi ,
-		   trangThai,
+          trangThai ,
           diemThuong
         )
 VALUES  ( 'KH005' ,
@@ -707,7 +704,7 @@ VALUES  ( 'KH005' ,
           'thanhnp@gmail.com' ,
           '0687125832' ,
           N'Huyện Bình Chánh' ,
-		  1,
+          1 ,
           20
         )
  GO
@@ -1427,61 +1424,67 @@ GO
 
 CREATE PROC KhachDatOnline
 AS
-
     SELECT  maHD ,
             tenKh ,
             dienThoai ,
             diaChi ,
             ngayHD ,
-            tongTien,
-			HoaDon.trangThai
+            tongTien ,
+            HoaDon.trangThai
     FROM    dbo.HoaDon
             JOIN dbo.KhachHang ON KhachHang.maKh = HoaDon.maKH
-    WHERE   HoaDon.trangThai =0
+    WHERE   HoaDon.trangThai = 0
 
 GO 
 
-CREATE PROC ChitietKHdatSP (@maHD varchar(10))
+CREATE PROC ChitietKHdatSP ( @maHD VARCHAR(10) )
 AS
-BEGIN 
-    SELECT  tenSp ,
-            giaBan ,
-            maSize ,
-            soLuong ,
-            hinhAnh,
-			dbo.Extra.ten
-    FROM    dbo.CTHoaDon JOIN dbo.Extra ON Extra.id = CTHoaDon.extra
-            JOIN dbo.HoaDon ON HoaDon.maHD = CTHoaDon.maHD
-            JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp
-
-    WHERE   CTHoaDon.maHD = @maHD
-	END 
+    BEGIN 
+        SELECT  tenSp ,
+                giaBan ,
+                maSize ,
+                soLuong ,
+                hinhAnh ,
+                dbo.Extra.ten
+        FROM    dbo.CTHoaDon
+                JOIN dbo.Extra ON Extra.id = CTHoaDon.extra
+                JOIN dbo.HoaDon ON HoaDon.maHD = CTHoaDon.maHD
+                JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp
+        WHERE   CTHoaDon.maHD = @maHD
+    END 
 GO 
 
 
 
 
 IF OBJECT_ID('BieuDoDoanhSo') IS NOT NULL
-	DROP PROC BieuDoDoanhSo
+    DROP PROC BieuDoDoanhSo
 GO
 CREATE PROC BieuDoDoanhSo
-	AS BEGIN
-		 SELECT month(dbo.hoaDon.ngayHD),year(dbo.hoaDon.ngayHD) , SUM(tongTien) AS tongdoanhthu
-                    		FROM dbo.hoaDon JOIN dbo.CTHoaDon
-                    			ON CTHoaDon.maHD = hoaDon.maHD JOIN dbo.sanPham
-                    				ON SanPham.maSp = CTHoaDon.maSp
-                    					GROUP BY month(dbo.hoaDon.ngayHD),year(dbo.hoaDon.ngayHD)
-	END
+AS
+    BEGIN
+        SELECT  MONTH(dbo.HoaDon.ngayHD) ,
+                YEAR(dbo.HoaDon.ngayHD) ,
+                SUM(tongTien) AS tongdoanhthu
+        FROM    dbo.HoaDon
+                JOIN dbo.CTHoaDon ON CTHoaDon.maHD = HoaDon.maHD
+                JOIN dbo.SanPham ON SanPham.maSp = CTHoaDon.maSp
+        GROUP BY MONTH(dbo.HoaDon.ngayHD) ,
+                YEAR(dbo.HoaDon.ngayHD)
+    END
 GO
 
 EXEC BieuDoDoanhSo 
 
 
-SELECT * FROM dbo.KhachHang
-SELECT * FROM dbo.HoaDon
-SELECT * FROM dbo.CTHoaDon
+SELECT  *
+FROM    dbo.KhachHang
+SELECT  *
+FROM    dbo.HoaDon
+SELECT  *
+FROM    dbo.CTHoaDon
 
-INSERT INTO dbo.HoaDon
+INSERT  INTO dbo.HoaDon
         ( maHD ,
           maNguoiDung ,
           maKH ,
@@ -1494,25 +1497,25 @@ VALUES  ( 'HD057' , -- maHD - varchar(10)
           'ND001' , -- maNguoiDung - varchar(10)
           'KH002' , -- maKH - varchar(10)
           NULL , -- chietKhau - money
-         '2019-02-22' , -- ngayHD - date
+          '2019-02-22' , -- ngayHD - date
           200090 , -- tongTien - money
           1  -- trangThai - bit
         )
 
 		GO 
 
-		INSERT INTO dbo.CTHoaDon
-		        ( maHD, maSp, maSize, extra, soLuong )
-		VALUES  ( 'HD057', -- maHD - varchar(10)
-		          'SP002', -- maSp - varchar(10)
-		          'M', -- maSize - varchar(5)
-		          'EX001', -- extra - varchar(10)
-		          5  -- soLuong - int
-		          )
+INSERT  INTO dbo.CTHoaDon
+        ( maHD, maSp, maSize, extra, soLuong )
+VALUES  ( 'HD057', -- maHD - varchar(10)
+          'SP002', -- maSp - varchar(10)
+          'M', -- maSize - varchar(5)
+          'EX001', -- extra - varchar(10)
+          5  -- soLuong - int
+          )
 
 				  GO 
 
-		INSERT INTO dbo.HoaDon
+INSERT  INTO dbo.HoaDon
         ( maHD ,
           maNguoiDung ,
           maKH ,
@@ -1525,7 +1528,7 @@ VALUES  ( 'HD058' , -- maHD - varchar(10)
           'ND001' , -- maNguoiDung - varchar(10)
           'KH003' , -- maKH - varchar(10)
           NULL , -- chietKhau - money
-         '2019-01-22' , -- ngayHD - date
+          '2019-01-22' , -- ngayHD - date
           200090 , -- tongTien - money
           1  -- trangThai - bit
         )
@@ -1533,26 +1536,31 @@ VALUES  ( 'HD058' , -- maHD - varchar(10)
 		GO 
 
 		
-		INSERT INTO dbo.CTHoaDon
-		        ( maHD, maSp, maSize, extra, soLuong )
-		VALUES  ( 'HD058', -- maHD - varchar(10)
-		          'SP004', -- maSp - varchar(10)
-		          'M', -- maSize - varchar(5)
-		          'EX001', -- extra - varchar(10)
-		          2  -- soLuong - int
-		          )
+INSERT  INTO dbo.CTHoaDon
+        ( maHD, maSp, maSize, extra, soLuong )
+VALUES  ( 'HD058', -- maHD - varchar(10)
+          'SP004', -- maSp - varchar(10)
+          'M', -- maSize - varchar(5)
+          'EX001', -- extra - varchar(10)
+          2  -- soLuong - int
+          )
 
 				  GO 
 
-SELECT DISTINCT dbo.KhachHang.* FROM dbo.KhachHang 
-JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh 
-WHERE  KhachHang.maKh  != 'KH000'
+SELECT DISTINCT
+        dbo.KhachHang.*
+FROM    dbo.KhachHang
+        JOIN dbo.HoaDon ON HoaDon.maKH = KhachHang.maKh
+WHERE   KhachHang.maKh != 'KH000'
 
-SELECT * FROM dbo.KhachHang
-SELECT * FROM dbo.NguoiDung where taiKhoan ='admin'
+SELECT  *
+FROM    dbo.KhachHang
+SELECT  *
+FROM    dbo.NguoiDung
+WHERE   taiKhoan = 'admin'
 --Bổ sung 
 
-INSERT INTO dbo.Extra
+INSERT  INTO dbo.Extra
         ( id, ten, gia )
 VALUES  ( 'EX000', -- id - varchar(10)
           N'Trống', -- ten - nvarchar(25)
@@ -1560,188 +1568,173 @@ VALUES  ( 'EX000', -- id - varchar(10)
           )
 
 		  GO 
-		  SELECT * FROM dbo.HoaDon
-		  INSERT INTO dbo.HoaDon
-		          ( maHD ,
-		            maNguoiDung ,
-		            maKH ,
-		            chietKhau ,
-		            ngayHD ,
-		            tongTien ,
-		            trangThai
-		          )
-		  VALUES  ( 'HD073' , -- maHD - varchar(10)
-		            'ND002' , -- maNguoiDung - varchar(10)
-		            'KH000' , -- maKH - varchar(10)
-		            NULL , -- chietKhau - money
-		            '2018-01-01' , -- ngayHD - date
-		            1540000 , -- tongTien - money
-		            1  -- trangThai - bit
-		          )
+SELECT  *
+FROM    dbo.HoaDon
+INSERT  INTO dbo.HoaDon
+        ( maHD ,
+          maNguoiDung ,
+          maKH ,
+          chietKhau ,
+          ngayHD ,
+          tongTien ,
+          trangThai
+		 )
+VALUES  ( 'HD073' , -- maHD - varchar(10)
+          'ND002' , -- maNguoiDung - varchar(10)
+          'KH000' , -- maKH - varchar(10)
+          NULL , -- chietKhau - money
+          '2018-01-01' , -- ngayHD - date
+          1540000 , -- tongTien - money
+          1  -- trangThai - bit
+		 )
 
 				  GO 
-				    SELECT * FROM dbo.HoaDon
-		  INSERT INTO dbo.HoaDon
-		          ( maHD ,
-		            maNguoiDung ,
-		            maKH ,
-		            chietKhau ,
-		            ngayHD ,
-		            tongTien ,
-		            trangThai
-		          )
-		  VALUES  ( 'HD074' , -- maHD - varchar(10)
-		            'ND002' , -- maNguoiDung - varchar(10)
-		            'KH000' , -- maKH - varchar(10)
-		            NULL , -- chietKhau - money
-		            '2018-02-01' , -- ngayHD - date
-		            1040000 , -- tongTien - money
-		            1  -- trangThai - bit
-		          )
+SELECT  *
+FROM    dbo.HoaDon
+INSERT  INTO dbo.HoaDon
+        ( maHD ,
+          maNguoiDung ,
+          maKH ,
+          chietKhau ,
+          ngayHD ,
+          tongTien ,
+          trangThai
+		 )
+VALUES  ( 'HD074' , -- maHD - varchar(10)
+          'ND002' , -- maNguoiDung - varchar(10)
+          'KH000' , -- maKH - varchar(10)
+          NULL , -- chietKhau - money
+          '2018-02-01' , -- ngayHD - date
+          1040000 , -- tongTien - money
+          1  -- trangThai - bit
+		 )
 
 				  GO 
 
-				    INSERT INTO dbo.HoaDon
-		          ( maHD ,
-		            maNguoiDung ,
-		            maKH ,
-		            chietKhau ,
-		            ngayHD ,
-		            tongTien ,
-		            trangThai
-		          )
-		  VALUES  ( 'HD076' , -- maHD - varchar(10)
-		            'ND002' , -- maNguoiDung - varchar(10)
-		            'KH000' , -- maKH - varchar(10)
-		            NULL , -- chietKhau - money
-		            '2018-03-07' , -- ngayHD - date
-		            1040000 , -- tongTien - money
-		            1  -- trangThai - bit
-		          )
+INSERT  INTO dbo.HoaDon
+        ( maHD ,
+          maNguoiDung ,
+          maKH ,
+          chietKhau ,
+          ngayHD ,
+          tongTien ,
+          trangThai
+		 )
+VALUES  ( 'HD076' , -- maHD - varchar(10)
+          'ND002' , -- maNguoiDung - varchar(10)
+          'KH000' , -- maKH - varchar(10)
+          NULL , -- chietKhau - money
+          '2018-03-07' , -- ngayHD - date
+          1040000 , -- tongTien - money
+          1  -- trangThai - bit
+		 )
 				  GO 
 				  
-				    INSERT INTO dbo.HoaDon
-		          ( maHD ,
-		            maNguoiDung ,
-		            maKH ,
-		            chietKhau ,
-		            ngayHD ,
-		            tongTien ,
-		            trangThai
-		          )
-		  VALUES  ( 'HD077' , -- maHD - varchar(10)
-		            'ND002' , -- maNguoiDung - varchar(10)
-		            'KH000' , -- maKH - varchar(10)
-		            NULL , -- chietKhau - money
-		            '2019-03-07' , -- ngayHD - date
-		            1040000 , -- tongTien - money
-		            1  -- trangThai - bit
-		          )
+INSERT  INTO dbo.HoaDon
+        ( maHD ,
+          maNguoiDung ,
+          maKH ,
+          chietKhau ,
+          ngayHD ,
+          tongTien ,
+          trangThai
+		 )
+VALUES  ( 'HD077' , -- maHD - varchar(10)
+          'ND002' , -- maNguoiDung - varchar(10)
+          'KH000' , -- maKH - varchar(10)
+          NULL , -- chietKhau - money
+          '2019-03-07' , -- ngayHD - date
+          1040000 , -- tongTien - money
+          1  -- trangThai - bit
+		 )
 				  GO 
-				  INSERT INTO dbo.CTHoaDon
-				          ( maHD, maSp, maSize, extra, soLuong )
-				  VALUES  ( 'HD073', -- maHD - varchar(10)
-				            'SP001', -- maSp - varchar(10)
-				            'XL', -- maSize - varchar(5)
-				            'EX000', -- extra - varchar(10)
-				            4  -- soLuong - int
-				            )
+INSERT  INTO dbo.CTHoaDon
+        ( maHD, maSp, maSize, extra, soLuong )
+VALUES  ( 'HD073', -- maHD - varchar(10)
+          'SP001', -- maSp - varchar(10)
+          'XL', -- maSize - varchar(5)
+          'EX000', -- extra - varchar(10)
+          4  -- soLuong - int
+          )
 
 							GO 
-							 INSERT INTO dbo.CTHoaDon
-				          ( maHD, maSp, maSize, extra, soLuong )
-				  VALUES  ( 'HD074', -- maHD - varchar(10)
-				            'SP002', -- maSp - varchar(10)
-				            'M', -- maSize - varchar(5)
-				            'EX000', -- extra - varchar(10)
-				            3  -- soLuong - int
-				            )
+INSERT  INTO dbo.CTHoaDon
+        ( maHD, maSp, maSize, extra, soLuong )
+VALUES  ( 'HD074', -- maHD - varchar(10)
+          'SP002', -- maSp - varchar(10)
+          'M', -- maSize - varchar(5)
+          'EX000', -- extra - varchar(10)
+          3  -- soLuong - int
+          )
 
 							GO 
 
 								
-							 INSERT INTO dbo.CTHoaDon
-				          ( maHD, maSp, maSize, extra, soLuong )
-				  VALUES  ( 'HD076', -- maHD - varchar(10)
-				            'SP001', -- maSp - varchar(10)
-				            'XL', -- maSize - varchar(5)
-				            'EX000', -- extra - varchar(10)
-				            4  -- soLuong - int
-				            )
+INSERT  INTO dbo.CTHoaDon
+        ( maHD, maSp, maSize, extra, soLuong )
+VALUES  ( 'HD076', -- maHD - varchar(10)
+          'SP001', -- maSp - varchar(10)
+          'XL', -- maSize - varchar(5)
+          'EX000', -- extra - varchar(10)
+          4  -- soLuong - int
+          )
 
 							
 
 							GO
 							
-									 INSERT INTO dbo.CTHoaDon
-				          ( maHD, maSp, maSize, extra, soLuong )
-				  VALUES  ( 'HD077', -- maHD - varchar(10)
-				            'SP006', -- maSp - varchar(10)
-				            'XL', -- maSize - varchar(5)
-				            'EX000', -- extra - varchar(10)
-				            4  -- soLuong - int
-				            ) 
+INSERT  INTO dbo.CTHoaDon
+        ( maHD, maSp, maSize, extra, soLuong )
+VALUES  ( 'HD077', -- maHD - varchar(10)
+          'SP006', -- maSp - varchar(10)
+          'XL', -- maSize - varchar(5)
+          'EX000', -- extra - varchar(10)
+          4  -- soLuong - int
+          ) 
 
 							GO 
-							INSERT INTO dbo.PhieuNhap
-							        ( maPhieu ,
-							          maNhaCungCap ,
-							          nguoiNhap ,
-							          ngayNhap ,
-							          tongTien
-							        )
-							VALUES  ( 'MP001' , -- maPhieu - varchar(10)
-							          'NCC001' , -- maNhaCungCap - varchar(10)
-							          'ND001' , -- nguoiNhap - varchar(10)
-							          GETDATE() , -- ngayNhap - date
-							          700000  -- tongTien - money
-							        )
+INSERT  INTO dbo.PhieuNhap
+        ( maPhieu ,
+          maNhaCungCap ,
+          nguoiNhap ,
+          ngayNhap ,
+          tongTien
+							
+        )
+VALUES  ( 'MP001' , -- maPhieu - varchar(10)
+          'NCC001' , -- maNhaCungCap - varchar(10)
+          'ND001' , -- nguoiNhap - varchar(10)
+          GETDATE() , -- ngayNhap - date
+          700000  -- tongTien - money
+							
+        )
 									GO 
-									INSERT INTO dbo.CTPhieuNhap
-									        ( maPhieu, maHangHoa, soLuong )
-									VALUES  ( 'MP001', -- maPhieu - varchar(10)
-									          'HH001', -- maHangHoa - varchar(10)
-									          6  -- soLuong - int
-									          )
-									INSERT INTO dbo.PhieuNhap
-							        ( maPhieu ,
-							          maNhaCungCap ,
-							          nguoiNhap ,
-							          ngayNhap ,
-							          tongTien
-							        )
-							VALUES  ( 'MP002' , -- maPhieu - varchar(10)
-							          'NCC002' , -- maNhaCungCap - varchar(10)
-							          'ND002' , -- nguoiNhap - varchar(10)
-							          GETDATE() , -- ngayNhap - date
-							          700000  -- tongTien - money
-							        )
+INSERT  INTO dbo.CTPhieuNhap
+        ( maPhieu, maHangHoa, soLuong )
+VALUES  ( 'MP001', -- maPhieu - varchar(10)
+          'HH001', -- maHangHoa - varchar(10)
+          6  -- soLuong - int
+          )
+INSERT  INTO dbo.PhieuNhap
+        ( maPhieu ,
+          maNhaCungCap ,
+          nguoiNhap ,
+          ngayNhap ,
+          tongTien
+							
+        )
+VALUES  ( 'MP002' , -- maPhieu - varchar(10)
+          'NCC002' , -- maNhaCungCap - varchar(10)
+          'ND002' , -- nguoiNhap - varchar(10)
+          GETDATE() , -- ngayNhap - date
+          700000  -- tongTien - money
+							
+        )
 									GO
-                                    INSERT INTO dbo.CTPhieuNhap
-                                            ( maPhieu, maHangHoa, soLuong )
-                                    VALUES  ( 'MP002', -- maPhieu - varchar(10)
-                                              'HH006', -- maHangHoa - varchar(10)
-                                              6  -- soLuong - int
-                                              )
+INSERT  INTO dbo.CTPhieuNhap
+        ( maPhieu, maHangHoa, soLuong )
+VALUES  ( 'MP002', -- maPhieu - varchar(10)
+          'HH006', -- maHangHoa - varchar(10)
+          6  -- soLuong - int
+          )
 											  GO
-                              -- Sửa từ khúc này     
-									SELECT * FROM dbo.HangHoa JOIN dbo.PhieuNhap ON PhieuNhap.maHangHoa = HangHoa.maHangHoa
-									IF OBJECT_ID('ChitietPhieuNhap') IS NOT NULL
-	                         DROP PROC ChitietPhieuNhap
-                                      GO
-									CREATE PROC ChitietPhieuNhap(@maphieu varchar(10))
-									AS
-                                    BEGIN 
-									SELECT maPhieu,HangHoa.maHangHoa, tenHangHoa,dbo.HangHoa.donGia, tenNhaCungCap, dbo.NhaCungCap.diaChi, dbo.PhieuNhap.ngayNhap, tongTien 
-									FROM dbo.PhieuNhap 
-									JOIN dbo.HangHoa 
-									ON HangHoa.maHangHoa = PhieuNhap.maHangHoa 
-									JOIN dbo.NhaCungCap 
-									ON NhaCungCap.maNhaCungCap = PhieuNhap.maNhaCungCap
-									WHERE dbo.PhieuNhap.maPhieu = @maphieu
-									END 
-									GO 
-									EXEC ChitietPhieuNhap @maphieu ='MP001'
-									GO 
-
-								SELECT * FROM dbo.SanPham

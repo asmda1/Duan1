@@ -54,7 +54,7 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         model.setRowCount(0);
         try {
             listPhieu.stream().map((kh) -> new Object[]{
-                kh.getMaPhieu(), kh.getMaHangHoa().getMaHangHoa(), kh.getMaNhaCungCap().getMaNhaCungCap(), kh.getMaNguoiDung().getMaNguoidung(), kh.getNgayNhap(), kh.getSoLuong(), kh.getTongTien()
+                kh.getMaPhieu(), kh.getMaNhaCungCap().getMaNhaCungCap(), kh.getMaNguoiDung().getMaNguoidung(), kh.getNgayNhap(), kh.getTongTien()
             }).forEachOrdered((row) -> {
                 model.addRow(row);
             });

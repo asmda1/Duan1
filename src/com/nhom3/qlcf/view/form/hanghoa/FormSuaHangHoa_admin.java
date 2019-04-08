@@ -250,7 +250,7 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("CẬP NHẬT KHÁC");
+        jLabel4.setText("SỬA THÔNG TIN HÀNG HÓA");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel4.setOpaque(true);
@@ -260,7 +260,7 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("CHỈNH SỬA GIÁ");
+        jLabel5.setText("THÊM HÀNG HÓA MỚI");
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel5.setOpaque(true);
@@ -269,7 +269,7 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
                 jLabel5MousePressed(evt);
             }
         });
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 230, 40));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 230, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel3.setText("MẶT ");
