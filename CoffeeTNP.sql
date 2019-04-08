@@ -1668,11 +1668,30 @@ VALUES  ( 'EX000', -- id - varchar(10)
 		            tongTien ,
 		            trangThai
 		          )
-		  VALUES  ( 'HD075' , -- maHD - varchar(10)
+		  VALUES  ( 'HD076' , -- maHD - varchar(10)
 		            'ND002' , -- maNguoiDung - varchar(10)
 		            'KH000' , -- maKH - varchar(10)
 		            NULL , -- chietKhau - money
 		            '2018-03-07' , -- ngayHD - date
+		            1040000 , -- tongTien - money
+		            1  -- trangThai - bit
+		          )
+				  GO 
+				  
+				    INSERT INTO dbo.HoaDon
+		          ( maHD ,
+		            maNguoiDung ,
+		            maKH ,
+		            chietKhau ,
+		            ngayHD ,
+		            tongTien ,
+		            trangThai
+		          )
+		  VALUES  ( 'HD077' , -- maHD - varchar(10)
+		            'ND002' , -- maNguoiDung - varchar(10)
+		            'KH000' , -- maKH - varchar(10)
+		            NULL , -- chietKhau - money
+		            '2019-03-07' , -- ngayHD - date
 		            1040000 , -- tongTien - money
 		            1  -- trangThai - bit
 		          )
@@ -1687,3 +1706,103 @@ VALUES  ( 'EX000', -- id - varchar(10)
 				            )
 
 							GO 
+							 INSERT INTO dbo.CTHoaDon
+				          ( maHD, maSp, maSize, extra, soLuong )
+				  VALUES  ( 'HD074', -- maHD - varchar(10)
+				            'SP002', -- maSp - varchar(10)
+				            'M', -- maSize - varchar(5)
+				            'EX000', -- extra - varchar(10)
+				            3  -- soLuong - int
+				            )
+
+							GO 
+
+								 INSERT INTO dbo.CTHoaDon
+				          ( maHD, maSp, maSize, extra, soLuong )
+				  VALUES  ( 'HD075', -- maHD - varchar(10)
+				            'SP004', -- maSp - varchar(10)
+				            'L', -- maSize - varchar(5)
+				            'EX000', -- extra - varchar(10)
+				            1  -- soLuong - int
+				            )
+
+							GO 
+							 INSERT INTO dbo.CTHoaDon
+				          ( maHD, maSp, maSize, extra, soLuong )
+				  VALUES  ( 'HD076', -- maHD - varchar(10)
+				            'SP001', -- maSp - varchar(10)
+				            'XL', -- maSize - varchar(5)
+				            'EX000', -- extra - varchar(10)
+				            4  -- soLuong - int
+				            )
+
+							
+
+							GO
+							
+									 INSERT INTO dbo.CTHoaDon
+				          ( maHD, maSp, maSize, extra, soLuong )
+				  VALUES  ( 'HD077', -- maHD - varchar(10)
+				            'SP006', -- maSp - varchar(10)
+				            'XL', -- maSize - varchar(5)
+				            'EX000', -- extra - varchar(10)
+				            4  -- soLuong - int
+				            ) 
+
+							GO 
+							INSERT INTO dbo.PhieuNhap
+							        ( maPhieu ,
+							          maHangHoa ,
+							          maNhaCungCap ,
+							          nguoiNhap ,
+							          ngayNhap ,
+							          soLuong ,
+							          tongTien
+							        )
+							VALUES  ( 'MP001' , -- maPhieu - varchar(10)
+							          'HH001' , -- maHangHoa - varchar(10)
+							          'NCC001' , -- maNhaCungCap - varchar(10)
+							          'ND001' , -- nguoiNhap - varchar(10)
+							          GETDATE() , -- ngayNhap - date
+							          6 , -- soLuong - int
+							          700000  -- tongTien - money
+							        )
+									GO 
+									INSERT INTO dbo.PhieuNhap
+							        ( maPhieu ,
+							          maHangHoa ,
+							          maNhaCungCap ,
+							          nguoiNhap ,
+							          ngayNhap ,
+							          soLuong ,
+							          tongTien
+							        )
+							VALUES  ( 'MP002' , -- maPhieu - varchar(10)
+							          'HH006' , -- maHangHoa - varchar(10)
+							          'NCC002' , -- maNhaCungCap - varchar(10)
+							          'ND002' , -- nguoiNhap - varchar(10)
+							          GETDATE() , -- ngayNhap - date
+							          6 , -- soLuong - int
+							          700000  -- tongTien - money
+							        )
+
+									SELECT * FROM dbo.HangHoa JOIN dbo.PhieuNhap ON PhieuNhap.maHangHoa = HangHoa.maHangHoa
+									IF OBJECT_ID('ChitietPhieuNhap') IS NOT NULL
+	                         DROP PROC ChitietPhieuNhap
+                                      GO
+									CREATE PROC ChitietPhieuNhap(@maphieu varchar(10))
+									AS
+                                    BEGIN 
+									SELECT maPhieu,HangHoa.maHangHoa, tenHangHoa,dbo.HangHoa.donGia, tenNhaCungCap, dbo.NhaCungCap.diaChi, dbo.PhieuNhap.ngayNhap, tongTien 
+									FROM dbo.PhieuNhap 
+									JOIN dbo.HangHoa 
+									ON HangHoa.maHangHoa = PhieuNhap.maHangHoa 
+									JOIN dbo.NhaCungCap 
+									ON NhaCungCap.maNhaCungCap = PhieuNhap.maNhaCungCap
+									WHERE dbo.PhieuNhap.maPhieu = @maphieu
+									END 
+									GO 
+									EXEC ChitietPhieuNhap @maphieu ='MP001'
+									GO 
+
+								SELECT * FROM dbo.SanPham

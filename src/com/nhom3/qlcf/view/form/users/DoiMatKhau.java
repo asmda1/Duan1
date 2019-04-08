@@ -39,6 +39,9 @@ public class DoiMatKhau extends javax.swing.JPanel {
     public DoiMatKhau() {
         initComponents();
         loadImg();
+        txtmkshow.hide();
+        txtmkmshow.hide();
+        txtxnmkshow.hide();
 
     }
     String code;
@@ -143,7 +146,7 @@ public class DoiMatKhau extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         lblpass3 = new javax.swing.JLabel();
         lblvien2 = new javax.swing.JLabel();
-        lblpass1 = new javax.swing.JLabel();
+        lblmkcu = new javax.swing.JLabel();
         lblvien3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -159,6 +162,12 @@ public class DoiMatKhau extends javax.swing.JPanel {
         jplimg = new javax.swing.JPanel();
         lblmaXN = new javax.swing.JLabel();
         lblimg = new javax.swing.JLabel();
+        txtmkshow = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtmkmshow = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtxnmkshow = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -173,9 +182,9 @@ public class DoiMatKhau extends javax.swing.JPanel {
         lblvien2.setText("___________________________________________");
         jPanel1.add(lblvien2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 260, 30));
 
-        lblpass1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblpass1.setText("Mật Khẩu Cũ:");
-        jPanel1.add(lblpass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, 20));
+        lblmkcu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblmkcu.setText("Mật Khẩu Cũ:");
+        jPanel1.add(lblmkcu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, 20));
 
         lblvien3.setText("___________________________________________");
         jPanel1.add(lblvien3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 260, 30));
@@ -228,6 +237,17 @@ public class DoiMatKhau extends javax.swing.JPanel {
 
         txtmkcu.setBorder(null);
         txtmkcu.setOpaque(false);
+        txtmkcu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtmkcuKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtmkcuKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtmkcuKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtmkcu, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 260, 40));
 
         txtmkmoi1.setBorder(null);
@@ -265,6 +285,57 @@ public class DoiMatKhau extends javax.swing.JPanel {
         jplimg.add(lblimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 60));
 
         jPanel1.add(jplimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 220, 60));
+
+        txtmkshow.setBorder(null);
+        txtmkshow.setOpaque(false);
+        jPanel1.add(txtmkshow, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 260, 50));
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/eye.png"))); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
+            }
+        });
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 40, 40));
+
+        txtmkmshow.setBorder(null);
+        txtmkmshow.setOpaque(false);
+        jPanel1.add(txtmkmshow, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 270, 50));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/eye.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel2MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel2MousePressed(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 50, 40));
+
+        txtxnmkshow.setBorder(null);
+        txtxnmkshow.setOpaque(false);
+        jPanel1.add(txtxnmkshow, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 270, 40));
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/eye.png"))); // NOI18N
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel3MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
+        });
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 50, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -313,15 +384,75 @@ public class DoiMatKhau extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_lblimgMousePressed
 
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        // TODO add your handling code here:
+        txtmkshow.show();
+        txtmkshow.setText(txtmkcu.getText());
+        txtmkcu.hide();
+    }//GEN-LAST:event_jLabel1MousePressed
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+        // TODO add your handling code here:
+
+        txtmkshow.hide();
+        txtmkcu.show();
+    }//GEN-LAST:event_jLabel1MouseExited
+
+    private void txtmkcuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmkcuKeyTyped
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtmkcuKeyTyped
+
+    private void txtmkcuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmkcuKeyPressed
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_txtmkcuKeyPressed
+
+    private void txtmkcuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmkcuKeyReleased
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_txtmkcuKeyReleased
+
+    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
+        // TODO add your handling code here:
+        txtmkmshow.hide();
+        txtmkmoi1.show();
+
+    }//GEN-LAST:event_jLabel2MouseExited
+
+    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
+        // TODO add your handling code here:
+        txtmkmshow.show();
+        txtmkmshow.setText(txtmkmoi1.getText());
+        txtmkmoi1.hide();
+    }//GEN-LAST:event_jLabel2MousePressed
+
+    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+        // TODO add your handling code here:
+        txtxnmkshow.show();
+        txtxnmkshow.setText(txtxnmkm.getText());
+        txtxnmkm.hide();
+    }//GEN-LAST:event_jLabel3MousePressed
+
+    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
+        // TODO add your handling code here:
+        txtxnmkshow.hide();
+        txtxnmkm.show();
+    }//GEN-LAST:event_jLabel3MouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jplimg;
     protected static javax.swing.JLabel lblimg;
     protected static javax.swing.JLabel lblmaXN;
-    private javax.swing.JLabel lblpass1;
+    private javax.swing.JLabel lblmkcu;
     private javax.swing.JLabel lblpass2;
     private javax.swing.JLabel lblpass3;
     private javax.swing.JLabel lblpass4;
@@ -333,6 +464,9 @@ public class DoiMatKhau extends javax.swing.JPanel {
     private javax.swing.JTextField txtcode;
     private javax.swing.JPasswordField txtmkcu;
     private javax.swing.JPasswordField txtmkmoi1;
+    private javax.swing.JTextField txtmkmshow;
+    private javax.swing.JTextField txtmkshow;
     private javax.swing.JPasswordField txtxnmkm;
+    private javax.swing.JTextField txtxnmkshow;
     // End of variables declaration//GEN-END:variables
 }

@@ -160,6 +160,7 @@ public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
         lblCapNhatTragThai.setText("Cập Nhật Trạng Thái :");
         jPanel1.add(lblCapNhatTragThai, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 140, 20));
 
+        txtTen.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtTen.setBorder(null);
         txtTen.setOpaque(false);
         jPanel1.add(txtTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 259, 40));
@@ -174,8 +175,14 @@ public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
         lblvien3.setText("___________________________________________");
         jPanel1.add(lblvien3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 260, 30));
 
+        txtSDT.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtSDT.setBorder(null);
         txtSDT.setOpaque(false);
+        txtSDT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSDTActionPerformed(evt);
+            }
+        });
         jPanel1.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 259, 40));
 
         lblButonReset.setBackground(new java.awt.Color(255, 255, 255));
@@ -214,6 +221,7 @@ public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
         lblDiachi.setText("Địa Chỉ:");
         jPanel1.add(lblDiachi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 50, 43));
 
+        txtDiachi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtDiachi.setBorder(null);
         txtDiachi.setOpaque(false);
         jPanel1.add(txtDiachi, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 259, 40));
@@ -329,6 +337,10 @@ public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
         DanhSachSuaNhaCC d = new DanhSachSuaNhaCC(null, true);
         d.setVisible(true);
     }//GEN-LAST:event_lblButonResetMousePressed
+
+    private void txtSDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSDTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSDTActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

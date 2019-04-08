@@ -5,7 +5,13 @@
  */
 package com.nhom3.qlcf.view.phieunhap;
 
+import com.nhom3.qlcf.dao.NhaCungCapDAO;
+import com.nhom3.qlcf.dao.PhieuNhapDAO;
+import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.Loginhelper;
+import com.nhom3.qlcf.model.HangHoa;
+import com.nhom3.qlcf.model.NhaCungCap;
+import com.nhom3.qlcf.model.PhieuNhap;
 import com.nhom3.qlcf.view.form.doanhthu.*;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
@@ -13,7 +19,11 @@ import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,6 +31,8 @@ import javax.swing.JFrame;
  */
 public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
 
+    public List<PhieuNhap> listPhieu = null;
+  
     /**
      * Creates new form FormLogin
      */
@@ -32,6 +44,26 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
         login = this;
         new Loginhelper().getLogin(lblTenDangNhapBangHang);
+        showPhieu();
+    }
+    DefaultTableModel model = null;
+
+    public void showPhieu() {
+        listPhieu = new PhieuNhapDAO().selectAll();
+        model = (DefaultTableModel) tblquanlyphieu.getModel();
+        model.setRowCount(0);
+        try {
+            listPhieu.stream().map((kh) -> new Object[]{
+                kh.getMaPhieu(), kh.getMaHangHoa().getMaHangHoa(), kh.getMaNhaCungCap().getMaNhaCungCap(), kh.getMaNguoiDung().getMaNguoidung(), kh.getNgayNhap(), kh.getSoLuong(), kh.getTongTien()
+            }).forEachOrdered((row) -> {
+                model.addRow(row);
+            });
+        } catch (Exception e) {
+        }
+    }
+
+    public void showPhieuNhap() {
+
     }
 
     /**
@@ -279,15 +311,23 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         tblquanlyphieu.setForeground(new java.awt.Color(51, 51, 51));
         tblquanlyphieu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Phiếu", "Mã Hàng Hóa", "Tên Nhà Cung Cấp", "Tên Hàng Hóa", "Người Nhập Hàng", "Ngày Nhập Hàng", "Số Lượng", "Tổng Tiền"
+                "Mã Phiếu", "Mã Hàng Hóa", "Mã Nhà Cung Cấp", "Mã ND", "Ngày Nhập Hàng", "Số Lượng", "Tổng Tiền"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblquanlyphieu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblquanlyphieu.setFocusable(false);
         tblquanlyphieu.setGridColor(new java.awt.Color(0, 0, 0));
@@ -298,7 +338,20 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         tblquanlyphieu.setShowVerticalLines(false);
         tblquanlyphieu.setSurrendersFocusOnKeystroke(true);
         tblquanlyphieu.getTableHeader().setReorderingAllowed(false);
+        tblquanlyphieu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblquanlyphieuMousePressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblquanlyphieu);
+        if (tblquanlyphieu.getColumnModel().getColumnCount() > 0) {
+            tblquanlyphieu.getColumnModel().getColumn(0).setResizable(false);
+            tblquanlyphieu.getColumnModel().getColumn(2).setResizable(false);
+            tblquanlyphieu.getColumnModel().getColumn(3).setResizable(false);
+            tblquanlyphieu.getColumnModel().getColumn(4).setResizable(false);
+            tblquanlyphieu.getColumnModel().getColumn(5).setResizable(false);
+            tblquanlyphieu.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         jpnNen.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 125, 1050, 490));
 
@@ -377,7 +430,7 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
     private void lblQuayVeBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuayVeBangHangMouseClicked
         // TODO add your handling code here:
 
-      new Loginhelper().QuayVe();
+        new Loginhelper().QuayVe();
         /*jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));
         jpnBanHang_Button.setBackground(new Color(0, 0, 0));
@@ -428,7 +481,7 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         lblLogin.setForeground(Color.white);
         jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));*/
-             Login.txtPass.setText("");
+        Login.txtPass.setText("");
         Login.lblLoiDangNhap.hide();
         jpnShowMenuOut.hide();
         jpnDangXuat.setBackground(Color.white);
@@ -454,6 +507,15 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         // TODO add your handling code here:
         jpnShowMenuOut.hide();
     }//GEN-LAST:event_jpnShowMenuOutMouseExited
+
+    private void tblquanlyphieuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblquanlyphieuMousePressed
+        // TODO add your handling code here:
+        int index = tblquanlyphieu.getSelectedRow();
+        String maPhieu = listPhieu.get(index).getMaPhieu();
+        chieuTietPhieu ct = new chieuTietPhieu(null, true, listPhieu.get(index).getMaPhieu());
+        ct.setVisible(true);
+
+    }//GEN-LAST:event_tblquanlyphieuMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

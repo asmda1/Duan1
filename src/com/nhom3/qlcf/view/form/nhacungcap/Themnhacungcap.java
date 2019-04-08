@@ -57,6 +57,7 @@ public class Themnhacungcap extends javax.swing.JPanel {
     }
 
     public boolean Check() {
+   
         if (txtTendoitac.getText().trim().equals("")) {
             lbltb.setText("Tên đối tác là bắt buột");
             lbltb.setForeground(Color.red);
@@ -83,6 +84,10 @@ public class Themnhacungcap extends javax.swing.JPanel {
             return false;
         } else if (txtdiachi.getText().trim().equals("")) {
             lbltb.setText("Địa chỉ đối tác là bắt buột");
+            lbltb.setForeground(Color.red);
+            return false;
+        } else if (txtdiachi.getText().length()<5) {
+            lbltb.setText("Địa chỉ phải ít nhất 5 kí tự");
             lbltb.setForeground(Color.red);
             return false;
         }
@@ -174,6 +179,7 @@ public class Themnhacungcap extends javax.swing.JPanel {
         jPanel1.add(lblvien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 260, 30));
 
         txtTendoitac.setBackground(new java.awt.Color(255, 204, 0));
+        txtTendoitac.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtTendoitac.setBorder(null);
         txtTendoitac.setOpaque(false);
         txtTendoitac.addActionListener(new java.awt.event.ActionListener() {
@@ -202,11 +208,13 @@ public class Themnhacungcap extends javax.swing.JPanel {
         lblpass3.setText("Địa Chỉ:");
         jPanel1.add(lblpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 100, 20));
 
+        txtdiachi.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtdiachi.setBorder(null);
         txtdiachi.setOpaque(false);
         jPanel1.add(txtdiachi, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 259, 40));
 
         txtDienThoai.setBackground(new java.awt.Color(255, 204, 0));
+        txtDienThoai.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtDienThoai.setBorder(null);
         txtDienThoai.setOpaque(false);
         txtDienThoai.addActionListener(new java.awt.event.ActionListener() {
