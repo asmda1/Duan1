@@ -6,7 +6,9 @@
 package com.nhom3.qlcf.view.phieunhap;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.model.CTPhieuNhap;
 import com.nhom3.qlcf.model.HangHoa;
+import com.nhom3.qlcf.model.NguoiDung;
 import com.nhom3.qlcf.model.NhaCungCap;
 import com.nhom3.qlcf.model.PhieuNhap;
 import java.sql.ResultSet;
@@ -20,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class chieuTietPhieu extends javax.swing.JDialog {
 
-    public List<PhieuNhap> addCTList = null;
+    public List<CTPhieuNhap> addCTList = null;
     String maphieu;
 
     /**
@@ -29,6 +31,7 @@ public class chieuTietPhieu extends javax.swing.JDialog {
     public chieuTietPhieu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        Show();
     }
     DefaultTableModel model = null;
 
@@ -41,11 +44,18 @@ public class chieuTietPhieu extends javax.swing.JDialog {
     }
 
     public void Addlist() {
-        ResultSet rs = JDBCHelper.executeQuery("EXEC ChitietPhieuNhap @maphieu ='" + maphieu + "'");
+        ResultSet rs = null;
+        if (maphieu != null) {
+            rs = JDBCHelper.executeQuery("EXEC proCTPhieuNhap @maphieu ='" + maphieu + "'");
+        } else {
+            rs = JDBCHelper.executeQuery("EXEC proshowCTPhieuNhap ");
+        }
         try {
             addCTList = new ArrayList<>();
             while (rs.next()) {
                 PhieuNhap phieu = new PhieuNhap();
+                CTPhieuNhap ctp = new CTPhieuNhap();
+                NguoiDung nd = new NguoiDung();
                 HangHoa hh = new HangHoa();
                 NhaCungCap ncc = new NhaCungCap();
                 phieu.setMaPhieu(rs.getString(1));
@@ -54,14 +64,20 @@ public class chieuTietPhieu extends javax.swing.JDialog {
                 hh.setGiaVon(rs.getDouble(4));
                 ncc.setTenNhaCC(rs.getString(5));
                 ncc.setDiaChi(rs.getString(6));
-                phieu.setMaNhaCungCap(ncc);
-                phieu.setNgayNhap(rs.getDate(7));
+                ctp.setSoLuong(rs.getInt(7));
+                phieu.setNgayNhap(rs.getDate(9));
                 phieu.setTongTien(rs.getDouble(8));
-                addCTList.add(phieu);
+                nd.setMaNguoidung(rs.getString(10));
+                phieu.setMaNguoiDung(nd);
+                phieu.setMaNhaCungCap(ncc);
+                ctp.setMaPhieuNhap(phieu);
+                ctp.setMaHangHoa(hh);
+                addCTList.add(ctp);
 
             }
 
         } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
@@ -72,12 +88,15 @@ public class chieuTietPhieu extends javax.swing.JDialog {
             model.setRowCount(0);
             try {
                 addCTList.stream().map((kh) -> new Object[]{
-                    kh.getMaPhieu(), kh.getMaNhaCungCap().getTenNhaCC(),
-                    kh.getMaNhaCungCap().getDiaChi(), kh.getNgayNhap(), kh.getTongTien()
+                    kh.getMaPhieuNhap().getMaPhieu(), kh.getMaHangHoa().getMaHangHoa(),
+                    kh.getMaHangHoa().getTenHangHoa(), kh.getMaHangHoa().getGiaVon(),
+                    kh.getMaPhieuNhap().getMaNhaCungCap().getTenNhaCC(), kh.getMaPhieuNhap().getMaNhaCungCap().getDiaChi(),
+                    kh.getSoLuong(), kh.getMaPhieuNhap().getTongTien(), kh.getMaPhieuNhap().getNgayNhap(), kh.getMaPhieuNhap().getMaNguoiDung().getMaNguoidung()
                 }).forEachOrdered((row) -> {
                     model.addRow(row);
                 });
             } catch (Exception e) {
+                System.out.println(e);
             }
         } catch (Exception e) {
         }
@@ -96,6 +115,8 @@ public class chieuTietPhieu extends javax.swing.JDialog {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblquanlyphieu = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -108,17 +129,17 @@ public class chieuTietPhieu extends javax.swing.JDialog {
         tblquanlyphieu.setForeground(new java.awt.Color(51, 51, 51));
         tblquanlyphieu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Phiếu", "Mã HH", "Tên Hàng", "Đơn Giá", "Tên Công Ty", "Địa Chỉ", "Ngày Nhập", "Tổng Tiền"
+                "Mã Phiếu", "Mã HH", "Tên Hàng", "Đơn Giá", "Tên Công Ty", "Địa Chỉ", "SL", "Tổng Tiền", "Ngày Nhập", "Mã NV"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -155,9 +176,13 @@ public class chieuTietPhieu extends javax.swing.JDialog {
             tblquanlyphieu.getColumnModel().getColumn(5).setResizable(false);
             tblquanlyphieu.getColumnModel().getColumn(5).setPreferredWidth(150);
             tblquanlyphieu.getColumnModel().getColumn(6).setResizable(false);
-            tblquanlyphieu.getColumnModel().getColumn(6).setPreferredWidth(60);
+            tblquanlyphieu.getColumnModel().getColumn(6).setPreferredWidth(35);
             tblquanlyphieu.getColumnModel().getColumn(7).setResizable(false);
             tblquanlyphieu.getColumnModel().getColumn(7).setPreferredWidth(60);
+            tblquanlyphieu.getColumnModel().getColumn(8).setResizable(false);
+            tblquanlyphieu.getColumnModel().getColumn(8).setPreferredWidth(65);
+            tblquanlyphieu.getColumnModel().getColumn(9).setResizable(false);
+            tblquanlyphieu.getColumnModel().getColumn(9).setPreferredWidth(40);
         }
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -171,13 +196,22 @@ public class chieuTietPhieu extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/excel.png"))); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Print:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 866, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -185,16 +219,21 @@ public class chieuTietPhieu extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,6 +279,7 @@ public class chieuTietPhieu extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(chieuTietPhieu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -258,6 +298,8 @@ public class chieuTietPhieu extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblquanlyphieu;

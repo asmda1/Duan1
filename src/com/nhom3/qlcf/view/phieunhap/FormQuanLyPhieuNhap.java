@@ -45,16 +45,24 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         login = this;
         new Loginhelper().getLogin(lblTenDangNhapBangHang);
         showPhieu();
+        ResultSet rs =  JDBCHelper.executeQuery("Select COUNT(maPhieu) from PhieuNhap;");
+        try {
+            while(rs.next()){
+                lblsophieu.setText(rs.getString(1));
+            }
+        } catch (Exception e) {
+        }
     }
     DefaultTableModel model = null;
 
     public void showPhieu() {
+        
         listPhieu = new PhieuNhapDAO().selectAll();
         model = (DefaultTableModel) tblquanlyphieu.getModel();
         model.setRowCount(0);
         try {
             listPhieu.stream().map((kh) -> new Object[]{
-                kh.getMaPhieu(), kh.getMaNhaCungCap().getMaNhaCungCap(), kh.getMaNguoiDung().getMaNguoidung(), kh.getNgayNhap(), kh.getTongTien()
+                kh.getMaPhieu(), kh.getMaNhaCungCap().getMaNhaCungCap(), kh.getMaNguoiDung().getMaNguoidung(), kh.getNgayNhap(),  kh.getTongTien()
             }).forEachOrdered((row) -> {
                 model.addRow(row);
             });
@@ -94,12 +102,9 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         tblquanlyphieu = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        cbxNgay = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        lblsophieu = new javax.swing.JLabel();
         lblanhGiaoDien = new javax.swing.JLabel();
         Card = new javax.swing.JPanel();
 
@@ -311,17 +316,17 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         tblquanlyphieu.setForeground(new java.awt.Color(51, 51, 51));
         tblquanlyphieu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã Phiếu", "Mã Hàng Hóa", "Mã Nhà Cung Cấp", "Mã ND", "Ngày Nhập Hàng", "Số Lượng", "Tổng Tiền"
+                "Mã Phiếu", "Mã Nhà Cung Cấp", "Mã ND", "Ngày Nhập Hàng", "Tổng Tiền"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, true, true, false, false, false, true
+                true, true, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -346,11 +351,10 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         jScrollPane3.setViewportView(tblquanlyphieu);
         if (tblquanlyphieu.getColumnModel().getColumnCount() > 0) {
             tblquanlyphieu.getColumnModel().getColumn(0).setResizable(false);
+            tblquanlyphieu.getColumnModel().getColumn(1).setResizable(false);
             tblquanlyphieu.getColumnModel().getColumn(2).setResizable(false);
             tblquanlyphieu.getColumnModel().getColumn(3).setResizable(false);
             tblquanlyphieu.getColumnModel().getColumn(4).setResizable(false);
-            tblquanlyphieu.getColumnModel().getColumn(5).setResizable(false);
-            tblquanlyphieu.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jpnNen.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 125, 1050, 490));
@@ -361,29 +365,26 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         jpnNen.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 40));
 
         jLabel10.setText("Tổng Số Phiếu:");
-        jpnNen.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 120, -1));
-
-        jLabel11.setText("Tổng Thu Chi:");
-        jpnNen.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 120, 20));
-
-        jLabel2.setText("Ngày tạo: ");
-        jpnNen.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 194, 30));
-
-        cbxNgay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hôm Nay", "7 Ngày Trước", "14 Ngày Trước", "1 Tháng Trước", "6 Tháng Trước", "1 Năm Trước" }));
-        jpnNen.add(cbxNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, 190, -1));
-
-        jLabel1.setText("Xem :");
-        jpnNen.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 90, 40, 20));
+        jpnNen.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 80, -1));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/excel.png"))); // NOI18N
         jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel4MousePressed(evt);
+            }
+        });
         jpnNen.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 70, 70, 50));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("IN:");
         jpnNen.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 40, 30));
+
+        lblsophieu.setText(".");
+        jpnNen.add(lblsophieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 130, 30));
 
         jfThongKe.add(jpnNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 630));
 
@@ -517,14 +518,16 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tblquanlyphieuMousePressed
 
+    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+        // TODO add your handling code here:
+         chieuTietPhieu ct = new chieuTietPhieu(null, true, null);
+        ct.setVisible(true);
+    }//GEN-LAST:event_jLabel4MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JPanel Card;
-    private javax.swing.JComboBox<String> cbxNgay;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -545,6 +548,7 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
     private javax.swing.JLabel lblQuayVeBangHang;
     private javax.swing.JLabel lblTenDangNhapBangHang;
     private javax.swing.JLabel lblanhGiaoDien;
+    private javax.swing.JLabel lblsophieu;
     private javax.swing.JTable tblquanlyphieu;
     // End of variables declaration//GEN-END:variables
 }
