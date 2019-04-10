@@ -10,8 +10,8 @@ import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.helper.Soundhelper;
 import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.hanghoa.FormKiemTraHangHoa;
-import com.nhom3.qlcf.view.form.hanghoa.FormNhapThemHangHoa;
-import com.nhom3.qlcf.view.form.hanghoa.FormSuaHangHoa_admin;
+import com.nhom3.qlcf.view.form.hanghoa.FormNhapHang;
+import com.nhom3.qlcf.view.form.hanghoa.FormSua_ThemMoiHangHoa_admin;
 import com.nhom3.qlcf.view.form.banhang.FormBanHang;
 import com.nhom3.qlcf.view.form.doanhthu.FormDonHang;
 import com.nhom3.qlcf.view.form.doanhthu.FormThongKe;
@@ -1250,7 +1250,7 @@ public class FormMenu extends javax.swing.JPanel {
     private void lblThemHangHoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemHangHoaMouseClicked
         // TODO add your handling code here:
         FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormNhapThemHangHoa());
+        FormLogin.login.Card.add(new FormNhapHang());
         FormLogin.login.Card.repaint();
         FormLogin.login.Card.revalidate();
         FormLogin.login.Card.show();
@@ -1271,7 +1271,7 @@ public class FormMenu extends javax.swing.JPanel {
     private void lblSuaHangHoa_ButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSuaHangHoa_ButtonMousePressed
         // TODO add your handling code here:
         FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormSuaHangHoa_admin());
+        FormLogin.login.Card.add(new FormSua_ThemMoiHangHoa_admin());
         FormLogin.login.Card.repaint();
         FormLogin.login.Card.revalidate();
         FormLogin.login.Card.show();

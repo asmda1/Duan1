@@ -25,9 +25,10 @@ public class PhieuNhapDAO implements DAO<PhieuNhap> {
 
     @Override
     public boolean insert(PhieuNhap t) {
-        String sql = "Insert dbo.PhieuNhap values (?,?,?,?,?)";
+        String sql = "Insert into dbo.PhieuNhap values (?,?,?,?,?)";
+//        System.out.println("1 " + t.getMaNhaCungCap().getMaNhaCungCap());
         return JDBCHelper.executeUpdate(sql, t.getMaPhieu(), t.getMaNhaCungCap().getMaNhaCungCap(), t.getMaNguoiDung().getMaNguoidung(), t.getNgayNhap(), t.getTongTien());
-
+// return false;
     }
 
     @Override

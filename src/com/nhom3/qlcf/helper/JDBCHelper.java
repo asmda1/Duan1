@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -45,19 +47,39 @@ public class JDBCHelper {
     }
 
     public static boolean executeUpdate(String sql, Object... args) {
-
+//        try {
+//            PreparedStatement stm = preparedStatement(sql, args);
+//            stm.getConnection().setAutoCommit(false);
+//            try {
+//                stm.executeUpdate();
+//            } finally {
+//                stm.getConnection().close();
+//            }
+//            return true;
+//        } catch (SQLException e) {
+//            return false;
+////            throw new RuntimeException(e);
+//        }
+        PreparedStatement stm = null;
         try {
-            PreparedStatement pst = preparedStatement(sql, args);
-            try {
-                pst.executeUpdate();
-            } finally {
-                pst.getConnection().close();
-            }
+            stm = preparedStatement(sql, args);
+            stm.getConnection().setAutoCommit(false);
+            stm.executeUpdate();
+            stm.getConnection().commit();
             return true;
-        } catch (SQLException e) {
+        } catch (Exception e) {
+            try {
+                stm.getConnection().rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
             return false;
-//            throw new RuntimeException(e);
-
+        } finally {
+            try {
+                stm.getConnection().close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

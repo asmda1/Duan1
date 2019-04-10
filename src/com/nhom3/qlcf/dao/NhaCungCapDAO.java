@@ -82,8 +82,8 @@ public class NhaCungCapDAO implements DAO<NhaCungCap> {
 
     @Override
     public NhaCungCap selectID(String ID) {
-        String sql = "Select * from dbo.NhaCungCap where dienThoai=?";
-        List<NhaCungCap> list = select(sql, ID);
+        String sql = "Select * from dbo.NhaCungCap where dienThoai=? or maNhacungCap=?";
+        List<NhaCungCap> list = select(sql, ID, ID);
         return list.size() > 0 ? list.get(0) : null;
     }
      public boolean checkMa(String ma) {

@@ -7,32 +7,41 @@ package com.nhom3.qlcf.view.form.hanghoa;
 
 import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.view.form.login.FormLogin;
-
+;
 import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.login.Login;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 
 /**
  *
  * @author baotri1998
  */
-public class FormSuaHangHoa_admin extends javax.swing.JPanel {
+
+
+public class FormNhapHang extends javax.swing.JPanel {
 
     /**
      * Creates new form FormLogin
      */
-    public static FormSuaHangHoa_admin login;
+    public static FormNhapHang nhapThemHangHoa;
+    protected static List<NhapHang.CTPNTam> listCTPNTam = new ArrayList<>();
+    protected static double tongTienPhieuNhap = 0;
 
-    public FormSuaHangHoa_admin() {
+    public FormNhapHang() {
         initComponents();
         // jpnLogin1.setBackground(new Color(0, 0, 0, 134));
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
-        login = this;
-           new Loginhelper().getLogin(lblTenDangNhapBangHang);
+        nhapThemHangHoa = this;
+
+        jpnThemHoangHoa.add(new NhapHang());
+        new Loginhelper().getLogin(lblTenDangNhapBangHang);
+
     }
 
     /**
@@ -44,7 +53,8 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jfSuaHang = new javax.swing.JPanel();
+        Card = new javax.swing.JPanel();
+        jfNhapThemHang = new javax.swing.JPanel();
         jpnShowMenuOut = new javax.swing.JPanel();
         jpnQuayVe = new javax.swing.JPanel();
         lblQuayVeBangHang = new javax.swing.JLabel();
@@ -52,26 +62,27 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
         lblTenDangNhapBangHang = new javax.swing.JLabel();
         jpnDangXuat = new javax.swing.JPanel();
         lblDangXuatBangHang = new javax.swing.JLabel();
+        jpnNen = new javax.swing.JPanel();
+        jpldanhmuc = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        lblNen = new javax.swing.JLabel();
+        jpnThemHoangHoa = new javax.swing.JPanel();
         jpnToolbar19 = new javax.swing.JPanel();
-        lblAn_BanHang = new javax.swing.JLabel();
-        lblOutBangHang = new javax.swing.JLabel();
-        jplbackround = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jplnen = new javax.swing.JPanel();
-        lblName = new javax.swing.JLabel();
+        lblAn = new javax.swing.JLabel();
+        lblOut = new javax.swing.JLabel();
         lblanhGiaoDien = new javax.swing.JLabel();
-        Card = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        jfSuaHang.setBackground(new java.awt.Color(255, 255, 255));
-        jfSuaHang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jfSuaHang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Card.setBackground(new java.awt.Color(255, 255, 255));
+        Card.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        Card.setLayout(new java.awt.CardLayout());
+        add(Card);
+
+        jfNhapThemHang.setBackground(new java.awt.Color(255, 255, 255));
+        jfNhapThemHang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jfNhapThemHang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpnShowMenuOut.setBackground(new java.awt.Color(255, 255, 255));
         jpnShowMenuOut.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 255)));
@@ -178,42 +189,91 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
         jpnShowMenuOut.add(jpnDangXuat);
         jpnDangXuat.setBounds(10, 50, 150, 40);
 
-        jfSuaHang.add(jpnShowMenuOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 30, 170, 140));
+        jfNhapThemHang.add(jpnShowMenuOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 30, 170, 140));
         jpnShowMenuOut.hide();
+
+        jpnNen.setBackground(new java.awt.Color(255, 255, 255));
+
+        jpldanhmuc.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jpldanhmuc.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("NHẬP HÀNG");
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel6MousePressed(evt);
+            }
+        });
+        jpldanhmuc.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 240, 180));
+
+        lblNen.setBackground(new java.awt.Color(255, 255, 255));
+        lblNen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenAdmin.png"))); // NOI18N
+        lblNen.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        lblNen.setOpaque(true);
+        jpldanhmuc.add(lblNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 620));
+
+        jpnThemHoangHoa.setBackground(new Color(0,0,0,105)
+        );
+        jpnThemHoangHoa.setLayout(new javax.swing.BoxLayout(jpnThemHoangHoa, javax.swing.BoxLayout.LINE_AXIS));
+
+        javax.swing.GroupLayout jpnNenLayout = new javax.swing.GroupLayout(jpnNen);
+        jpnNen.setLayout(jpnNenLayout);
+        jpnNenLayout.setHorizontalGroup(
+            jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnNenLayout.createSequentialGroup()
+                .addComponent(jpldanhmuc, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpnThemHoangHoa, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpnNenLayout.setVerticalGroup(
+            jpnNenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpldanhmuc, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnNenLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpnThemHoangHoa, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
+        );
+
+        jfNhapThemHang.add(jpnNen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 630));
 
         jpnToolbar19.setBackground(new java.awt.Color(255, 255, 255));
         jpnToolbar19.setOpaque(false);
 
-        lblAn_BanHang.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        lblAn_BanHang.setForeground(new java.awt.Color(255, 255, 255));
-        lblAn_BanHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAn_BanHang.setText("-");
-        lblAn_BanHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblAn_BanHang.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblAn.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        lblAn.setForeground(new java.awt.Color(255, 255, 255));
+        lblAn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAn.setText("-");
+        lblAn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblAn_BanHangMouseClicked(evt);
+                lblAnMouseClicked(evt);
             }
         });
 
-        lblOutBangHang.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        lblOutBangHang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblOutBangHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/logout.png"))); // NOI18N
-        lblOutBangHang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblOutBangHang.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblOut.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblOut.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/logout.png"))); // NOI18N
+        lblOut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblOut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblOutBangHangMouseClicked(evt);
+                lblOutMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblOutBangHangMouseEntered(evt);
+                lblOutMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblOutBangHangMouseExited(evt);
+                lblOutMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblOutBangHangMousePressed(evt);
+                lblOutMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                lblOutBangHangMouseReleased(evt);
+                lblOutMouseReleased(evt);
             }
         });
 
@@ -223,147 +283,61 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
             jpnToolbar19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnToolbar19Layout.createSequentialGroup()
                 .addContainerGap(996, Short.MAX_VALUE)
-                .addComponent(lblAn_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblAn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblOutBangHang)
+                .addComponent(lblOut)
                 .addGap(17, 17, 17))
         );
         jpnToolbar19Layout.setVerticalGroup(
             jpnToolbar19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblAn_BanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(lblOutBangHang, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addComponent(lblAn, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(lblOut, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jfSuaHang.add(jpnToolbar19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 50));
-
-        jplbackround.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel2.setText("HÀNG");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 130, 90));
-
-        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("SỬA THÔNG TIN HÀNG HÓA");
-        jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.setOpaque(true);
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 230, 40));
-
-        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("THÊM HÀNG HÓA MỚI");
-        jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel5.setOpaque(true);
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel5MousePressed(evt);
-            }
-        });
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 230, 40));
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel3.setText("MẶT ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 100, 90));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenAdmin_thucuong.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 270, 610));
-
-        jplnen.setLayout(new javax.swing.BoxLayout(jplnen, javax.swing.BoxLayout.LINE_AXIS));
-
-        lblName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblName.setText("NAME");
-
-        javax.swing.GroupLayout jplbackroundLayout = new javax.swing.GroupLayout(jplbackround);
-        jplbackround.setLayout(jplbackroundLayout);
-        jplbackroundLayout.setHorizontalGroup(
-            jplbackroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jplbackroundLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jplbackroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jplbackroundLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jplnen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jplbackroundLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE)
-                        .addContainerGap())))
-        );
-        jplbackroundLayout.setVerticalGroup(
-            jplbackroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jplbackroundLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jplnen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        lblName.setText("CHỈNH SỬA HÀNG HÓA");
-        jplnen.removeAll();
-        jplnen.updateUI();
-        jplnen.add(new SuaHangHoa());
-        jplnen.repaint();
-        jplnen.updateUI();
-
-        jfSuaHang.add(jplbackround, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1080, 630));
+        jfNhapThemHang.add(jpnToolbar19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 50));
 
         lblanhGiaoDien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/nenThuNgan.png"))); // NOI18N
-        jfSuaHang.add(lblanhGiaoDien, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, -1));
+        jfNhapThemHang.add(lblanhGiaoDien, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 1120, 710));
 
-        add(jfSuaHang);
+        jLabel1.setText("jLabel1");
+        jfNhapThemHang.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, -1, -1));
 
-        Card.setBackground(new java.awt.Color(255, 255, 255));
-        Card.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        Card.setLayout(new java.awt.CardLayout());
-        add(Card);
+        add(jfNhapThemHang);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblAn_BanHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAn_BanHangMouseClicked
+    private void lblAnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnMouseClicked
         // TODO add your handling code here:
         Run.main.setState(JFrame.ICONIFIED);
-    }//GEN-LAST:event_lblAn_BanHangMouseClicked
+    }//GEN-LAST:event_lblAnMouseClicked
 
-    private void lblOutBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOutBangHangMouseClicked
+    private void lblOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOutMouseClicked
         // TODO add your handling code here:
         jpnShowMenuOut.show();
-        lblOutBangHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/logout.png")));
-    }//GEN-LAST:event_lblOutBangHangMouseClicked
+        lblOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/logout.png")));
+    }//GEN-LAST:event_lblOutMouseClicked
 
-    private void lblOutBangHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOutBangHangMouseEntered
+    private void lblOutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOutMouseEntered
         // TODO add your handling code here:
-        lblOutBangHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/logout_hover.png")));
-    }//GEN-LAST:event_lblOutBangHangMouseEntered
+        lblOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/logout_hover.png")));
+    }//GEN-LAST:event_lblOutMouseEntered
 
-    private void lblOutBangHangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOutBangHangMouseExited
+    private void lblOutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOutMouseExited
         // TODO add your handling code here:
-        lblOutBangHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/logout.png")));
-    }//GEN-LAST:event_lblOutBangHangMouseExited
+        lblOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/logout.png")));
+    }//GEN-LAST:event_lblOutMouseExited
 
-    private void lblOutBangHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOutBangHangMousePressed
+    private void lblOutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOutMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_lblOutBangHangMousePressed
+    }//GEN-LAST:event_lblOutMousePressed
 
-    private void lblOutBangHangMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOutBangHangMouseReleased
+    private void lblOutMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOutMouseReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_lblOutBangHangMouseReleased
+    }//GEN-LAST:event_lblOutMouseReleased
 
     private void lblQuayVeBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuayVeBangHangMouseClicked
         // TODO add your handling code here:
 
-    new Loginhelper().QuayVe();
+     new Loginhelper().QuayVe();
         /*jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));
         jpnBanHang_Button.setBackground(new Color(0, 0, 0));
@@ -408,7 +382,7 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
         FormLogin.login.Card.revalidate();
         FormLogin.login.Card.show();
         jfMain.hide();
-        jfSuaHang.hide();
+        jfNhapThemHang.hide();
         /* jpnNenButton_login.setBackground(new Color(0, 0, 0));
         jpnNenButton_login.setOpaque(false);
         lblLogin.setForeground(Color.white);
@@ -441,37 +415,28 @@ public class FormSuaHangHoa_admin extends javax.swing.JPanel {
         jpnShowMenuOut.hide();
     }//GEN-LAST:event_jpnShowMenuOutMouseExited
 
-    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
+    private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
         // TODO add your handling code here:
-        lblName.setText("CHỈNH SỬA HÀNG HÓA");
-        jplnen.removeAll();
-        jplnen.updateUI();
-        jplnen.add(new SuaHangHoa());
-        jplnen.repaint();
-        jplnen.updateUI();
-    }//GEN-LAST:event_jLabel5MousePressed
+    }//GEN-LAST:event_jLabel6MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JPanel Card;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    protected static javax.swing.JPanel jfSuaHang;
-    private javax.swing.JPanel jplbackround;
-    private javax.swing.JPanel jplnen;
+    private javax.swing.JLabel jLabel6;
+    protected static javax.swing.JPanel jfNhapThemHang;
+    private javax.swing.JPanel jpldanhmuc;
     private javax.swing.JPanel jpnDangXuat;
+    private javax.swing.JPanel jpnNen;
     private javax.swing.JPanel jpnQuayVe;
     private javax.swing.JPanel jpnShowMenuOut;
     private javax.swing.JPanel jpnTenDangNhap;
+    protected static javax.swing.JPanel jpnThemHoangHoa;
     private javax.swing.JPanel jpnToolbar19;
-    private javax.swing.JLabel lblAn_BanHang;
+    private javax.swing.JLabel lblAn;
     private javax.swing.JLabel lblDangXuatBangHang;
-    private javax.swing.JLabel lblName;
-    private javax.swing.JLabel lblOutBangHang;
+    private javax.swing.JLabel lblNen;
+    private javax.swing.JLabel lblOut;
     private javax.swing.JLabel lblQuayVeBangHang;
     private javax.swing.JLabel lblTenDangNhapBangHang;
     private javax.swing.JLabel lblanhGiaoDien;

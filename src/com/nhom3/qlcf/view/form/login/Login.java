@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
 public class Login extends javax.swing.JPanel {
 
     public List<NguoiDung> list = null;
+    public static NguoiDung user;
     Pattern pattern;
     /**
      * Creates new form login
@@ -106,6 +107,7 @@ public class Login extends javax.swing.JPanel {
 
     public void loginnv() {//
         list = new NguoiDungDAO().select("Select * from NguoiDung  where taiKhoan ='" + txtManhanVien.getText() + "' and matKhau ='" + txtPass.getText() + "'");
+        user = list.get(0);
         if (list.get(0).getVaiTro().equals("Administration")) {
             FormLogin.login.Card.removeAll();
             FormLogin.login.Card.add(new FormMenu());

@@ -23,7 +23,7 @@ CREATE TABLE NguoiDung
       dienThoai VARCHAR(13) ,
       vaiTro VARCHAR(20) NOT NULL ,
       trangThai BIT NOT NULL
-    )
+    ) 
 
 ALTER TABLE dbo.NguoiDung ADD UNIQUE (taiKhoan)
 
@@ -1747,6 +1747,8 @@ VALUES  ( 'EX000', -- id - varchar(10)
 								JOIN dbo.NhaCungCap ON NhaCungCap.maNhaCungCap = PhieuNhap.maNhaCungCap
 								WHERE CTPhieuNhap.maPhieu =@maPhieu
 								END
+								GO
+                                
 								--PROC ctphieu
 								CREATE PROC proshowCTPhieuNhap
 								AS
