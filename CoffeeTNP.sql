@@ -1736,7 +1736,7 @@ VALUES  ( 'HD078', -- maHD - varchar(10)
           'EX002', -- extra - varchar(10)
           4  -- soLuong - int
           ); 
-		  INSERT  INTO dbo.HoaDon
+INSERT  INTO dbo.HoaDon
         ( maHD ,
           maNguoiDung ,
           maKH ,
@@ -1761,7 +1761,7 @@ VALUES  ( 'HD079', -- maHD - varchar(10)
           'EX000', -- extra - varchar(10)
           4  -- soLuong - int
           ); 
-		  INSERT  INTO dbo.HoaDon
+INSERT  INTO dbo.HoaDon
         ( maHD ,
           maNguoiDung ,
           maKH ,
@@ -1840,7 +1840,7 @@ VALUES  ( 'MP002', -- maPhieu - varchar(10)
           6  -- soLuong - int
           );
 											  GO
-                              -- Sửa từ khúc này     
+                              
 								
 SELECT  *
 FROM    dbo.KhachHang;
@@ -1889,7 +1889,4 @@ AS
                 JOIN dbo.PhieuNhap ON PhieuNhap.maPhieu = CTPhieuNhap.maPhieu
                 JOIN dbo.NhaCungCap ON NhaCungCap.maNhaCungCap = PhieuNhap.maNhaCungCap;
 
-								END
-SELECT * FROM dbo.PhieuNhap
-GO
-SELECT * FROM  dbo.CTPhieuNhap
+    END
