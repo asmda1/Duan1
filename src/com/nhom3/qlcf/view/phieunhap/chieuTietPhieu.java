@@ -6,15 +6,34 @@
 package com.nhom3.qlcf.view.phieunhap;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
+import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.CTPhieuNhap;
 import com.nhom3.qlcf.model.HangHoa;
 import com.nhom3.qlcf.model.NguoiDung;
 import com.nhom3.qlcf.model.NhaCungCap;
 import com.nhom3.qlcf.model.PhieuNhap;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
 
 /**
  *
@@ -34,6 +53,7 @@ public class chieuTietPhieu extends javax.swing.JDialog {
         Show();
     }
     DefaultTableModel model = null;
+    NumberFormat chuyentien = new DecimalFormat("#,###,###");
 
     public chieuTietPhieu(java.awt.Frame parent, boolean modal, String maPhieu) {
         super(parent, modal);
@@ -89,9 +109,9 @@ public class chieuTietPhieu extends javax.swing.JDialog {
             try {
                 addCTList.stream().map((kh) -> new Object[]{
                     kh.getMaPhieuNhap().getMaPhieu(), kh.getMaHangHoa().getMaHangHoa(),
-                    kh.getMaHangHoa().getTenHangHoa(), kh.getMaHangHoa().getGiaVon(),
+                    kh.getMaHangHoa().getTenHangHoa(), String.valueOf(chuyentien.format(kh.getMaHangHoa().getGiaVon()) + " VND "),
                     kh.getMaPhieuNhap().getMaNhaCungCap().getTenNhaCC(), kh.getMaPhieuNhap().getMaNhaCungCap().getDiaChi(),
-                    kh.getSoLuong(), kh.getMaPhieuNhap().getTongTien(), kh.getMaPhieuNhap().getNgayNhap(), kh.getMaPhieuNhap().getMaNguoiDung().getMaNguoidung()
+                    kh.getSoLuong(), kh.getMaPhieuNhap().getNgayNhap(), kh.getMaPhieuNhap().getMaNguoiDung().getMaNguoidung()
                 }).forEachOrdered((row) -> {
                     model.addRow(row);
                 });
@@ -99,6 +119,312 @@ public class chieuTietPhieu extends javax.swing.JDialog {
                 System.out.println(e);
             }
         } catch (Exception e) {
+        }
+    }
+
+    public HSSFCellStyle creat(HSSFWorkbook book) {
+        HSSFFont font = book.createFont();
+        font.setBold(true);
+        font.setFontHeightInPoints((short) 10);
+        HSSFCellStyle style = book.createCellStyle();
+        style.setAlignment(HorizontalAlignment.CENTER);
+        style.setFont(font);
+        return style;
+    }
+
+    public void Excec() throws FileNotFoundException, IOException {
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("Phieu Nhap");
+        //set độ rộng
+        sheet.setColumnWidth(0, 10300); //hàng A
+        sheet.setColumnWidth(1, 5500); //hàng B
+        sheet.setColumnWidth(2, 7500); //hàng C
+        if (maphieu == null) {
+            sheet.setColumnWidth(3, 7500); //hàng D
+        } else {
+            sheet.setColumnWidth(3, 5500); //hàng D
+        }
+
+        sheet.setColumnWidth(4, 7500); //hàng E
+        sheet.setColumnWidth(5, 7500); //hàng F
+        sheet.setColumnWidth(6, 3500); //hàng G
+        sheet.setColumnWidth(7, 7500); //hàng H
+        sheet.setColumnWidth(8, 7500); //hàngI
+        sheet.setColumnWidth(9, 7500); //hàng j
+        int rowcount = 0; //hang 1
+        Cell cell, cellMP, cellInHD, cellTile, cellcongty, cellngay;
+        Row row;
+        HSSFCellStyle style = creat(workbook);
+
+//ten quán
+        HSSFFont font = workbook.createFont();
+        font.setBold(true);
+        font.setFontHeightInPoints((short) 15);
+        HSSFCellStyle styleTile = workbook.createCellStyle();
+        styleTile.setAlignment(HorizontalAlignment.CENTER);
+        styleTile.setFont(font);
+        row = sheet.createRow(rowcount);
+        cellTile = row.createCell(0, CellType.STRING);// 0 = cột A
+        cellTile.setCellValue("TNP COFFE");
+        cellTile.setCellStyle(styleTile);
+
+        //Ten congty
+        rowcount = 1; //hang2
+        Row rowcongty = sheet.createRow(rowcount++);
+        cellcongty = rowcongty.createCell(5, CellType.STRING);
+        cellcongty.setCellValue("CÔNG TY TRÁCH NHIỆM HỮU HẠN MỘT THÀNH VIÊN");
+        HSSFFont fontcongty = workbook.createFont();
+        fontcongty.setBold(true);
+        fontcongty.setFontHeightInPoints((short) 13);
+        HSSFCellStyle stylecongty = workbook.createCellStyle();
+        stylecongty.setAlignment(HorizontalAlignment.CENTER);
+        stylecongty.setFont(fontcongty);
+        cellcongty.setCellStyle(stylecongty);
+        //diachi
+        rowcount = 2; //hang2
+        Row rowdiachi = sheet.createRow(rowcount++);
+        cellcongty = rowdiachi.createCell(5, CellType.STRING);
+        cellcongty.setCellValue("23 Nguyễn Huệ, Bến Nghé, Quận 1, TP HCM");
+        HSSFFont fontdiachi = workbook.createFont();
+        fontdiachi.setBold(true);
+        fontdiachi.setItalic(true);
+        fontdiachi.setFontHeightInPoints((short) 12);
+        HSSFCellStyle styleDiachi = workbook.createCellStyle();
+        styleDiachi.setAlignment(HorizontalAlignment.CENTER);
+        styleDiachi.setFont(fontdiachi);
+        cellcongty.setCellStyle(styleDiachi);
+
+        HSSFFont font2 = workbook.createFont();
+        font2.setItalic(true);
+        font2.setFontHeightInPoints((short) 10);
+        HSSFCellStyle styleHD = workbook.createCellStyle();
+        styleHD.setAlignment(HorizontalAlignment.LEFT);
+        styleHD.setFont(font2);
+        //ngày
+        rowcount = 5; //hàng 4
+        row = sheet.createRow(rowcount);
+        java.sql.Timestamp date = new java.sql.Timestamp(System.currentTimeMillis());
+        cellngay = row.createCell(7, CellType.STRING); //cột D
+        cellngay.setCellValue("Ngày Tạo: " + date);
+        cellngay.setCellStyle(styleHD);
+
+        //In Hoa Don
+        cellInHD = row.createCell(5, CellType.STRING); //4= cột D
+        cellInHD.setCellValue("PHIẾU NHẬP HÀNG ");
+        HSSFFont fontIN = workbook.createFont();
+        fontIN.setBold(true);
+        fontIN.setFontHeightInPoints((short) 14);
+        HSSFCellStyle stylein = workbook.createCellStyle();
+        stylein.setAlignment(HorizontalAlignment.CENTER);
+        stylein.setFont(fontIN);
+        cellInHD.setCellStyle(stylein);
+        //mã Phiếu
+        rowcount = 6; //hàng 5
+        row = sheet.createRow(rowcount);
+        cellMP = row.createCell(1, CellType.STRING);
+        rowcount = 7;
+        style.setBorderBottom(BorderStyle.THIN);
+        style.setBorderTop(BorderStyle.THIN);
+        style.setBorderRight(BorderStyle.THIN);
+        style.setBorderLeft(BorderStyle.THIN);
+        if (maphieu == null) {
+            cellMP.setCellValue("Mã Phiếu: Tất cả Phiếu ");
+            row = sheet.createRow(rowcount);
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("Mã Phiếu");
+            cell.setCellStyle(style);
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("Mã Hàng");
+            cell.setCellStyle(style);
+
+//
+            cell = row.createCell(3, CellType.STRING);
+            cell.setCellValue("Tên Hàng");
+            cell.setCellStyle(style);
+            //
+            cell = (Cell) row.createCell(4, CellType.STRING);
+            cell.setCellValue("Đơn Giá.");
+            cell.setCellStyle(style);
+//
+            cell = (Cell) row.createCell(5, CellType.STRING);
+            cell.setCellValue("Tên Công Ty.");
+            cell.setCellStyle(style);
+//
+            cell = (Cell) row.createCell(6, CellType.STRING);
+            cell.setCellValue("Địa Chỉ");
+            cell.setCellStyle(style);
+            cell = (Cell) row.createCell(7, CellType.STRING);
+            cell.setCellValue("Số Lượng");
+            cell.setCellStyle(style);
+            cell = (Cell) row.createCell(8, CellType.STRING);
+            cell.setCellValue("Ngày Nhập");
+            cell.setCellStyle(style);
+        } else {
+            cellMP.setCellValue("Mã Phiếu:" + maphieu);
+            row = sheet.createRow(rowcount);
+            cell = row.createCell(1, CellType.STRING);
+            cell.setCellValue("Mã Hàng");
+            cell.setCellStyle(style);
+
+//
+            cell = row.createCell(2, CellType.STRING);
+            cell.setCellValue("Tên Hàng");
+            cell.setCellStyle(style);
+            //
+            cell = (Cell) row.createCell(3, CellType.STRING);
+            cell.setCellValue("Đơn Giá.");
+            cell.setCellStyle(style);
+//
+            cell = (Cell) row.createCell(4, CellType.STRING);
+            cell.setCellValue("Tên Công Ty.");
+            cell.setCellStyle(style);
+//
+            cell = (Cell) row.createCell(5, CellType.STRING);
+            cell.setCellValue("Địa Chỉ");
+            cell.setCellStyle(style);
+            cell = (Cell) row.createCell(6, CellType.STRING);
+            cell.setCellValue("Số Lượng");
+            cell.setCellStyle(style);
+            cell = (Cell) row.createCell(7, CellType.STRING);
+            cell.setCellValue("Ngày Nhập");
+            cell.setCellStyle(style);
+        }
+
+        cellMP.setCellStyle(styleHD);
+        //setBorder table
+
+        //table
+        rowcount = 8;
+        double tongthanhtien = 0;
+        //data
+        for (CTPhieuNhap ctpn : addCTList) {
+            if (maphieu == null) {
+                row = sheet.createRow(rowcount++);
+                cell = row.createCell(1, CellType.STRING);
+                cell.setCellValue(ctpn.getMaPhieuNhap().getMaPhieu());
+                cell.setCellStyle(style);
+                cell = row.createCell(2, CellType.STRING);
+                cell.setCellValue(ctpn.getMaHangHoa().getMaHangHoa());
+                cell.setCellStyle(style);
+                //
+                cell = row.createCell(3, CellType.STRING);
+                cell.setCellValue(ctpn.getMaHangHoa().getTenHangHoa());
+                cell.setCellStyle(style);
+                cell = row.createCell(4, CellType.STRING);
+                cell.setCellValue(String.valueOf(chuyentien.format(ctpn.getMaHangHoa().getGiaVon()) + " VND "));
+                cell.setCellStyle(style);
+                cell = row.createCell(5, CellType.STRING);
+                cell.setCellValue(ctpn.getMaPhieuNhap().getMaNhaCungCap().getTenNhaCC());
+                cell.setCellStyle(style);
+                cell = row.createCell(6, CellType.STRING);
+                cell.setCellValue(ctpn.getMaPhieuNhap().getMaNhaCungCap().getDiaChi());
+                cell.setCellStyle(style);
+
+                // 
+                cell = row.createCell(7, CellType.STRING);
+                cell.setCellValue(ctpn.getSoLuong());
+                cell.setCellStyle(style);
+                //
+
+                //
+                cell = row.createCell(8, CellType.STRING);
+                cell.setCellValue(String.valueOf(ctpn.getMaPhieuNhap().getNgayNhap()));
+                cell.setCellStyle(style);
+                ////////////////
+
+            } else {
+                row = sheet.createRow(rowcount++);
+                cell = row.createCell(1, CellType.STRING);
+                cell.setCellValue(ctpn.getMaHangHoa().getMaHangHoa());
+                cell.setCellStyle(style);
+                //
+                cell = row.createCell(2, CellType.STRING);
+                cell.setCellValue(ctpn.getMaHangHoa().getTenHangHoa());
+                cell.setCellStyle(style);
+                cell = row.createCell(3, CellType.STRING);
+                cell.setCellValue(String.valueOf(chuyentien.format(ctpn.getMaHangHoa().getGiaVon()) + " VND "));
+                cell.setCellStyle(style);
+                cell = row.createCell(4, CellType.STRING);
+                cell.setCellValue(ctpn.getMaPhieuNhap().getMaNhaCungCap().getTenNhaCC());
+                cell.setCellStyle(style);
+                cell = row.createCell(5, CellType.STRING);
+                cell.setCellValue(ctpn.getMaPhieuNhap().getMaNhaCungCap().getDiaChi());
+                cell.setCellStyle(style);
+
+                // 
+                cell = row.createCell(6, CellType.STRING);
+                cell.setCellValue(ctpn.getSoLuong());
+                cell.setCellStyle(style);
+                //
+
+                //
+                cell = row.createCell(7, CellType.STRING);
+                cell.setCellValue(String.valueOf(ctpn.getMaPhieuNhap().getNgayNhap()));
+                cell.setCellStyle(style);
+            }
+
+        }//Thành tiền
+        Cell tennv;
+        Row row1, row2, row3;
+        //tạo font , style thành tiền
+        HSSFFont fontThanhTien = workbook.createFont();
+        fontThanhTien.setBold(true);
+        fontThanhTien.setFontHeightInPoints((short) 10);
+        HSSFCellStyle styleThanhTien = workbook.createCellStyle();
+        styleThanhTien.setAlignment(HorizontalAlignment.CENTER);
+        styleThanhTien.setFont(fontThanhTien);
+        //tong tien
+
+        row3 = sheet.createRow((rowcount++) + 1);
+        tennv = row3.createCell(6);
+        tennv.setCellValue("Tổng Tiền: ");
+        tennv.setCellStyle(styleThanhTien);
+       for(PhieuNhap phieuNhap: new FormQuanLyPhieuNhap().listPhieu) {
+           tongthanhtien+= phieuNhap.getTongTien();
+       };
+        Cell tongtien = row3.createCell(7);
+        if (maphieu == null) {
+
+            tongtien.setCellValue(chuyentien.format(tongthanhtien) + " VNĐ");
+            tongtien.setCellStyle(styleThanhTien);
+        } else {
+            tongtien.setCellValue(chuyentien.format(addCTList.get(0).getMaPhieuNhap().getTongTien()) + " VNĐ");
+            tongtien.setCellStyle(styleThanhTien);
+        }
+
+        //tên Nhan Viên
+        row1 = sheet.createRow((rowcount++) + 3);
+        tennv = row1.createCell(2);
+        tennv.setCellValue("Tên Nhân Viên: ");
+        tennv.setCellStyle(styleThanhTien);
+        //ký tên
+        row2 = sheet.createRow(rowcount++ + 5);
+        tennv = row2.createCell(2);
+        tennv.setCellValue(" ................... ");
+        tennv.setCellStyle(styleThanhTien);
+
+        Cell TenNhaSX = row1.createCell(7);
+        TenNhaSX.setCellValue("Tên Đối Tác");
+        TenNhaSX.setCellStyle(styleThanhTien);
+        //tiền khách
+
+        Cell tienkhach = row2.createCell(7);
+        tienkhach.setCellValue("____________________");
+        tienkhach.setCellStyle(styleThanhTien);
+
+        //write
+        File file = new File("src/com/nhom3/qlcf/reported/PhieuNhap.xls");
+        file.getParentFile().mkdirs();
+        FileOutputStream outFile = new FileOutputStream(file);
+        workbook.write(outFile);
+        //mở file
+        if (Desktop.isDesktopSupported()) {
+            File pdf = new File("src/com/nhom3/qlcf/reported/PhieuNhap.xls");
+            try {
+                Desktop.getDesktop().open(pdf);
+            } catch (Exception e) {
+            }
+
         }
     }
 
@@ -129,17 +455,17 @@ public class chieuTietPhieu extends javax.swing.JDialog {
         tblquanlyphieu.setForeground(new java.awt.Color(51, 51, 51));
         tblquanlyphieu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Phiếu", "Mã HH", "Tên Hàng", "Đơn Giá", "Tên Công Ty", "Địa Chỉ", "SL", "Tổng Tiền", "Ngày Nhập", "Mã NV"
+                "Mã Phiếu", "Mã HH", "Tên Hàng", "Đơn Giá", "Tên Công Ty", "Địa Chỉ", "SL", "Ngày Nhập", "Mã NV"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -178,11 +504,9 @@ public class chieuTietPhieu extends javax.swing.JDialog {
             tblquanlyphieu.getColumnModel().getColumn(6).setResizable(false);
             tblquanlyphieu.getColumnModel().getColumn(6).setPreferredWidth(35);
             tblquanlyphieu.getColumnModel().getColumn(7).setResizable(false);
-            tblquanlyphieu.getColumnModel().getColumn(7).setPreferredWidth(60);
+            tblquanlyphieu.getColumnModel().getColumn(7).setPreferredWidth(65);
             tblquanlyphieu.getColumnModel().getColumn(8).setResizable(false);
-            tblquanlyphieu.getColumnModel().getColumn(8).setPreferredWidth(65);
-            tblquanlyphieu.getColumnModel().getColumn(9).setResizable(false);
-            tblquanlyphieu.getColumnModel().getColumn(9).setPreferredWidth(40);
+            tblquanlyphieu.getColumnModel().getColumn(8).setPreferredWidth(40);
         }
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -197,6 +521,12 @@ public class chieuTietPhieu extends javax.swing.JDialog {
         });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/excel.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel2MousePressed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -252,6 +582,15 @@ public class chieuTietPhieu extends javax.swing.JDialog {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jLabel1MousePressed
+
+    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
+        try {
+            // TODO add your handling code here:
+            Excec();
+        } catch (IOException ex) {
+            Logger.getLogger(chieuTietPhieu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel2MousePressed
 
     /**
      * @param args the command line arguments

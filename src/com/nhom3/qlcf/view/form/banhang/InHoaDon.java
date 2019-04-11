@@ -95,8 +95,11 @@ public class InHoaDon extends javax.swing.JDialog {
         } else {
             lblsdt.setText(sdt);
         }
-
+        if (!tienkhach.matches("[0-9]+")) {
+            tienkhach = "0";
+        }
         double tienkhach1 = Double.parseDouble(tienkhach);
+
         if (tienkhach == null || tienthoi == null || tienkhach1 == 0) {
             lbltienkhach.setText("0");
             lblTienthoi.setText("0");
@@ -481,7 +484,7 @@ public class InHoaDon extends javax.swing.JDialog {
                 }
 
             }
-        
+
         } catch (FileNotFoundException e) {
             JOptionPane.showOptionDialog(null,
                     "Có Sự Cố! File PDF đang sữ dụng, close để ghi dữ liệu mới.",
@@ -565,7 +568,7 @@ public class InHoaDon extends javax.swing.JDialog {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Tên SP", "Giá Bán", "Số Lượng", "maSize", "Ghi chú"
+                "Tên SP", "Giá Bán", "maSize", "Số Lượng", "Ghi chú"
             }
         ));
         tblInHoaDon.setToolTipText("");

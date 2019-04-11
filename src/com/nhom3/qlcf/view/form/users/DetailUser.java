@@ -366,7 +366,7 @@ public class DetailUser extends javax.swing.JDialog {
     private javax.swing.JLabel lblvien3;
     private javax.swing.JLabel lblvien4;
     private javax.swing.JTextField ttxhoten;
-    private javax.swing.JTextField txtSDT;
+    protected static javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtUsers;
     private javax.swing.JTextField txtemail;
     // End of variables declaration//GEN-END:variables

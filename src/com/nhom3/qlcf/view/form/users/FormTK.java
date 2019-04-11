@@ -453,6 +453,8 @@ public class FormTK extends javax.swing.JPanel {
         jpltable.updateUI();
         new Loginhelper().getLogin(lblTenDangNhapBangHang);
         lbltentk.setText(lblTenDangNhapBangHang.getText());
+     
+       
     }//GEN-LAST:event_jLabel6MousePressed
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed

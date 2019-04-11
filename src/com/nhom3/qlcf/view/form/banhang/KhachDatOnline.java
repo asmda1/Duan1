@@ -299,7 +299,7 @@ public class KhachDatOnline extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(0, 102, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Khách Đặt Online");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 940, 36));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 1, 370, 36));
 
         lbltongtien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbltongtien.setText("...");
@@ -345,7 +345,7 @@ public class KhachDatOnline extends javax.swing.JDialog {
         lblbuttontim.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblbuttontim.setForeground(new java.awt.Color(255, 255, 255));
         lblbuttontim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblbuttontim.setText("Tìm");
+        lblbuttontim.setText("Tìm SDT");
         lblbuttontim.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblbuttontim.setOpaque(true);
         lblbuttontim.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -434,6 +434,8 @@ public class KhachDatOnline extends javax.swing.JDialog {
             lblThongBao.setCursor(null);
             
         } else {
+              lblThongBao.setText("Tìm Thành công");
+            lblThongBao.setForeground(Color.GREEN);
             ResultSet rs = JDBCHelper.executeQuery("Exec TimKhachHang @SDT ='" + txttimsdt.getText() + "'");
             model = (DefaultTableModel) tblkhachdatonline.getModel();
             listHD = new ArrayList<HoaDon>();

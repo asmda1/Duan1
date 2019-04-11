@@ -33,6 +33,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
@@ -87,7 +89,7 @@ public class Designhelper implements DesignInterFace {
                 ImageIcon icon = new ImageIcon(HinhAnh);
                 lblImg.setIcon(icon);
                 pnlSanPham[i].setName(this.data.get(i).getMaSanPham());
-                pnlSanPham[i].setPreferredSize(new Dimension(140, 175)); //w = 200 hei = 250
+                pnlSanPham[i].setPreferredSize(new Dimension(140, 175)); //
                 pnlSanPham[i].setLayout(new BoxLayout(pnlSanPham[i], javax.swing.BoxLayout.LINE_AXIS));
                 pnlSanPham[i].setBackground(new Color(255, 255, 255));
                 pnlSanPham[i].setBorder(new LineBorder(Color.BLUE, 1));
@@ -221,12 +223,22 @@ public class Designhelper implements DesignInterFace {
             lbltongtien.setForeground(Color.RED);
             lbltongtien.setToolTipText(String.valueOf(chuyentien.format(tongtien - this.CTHD.get(i).getMaSanPham().getGiaBan())));
             //Xóa
-            JLabel lblXoa = new JLabel("Xóa");
+            JLabel lblXoa = new JLabel("");
             int index = i;
             lblXoa.setName(String.valueOf(index));
             lblXoa.setToolTipText(String.valueOf(index));
             lblXoa.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            //Set show Giá
+            BufferedImage image;
+            try {
+                image = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/xoa.png"));
+                int type = image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType();
+                BufferedImage HinhAnh = new ReSizehelper().buffImage(image, type, 30, 22);
+                ImageIcon icon = new ImageIcon(HinhAnh);
+                lblXoa.setIcon(icon);
+            } catch (IOException ex) {
+                Logger.getLogger(Designhelper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             JLabel lblgiaSP = new JLabel(String.valueOf(chuyentien.format(this.CTHD.get(i).getMaSanPham().getGiaBan())) + " VNĐ (*" + this.CTHD.get(i).getSizeSP().getHeSo() + ")");
             lblgiaSP.setFont(new Font("Tahoma", 1, 11));
 
@@ -251,7 +263,6 @@ public class Designhelper implements DesignInterFace {
                     Datmon d = new Datmon(null, true);
                     d.getTamTinh();
                     FormBanHang.banhang.diemtichluy();
-            
                     DesigDonHang(donhangUI, CTHD);
                 }
 
@@ -372,7 +383,7 @@ public class Designhelper implements DesignInterFace {
         this.giaExtra = lblgiaExtra;
         this.lbltenExtra = tenExtra;
         s1 = so;
-        jplExtra.setLayout(new GridLayout(3, 3, 2, 3));
+        jplExtra.setLayout(new GridLayout(2,4));
         jplExtra.removeAll();
         jplExtra.updateUI();
         jplExtra.setVisible(true);

@@ -51,6 +51,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -80,6 +81,8 @@ public class FormBanHang extends javax.swing.JPanel {
         RezieImageGroupLogo();
         new Loginhelper().getLogin(lblUsers);
         lblbuton_thanhToan.setName(AutogetMaHD());
+        lblsound.setName("sound");
+        txtdiem.setName("bat");
 
     }
 
@@ -126,24 +129,26 @@ public class FormBanHang extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        lblsdt = new javax.swing.JLabel();
         txtTimSDT = new javax.swing.JTextField();
         lblTamTinh = new javax.swing.JLabel();
         lblThanhTien = new javax.swing.JLabel();
         lbltimSDT = new javax.swing.JLabel();
         txtChietKhau = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        lbltru = new javax.swing.JLabel();
+        lblcong = new javax.swing.JLabel();
+        jpldiemtichluy = new javax.swing.JPanel();
+        lbldiemtichluy = new javax.swing.JLabel();
         txtdiem = new javax.swing.JTextField();
         lbldiem = new javax.swing.JLabel();
-        lbldiemtichluy = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lbltendiem = new javax.swing.JLabel();
+        txtbattatdiem = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         txttienkhach = new javax.swing.JTextField();
         lbltenTienthua = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jplthanhtoan = new javax.swing.JPanel();
         lblbuton_thanhToan = new javax.swing.JLabel();
         lbltienthua = new javax.swing.JLabel();
         lblVienTxt = new javax.swing.JLabel();
@@ -504,11 +509,11 @@ public class FormBanHang extends javax.swing.JPanel {
         jpldonhang.setLayout(jpldonhangLayout);
         jpldonhangLayout.setHorizontalGroup(
             jpldonhangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1109, Short.MAX_VALUE)
+            .addGap(0, 1227, Short.MAX_VALUE)
         );
         jpldonhangLayout.setVerticalGroup(
             jpldonhangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGap(0, 488, Short.MAX_VALUE)
         );
 
         jSDonHang.setViewportView(jpldonhang);
@@ -516,7 +521,7 @@ public class FormBanHang extends javax.swing.JPanel {
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("#Mã/TênSP                                             Giá Niêm Yết                                                   Thành Tiền  /SL            ");
+        jLabel1.setText("#Mã/TênSP /Size                                     Giá Niêm Yết                                      Thành Tiền  /SL            ");
         jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout jplDonHangLayout = new javax.swing.GroupLayout(jplDonHang);
@@ -560,12 +565,13 @@ public class FormBanHang extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel8.setText("Tổng Thành Tiền: ");
-        jplHoaDon.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 133, 116, -1));
+        jLabel8.setText("Thành Tiền: ");
+        jplHoaDon.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 133, 90, -1));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        jLabel11.setText("Ngày tạo:");
-        jplHoaDon.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 40, 100, -1));
+        lblsdt.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lblsdt.setText("Ngày tạo:");
+        lblsdt.setName("true"); // NOI18N
+        jplHoaDon.add(lblsdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 40, 100, -1));
 
         txtTimSDT.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -587,11 +593,12 @@ public class FormBanHang extends javax.swing.JPanel {
 
         lblTamTinh.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTamTinh.setText("....");
-        jplHoaDon.add(lblTamTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 120, 30));
+        lblTamTinh.setName("0"); // NOI18N
+        jplHoaDon.add(lblTamTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 140, 30));
 
         lblThanhTien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblThanhTien.setText("0 VNĐ");
-        jplHoaDon.add(lblThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 129, 143, 23));
+        jplHoaDon.add(lblThanhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 129, 130, 23));
 
         lbltimSDT.setBackground(new java.awt.Color(0, 51, 255));
         lbltimSDT.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -601,6 +608,12 @@ public class FormBanHang extends javax.swing.JPanel {
         lbltimSDT.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbltimSDT.setOpaque(true);
         lbltimSDT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbltimSDTMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbltimSDTMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lbltimSDTMousePressed(evt);
             }
@@ -622,62 +635,97 @@ public class FormBanHang extends javax.swing.JPanel {
         jLabel14.setText("%");
         jplHoaDon.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 20, 20));
 
-        jLabel13.setBackground(new java.awt.Color(0, 102, 255));
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("-");
-        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel13.setOpaque(true);
-        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbltru.setBackground(new java.awt.Color(0, 51, 255));
+        lbltru.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbltru.setForeground(new java.awt.Color(255, 255, 255));
+        lbltru.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbltru.setText("-");
+        lbltru.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbltru.setOpaque(true);
+        lbltru.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbltruMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbltruMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel13MousePressed(evt);
+                lbltruMousePressed(evt);
             }
         });
-        jplHoaDon.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 30, 20));
+        jplHoaDon.add(lbltru, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 30, 20));
 
-        jLabel15.setBackground(new java.awt.Color(0, 51, 255));
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("+");
-        jLabel15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel15.setOpaque(true);
-        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblcong.setBackground(new java.awt.Color(0, 51, 255));
+        lblcong.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblcong.setForeground(new java.awt.Color(255, 255, 255));
+        lblcong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblcong.setText("+");
+        lblcong.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblcong.setOpaque(true);
+        lblcong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblcongMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblcongMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel15MousePressed(evt);
+                lblcongMousePressed(evt);
             }
         });
-        jplHoaDon.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 30, 20));
+        jplHoaDon.add(lblcong, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 30, 20));
 
-        txtdiem.setEditable(false);
-        txtdiem.setText("0");
-        txtdiem.setName("true"); // NOI18N
-        jplHoaDon.add(txtdiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 60, -1));
-        txtdiem.hide();
-
-        lbldiem.setBackground(new java.awt.Color(0, 51, 255));
-        lbldiem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lbldiem.setForeground(new java.awt.Color(255, 255, 255));
-        lbldiem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbldiem.setText("Điểm");
-        lbldiem.setOpaque(true);
-        jplHoaDon.add(lbldiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 40, 20));
-        lbldiem.hide();
+        jpldiemtichluy.setBackground(new java.awt.Color(255, 255, 255));
+        jpldiemtichluy.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbldiemtichluy.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbldiemtichluy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbldiemtichluy.setText("0");
         lbldiemtichluy.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
         lbldiemtichluy.setName("true"); // NOI18N
-        jplHoaDon.add(lbldiemtichluy, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 50, 20));
+        jpldiemtichluy.add(lbldiemtichluy, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 40, 20));
 
-        jLabel4.setBackground(new java.awt.Color(0, 51, 255));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Điểm +:");
-        jLabel4.setOpaque(true);
-        jplHoaDon.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 50, 20));
+        txtdiem.setEditable(false);
+        txtdiem.setText("0");
+        txtdiem.setName("true"); // NOI18N
+        jpldiemtichluy.add(txtdiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, -1));
+        txtdiem.hide();
+
+        lbldiem.setBackground(new java.awt.Color(0, 51, 255));
+        lbldiem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbldiem.setForeground(new java.awt.Color(255, 255, 255));
+        lbldiem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbldiem.setText("+");
+        lbldiem.setOpaque(true);
+        jpldiemtichluy.add(lbldiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 0, -1, 20));
+        lbldiem.hide();
+
+        jplHoaDon.add(jpldiemtichluy, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 100, 20));
+        jpldiemtichluy.hide();
+
+        lbltendiem.setBackground(new java.awt.Color(0, 51, 255));
+        lbltendiem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbltendiem.setForeground(new java.awt.Color(255, 255, 255));
+        lbltendiem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbltendiem.setText("Điểm Tích Lũy");
+        lbltendiem.setOpaque(true);
+        jplHoaDon.add(lbltendiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 100, 20));
+        lbltendiem.hide();
+
+        txtbattatdiem.setBackground(new java.awt.Color(0, 51, 255));
+        txtbattatdiem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtbattatdiem.setForeground(new java.awt.Color(255, 255, 255));
+        txtbattatdiem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtbattatdiem.setText("Tắt");
+        txtbattatdiem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtbattatdiem.setOpaque(true);
+        txtbattatdiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtbattatdiemMousePressed(evt);
+            }
+        });
+        jplHoaDon.add(txtbattatdiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 100, 20));
+        txtbattatdiem.hide();
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -713,7 +761,7 @@ public class FormBanHang extends javax.swing.JPanel {
         lbltenTienthua.setText("Tiềm Thừa:");
         jPanel7.add(lbltenTienthua, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 55, 93, 27));
 
-        jPanel1.setBackground(new java.awt.Color(255, 0, 51));
+        jplthanhtoan.setBackground(new java.awt.Color(255, 0, 51));
 
         lblbuton_thanhToan.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblbuton_thanhToan.setForeground(new java.awt.Color(255, 255, 255));
@@ -723,23 +771,29 @@ public class FormBanHang extends javax.swing.JPanel {
         lblbuton_thanhToan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblbuton_thanhToan.setName("AutogetMaHD"); // NOI18N
         lblbuton_thanhToan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblbuton_thanhToanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblbuton_thanhToanMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblbuton_thanhToanMousePressed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jplthanhtoanLayout = new javax.swing.GroupLayout(jplthanhtoan);
+        jplthanhtoan.setLayout(jplthanhtoanLayout);
+        jplthanhtoanLayout.setHorizontalGroup(
+            jplthanhtoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblbuton_thanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jplthanhtoanLayout.setVerticalGroup(
+            jplthanhtoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblbuton_thanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
         );
 
-        jPanel7.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 93, 230, 51));
+        jPanel7.add(jplthanhtoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 93, 230, 51));
 
         lbltienthua.setBackground(new java.awt.Color(255, 255, 255));
         lbltienthua.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -847,8 +901,6 @@ public class FormBanHang extends javax.swing.JPanel {
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-
-        lblsound.setName("sound");
 
         jfBangHang.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 1070, 620));
 
@@ -1004,11 +1056,11 @@ public class FormBanHang extends javax.swing.JPanel {
                 lblThongBao.setForeground(Color.GREEN);
                 if (txttienkhach.getText().trim().equals("")) {
                     txttienkhach.setText("0");
-                    InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(), lbltenKH.getToolTipText(), txtdiem.getName(),
+                    InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(), lbltenKH.getToolTipText(), lblsdt.getName(),
                             txttienkhach.getText(), lbltienthua.getText(), txtChietKhau.getText());
                     show.setVisible(true);
                 } else {
-                    InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(), lbltenKH.getToolTipText(), txtdiem.getName(),
+                    InHoaDon show = new InHoaDon(null, true, lblbuton_thanhToan.getToolTipText(), lblThanhTien.getToolTipText(), lbltenKH.getToolTipText(), lblsdt.getName(),
                             txttienkhach.getText(), lbltienthua.getText(), txtChietKhau.getText());
                     show.setVisible(true);
                 }
@@ -1067,14 +1119,20 @@ public class FormBanHang extends javax.swing.JPanel {
             lbltenKH.setName("KH000");
             txtTimSDT.requestFocus();
             txtdiem.hide();
-            lbldiem.hide();
+            lbltendiem.hide();
+            jpldiemtichluy.hide();
+            lbldiemtichluy.hide();
+            txtbattatdiem.hide();
         } else if (!txtTimSDT.getText().matches("[0-9]+")) {
             lbltenKH.setText("Lỗi! phải nhập bằng số!");
             lbltenKH.setForeground(Color.red);
             lbltenKH.setCursor(null);
             lbltenKH.setName("KH000");
             txtdiem.hide();
-            lbldiem.hide();
+            lbltendiem.hide();
+            jpldiemtichluy.hide();
+            lbldiemtichluy.hide();
+            txtbattatdiem.hide();
             txtTimSDT.requestFocus();
         } else if (txtTimSDT.getText().length() < 9 || txtTimSDT.getText().length() > 13) {
             lbltenKH.setText("SĐT phải là [9-13] số!");
@@ -1082,7 +1140,10 @@ public class FormBanHang extends javax.swing.JPanel {
             lbltenKH.setCursor(null);
             lbltenKH.setName("KH000");
             txtdiem.hide();
-            lbldiem.hide();
+            lbltendiem.hide();
+            jpldiemtichluy.hide();
+            lbldiemtichluy.hide();
+            txtbattatdiem.hide();
             txtTimSDT.requestFocus();
         } else if (khDao.checkSDT(txtTimSDT.getText()) == false) {
             lbltenKH.setText("SĐT này chưa đăng ký");
@@ -1103,7 +1164,10 @@ public class FormBanHang extends javax.swing.JPanel {
                 }
             });
             txtdiem.hide();
-            lbldiem.hide();
+            lbltendiem.hide();
+            jpldiemtichluy.hide();
+            lbldiemtichluy.hide();
+            txtbattatdiem.hide();
         } else {
 
             searchSDT();
@@ -1143,7 +1207,7 @@ public class FormBanHang extends javax.swing.JPanel {
                 tongtien += (DongCTHD.get(i).getMaHoaDon().getTongTien());
             }
             //khách tích lủy 1000 ms dc giảm giá, 
-            if (!txtdiem.getText().equals("0") && so < 5 && diem > 500 && tongtien > 200000) {
+            if (!txtdiem.getText().equals("0") && so < 5 && diem > 500 && tongtien > 200000 && txtdiem.getName().equals("bat")) {
                 so++;
                 txtChietKhau.setText(String.valueOf((so + 5) - 1));
                 lbldiemtichluy.setText("0");
@@ -1160,19 +1224,55 @@ public class FormBanHang extends javax.swing.JPanel {
                         || lbltenKH.getText().equals("SĐT phải là [9-13] số!")) {
                     so++;
                     txtChietKhau.setText(String.valueOf((so + 5) - 1));
+                } else if (txtdiem.getName().equals("tat") && !lbltenKH.getText().equals("KH000")) {
+                    so++;
+                    txtChietKhau.setText(String.valueOf((so + 5) - 1));
                 }
             }
             getTongTien();
 
         }
     }
-    private void jLabel15MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MousePressed
+    private void lblcongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblcongMousePressed
         // TODO add your handling code here:
-        ChietKhauTang();
+        int diem = Integer.parseInt(txtdiem.getText());
+        int chietkhau = Integer.parseInt(txtChietKhau.getText());
+        double tamtinh = Double.parseDouble(lblTamTinh.getName());
+        if (txtdiem.getName().equals("bat") && diem < 500 && chietkhau == 0 && !lbltenKH.getName().equals("KH000")) {
+            lblThongBao.setText("Điểm khách hàng phải tối đa 500 điểm mới được hưởng chiết khấu!");
+            lblThongBao.setForeground(Color.red);
+        } else if (txtdiem.getName().equals("bat") && tamtinh < 200000 && !lbltenKH.getName().equals("KH000")) {
+            lblThongBao.setText("Hóa Đơn KH phải tối đa 200,000 VNĐ mới có thể giảm giá!");
+            lblThongBao.setForeground(Color.red);
+        } else if (txtdiem.getName().equals("bat") && chietkhau >= 5 && !lbltenKH.getName().equals("KH000")) {
+            lblThongBao.setText("Mỗi hóa đơn chỉ được giảm tối đa 5%!");
+            lblThongBao.setForeground(Color.red);
+        } else {
+            String opObjects[] = {"Đồng Ý", "Trở Lại"};
 
-    }//GEN-LAST:event_jLabel15MousePressed
+            if (txtdiem.getName().equals("bat") && !lbltenKH.getName().equals("KH000") && tamtinh > 200000 && tamtinh != 0 && 0 == JOptionPane.showOptionDialog(null,
+                    "Giảm giá hóa đơn sẽ không cộng điểm lũy cho khách hàng này !",
+                    "Lưu Ý!",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                    opObjects,
+                    opObjects[0])) {
 
-    private void jLabel13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MousePressed
+                ChietKhauTang();
+                lblThongBao.setText("");
+
+            } else {
+                ChietKhauTang();
+                lblThongBao.setText("");
+            }
+
+        }
+
+
+    }//GEN-LAST:event_lblcongMousePressed
+
+    private void lbltruMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltruMousePressed
         // TODO add your handling code here:
 
         so = Integer.parseInt(txtChietKhau.getText());
@@ -1181,11 +1281,15 @@ public class FormBanHang extends javax.swing.JPanel {
             diemtichluy();
             diem = Integer.parseInt(txtChietKhau.getText()) * 100 + (Integer.parseInt(txtdiem.getText()));
             txtChietKhau.setText(String.valueOf(so - 4));
-            txtdiem.setText(String.valueOf(diem));
+            if (txtdiem.getName().equals("bat")) {
+                txtdiem.setText(String.valueOf(diem));
+            }
+
             getTongTien();
+            lblThongBao.setText("");
 
         }
-    }//GEN-LAST:event_jLabel13MousePressed
+    }//GEN-LAST:event_lbltruMousePressed
 
     private void lblShoworderwebMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblShoworderwebMousePressed
         // TODO add your handling code here:
@@ -1317,8 +1421,80 @@ public class FormBanHang extends javax.swing.JPanel {
     }
     private void txttienkhachKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttienkhachKeyReleased
         // TODO add your handling code here:
-tienKhach();
+        tienKhach();
     }//GEN-LAST:event_txttienkhachKeyReleased
+
+    private void lblbuton_thanhToanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbuton_thanhToanMouseEntered
+        // TODO add your handling code here:
+        jplthanhtoan.setBackground(Color.BLUE);
+    }//GEN-LAST:event_lblbuton_thanhToanMouseEntered
+
+    private void lblbuton_thanhToanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbuton_thanhToanMouseExited
+        // TODO add your handling code here:
+        jplthanhtoan.setBackground(Color.red);
+    }//GEN-LAST:event_lblbuton_thanhToanMouseExited
+
+    private void lbltimSDTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltimSDTMouseEntered
+        // TODO add your handling code here:
+        lbltimSDT.setBackground(Color.WHITE);
+        lbltimSDT.setBorder(new LineBorder(Color.GRAY));
+        lbltimSDT.setForeground(Color.BLUE);
+
+    }//GEN-LAST:event_lbltimSDTMouseEntered
+
+    private void lbltimSDTMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltimSDTMouseExited
+        // TODO add your handling code here:
+
+        lbltimSDT.setBackground(Color.BLUE);
+        lbltimSDT.setBorder(null);
+        lbltimSDT.setForeground(Color.white);
+    }//GEN-LAST:event_lbltimSDTMouseExited
+
+    private void lblcongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblcongMouseEntered
+        // TODO add your handling code here:
+        lblcong.setBackground(Color.red);
+    }//GEN-LAST:event_lblcongMouseEntered
+
+    private void lbltruMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltruMouseEntered
+        // TODO add your handling code here:
+        lbltru.setBackground(Color.red);
+    }//GEN-LAST:event_lbltruMouseEntered
+
+    private void lblcongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblcongMouseExited
+        // TODO add your handling code here:
+        lblcong.setBackground(Color.BLUE);
+    }//GEN-LAST:event_lblcongMouseExited
+
+    private void lbltruMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltruMouseExited
+        // TODO add your handling code here:
+        lbltru.setBackground(Color.BLUE);
+    }//GEN-LAST:event_lbltruMouseExited
+
+    private void txtbattatdiemMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtbattatdiemMousePressed
+        // TODO add your handling code here:
+        if (txtChietKhau.getText().equals("5") && !lbltenKH.getName().equals("KH000")) {
+            lblThongBao.setText("Không thể bật/tắt khi bạn đang áp dụng điểm thưởng! Thử lại");
+        } else {
+            if (txtbattatdiem.getText().equals("Tắt")) {
+                txtdiem.setName("tat");
+                txtdiem.setToolTipText("tat");
+                txtbattatdiem.setText("Bật");
+                lbltendiem.setBackground(Color.gray);
+                lbltendiem.setText("Đã Tắt");
+                txtChietKhau.setText("0");
+
+            } else {
+                lbltendiem.setBackground(Color.BLUE);
+                lbltendiem.setText("Điểm Tích Lũy");
+                txtdiem.setName("bat");
+                txtdiem.setToolTipText("bat");
+                txtbattatdiem.setText("Tắt");
+                txtChietKhau.setText("0");
+
+            }
+            getTongTien();
+        }
+    }//GEN-LAST:event_txtbattatdiemMousePressed
     public void RezieImageGroupLogo() {
         try {
             BufferedImage HinhAnh, HinhAnh2, HinhAnh3, HinhAnh4, HinhAnh5;
@@ -1378,11 +1554,19 @@ tienKhach();
 
     public boolean CheckTienKhach() {
         String so = "[0-9]+";
-        if (!txttienkhach.getText().matches(so)) {
-            lblThongBao.setText("Tiền phải nhập bằng số!");
+        if (!txttienkhach.getText().matches(so) && !txttienkhach.getText().trim().equals("")) {
+            lblThongBao.setText("Cảnh báo: Tiền phải nhập bằng số!");
+            txttienkhach.setText("0");
+            lblThongBao.setForeground(Color.red);
             return false;
         } else if (txttienkhach.getText().trim().equals("")) {
-            lblThongBao.setText("Bạn cần nhập số tiền của khách hàng!!");
+            lblThongBao.setText("Cảnh Báo: Bạn bỏ trống tiền khách trả!!");
+            txttienkhach.setText("");
+            lblThongBao.setForeground(Color.red);
+            return false;
+        } else if (txttienkhach.getText().trim().length() > 0) {
+            lblThongBao.setText("");
+            return true;
         }
 
         return true;
@@ -1395,13 +1579,17 @@ tienKhach();
         nd = khDao.selectID(txtTimSDT.getText());
         lbltenKH.setText(nd.getTenKh());
         txtdiem.setText(String.valueOf(nd.getDiemThuong()));
-        txtdiem.setName(nd.getDienThoai());
+        lblsdt.setName(nd.getDienThoai());
         lbltenKH.setName(nd.getMakh());
         lbltenKH.setToolTipText(nd.getTenKh());
         lbldiemtichluy.setName(String.valueOf(nd.isTrangThai()));
         txtChietKhau.setText("0");
         txtdiem.show();
+        lbltendiem.show();
         lbldiem.show();
+        jpldiemtichluy.show();
+        lbldiemtichluy.show();
+        txtbattatdiem.show();
     }
 
     public void Search(JTextField Search) {
@@ -1547,21 +1735,23 @@ tienKhach();
                 } else if (tongtien >= 50000 && tongtien < 100000 && !lbltenKH.getName().equals("KH000")) {
                     lbldiemtichluy.setText("55");
                 } else if (tongtien >= 100000 && tongtien < 200000 && !lbltenKH.getName().equals("KH000")) {
-                    lbldiemtichluy.setText("105");
+                    lbldiemtichluy.setText("95");
                 } else if (tongtien >= 250000 && tongtien < 350000 && !lbltenKH.getName().equals("KH000")) {
-                    lbldiemtichluy.setText("205");
+                    lbldiemtichluy.setText("195");
                 } else if (tongtien >= 400000 && tongtien < 500000 && !lbltenKH.getName().equals("KH000")) {
-                    lbldiemtichluy.setText("335");
+                    lbldiemtichluy.setText("305");
                 } else if (tongtien >= 550000 && tongtien < 1000000 && !lbltenKH.getName().equals("KH000")) {
-                    lbldiemtichluy.setText("555");
+                    lbldiemtichluy.setText("505");
                 } else if (tongtien >= 1100000 && tongtien < 1500000 && !lbltenKH.getName().equals("KH000")) {
-                    lbldiemtichluy.setText("805");
+                    lbldiemtichluy.setText("795");
                 } else if (tongtien >= 1100000 && tongtien < 2500000 && !lbltenKH.getName().equals("KH000")) {
-                    lbldiemtichluy.setText("1005");
-                } else if (tongtien >= 2550000 && tongtien < 5050000 && !lbltenKH.getName().equals("KH000")) {
-                    lbldiemtichluy.setText("1500");
-                } else if (tongtien >= 5550000 && !lbltenKH.getName().equals("KH000")) {
-                    lbldiemtichluy.setText("1700");
+                    lbldiemtichluy.setText("905");
+                } else if (tongtien >= 2550000 && tongtien < 3500000 && !lbltenKH.getName().equals("KH000")) {
+                    lbldiemtichluy.setText("1205");
+                } else if (tongtien >= 3550000 && tongtien < 5050000 && !lbltenKH.getName().equals("KH000")) {
+                    lbldiemtichluy.setText("1505");
+                } else if (tongtien >= 5250000 && !lbltenKH.getName().equals("KH000")) {
+                    lbldiemtichluy.setText("1705");
 
                 }
             }
@@ -1627,6 +1817,7 @@ tienKhach();
         DongCTHD.removeAll(DongCTHD);
         SavehoaDon.removeAll(SavehoaDon);
         lblTamTinh.setText("0 VNĐ");
+        lblTamTinh.setName("0");
         lblThanhTien.setText("0 VNĐ");
         lblThanhTien.setToolTipText("0");
         lbltenKH.setText(" x Khách lẻ");
@@ -1637,6 +1828,10 @@ tienKhach();
         lbldiemtichluy.setText("0");
         txtdiem.hide();
         lbldiem.hide();
+        lbltendiem.hide();
+        jpldiemtichluy.show();
+        txtbattatdiem.hide();
+        lbldiemtichluy.hide();
     }
 
     public void CountSoLuongHoaDonTrenWeb() {
@@ -1649,19 +1844,14 @@ tienKhach();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JPanel Card;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
@@ -1672,7 +1862,9 @@ tienKhach();
     protected static javax.swing.JPanel jfBangHang;
     private javax.swing.JPanel jplDonHang;
     private javax.swing.JPanel jplHoaDon;
+    private javax.swing.JPanel jpldiemtichluy;
     protected static javax.swing.JPanel jpldonhang;
+    private javax.swing.JPanel jplthanhtoan;
     private javax.swing.JPanel jpnDSsanpham;
     private javax.swing.JPanel jpnDangXuatBanHang;
     private javax.swing.JPanel jpnNext;
@@ -1694,20 +1886,25 @@ tienKhach();
     private javax.swing.JLabel lblbanhngot;
     protected static javax.swing.JLabel lblbuton_thanhToan;
     private javax.swing.JLabel lblcoffe;
+    private javax.swing.JLabel lblcong;
     private javax.swing.JLabel lbldiem;
     private javax.swing.JLabel lbldiemtichluy;
     private javax.swing.JLabel lblfee;
     private javax.swing.JLabel lblorderweb;
+    private javax.swing.JLabel lblsdt;
     private javax.swing.JLabel lblsound;
     private javax.swing.JLabel lbltea;
     protected static javax.swing.JLabel lbltenKH;
     private javax.swing.JLabel lbltenTienthua;
+    protected static javax.swing.JLabel lbltendiem;
     private javax.swing.JLabel lbltienthua;
     private javax.swing.JLabel lbltimSDT;
+    private javax.swing.JLabel lbltru;
     protected static javax.swing.JTextField txtChietKhau;
     private javax.swing.JTextField txtTimKiem;
     protected static javax.swing.JTextField txtTimSDT;
-    private javax.swing.JTextField txtdiem;
+    protected static javax.swing.JLabel txtbattatdiem;
+    protected static javax.swing.JTextField txtdiem;
     private javax.swing.JTextField txttienkhach;
     // End of variables declaration//GEN-END:variables
 }
