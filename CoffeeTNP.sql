@@ -1760,3 +1760,6 @@ VALUES  ( 'EX000', -- id - varchar(10)
 								JOIN dbo.NhaCungCap ON NhaCungCap.maNhaCungCap = PhieuNhap.maNhaCungCap
 
 								END
+SELECT * FROM dbo.PhieuNhap
+GO
+SELECT * FROM  dbo.CTPhieuNhap

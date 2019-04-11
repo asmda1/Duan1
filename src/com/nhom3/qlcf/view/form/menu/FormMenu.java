@@ -15,6 +15,7 @@ import com.nhom3.qlcf.view.form.hanghoa.FormSua_ThemMoiHangHoa_admin;
 import com.nhom3.qlcf.view.form.banhang.FormBanHang;
 import com.nhom3.qlcf.view.form.doanhthu.FormDonHang;
 import com.nhom3.qlcf.view.form.doanhthu.FormThongKe;
+import com.nhom3.qlcf.view.form.hanghoa.NhapHang;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.khachhang.FormKhachHang;
 import com.nhom3.qlcf.view.form.login.Login;
@@ -32,6 +33,7 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
@@ -416,7 +418,7 @@ public class FormMenu extends javax.swing.JPanel {
         lblSuaHangHoa_txt.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblSuaHangHoa_txt.setForeground(new java.awt.Color(255, 255, 255));
         lblSuaHangHoa_txt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSuaHangHoa_txt.setText("Chỉnh Sữa Hàng Hóa");
+        lblSuaHangHoa_txt.setText("Thêm/Sửa Hàng Hóa");
         lblSuaHangHoa_txt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jpnSuaHangHoa_ButtonLayout = new javax.swing.GroupLayout(jpnSuaHangHoa_Button);
@@ -793,7 +795,7 @@ public class FormMenu extends javax.swing.JPanel {
         lblthemHangHoa_txt.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblthemHangHoa_txt.setForeground(new java.awt.Color(255, 255, 255));
         lblthemHangHoa_txt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblthemHangHoa_txt.setText("Nhập \\Thêm Hàng Hóa");
+        lblthemHangHoa_txt.setText("Nhập Hàng Hóa");
         lblthemHangHoa_txt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jpnNhapHanghoa_ButtonLayout = new javax.swing.GroupLayout(jpnNhapHanghoa_Button);
@@ -1249,6 +1251,8 @@ public class FormMenu extends javax.swing.JPanel {
 
     private void lblThemHangHoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemHangHoaMouseClicked
         // TODO add your handling code here:
+        
+        
         FormLogin.login.Card.removeAll();
         FormLogin.login.Card.add(new FormNhapHang());
         FormLogin.login.Card.repaint();

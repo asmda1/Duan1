@@ -22,7 +22,7 @@ public class HangHoaDAO implements DAO<HangHoa> {
     public boolean insert(HangHoa t) {
         String sql = "INSERT dbo.HangHoa Values(?,?,?,?,?,?)";
 
-        return JDBCHelper.executeUpdate(sql, t.getMaHangHoa(), t.getTenHangHoa(), t.getDonViTinh(), t.getGiaVon(), t.getMoTa());
+        return JDBCHelper.executeUpdate(sql, t.getMaHangHoa(), t.getTenHangHoa(), t.getDonViTinh(),t.getSoLuong(), t.getGiaVon(), t.getMoTa());
     }
 
     @Override

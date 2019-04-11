@@ -5,17 +5,63 @@
  */
 package com.nhom3.qlcf.view.form.hanghoa;
 
+import com.nhom3.qlcf.dao.HangHoaDAO;
+import com.nhom3.qlcf.helper.XuLy;
+import com.nhom3.qlcf.model.HangHoa;
+import static com.nhom3.qlcf.view.form.hanghoa.FormSua_ThemMoiHangHoa_admin.jplnen;
+import java.awt.Color;
+import java.text.DecimalFormat;
+
 /**
  *
  * @author baotri1998
  */
 public class SuaHangHoa extends javax.swing.JPanel {
 
+    public static HangHoa matHang;
+    public static SuaHangHoa suaHangHoa;
+
     /**
      * Creates new form SuaHangHoa
      */
     public SuaHangHoa() {
         initComponents();
+        suaHangHoa = this;
+        txtSearch.setText("Tên mặt hàng");
+        txtSearch.setForeground(Color.GRAY);
+        XuLy.placeHolder(txtSearch, "Tên mặt hàng");
+        if (matHang != null) {
+            fillForm(matHang);
+        }
+    }
+
+    private void fillForm(HangHoa matHang) {
+        txtTenHang.setText(matHang.getTenHangHoa());
+        txtDVT.setText(matHang.getDonViTinh());
+        lblGiaCu.setText(String.valueOf(matHang.getGiaVon()) + " vnđ");
+        txtGhiChu.setText(matHang.getMoTa());
+
+    }
+
+    private void clearForm() {
+        matHang = null;
+        txtTenHang.setText("");
+        txtDVT.setText("");
+        lblGiaCu.setText("..............");
+        txtGiaMoi.setText("");
+        txtGhiChu.setText("");
+    }
+
+    private boolean checkNull() {
+        if (txtTenHang.getText().trim().isEmpty()) {
+            lblThongBao.setText("Không được để trống tên hàng!!");
+            return false;
+        }
+        if (txtDVT.getText().trim().isEmpty()) {
+            lblThongBao.setText("Không được để trống đơn vị tính");
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -29,23 +75,26 @@ public class SuaHangHoa extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTenHang = new javax.swing.JTextField();
         lblvien = new javax.swing.JLabel();
-        lblvien1 = new javax.swing.JLabel();
-        lblpass = new javax.swing.JLabel();
         lbluser = new javax.swing.JLabel();
         lblpass1 = new javax.swing.JLabel();
-        lblvien2 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        lblGiaCu = new javax.swing.JLabel();
+        txtGiaMoi = new javax.swing.JTextField();
         lblpass2 = new javax.swing.JLabel();
         lblvien3 = new javax.swing.JLabel();
         lblpass3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jTextField5 = new javax.swing.JTextField();
+        lblReset = new javax.swing.JLabel();
+        lblCapNhat = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtGhiChu = new javax.swing.JTextArea();
+        txtDVT = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        lblThongBao = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        txtSearch = new javax.swing.JTextField();
+        lblSearch = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -64,76 +113,103 @@ public class SuaHangHoa extends javax.swing.JPanel {
         jLabel1.setPreferredSize(new java.awt.Dimension(122, 17));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 58));
 
-        jTextField1.setBorder(null);
-        jTextField1.setOpaque(false);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtTenHang.setBorder(null);
+        txtTenHang.setOpaque(false);
+        txtTenHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtTenHangActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 102, 259, 40));
+        jPanel1.add(txtTenHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 259, 40));
 
         lblvien.setText("___________________________________________");
-        jPanel1.add(lblvien, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 114, 260, 30));
-
-        lblvien1.setText("..............");
-        jPanel1.add(lblvien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 260, 40));
-
-        lblpass.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblpass.setText("Mã Hàng:");
-        jPanel1.add(lblpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 80, 20));
+        jPanel1.add(lblvien, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 260, 30));
 
         lbluser.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbluser.setText("Tên Hàng:");
-        jPanel1.add(lbluser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 84, 80, 20));
+        jPanel1.add(lbluser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 80, 20));
 
         lblpass1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblpass1.setText("Giá Hiện Tại:");
-        jPanel1.add(lblpass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 80, 20));
+        jPanel1.add(lblpass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 80, 20));
 
-        lblvien2.setText("..............");
-        jPanel1.add(lblvien2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 260, 30));
+        lblGiaCu.setText("..............");
+        jPanel1.add(lblGiaCu, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 260, 30));
 
-        jTextField4.setBorder(null);
-        jTextField4.setOpaque(false);
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 259, 40));
+        txtGiaMoi.setBorder(null);
+        txtGiaMoi.setOpaque(false);
+        jPanel1.add(txtGiaMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 259, 30));
 
         lblpass2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblpass2.setText("Đơn Vị Tính:");
-        jPanel1.add(lblpass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 80, 20));
+        jPanel1.add(lblpass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 80, 20));
 
         lblvien3.setText("___________________________________________");
-        jPanel1.add(lblvien3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 260, 30));
+        jPanel1.add(lblvien3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 260, 30));
 
         lblpass3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblpass3.setText("Giá Điều Chỉnh:");
-        jPanel1.add(lblpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 100, 20));
+        jPanel1.add(lblpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 100, 20));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kg", "Lô", "Cái", "Thùng" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 210, -1));
+        lblReset.setBackground(new java.awt.Color(255, 255, 255));
+        lblReset.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblReset.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblReset.setText("Reset");
+        lblReset.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblReset.setOpaque(true);
+        lblReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblResetMousePressed(evt);
+            }
+        });
+        jPanel1.add(lblReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, 110, 40));
 
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Reset");
-        jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel3.setOpaque(true);
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 110, 40));
+        lblCapNhat.setBackground(new java.awt.Color(255, 255, 255));
+        lblCapNhat.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblCapNhat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCapNhat.setText("CẬP NHẬT");
+        lblCapNhat.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lblCapNhat.setOpaque(true);
+        lblCapNhat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblCapNhatMousePressed(evt);
+            }
+        });
+        jPanel1.add(lblCapNhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, 110, 40));
 
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("CẬP NHẬT");
-        jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel4.setOpaque(true);
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 110, 40));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("Ghi chú:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
+
+        txtGhiChu.setColumns(20);
+        txtGhiChu.setRows(5);
+        jScrollPane1.setViewportView(txtGhiChu);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 260, 60));
+
+        txtDVT.setBorder(null);
+        txtDVT.setOpaque(false);
+        jPanel1.add(txtDVT, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 260, 40));
+
+        jLabel2.setText("___________________________________________");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 260, 30));
+
+        lblThongBao.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lblThongBao.setForeground(new java.awt.Color(255, 0, 0));
+        lblThongBao.setText(" ");
+        jPanel1.add(lblThongBao, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, 250, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Tìm Kiếm");
+        lblSearch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblSearch.setForeground(new java.awt.Color(255, 255, 255));
+        lblSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSearch.setText("Tìm Kiếm");
+        lblSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSearchMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -141,15 +217,15 @@ public class SuaHangHoa extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
+                .addComponent(lblSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                .addComponent(lblSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -159,9 +235,12 @@ public class SuaHangHoa extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(182, 182, 182)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(221, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 181, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,30 +253,78 @@ public class SuaHangHoa extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtTenHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenHangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtTenHangActionPerformed
+
+    private void lblSearchMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSearchMousePressed
+        ListHang.tenMatHang = txtSearch.getText().trim();
+        ListHang.checkForm = "Sửa hàng";
+
+        FormSua_ThemMoiHangHoa_admin.jplnen.removeAll();
+        FormSua_ThemMoiHangHoa_admin.jplnen.add(new ListHang());
+        FormSua_ThemMoiHangHoa_admin.jplnen.repaint();
+        FormSua_ThemMoiHangHoa_admin.jplnen.revalidate();
+        this.hide();
+    }//GEN-LAST:event_lblSearchMousePressed
+
+    private void lblCapNhatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCapNhatMousePressed
+        // TODO add your handling code here:
+        if (checkNull()) {
+            try {
+                if (matHang != null) {
+                    matHang.setTenHangHoa(XuLy.xuLyTen(txtTenHang.getText()));
+                    matHang.setDonViTinh(XuLy.xuLyTen(txtDVT.getText()));
+
+                    if (txtGiaMoi.getText().trim().isEmpty()) {
+
+                        matHang.setGiaVon(Double.parseDouble(lblGiaCu.getText().substring(0, lblGiaCu.getText().indexOf(" "))));
+                    } else {
+                        matHang.setGiaVon(Double.parseDouble(txtGiaMoi.getText().trim()));
+                    }
+                    matHang.setMoTa(txtGhiChu.getText());
+                    boolean updateResult = new HangHoaDAO().update(matHang);
+                    if (updateResult) {
+                        lblThongBao.setText("Đã cập nhật thông tin hàng!!");
+                    } else {
+                        lblThongBao.setText("Cập nhật thất bại!!");
+                    }
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                lblThongBao.setText("Giá hàng hóa chỉ nhập số!!");
+            }
+        }
+    }//GEN-LAST:event_lblCapNhatMousePressed
+
+    private void lblResetMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResetMousePressed
+        // TODO add your handling code here:
+        clearForm();
+    }//GEN-LAST:event_lblResetMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JLabel lblpass;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCapNhat;
+    private javax.swing.JLabel lblGiaCu;
+    private javax.swing.JLabel lblReset;
+    private javax.swing.JLabel lblSearch;
+    private javax.swing.JLabel lblThongBao;
     private javax.swing.JLabel lblpass1;
     private javax.swing.JLabel lblpass2;
     private javax.swing.JLabel lblpass3;
     private javax.swing.JLabel lbluser;
     private javax.swing.JLabel lblvien;
-    private javax.swing.JLabel lblvien1;
-    private javax.swing.JLabel lblvien2;
     private javax.swing.JLabel lblvien3;
+    private javax.swing.JTextField txtDVT;
+    private javax.swing.JTextArea txtGhiChu;
+    private javax.swing.JTextField txtGiaMoi;
+    private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextField txtTenHang;
     // End of variables declaration//GEN-END:variables
 }

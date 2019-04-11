@@ -534,7 +534,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Ch&#x1ec9;nh S&#x1eef;a H&#xe0;ng H&#xf3;a"/>
+                    <Property name="text" type="java.lang.String" value="Th&#xea;m/S&#x1eed;a H&#xe0;ng H&#xf3;a"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>
@@ -1072,7 +1072,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Nh&#x1ead;p \u005cTh&#xea;m H&#xe0;ng H&#xf3;a" containsInvalidXMLChars="true"/>
+                    <Property name="text" type="java.lang.String" value="Nh&#x1ead;p H&#xe0;ng H&#xf3;a"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Hand Cursor"/>
                     </Property>

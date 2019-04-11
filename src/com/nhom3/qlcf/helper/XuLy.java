@@ -34,7 +34,7 @@ public class XuLy {
                     field.setForeground(Color.BLACK);
 
                 }
-         
+
             }
 
             @Override
@@ -47,14 +47,15 @@ public class XuLy {
             }
         });
     }
-    public static JTable popupDialog(JPanel parentFrame, String[] column){
+
+    public static JTable popupDialog(JPanel parentFrame, String[] column) {
         DefaultTableModel table = new DefaultTableModel(column, 0);
         JScrollPane scp = new JScrollPane();
-        JTable tbl = new JTable(table); 
+        JTable tbl = new JTable(table);
         scp.setViewportView(tbl);
-        scp.setPreferredSize(new Dimension(580, 550)); 
+        scp.setPreferredSize(new Dimension(580, 550));
         JPanel pnl = new JPanel(new BorderLayout(5, 5));
-        
+
         pnl.add(scp, BorderLayout.NORTH);
         JDialog dl = new JDialog(SwingUtilities.windowForComponent(parentFrame));
 //        dl.setModal(true); 
@@ -63,5 +64,21 @@ public class XuLy {
         dl.setVisible(true);
         dl.setLocationRelativeTo(null);
         return tbl;
+    }
+
+    public static String xuLyTen(String ten) {
+        String[] c;
+        String kq = "";
+        ten = ten.trim().toLowerCase();
+        c = ten.split(" ");
+        for (String i : c) {
+            if (i.length() != 0) {
+                String a = i.substring(0, 1).toUpperCase();
+                String b = i.substring(1, i.length());
+                i = a + b;
+                kq += i + " ";
+            }
+        }
+        return kq.trim();
     }
 }

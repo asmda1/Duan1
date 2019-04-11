@@ -23,6 +23,7 @@ public class ListHang extends javax.swing.JPanel {
     public static ListHang nhapHang1;
     public static String tenMatHang;
     static List<HangHoa> list;
+    public static String checkForm;
 
     public ListHang() {
         initComponents();
@@ -157,22 +158,40 @@ public class ListHang extends javax.swing.JPanel {
     private void tblKhoHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhoHangMousePressed
         // TODO add your handling code here:
         int index = tblKhoHang.getSelectedRow();
-        NhapHang.matHang = list.get(index);
-        
-        FormNhapHang.jpnThemHoangHoa.removeAll();
-        FormNhapHang.jpnThemHoangHoa.add(new NhapHang());
-        FormNhapHang.jpnThemHoangHoa.repaint();
-        FormNhapHang.jpnThemHoangHoa.revalidate();
-        this.hide();
+        if (checkForm.equals("Nhập hàng")) {
+            NhapHang.matHang = list.get(index);
+
+            FormNhapHang.jpnThemHoangHoa.removeAll();
+            FormNhapHang.jpnThemHoangHoa.add(new NhapHang());
+            FormNhapHang.jpnThemHoangHoa.repaint();
+            FormNhapHang.jpnThemHoangHoa.revalidate();
+            this.hide();
+        } else {
+            SuaHangHoa.matHang = list.get(index);
+            
+            FormSua_ThemMoiHangHoa_admin.jplnen.removeAll();
+            FormSua_ThemMoiHangHoa_admin.jplnen.add(new SuaHangHoa());
+            FormSua_ThemMoiHangHoa_admin.jplnen.repaint();
+            FormSua_ThemMoiHangHoa_admin.jplnen.revalidate();
+            this.hide();
+        }
     }//GEN-LAST:event_tblKhoHangMousePressed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         // TODO add your handling code here:
-        FormNhapHang.jpnThemHoangHoa.removeAll();
-        FormNhapHang.jpnThemHoangHoa.add(new NhapHang());
-        FormNhapHang.jpnThemHoangHoa.repaint();
-        FormNhapHang.jpnThemHoangHoa.revalidate();
-        this.hide();
+        if (checkForm.equals("Nhập hàng")) {
+            FormNhapHang.jpnThemHoangHoa.removeAll();
+            FormNhapHang.jpnThemHoangHoa.add(new NhapHang());
+            FormNhapHang.jpnThemHoangHoa.repaint();
+            FormNhapHang.jpnThemHoangHoa.revalidate();
+            this.hide();
+        } else {
+            FormSua_ThemMoiHangHoa_admin.jplnen.removeAll();
+            FormSua_ThemMoiHangHoa_admin.jplnen.add(new NhapHang());
+            FormSua_ThemMoiHangHoa_admin.jplnen.repaint();
+            FormSua_ThemMoiHangHoa_admin.jplnen.revalidate();
+            this.hide();
+        }
     }//GEN-LAST:event_jLabel1MousePressed
 
 
