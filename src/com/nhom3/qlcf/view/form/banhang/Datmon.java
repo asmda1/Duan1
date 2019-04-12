@@ -32,6 +32,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.lblTamTinh;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.lblThanhTien;
+import static com.nhom3.qlcf.view.form.banhang.FormBanHang.lbltendiem;
+import static com.nhom3.qlcf.view.form.banhang.FormBanHang.txtbattatdiem;
+import static com.nhom3.qlcf.view.form.banhang.FormBanHang.txtdiem;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
@@ -198,10 +201,16 @@ public class Datmon extends javax.swing.JDialog {
         }
 
         lblTamTinh.setText(String.valueOf(chuyentien.format(tongtien)) + " VNĐ");
+        lblTamTinh.setName(String.valueOf(tongtien));
         lblThanhTien.setText(String.valueOf(chuyentien.format(tongtien)) + " VNĐ");
         FormBanHang.banhang.txtChietKhau.setText("0");
         if (!FormBanHang.banhang.txtTimSDT.getText().trim().equals("") && !FormBanHang.banhang.lbltenKH.getName().equals("KH000")) {
             FormBanHang.banhang.searchSDT();
+        }
+        if (txtbattatdiem.getText().equals("Tắt")) {
+            txtdiem.setName("bat");
+        } else {
+            txtdiem.setName("tat");
         }
 
     }
@@ -227,8 +236,8 @@ public class Datmon extends javax.swing.JDialog {
         lblten = new javax.swing.JLabel();
         lblmaSP = new javax.swing.JLabel();
         lblimg = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lbltru = new javax.swing.JLabel();
+        lblcong = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lbltengia1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -274,6 +283,12 @@ public class Datmon extends javax.swing.JDialog {
         lblbutonTat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblbutonTat.setOpaque(true);
         lblbutonTat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblbutonTatMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblbutonTatMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblbutonTatMousePressed(evt);
             }
@@ -288,6 +303,12 @@ public class Datmon extends javax.swing.JDialog {
         lblbutonThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblbutonThem.setOpaque(true);
         lblbutonThem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblbutonThemMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblbutonThemMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblbutonThemMousePressed(evt);
             }
@@ -339,33 +360,45 @@ public class Datmon extends javax.swing.JDialog {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, 260));
 
-        jLabel3.setBackground(new java.awt.Color(0, 102, 255));
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("-");
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel3.setOpaque(true);
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbltru.setBackground(new java.awt.Color(0, 102, 255));
+        lbltru.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lbltru.setForeground(new java.awt.Color(255, 255, 255));
+        lbltru.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbltru.setText("-");
+        lbltru.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbltru.setOpaque(true);
+        lbltru.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbltruMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbltruMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel3MousePressed(evt);
+                lbltruMousePressed(evt);
             }
         });
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 30, 30));
+        jPanel1.add(lbltru, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 30, 30));
 
-        jLabel4.setBackground(new java.awt.Color(0, 102, 255));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("+");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.setOpaque(true);
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblcong.setBackground(new java.awt.Color(0, 102, 255));
+        lblcong.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblcong.setForeground(new java.awt.Color(255, 255, 255));
+        lblcong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblcong.setText("+");
+        lblcong.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblcong.setOpaque(true);
+        lblcong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblcongMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblcongMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel4MousePressed(evt);
+                lblcongMousePressed(evt);
             }
         });
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 30, 30));
+        jPanel1.add(lblcong, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 30, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("THÊM: ");
@@ -376,7 +409,7 @@ public class Datmon extends javax.swing.JDialog {
         jPanel1.add(lbltengia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 70, 30));
 
         jScrollPane1.setBorder(null);
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         jplExtra.setBackground(new java.awt.Color(255, 255, 255));
@@ -442,12 +475,14 @@ public class Datmon extends javax.swing.JDialog {
         DongGoiHDCT();
         getTamTinh();
         FormBanHang.banhang.getTongTien();
-          FormBanHang.banhang.tienKhach();
+        FormBanHang.banhang.tienKhach();
         Designhelper designhelper = new Designhelper();
         designhelper.DesigDonHang(jpldonhang, DongCTHD);
         FormBanHang.banhang.lblThongBao.setText("");
         FormBanHang.banhang.diemtichluy();
+
         dispose();
+
 
     }//GEN-LAST:event_lblbutonThemMousePressed
 
@@ -457,7 +492,7 @@ public class Datmon extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_lblbutonTatMousePressed
 
-    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+    private void lblcongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblcongMousePressed
         // TODO add your handling code here:
         so = Integer.parseInt(txtsoluong.getText());
         if (so < 35) { //tang toi thieu
@@ -472,9 +507,9 @@ public class Datmon extends javax.swing.JDialog {
             designhelper.DesignExtra(jplExtra, extraDAO.selectAll(), lblgiaExtra, lbltenExtra, lblgia, lbltinhthem, txtsoluong, so);
             getTinhThem();
         }
-    }//GEN-LAST:event_jLabel4MousePressed
+    }//GEN-LAST:event_lblcongMousePressed
 
-    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+    private void lbltruMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltruMousePressed
         // TODO add your handling code here:
         so = Integer.parseInt(txtsoluong.getText());
         if (so != 0 && so != 1) { //tang toi thieu
@@ -490,7 +525,47 @@ public class Datmon extends javax.swing.JDialog {
             //Set cot tinh them tien
             getTinhThem();
         }
-    }//GEN-LAST:event_jLabel3MousePressed
+    }//GEN-LAST:event_lbltruMousePressed
+
+    private void lblbutonThemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbutonThemMouseEntered
+        // TODO add your handling code here:
+        lblbutonThem.setBackground(Color.red);
+    }//GEN-LAST:event_lblbutonThemMouseEntered
+
+    private void lblbutonThemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbutonThemMouseExited
+        // TODO add your handling code here:
+        lblbutonThem.setBackground(Color.BLUE);
+    }//GEN-LAST:event_lblbutonThemMouseExited
+
+    private void lblbutonTatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbutonTatMouseEntered
+        // TODO add your handling code here:
+        lblbutonTat.setBackground(Color.red);
+    }//GEN-LAST:event_lblbutonTatMouseEntered
+
+    private void lblbutonTatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblbutonTatMouseExited
+        // TODO add your handling code here:
+        lblbutonTat.setBackground(Color.blue);
+    }//GEN-LAST:event_lblbutonTatMouseExited
+
+    private void lblcongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblcongMouseEntered
+        // TODO add your handling code here:
+        lblcong.setBackground(Color.red);
+    }//GEN-LAST:event_lblcongMouseEntered
+
+    private void lbltruMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltruMouseEntered
+        // TODO add your handling code here:
+        lbltru.setBackground(Color.red);
+    }//GEN-LAST:event_lbltruMouseEntered
+
+    private void lbltruMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltruMouseExited
+        // TODO add your handling code here:
+        lbltru.setBackground(Color.blue);
+    }//GEN-LAST:event_lbltruMouseExited
+
+    private void lblcongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblcongMouseExited
+        // TODO add your handling code here:
+        lblcong.setBackground(Color.blue);
+    }//GEN-LAST:event_lblcongMouseExited
 
     /**
      * @param args the command line arguments
@@ -537,8 +612,6 @@ public class Datmon extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -547,6 +620,7 @@ public class Datmon extends javax.swing.JDialog {
     private javax.swing.JPanel jpnSize;
     private javax.swing.JLabel lblbutonTat;
     private javax.swing.JLabel lblbutonThem;
+    private javax.swing.JLabel lblcong;
     private javax.swing.JLabel lblgia;
     private javax.swing.JLabel lblgiaExtra;
     private javax.swing.JLabel lblgiagoc;
@@ -558,6 +632,7 @@ public class Datmon extends javax.swing.JDialog {
     private javax.swing.JLabel lbltengia1;
     private javax.swing.JLabel lbltengia2;
     private javax.swing.JLabel lbltinhthem;
+    private javax.swing.JLabel lbltru;
     private javax.swing.JTextField txtsoluong;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,6 +9,7 @@ import com.nhom3.qlcf.dao.NhaCungCapDAO;
 import com.nhom3.qlcf.dao.PhieuNhapDAO;
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.Loginhelper;
+import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.model.HangHoa;
 import com.nhom3.qlcf.model.NhaCungCap;
 import com.nhom3.qlcf.model.PhieuNhap;
@@ -20,9 +21,12 @@ import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,7 +36,7 @@ import javax.swing.table.DefaultTableModel;
 public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
 
     public List<PhieuNhap> listPhieu = null;
-  
+
     /**
      * Creates new form FormLogin
      */
@@ -45,24 +49,47 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         login = this;
         new Loginhelper().getLogin(lblTenDangNhapBangHang);
         showPhieu();
-        ResultSet rs =  JDBCHelper.executeQuery("Select COUNT(maPhieu) from PhieuNhap;");
+        ResultSet rs = JDBCHelper.executeQuery("Select COUNT(maPhieu) from PhieuNhap;");
         try {
-            while(rs.next()){
+            while (rs.next()) {
                 lblsophieu.setText(rs.getString(1));
             }
         } catch (Exception e) {
         }
+        txtphieu.setText("Tìm kiếm mã phiếu");
+        txtphieu.setForeground(Color.gray);
+        XuLy.placeHolder(txtphieu, "Tìm kiếm mã phiếu");
     }
+
+    public void timkiem() {
+        if (txtphieu.getText().trim().equals("")) {
+            showPhieu();
+        } else {
+            listPhieu = new PhieuNhapDAO().select(" Select * from PhieuNhap where maPhieu = '" + txtphieu.getText() + "'");
+            model = (DefaultTableModel) tblquanlyphieu.getModel();
+            model.setRowCount(0);
+            try {
+                listPhieu.stream().map((kh) -> new Object[]{
+                    kh.getMaPhieu(), kh.getMaNhaCungCap().getMaNhaCungCap(), kh.getMaNguoiDung().getMaNguoidung(), kh.getNgayNhap(), String.valueOf(chuyentien.format(kh.getTongTien()))
+                }).forEachOrdered((row) -> {
+                    model.addRow(row);
+                });
+            } catch (Exception e) {
+            }
+        }
+    }
+
     DefaultTableModel model = null;
+    NumberFormat chuyentien = new DecimalFormat("#,###,###");
 
     public void showPhieu() {
-        
+
         listPhieu = new PhieuNhapDAO().selectAll();
         model = (DefaultTableModel) tblquanlyphieu.getModel();
         model.setRowCount(0);
         try {
             listPhieu.stream().map((kh) -> new Object[]{
-                kh.getMaPhieu(), kh.getMaNhaCungCap().getMaNhaCungCap(), kh.getMaNguoiDung().getMaNguoidung(), kh.getNgayNhap(),  kh.getTongTien()
+                kh.getMaPhieu(), kh.getMaNhaCungCap().getMaNhaCungCap(), kh.getMaNguoiDung().getMaNguoidung(), kh.getNgayNhap(), String.valueOf(chuyentien.format(kh.getTongTien()))
             }).forEachOrdered((row) -> {
                 model.addRow(row);
             });
@@ -95,7 +122,7 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         lblAn_BanHang = new javax.swing.JLabel();
         lblOutBangHang = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtphieu = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jpnNen = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -260,13 +287,18 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 255));
 
-        jTextField1.setText("Tìm kiếm");
+        txtphieu.setText("Tìm kiếm");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Tìm Kiếm");
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -274,13 +306,13 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtphieu, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField1)
+            .addComponent(txtphieu)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -357,7 +389,7 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
             tblquanlyphieu.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jpnNen.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 125, 1050, 490));
+        jpnNen.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 1060, 490));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -380,8 +412,8 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("IN:");
-        jpnNen.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 40, 30));
+        jLabel5.setText("IN ALL:");
+        jpnNen.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 70, 30));
 
         lblsophieu.setText(".");
         jpnNen.add(lblsophieu, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 130, 30));
@@ -520,9 +552,33 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
         // TODO add your handling code here:
-         chieuTietPhieu ct = new chieuTietPhieu(null, true, null);
-        ct.setVisible(true);
+        String opObjects[] = {"Trở Về"};
+        if (!listPhieu.isEmpty()) {
+            if (txtphieu.getText().length() > 0) {
+                chieuTietPhieu ct = new chieuTietPhieu(null, true, listPhieu.get(0).getMaPhieu());
+                ct.setVisible(true);
+            } else {
+                chieuTietPhieu ct = new chieuTietPhieu(null, true, null);
+                ct.setVisible(true);
+            }
+        } else {
+            JOptionPane.showOptionDialog(null,
+                    "Không có mã phiếu nào để in!",
+                    "Thông Báo!",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                    opObjects,
+                    opObjects[0]);
+        }
+
+
     }//GEN-LAST:event_jLabel4MousePressed
+
+    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+        // TODO add your handling code here:
+        timkiem();
+    }//GEN-LAST:event_jLabel3MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -534,7 +590,6 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
     protected static javax.swing.JPanel jfThongKe;
     private javax.swing.JPanel jpnDangXuat;
     private javax.swing.JPanel jpnNen;
@@ -550,5 +605,6 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
     private javax.swing.JLabel lblanhGiaoDien;
     private javax.swing.JLabel lblsophieu;
     private javax.swing.JTable tblquanlyphieu;
+    private javax.swing.JTextField txtphieu;
     // End of variables declaration//GEN-END:variables
 }

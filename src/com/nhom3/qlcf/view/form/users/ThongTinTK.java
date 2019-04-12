@@ -291,6 +291,6 @@ public class ThongTinTK extends javax.swing.JPanel {
     private javax.swing.JLabel lblvien4;
     private javax.swing.JTextField txtSDT;
     protected static javax.swing.JTextField txtemail;
-    private javax.swing.JTextField txtten;
+    protected static javax.swing.JTextField txtten;
     // End of variables declaration//GEN-END:variables
 }

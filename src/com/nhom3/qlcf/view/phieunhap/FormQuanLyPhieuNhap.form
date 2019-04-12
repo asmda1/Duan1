@@ -298,21 +298,21 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextField1" min="-2" pref="289" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtphieu" min="-2" pref="283" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" pref="69" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtphieu" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="jTextField1">
+                <Component class="javax.swing.JTextField" name="txtphieu">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
                   </Properties>
@@ -331,6 +331,9 @@
                       <Color id="Hand Cursor"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel3MousePressed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -367,7 +370,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="10" y="125" width="1050" height="490"/>
+                  <AbsoluteConstraints x="10" y="130" width="1060" height="490"/>
                 </Constraint>
               </Constraints>
 
@@ -499,11 +502,11 @@
                   <Font name="Tahoma" size="12" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="IN:"/>
+                <Property name="text" type="java.lang.String" value="IN ALL:"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="600" y="80" width="40" height="30"/>
+                  <AbsoluteConstraints x="570" y="80" width="70" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>

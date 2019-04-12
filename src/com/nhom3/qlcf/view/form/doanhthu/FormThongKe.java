@@ -64,7 +64,7 @@ public class FormThongKe extends javax.swing.JPanel {
         tblHoatDongBanHang.getTableHeader().setBackground(new Color(0, 0, 0));
         tblHoatDongBanHang.getTableHeader().setForeground(new Color(255, 255, 255));
         tblHoatDongBanHang.setRowHeight(25);
-        String[] items = {"Hôm Nay", "Hôm Qua", "7 Ngày Trước", "Chọn Trong Ngày "};
+        String[] items = {"Hôm Nay", "Hôm Qua", "7 Ngày Trước"};
         for (String item : items) {
             cboDate.addItem(item);
         }
@@ -472,7 +472,7 @@ public class FormThongKe extends javax.swing.JPanel {
 
         lblthongkedoangthu.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblthongkedoangthu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblthongkedoangthu.setText("THỐNG KÊ DOANG THU");
+        lblthongkedoangthu.setText("THỐNG KÊ DOANH THU");
         jpnNen.add(lblthongkedoangthu, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 770, 40));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
