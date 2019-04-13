@@ -106,7 +106,10 @@ public class ThemSanPham extends javax.swing.JPanel {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            return;
         }
+        lblDuongDan.setText(f.getPath());
         lblHinh.setIcon(new ImageIcon(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), width, height)));
     }
 
@@ -464,7 +467,6 @@ public class ThemSanPham extends javax.swing.JPanel {
     private void lblChonHinhMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblChonHinhMousePressed
         // TODO add your handling code here:
         get_SetHinh();
-        lblDuongDan.setText(f.getPath());
 
     }//GEN-LAST:event_lblChonHinhMousePressed
 
