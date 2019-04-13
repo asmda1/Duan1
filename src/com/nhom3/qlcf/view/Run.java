@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javax.swing.BoxLayout;
@@ -29,6 +30,7 @@ public class Run extends javax.swing.JFrame {
      */
     public static Run main;
     Timer t;
+    public static String folderPAth = System.getenv("ProgramData") + "\\" + "QLCF" + "\\" + "Images";
 
     public Run() {
         initComponents();
@@ -58,8 +60,20 @@ public class Run extends javax.swing.JFrame {
         t.start();
 
         main = this;
+        
+        createImagesFolder();
     }
 
+    private void createImagesFolder(){
+        
+        File folder = new File(folderPAth);
+        if (!folder.exists()) {
+            folder.mkdirs();
+            System.out.println("Folder has been created!");
+        } else {
+            System.out.println("Folder exist");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

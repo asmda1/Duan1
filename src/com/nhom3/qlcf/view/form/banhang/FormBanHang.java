@@ -13,7 +13,6 @@ import com.nhom3.qlcf.helper.Designhelper;
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.helper.ReSizehelper;
-import com.nhom3.qlcf.helper.Soundhelper;
 import com.nhom3.qlcf.helper.Timehelper;
 import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.model.CTHoaDon;
@@ -21,17 +20,11 @@ import com.nhom3.qlcf.model.HoaDon;
 import com.nhom3.qlcf.model.KhachHang;
 import com.nhom3.qlcf.model.NguoiDung;
 import com.nhom3.qlcf.model.SanPham;
-import com.nhom3.qlcf.test.testSQL;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.Run;
-import com.nhom3.qlcf.view.form.khachhang.FormKhachHang;
-import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnDangKyForm;
-import com.nhom3.qlcf.view.form.khachhang.DangKyHoiVien;
 import com.nhom3.qlcf.view.form.khachhang.jdialogThemKH;
 import com.nhom3.qlcf.view.form.login.Login;
-import com.nhom3.qlcf.view.form.menu.FormMenu;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
-import com.nhom3.qlcf.view.form.nhacungcap.FormDanhSachNhaCC;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.GridLayout;
@@ -40,7 +33,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -83,6 +75,9 @@ public class FormBanHang extends javax.swing.JPanel {
         lblbuton_thanhToan.setName(AutogetMaHD());
         lblsound.setName("sound");
         txtdiem.setName("bat");
+        txtTimSDT.setText("Số điện thoại khách hàng");
+        txtTimSDT.setForeground(Color.GRAY);
+        XuLy.placeHolder(txtTimSDT, "Số điện thoại khách hàng");
 
     }
 
@@ -1620,19 +1615,18 @@ public class FormBanHang extends javax.swing.JPanel {
 
         try {
             jpnDSsanpham.setLayout(new GridLayout(9, 4, 3, 3));
-            testSQL sql = new testSQL();
             int start = 0;
             int end = 9;
             // List Show sp từ dữ liệu SQL
 
-            if (sql.select().size() < 9) {
-                end = sql.select().size();
+            if (new SanPhamDAO().selectAll().size() < 9) {
+                end = new SanPhamDAO().selectAll().size();
                 //jpnDSsanpham.setLayout(new GridLayout(2, 3, 4, 4));
             }
             Designhelper designhelper = new Designhelper();
-            designhelper.DesignPage(jpnNext, sql.select());
-            list = designhelper.LimitPage(sql.select(), start, end);
-            designhelper.DesignSanPham(jpnDSsanpham, testSQL.select());
+            designhelper.DesignPage(jpnNext, new SanPhamDAO().selectAll());
+            list = designhelper.LimitPage(new SanPhamDAO().selectAll(), start, end);
+            designhelper.DesignSanPham(jpnDSsanpham, new SanPhamDAO().selectAll());
 
         } catch (Exception e) {
             System.out.println(e);
@@ -1643,28 +1637,12 @@ public class FormBanHang extends javax.swing.JPanel {
     public String AutogetMaHD() {
         HoaDonDAO hdDao = new HoaDonDAO();
         String chuoi = "";
-        List<HoaDon> list = hdDao.selectAll();
-        if (list.isEmpty()) {
-            chuoi = "HD001";
-            lblbuton_thanhToan.setToolTipText(chuoi);
-            return lblbuton_thanhToan.getToolTipText();
-        } else {
-            int index = list.size() - 1;
-            int so = Integer.parseInt(list.get(index).getMaHoaDon().substring(2)) + 1;
-            switch (String.valueOf(so).length()) {
-                case 1:
-                    chuoi = "HD00" + so;
-                    break;
-                case 2:
-                    chuoi = "HD0" + so;
-                    break;
-                case 3:
-                    chuoi = "HD" + so;
-                    break;
-            }
-            lblbuton_thanhToan.setToolTipText(chuoi);
-            return lblbuton_thanhToan.getToolTipText();
-        }
+        List<HoaDon> list = new HoaDonDAO().selectAll();
+        String maCuoi = list.get(list.size() - 1).getMaHoaDon();
+
+        lblbuton_thanhToan.setToolTipText(XuLy.tuDongTaoMa(list, maCuoi, "HD"));
+        return lblbuton_thanhToan.getToolTipText();
+
     }
 
     public void getTongTien() {

@@ -6,15 +6,12 @@
 package com.nhom3.qlcf.dao;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
-import com.nhom3.qlcf.model.HangHoa;
 import com.nhom3.qlcf.model.LoaiSanPham;
 import com.nhom3.qlcf.model.SanPham;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -24,7 +21,7 @@ public class SanPhamDAO implements DAO<SanPham> {
 
     @Override
     public boolean insert(SanPham t) {
-        String sql = "Insert dbo.SanPham values (?,?,?,?,?,?)";
+        String sql = "Insert into dbo.SanPham values (?,?,N'?',?,?,?)";
         return JDBCHelper.executeUpdate(sql, t.getMaSanPham(), t.getMaLoaiSanPham().getMaLoai(), t.getTenSp(), t.getGiaBan(), t.isTrangThai(), t.getHinhAnh());
     }
 

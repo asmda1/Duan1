@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -80,5 +81,27 @@ public class XuLy {
             }
         }
         return kq.trim();
+    }
+
+    public static <T> String tuDongTaoMa(List<T> list, String maCuoi, String ma) {
+        String maMoi;
+        if (list.isEmpty()) {
+            maMoi = ma + "001";
+        } else {
+            String soCuoi = maCuoi.replaceAll("\\D+", "").trim();
+            int soMoi = Integer.parseInt(soCuoi) + 1;
+            switch (String.valueOf(soMoi).length()) {
+                case 1:
+                    maMoi = ma + "00" + soMoi;
+                    break;
+                case 2:
+                    maMoi = ma + "0" + soMoi;
+                    break;
+                default:
+                    maMoi = ma + soMoi;
+            }
+        }
+        return maMoi;
+
     }
 }

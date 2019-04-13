@@ -74,11 +74,11 @@ public class LoaiSanPhamDAO implements DAO<LoaiSanPham> {
         return model;
     }
 
-   
-
     @Override
     public LoaiSanPham selectID(String ID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "Select * from dbo.LoaiSanPham where maLoai=?";
+        List<LoaiSanPham> list = select(sql, ID);
+        return list.size() > 0 ? list.get(0) : null;
     }
 
 }

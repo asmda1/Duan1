@@ -1890,3 +1890,4 @@ AS
                 JOIN dbo.NhaCungCap ON NhaCungCap.maNhaCungCap = PhieuNhap.maNhaCungCap;
 
     END
+	SELECT * FROM dbo.SanPham

@@ -67,7 +67,8 @@ public class JDBCHelper {
             stm.executeUpdate();
             stm.getConnection().commit();
             return true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            e.printStackTrace();
             try {
                 stm.getConnection().rollback();
             } catch (SQLException ex) {
