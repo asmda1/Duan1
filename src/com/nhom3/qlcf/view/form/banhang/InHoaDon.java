@@ -90,7 +90,7 @@ public class InHoaDon extends javax.swing.JDialog {
         lblten.setText(tenkh);
         lblngay.setText(String.valueOf(date));
         lblchietkhau.setText(chietkhau);
-        if (sdt == "true") {
+        if ("true".equals(sdt)) {
             lblsdt.setText("");
         } else {
             lblsdt.setText(sdt);

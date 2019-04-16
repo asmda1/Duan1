@@ -482,6 +482,7 @@
             <Container class="javax.swing.JPanel" name="jplnen">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="lblName.setText(&quot;CH&#x1ec8;NH S&#x1eec;A S&#x1ea2;N PH&#x1ea8;M&quot;);&#xa;jplnen.removeAll();&#xa;jplnen.updateUI();&#xa;jplnen.add(new SuaSP());&#xa;jplnen.repaint();&#xa;jplnen.updateUI();"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
               </AuxValues>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>

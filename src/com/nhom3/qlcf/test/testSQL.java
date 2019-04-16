@@ -5,7 +5,7 @@
  */
 package com.nhom3.qlcf.test;
 
-import com.nhom3.qlcf.helper.Jdbc;
+import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.model.HangHoa;
 import com.nhom3.qlcf.model.LoaiSanPham;
 import com.nhom3.qlcf.model.SanPham;
@@ -38,7 +38,7 @@ public class testSQL {
             ResultSet rs = null;
 
             try {
-                rs = Jdbc.executeQuery(sql, args);
+                rs = JDBCHelper.executeQuery(sql, args);
 
                 while (rs.next()) {
                     SanPham model = readFromResultSet(rs);

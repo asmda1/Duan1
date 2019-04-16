@@ -16,7 +16,14 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -32,7 +39,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class ThemSanPham extends javax.swing.JPanel {
 
     BufferedImage image = null;
-    File f;
+    File sourceFile, destFile;
 
     /**
      * Creates new form ThemSanPham
@@ -62,7 +69,33 @@ public class ThemSanPham extends javax.swing.JPanel {
         txtGiaBan.setText("Giá sản phẩm");
         cboLoaiSP.setSelectedIndex(0);
         lblHinh.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/default.png")));
-        f = null;
+        sourceFile = null;
+        destFile = null;
+        lblDuongDan.setText(" ");
+    }
+
+    private static void copyFile(File sourceFile, File destFile)
+            throws IOException {
+        if (!sourceFile.exists()) {
+            return;
+        }
+        if (!destFile.exists()) {
+            destFile.createNewFile();
+        }
+        FileChannel source = null;
+        FileChannel destination = null;
+        source = new FileInputStream(sourceFile).getChannel();
+        destination = new FileOutputStream(destFile).getChannel();
+        if (destination != null && source != null) {
+            destination.transferFrom(source, 0, source.size());
+        }
+        if (source != null) {
+            source.close();
+        }
+        if (destination != null) {
+            destination.close();
+        }
+
     }
 
     private void get_SetHinh() {
@@ -77,39 +110,28 @@ public class ThemSanPham extends javax.swing.JPanel {
         int result = jfc.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
             try {
-                f = jfc.getSelectedFile();
+                sourceFile = jfc.getSelectedFile();
 
-                if (f.getName().length() > 50) {
+                if (sourceFile.getName().length() > 50) {
                     lblDuongDan.setText("Tên ảnh không được quá 45 kí tự!!");
                     return;
                 }
 
-                image = ImageIO.read(f);
-                String fileName = f.getName();
+                String fileName = sourceFile.getName();
 
-                if (f.getPath().equals(Run.folderPAth + "\\" + fileName)) {
-                    lblHinh.setIcon(new ImageIcon(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), width, height)));
-                } else {
-                    f = new File(Run.folderPAth + "\\" + fileName);
-                    if (f.exists()) {
-                        int opt = JOptionPane.showConfirmDialog(this, "Ảnh " + fileName + " đã tồn tại.\nXác nhận chép đè?", "Xác nhận lưu", JOptionPane.YES_NO_OPTION);
-                        if (opt == JOptionPane.YES_OPTION) {
-                            ImageIO.write(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), width, height), "png", f);
-                        } else {
+                destFile = new File(System.getProperty("user.dir") + "/src/com/nhom3/qlcf/img/" + fileName);
 
-                        }
-                    } else {
-                        ImageIO.write(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), width, height), "png", f);
-                    }
-                }
+                copyFile(sourceFile, destFile);
 
+                image = ImageIO.read(destFile);
+                ImageIO.write(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), width, height), "png", destFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             return;
         }
-        lblDuongDan.setText(f.getPath());
+        lblDuongDan.setText(sourceFile.getPath());
         lblHinh.setIcon(new ImageIcon(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), width, height)));
     }
 
@@ -443,11 +465,11 @@ public class ThemSanPham extends javax.swing.JPanel {
             Hình thêm mới nằm bên ngoài PJ, show sản phẩm có thể lỗi (chưa test) 
             nếu f null => default.png, ngược lại tên hình
              */
-            if (!f.exists() && f.length() == 0) {
+            if (!destFile.exists() && destFile.length() == 0) {
                 sp.setHinhAnh("default.png");
             } else {
-                sp.setHinhAnh(f.getName());
-                System.out.println("hinh " + f.getName());
+                sp.setHinhAnh(destFile.getName());
+                System.out.println("hinh " + destFile.getName());
             }
             boolean insertResult = new SanPhamDAO().insert(sp);
             if (insertResult) {

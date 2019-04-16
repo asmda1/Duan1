@@ -21,7 +21,7 @@ public class SanPhamDAO implements DAO<SanPham> {
 
     @Override
     public boolean insert(SanPham t) {
-        String sql = "Insert into dbo.SanPham values (?,?,N'?',?,?,?)";
+        String sql = "Insert into dbo.SanPham values (?,?,?,?,?,?)";
         return JDBCHelper.executeUpdate(sql, t.getMaSanPham(), t.getMaLoaiSanPham().getMaLoai(), t.getTenSp(), t.getGiaBan(), t.isTrangThai(), t.getHinhAnh());
     }
 

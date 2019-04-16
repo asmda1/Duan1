@@ -36,6 +36,7 @@ import static com.nhom3.qlcf.view.form.banhang.FormBanHang.lbltendiem;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.txtbattatdiem;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.txtdiem;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import javax.imageio.ImageIO;
 
 /**
@@ -105,7 +106,10 @@ public class Datmon extends javax.swing.JDialog {
         sp.setTenSp(lblten.getText());
         sp.setMaSanPham(lblten.getName());
         sp.setGiaBan(showSP.get(0).getGiaBan());
-        sp.setHinhAnh("/com/qlbhcafe/img/" + lblimg.getText());
+//        sp.setHinhAnh("/com/qlbhcafe/img/" + lblimg.getText());
+        
+        sp.setHinhAnh(lblimg.getText());
+        
         Ex.setId(lbltenExtra.getToolTipText());
         Ex.setTen(lbltenExtra.getText());
         Ex.setGia(Double.parseDouble(lblgiaExtra.getName()));

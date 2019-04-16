@@ -33,6 +33,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -1384,9 +1385,7 @@ public class FormBanHang extends javax.swing.JPanel {
             lbltienthua.setForeground(Color.black);
             lbltenTienthua.setText("Tiền Thối: ");
             lbltienthua.setText("0 VNĐ");
-
         }
-
     }//GEN-LAST:event_txttienkhachKeyTyped
     public void tienKhach() {
         if (CheckTienKhach()) {
@@ -1498,6 +1497,9 @@ public class FormBanHang extends javax.swing.JPanel {
             BufferedImage banhmi = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/GaXeNuocTuong(19).png"));
             BufferedImage banhngot = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/PhoMaiTraXanh(29).jpg"));
             BufferedImage fee = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/FreezeChocolate(49).png"));
+
+
+            
             int type = coffee.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : coffee.getType();
             int type1 = tea.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : tea.getType();
             int type2 = banhmi.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : banhmi.getType();

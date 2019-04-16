@@ -5,7 +5,7 @@
  */
 package com.nhom3.qlcf.test;
 
-import com.nhom3.qlcf.helper.Jdbc;
+import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.HoaDon;
 import com.nhom3.qlcf.model.SanPham;
@@ -31,7 +31,7 @@ public class SelectSIze {
         try {
             ResultSet rs = null;
             try {
-                 rs = Jdbc.executeQuery(sql, args);
+                 rs = JDBCHelper.executeQuery(sql, args);
                 while (rs.next()) {
                     SizeSP model = readFromResulSet(rs);
                     list.add(model);

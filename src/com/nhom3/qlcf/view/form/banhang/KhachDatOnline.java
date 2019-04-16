@@ -168,7 +168,10 @@ public class KhachDatOnline extends javax.swing.JDialog {
                 maSize = new JLabel(listCTHD.get(i).getSizeSP().getMaSize());
                 soLuong = new JLabel(String.valueOf(listCTHD.get(i).getSoLuong()));
                 HinhAnh = new JLabel();
+                
                 BufferedImage image = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/" + listCTHD.get(i).getMaSanPham().getHinhAnh()));
+                
+                
                 int type = image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType();
                 BufferedImage hinhAnh = new ReSizehelper().buffImage(image, type, 70, 70);
                 ImageIcon icon = new ImageIcon(hinhAnh);

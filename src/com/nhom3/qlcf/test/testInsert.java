@@ -5,7 +5,7 @@
  */
 package com.nhom3.qlcf.test;
 
-import com.nhom3.qlcf.helper.Jdbc;
+import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.HoaDon;
 import com.nhom3.qlcf.model.SanPham;
@@ -23,7 +23,7 @@ public class testInsert {
      public static void insert(CTHoaDon model) {
         String sql = "INSERT INTO dbo.CTHoaDon( maHD, maSP,soLuong )VALUES (?,?,?)";
         
-        Jdbc.executeUpdate(sql, model.getMaHoaDon().getMaHoaDon(), model.getMaSanPham().getMaSanPham(),model.getSoLuong());
+        JDBCHelper.executeUpdate(sql, model.getMaHoaDon().getMaHoaDon(), model.getMaSanPham().getMaSanPham(),model.getSoLuong());
            System.out.println("Thanh công");
     }
 
@@ -37,7 +37,7 @@ public class testInsert {
         try {
             ResultSet rs = null;
             try {
-                 rs = Jdbc.executeQuery(sql, args);
+                 rs = JDBCHelper.executeQuery(sql, args);
                 while (rs.next()) {
                     CTHoaDon model = readFromResulSet(rs);
                     list.add(model);

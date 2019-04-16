@@ -108,7 +108,7 @@ CREATE TABLE Extra
 CREATE TABLE NhaCungCap
     (
       maNhaCungCap VARCHAR(10) PRIMARY KEY ,
-      tenNhaCungCap NVARCHAR(25) NOT NULL ,
+      tenNhaCungCap NVARCHAR(50) NOT NULL ,
       dienThoai VARCHAR(13) ,
       diaChi NVARCHAR(50) NOT NULL ,
       trangThai BIT NOT NULL   -- tinh trang hop tac mua ban
@@ -1288,14 +1288,7 @@ VALUES  ( 'NCC005' ,
           0
         );
 GO
-INSERT  INTO dbo.Extra
-        ( id, ten, gia )
-VALUES  ( 'EX006', N'Thêm Caffee', 5000 );
-GO
-INSERT  INTO dbo.Extra
-        ( id, ten, gia )
-VALUES  ( 'EX007', N'Thêm Sữa', 5000 );
-GO
+
 INSERT  INTO dbo.Extra
         ( id, ten, gia )
 VALUES  ( 'EX001', N'Thêm Kem', 10000 );
@@ -1312,7 +1305,14 @@ INSERT  INTO dbo.Extra
         ( id, ten, gia )
 VALUES  ( 'EX005', N'One Shot', 15000 );
 GO
-
+INSERT  INTO dbo.Extra
+        ( id, ten, gia )
+VALUES  ( 'EX006', N'Thêm Caffee', 5000 );
+GO
+INSERT  INTO dbo.Extra
+        ( id, ten, gia )
+VALUES  ( 'EX007', N'Thêm Sữa', 5000 );
+GO
 
 CREATE VIEW LichSuBanHang
 AS
@@ -1355,10 +1355,10 @@ INSERT  dbo.HoaDon
 VALUES  ( 'HD004', 'ND003', 'KH001', 0, '2019-03-14', 12500, 1 );
 GO
 INSERT  dbo.CTHoaDon
-VALUES  ( 'HD004', 'SP001', 'M', 'EX000', 2 );
+VALUES  ( 'HD004', 'SP001', 'M', 'EX002', 2 );
 GO
 INSERT  dbo.CTHoaDon
-VALUES  ( 'HD004', 'SP005', 'XL', 'EX000', 2 );
+VALUES  ( 'HD004', 'SP005', 'XL', 'EX004', 2 );
 GO
 INSERT  dbo.CTHoaDon
 VALUES  ( 'HD004', 'SP002', 'M', 'EX001', 3 );

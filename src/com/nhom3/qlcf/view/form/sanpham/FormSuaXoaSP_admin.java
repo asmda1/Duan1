@@ -30,7 +30,7 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
         // jpnLogin1.setBackground(new Color(0, 0, 0, 134));
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
         login = this;
-           new Loginhelper().getLogin(lblTenDangNhapBangHang);
+        new Loginhelper().getLogin(lblTenDangNhapBangHang);
     }
 
     /**
@@ -382,7 +382,7 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
     private void lblQuayVeBangHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuayVeBangHangMouseClicked
         // TODO add your handling code here:
 
-      new Loginhelper().QuayVe();
+        new Loginhelper().QuayVe();
         /*jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));
         jpnBanHang_Button.setBackground(new Color(0, 0, 0));
@@ -390,6 +390,7 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
         lblBanHang_txt.setForeground(Color.WHITE);*/
         jpnQuayVe.setBackground(Color.white);
         lblQuayVeBangHang.setForeground(new Color(51, 102, 255));
+        SuaSP.sanPham = null;
     }//GEN-LAST:event_lblQuayVeBangHangMouseClicked
 
     private void lblQuayVeBangHangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuayVeBangHangMouseEntered
@@ -433,7 +434,7 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
         lblLogin.setForeground(Color.white);
         jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));*/
-             Login.txtPass.setText("");
+        Login.txtPass.setText("");
         Login.lblLoiDangNhap.hide();
         jpnShowMenuOut.hide();
         jpnDangXuat.setBackground(Color.white);
@@ -484,7 +485,7 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
     protected static javax.swing.JPanel jfTSuaXoa;
-    private javax.swing.JPanel jplnen;
+    protected static javax.swing.JPanel jplnen;
     private javax.swing.JPanel jpnDangXuat;
     private javax.swing.JPanel jpnNen;
     private javax.swing.JPanel jpnQuayVe;

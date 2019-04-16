@@ -5,19 +5,19 @@
  */
 package com.nhom3.qlcf.view;
 
-import com.nhom3.qlcf.view.form.banhang.FormBanHang;
+
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javax.swing.BoxLayout;
 import javax.swing.Timer;
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
 
 /**
  *
@@ -30,7 +30,7 @@ public class Run extends javax.swing.JFrame {
      */
     public static Run main;
     Timer t;
-    public static String folderPAth = System.getenv("ProgramData") + "\\" + "QLCF" + "\\" + "Images";
+    public static String folderPAth = System.getenv("ProgramData") + "\\" + "QLCF\\";
 
     public Run() {
         initComponents();
@@ -61,12 +61,21 @@ public class Run extends javax.swing.JFrame {
 
         main = this;
         
-        createImagesFolder();
+        createImagesFolder("Images");
+        createImagesFolder("TemptImages"); 
+//        copyImagesFromResources();
     }
 
-    private void createImagesFolder(){
+    private void copyImagesFromResources(){
+        try(InputStream is = this.getClass().getClassLoader().getResourceAsStream("/com/nhom3/qlcf/img")){
+            Files.copy(is, Paths.get(folderPAth + "/Images"));
+        } catch (IOException e){
+            
+        }
+    }
+    private void createImagesFolder(String folderName){
         
-        File folder = new File(folderPAth);
+        File folder = new File(folderPAth + folderName);
         if (!folder.exists()) {
             folder.mkdirs();
             System.out.println("Folder has been created!");
