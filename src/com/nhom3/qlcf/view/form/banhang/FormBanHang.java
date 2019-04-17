@@ -1491,15 +1491,20 @@ public class FormBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_txtbattatdiemMousePressed
     public void RezieImageGroupLogo() {
         try {
+//            BufferedImage HinhAnh, HinhAnh2, HinhAnh3, HinhAnh4, HinhAnh5;
+//            BufferedImage coffee = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/Americano(44).png"));
+//            BufferedImage tea = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/TraThachVai(39).png"));
+//            BufferedImage banhmi = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/GaXeNuocTuong(19).png"));
+//            BufferedImage banhngot = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/PhoMaiTraXanh(29).jpg"));
+//            BufferedImage fee = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/FreezeChocolate(49).png"));
+
             BufferedImage HinhAnh, HinhAnh2, HinhAnh3, HinhAnh4, HinhAnh5;
-            BufferedImage coffee = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/Americano(44).png"));
-            BufferedImage tea = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/TraThachVai(39).png"));
-            BufferedImage banhmi = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/GaXeNuocTuong(19).png"));
-            BufferedImage banhngot = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/PhoMaiTraXanh(29).jpg"));
-            BufferedImage fee = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/FreezeChocolate(49).png"));
+            BufferedImage coffee = ImageIO.read(new File(Run.folderPAth + "Images\\" + "Americano(44).png"));
+            BufferedImage tea = ImageIO.read(new File(Run.folderPAth + "Images\\" + "TraThachVai(39).png"));
+            BufferedImage banhmi = ImageIO.read(new File(Run.folderPAth + "Images\\" + "GaXeNuocTuong(19).png"));
+            BufferedImage banhngot = ImageIO.read(new File(Run.folderPAth + "Images\\" + "PhoMaiTraXanh(29).jpg"));
+            BufferedImage fee = ImageIO.read(new File(Run.folderPAth + "Images\\" + "FreezeChocolate(49).png"));
 
-
-            
             int type = coffee.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : coffee.getType();
             int type1 = tea.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : tea.getType();
             int type2 = banhmi.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : banhmi.getType();

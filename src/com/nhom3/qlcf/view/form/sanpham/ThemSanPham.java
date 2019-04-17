@@ -20,15 +20,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -74,29 +69,7 @@ public class ThemSanPham extends javax.swing.JPanel {
         lblDuongDan.setText(" ");
     }
 
-    private static void copyFile(File sourceFile, File destFile)
-            throws IOException {
-        if (!sourceFile.exists()) {
-            return;
-        }
-        if (!destFile.exists()) {
-            destFile.createNewFile();
-        }
-        FileChannel source = null;
-        FileChannel destination = null;
-        source = new FileInputStream(sourceFile).getChannel();
-        destination = new FileOutputStream(destFile).getChannel();
-        if (destination != null && source != null) {
-            destination.transferFrom(source, 0, source.size());
-        }
-        if (source != null) {
-            source.close();
-        }
-        if (destination != null) {
-            destination.close();
-        }
-
-    }
+   
 
     private void get_SetHinh() {
 
@@ -119,9 +92,10 @@ public class ThemSanPham extends javax.swing.JPanel {
 
                 String fileName = sourceFile.getName();
 
-                destFile = new File(System.getProperty("user.dir") + "/src/com/nhom3/qlcf/img/" + fileName);
+//                destFile = new File(System.getProperty("user.dir") + "/src/com/nhom3/qlcf/img/" + fileName);
+                destFile = new File(Run.folderPAth + "Images\\" + fileName);
 
-                copyFile(sourceFile, destFile);
+                XuLy.copyFile(sourceFile, destFile);
 
                 image = ImageIO.read(destFile);
                 ImageIO.write(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), width, height), "png", destFile);
@@ -204,7 +178,7 @@ public class ThemSanPham extends javax.swing.JPanel {
         lblMoThuMuc = new javax.swing.JLabel();
         lblDuongDan = new javax.swing.JLabel();
 
-        setBackground(new Color(0,0,0,130));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setMaximumSize(new java.awt.Dimension(161, 192));

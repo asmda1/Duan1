@@ -10,6 +10,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -102,6 +107,30 @@ public class XuLy {
             }
         }
         return maMoi;
+
+    }
+
+    public static void copyFile(File sourceFile, File destFile)
+            throws IOException {
+        if (!sourceFile.exists()) {
+            return;
+        }
+        if (!destFile.exists()) {
+            destFile.createNewFile();
+        }
+        FileChannel source = null;
+        FileChannel destination = null;
+        source = new FileInputStream(sourceFile).getChannel();
+        destination = new FileOutputStream(destFile).getChannel();
+        if (destination != null && source != null) {
+            destination.transferFrom(source, 0, source.size());
+        }
+        if (source != null) {
+            source.close();
+        }
+        if (destination != null) {
+            destination.close();
+        }
 
     }
 }

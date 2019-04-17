@@ -62,16 +62,10 @@ public class Run extends javax.swing.JFrame {
         main = this;
         
         createImagesFolder("Images");
-        createImagesFolder("TemptImages"); 
-//        copyImagesFromResources();
     }
 
     private void copyImagesFromResources(){
-        try(InputStream is = this.getClass().getClassLoader().getResourceAsStream("/com/nhom3/qlcf/img")){
-            Files.copy(is, Paths.get(folderPAth + "/Images"));
-        } catch (IOException e){
-            
-        }
+        
     }
     private void createImagesFolder(String folderName){
         

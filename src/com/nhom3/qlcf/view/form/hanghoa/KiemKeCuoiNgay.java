@@ -209,7 +209,6 @@ public class KiemKeCuoiNgay extends javax.swing.JPanel {
         jPanel6.setOpaque(false);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("SL Kiểm Kho:");
 
         txtSoLuongKiemKho.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N

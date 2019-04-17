@@ -25,7 +25,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -38,7 +37,7 @@ public class SuaSP extends javax.swing.JPanel {
     public static SanPham sanPham;
 
     File sourceFile, destFile;
-    File defaultImage = new File(getClass().getResource("/com/nhom3/qlcf/img/default.png").getPath());
+//    File defaultImage = new File(getClass().getResource("/com/nhom3/qlcf/img/default.png").toString());
 
     /**
      * Creates new form SuaHangHoa
@@ -56,10 +55,10 @@ public class SuaSP extends javax.swing.JPanel {
                 int width = 110;
                 int height = 130;
 
-                BufferedImage image = ImageIO.read(defaultImage);
+                BufferedImage image = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/default.png"));
                 lblHinhSP.setIcon(new ImageIcon(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), width, height)));
                 lblChonAnh.setIcon(new ImageIcon(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), width, height)));
-                lblChonAnh.setName("default.png");
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -86,22 +85,9 @@ public class SuaSP extends javax.swing.JPanel {
         BufferedImage image = null;
         File f;
 
-//        try {
-//
-//            if (new File(getClass().getResource("/com/nhom3/qlcf/img/" + sp.getHinhAnh()).getPath()).exists()) {
-//                f = new File(getClass().getResource("/com/nhom3/qlcf/img/" + sp.getHinhAnh()).getPath());
-//                image = ImageIO.read(f);
-//            } else if (new File(Run.folderPAth + sp.getHinhAnh()).exists()) {
-//                f = new File(Run.folderPAth + sp.getHinhAnh());
-//                image = ImageIO.read(f);
-//            } else {
-//                image = ImageIO.read(defaultImage);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+
         try {
-            f = new File(getClass().getResource("/com/nhom3/qlcf/img/" + sp.getHinhAnh()).getPath());
+            f = new File(Run.folderPAth + "Images\\" + sp.getHinhAnh());
             image = ImageIO.read(f);
         } catch (IOException e1) {
 
@@ -131,7 +117,7 @@ public class SuaSP extends javax.swing.JPanel {
         lblGiaSP.setText(".....................");
         lblTrangThaiSP.setText(".....................");
 
-        BufferedImage image = ImageIO.read(defaultImage);
+        BufferedImage image = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/default.png"));
         lblHinhSP.setIcon(new ImageIcon(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), 110, 130)));
         
         txtTenSP.setText("");
@@ -140,30 +126,6 @@ public class SuaSP extends javax.swing.JPanel {
         lblChonAnh.setIcon(new ImageIcon(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), 110, 130)));
         
         sanPham = null;
-    }
-
-    private static void copyFile(File sourceFile, File destFile)
-            throws IOException {
-        if (!sourceFile.exists()) {
-            return;
-        }
-        if (!destFile.exists()) {
-            destFile.createNewFile();
-        }
-        FileChannel source = null;
-        FileChannel destination = null;
-        source = new FileInputStream(sourceFile).getChannel();
-        destination = new FileOutputStream(destFile).getChannel();
-        if (destination != null && source != null) {
-            destination.transferFrom(source, 0, source.size());
-        }
-        if (source != null) {
-            source.close();
-        }
-        if (destination != null) {
-            destination.close();
-        }
-
     }
 
     private void chonAnh() {
@@ -188,9 +150,9 @@ public class SuaSP extends javax.swing.JPanel {
                 image = ImageIO.read(sourceFile);
                 String fileName = sourceFile.getName();
 
-                destFile = new File(System.getProperty("user.dir") + "/src/com/nhom3/qlcf/img/" + fileName);
+                destFile = new File(Run.folderPAth + "Images\\" + fileName);
 
-                copyFile(sourceFile, destFile);
+                XuLy.copyFile(sourceFile, destFile);
 
                 image = ImageIO.read(destFile);
                 ImageIO.write(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), width, height), "png", destFile);

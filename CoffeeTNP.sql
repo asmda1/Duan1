@@ -1891,3 +1891,14 @@ AS
 
     END
 	SELECT * FROM dbo.SanPham
+
+	INSERT INTO dbo.SanPham 
+	VALUES  ( 'SP033' , -- maSp - varchar(10)
+	          'ML002' , -- maLoai - varchar(10)
+	          N'Test' , -- tenSp - nvarchar(50)
+	          123 , -- giaBan - money
+	          1 , -- trangThai - bit
+	          '14.jpg'  -- hinhAnh - varchar(50)
+	        )
+
+			DELETE FROM dbo.SanPham WHERE maSp='SP033'

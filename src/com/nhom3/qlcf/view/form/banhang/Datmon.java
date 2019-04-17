@@ -6,37 +6,29 @@
 package com.nhom3.qlcf.view.form.banhang;
 
 import com.nhom3.qlcf.dao.ExtraDAO;
-import com.nhom3.qlcf.dao.KhachHangDAO;
 import com.nhom3.qlcf.helper.Designhelper;
 import com.nhom3.qlcf.helper.ReSizehelper;
 import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.Extra;
 import com.nhom3.qlcf.model.HoaDon;
-import com.nhom3.qlcf.model.KhachHang;
 import com.nhom3.qlcf.model.SanPham;
 import com.nhom3.qlcf.model.SizeSP;
 import com.nhom3.qlcf.test.SelectSIze;
 import com.nhom3.qlcf.test.testSQL;
 import com.nhom3.qlcf.view.form.banhang.FormBanHang;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.DongCTHD;
-import static com.nhom3.qlcf.view.form.banhang.FormBanHang.SavehoaDon;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.jpldonhang;
 import java.awt.Color;
-import java.sql.Array;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.lblTamTinh;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.lblThanhTien;
-import static com.nhom3.qlcf.view.form.banhang.FormBanHang.lbltendiem;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.txtbattatdiem;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.txtdiem;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import javax.imageio.ImageIO;
 
 /**

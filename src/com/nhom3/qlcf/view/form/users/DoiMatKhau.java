@@ -151,7 +151,6 @@ public class DoiMatKhau extends javax.swing.JPanel {
         lblvien2 = new javax.swing.JLabel();
         lblmkcu = new javax.swing.JLabel();
         lblvien3 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lblthongbao = new javax.swing.JLabel();
         lblpass2 = new javax.swing.JLabel();
@@ -228,14 +227,6 @@ public class DoiMatKhau extends javax.swing.JPanel {
         lblvien3.setText("___________________________________________");
         jPanel1.add(lblvien3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 260, 30));
 
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("HỦY");
-        jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel6.setOpaque(true);
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 110, 40));
-
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -248,7 +239,7 @@ public class DoiMatKhau extends javax.swing.JPanel {
                 jLabel7MousePressed(evt);
             }
         });
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 110, 40));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, 110, 40));
 
         lblthongbao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblthongbao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -443,7 +434,6 @@ public class DoiMatKhau extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jplimg;
