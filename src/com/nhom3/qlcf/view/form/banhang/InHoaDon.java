@@ -23,6 +23,7 @@ import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.Extra;
 import com.nhom3.qlcf.model.SanPham;
 import com.nhom3.qlcf.model.SizeSP;
+import com.nhom3.qlcf.view.Run;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Font;
@@ -38,6 +39,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -90,7 +92,7 @@ public class InHoaDon extends javax.swing.JDialog {
         lblten.setText(tenkh);
         lblngay.setText(String.valueOf(date));
         lblchietkhau.setText(chietkhau);
-        if ("true".equals(sdt)) {
+        if (sdt == "true") {
             lblsdt.setText("");
         } else {
             lblsdt.setText(sdt);
@@ -355,13 +357,13 @@ public class InHoaDon extends javax.swing.JDialog {
         tienthoi.setCellStyle(styleThanhTien);
 
         //write
-        File file = new File("src/com/nhom3/qlcf/reported/HoaDon.xls");
+        File file = new File(Run.folderPAth + "\\" + "HoaDon.xls");
         file.getParentFile().mkdirs();
         FileOutputStream outFile = new FileOutputStream(file);
         workbook.write(outFile);
         //mở file
         if (Desktop.isDesktopSupported()) {
-            File pdf = new File("src/com/nhom3/qlcf/reported/HoaDon.xls");
+            File pdf = new File(Run.folderPAth + "\\" + "HoaDon.xls");
             try {
                 Desktop.getDesktop().open(pdf);
             } catch (Exception e) {
@@ -376,7 +378,7 @@ public class InHoaDon extends javax.swing.JDialog {
         try {
 
             // Tạo đối tượng PdfWriter
-            PdfWriter.getInstance(document, new FileOutputStream("src/com/nhom3/qlcf/reported/HoaDon.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream(Run.folderPAth + "\\" + "HoaDon.pdf"));
             // Mở file để thực hiện ghi
             document.open();
             PdfPTable table = new PdfPTable(5);
@@ -477,7 +479,7 @@ public class InHoaDon extends javax.swing.JDialog {
                     opObjects[0]);
 
             if (Desktop.isDesktopSupported()) {
-                File pdf = new File("src/com/nhom3/qlcf/reported/HoaDon.pdf");
+                File pdf = new File(Run.folderPAth + "\\" + "HoaDon.pdf");
                 try {
                     Desktop.getDesktop().open(pdf);
                 } catch (Exception e) {
@@ -607,6 +609,12 @@ public class InHoaDon extends javax.swing.JDialog {
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel2MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel2MousePressed(evt);
             }
@@ -624,6 +632,12 @@ public class InHoaDon extends javax.swing.JDialog {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Close");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel4MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel4MousePressed(evt);
             }
@@ -638,6 +652,12 @@ public class InHoaDon extends javax.swing.JDialog {
         jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel6MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel6MousePressed(evt);
             }
@@ -757,6 +777,36 @@ public class InHoaDon extends javax.swing.JDialog {
             Logger.getLogger(InHoaDon.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel6MousePressed
+
+    private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
+        // TODO add your handling code here:
+        jLabel6.setBorder(new LineBorder(Color.BLUE));
+    }//GEN-LAST:event_jLabel6MouseEntered
+
+    private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
+        // TODO add your handling code here:
+        jLabel6.setBorder(new LineBorder(new Color(204, 204, 204)));
+    }//GEN-LAST:event_jLabel6MouseExited
+
+    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
+        // TODO add your handling code here:
+        jLabel2.setBorder(new LineBorder(Color.BLUE));
+    }//GEN-LAST:event_jLabel2MouseEntered
+
+    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
+        // TODO add your handling code here:
+        jLabel2.setBorder(new LineBorder(new Color(204, 204, 204)));
+    }//GEN-LAST:event_jLabel2MouseExited
+
+    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
+        // TODO add your handling code here:
+        jLabel14.setForeground(Color.red);
+    }//GEN-LAST:event_jLabel4MouseEntered
+
+    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+        // TODO add your handling code here:
+        jLabel14.setForeground(new Color(0, 0, 153));
+    }//GEN-LAST:event_jLabel4MouseExited
 
     /**
      * @param args the command line arguments

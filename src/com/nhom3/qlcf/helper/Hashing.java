@@ -17,7 +17,8 @@ import java.util.logging.Logger;
  * @author Le Minh Hung - PS08234
  */
 public class Hashing {
-     public static String hashedText(String password) {
+
+    public static String hashedText(String password) {
         try {
 
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -41,5 +42,16 @@ public class Hashing {
             sb.append(sample.charAt(index));
         }
         return sb.toString();
+    }
+
+    public static String ramdomso(int lenght) {
+        String mahoa = "0123456789";
+        Random random = new Random();
+        StringBuilder sbr = new StringBuilder();
+        for (int i = 0; i < lenght; i++) {
+            int index = (int) (random.nextFloat() * mahoa.length());
+            sbr.append(mahoa.charAt(index));
+        }
+        return sbr.toString();
     }
 }

@@ -193,6 +193,17 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         jLabel3.setText("Reset");
         jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel3.setOpaque(true);
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel3MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
+        });
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 110, 40));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -202,6 +213,12 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel4.setOpaque(true);
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel4MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel4MousePressed(evt);
             }
@@ -256,8 +273,47 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (check()) {
             InsertUser();
+            txtMatKhau.setText("");
+            txtSDT.setText("");
+            txtTen.setText("");
+            txtUsers.setText("");
+            txtemail.setText("");
         }
     }//GEN-LAST:event_jLabel4MousePressed
+
+    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
+        // TODO add your handling code here:
+        jLabel4.setBackground(Color.BLACK);
+        jLabel4.setForeground(Color.WHITE);
+    }//GEN-LAST:event_jLabel4MouseEntered
+
+    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+        // TODO add your handling code here:
+        jLabel4.setBackground(Color.WHITE);
+        jLabel4.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jLabel4MouseExited
+
+    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+        // TODO add your handling code here:
+        txtMatKhau.setText("");
+        txtSDT.setText("");
+        txtTen.setText("");
+        txtUsers.setText("");
+        txtemail.setText("");
+
+    }//GEN-LAST:event_jLabel3MousePressed
+
+    private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
+        // TODO add your handling code here:
+         jLabel3.setBackground(Color.BLACK);
+        jLabel3.setForeground(Color.WHITE);
+    }//GEN-LAST:event_jLabel3MouseEntered
+
+    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
+        // TODO add your handling code here:
+           jLabel3.setBackground(Color.WHITE);
+        jLabel3.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jLabel3MouseExited
     public void InsertUser() {
         NguoiDung nd = new NguoiDung();
         nd.setMaNguoidung(txtUsers.getName());
@@ -270,6 +326,8 @@ public class TaoTaiKhoan extends javax.swing.JPanel {
         nd.setTrangThai(true);
         NguoiDungDAO ndDAO = new NguoiDungDAO();
         ndDAO.insert(nd);
+        lblthongbao.setText("Thêm thành viên thành công");
+        lblthongbao.setForeground(Color.GREEN);
     }
 
     public String AutogetMaND() {

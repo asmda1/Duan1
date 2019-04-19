@@ -6,12 +6,12 @@
 package com.nhom3.qlcf.view.phieunhap;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
-import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.CTPhieuNhap;
 import com.nhom3.qlcf.model.HangHoa;
 import com.nhom3.qlcf.model.NguoiDung;
 import com.nhom3.qlcf.model.NhaCungCap;
 import com.nhom3.qlcf.model.PhieuNhap;
+import com.nhom3.qlcf.view.Run;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -414,13 +413,13 @@ public class chieuTietPhieu extends javax.swing.JDialog {
         tienkhach.setCellStyle(styleThanhTien);
 
         //write
-        File file = new File("src/com/nhom3/qlcf/reported/PhieuNhap.xls");
+        File file = new File(Run.folderPAth + "\\" + "PhieuNhap.xls");
         file.getParentFile().mkdirs();
         FileOutputStream outFile = new FileOutputStream(file);
         workbook.write(outFile);
         //mở file
         if (Desktop.isDesktopSupported()) {
-            File pdf = new File("src/com/nhom3/qlcf/reported/PhieuNhap.xls");
+            File pdf = new File(Run.folderPAth + "\\" + "PhieuNhap.xls");
             try {
                 Desktop.getDesktop().open(pdf);
             } catch (Exception e) {

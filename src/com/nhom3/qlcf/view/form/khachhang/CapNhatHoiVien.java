@@ -36,6 +36,7 @@ public class CapNhatHoiVien extends javax.swing.JPanel {
     public CapNhatHoiVien(String danhsach) {
         initComponents();
         txtsdt.setText(danhsach);
+        txtSodt.setName(danhsach);
         txtsdt.setEditable(false);
         if (checkTimSDT()) {
             TimSDT();
@@ -171,6 +172,7 @@ public class CapNhatHoiVien extends javax.swing.JPanel {
         txtemail.setText(kh.getEmail());
         txtdiem.setText(String.valueOf(kh.getDiemThuong()));
         txttenkh.setName(kh.getMakh());
+        txtdiachi.setText(kh.getDiaChi());
         if (kh.isTrangThai()) {
             coxLoaiKhach.setSelectedIndex(0);
      

@@ -91,13 +91,11 @@ public class DanhSachSuaNhaCC extends javax.swing.JDialog {
         });
         tblnhacungcap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblnhacungcap.setFocusable(false);
-        tblnhacungcap.setGridColor(new java.awt.Color(0, 0, 0));
+        tblnhacungcap.setGridColor(new java.awt.Color(102, 102, 102));
         tblnhacungcap.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tblnhacungcap.setRowHeight(25);
-        tblnhacungcap.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        tblnhacungcap.setShowHorizontalLines(false);
+        tblnhacungcap.setSelectionForeground(new java.awt.Color(204, 204, 204));
         tblnhacungcap.setShowVerticalLines(false);
-        tblnhacungcap.setSurrendersFocusOnKeystroke(true);
         tblnhacungcap.getTableHeader().setReorderingAllowed(false);
         tblnhacungcap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {

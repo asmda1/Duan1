@@ -77,7 +77,7 @@ public class LayLaiMatKhau extends javax.swing.JDialog {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setText("Mã Code");
+        jLabel2.setText("Mã code");
 
         lblthongbao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblthongbao.setForeground(new java.awt.Color(255, 0, 0));

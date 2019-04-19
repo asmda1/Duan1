@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
 public class SendMailHelper {
 
     public static String StrHtml(String input) {
-        return "<html><h1 style=\"color: blue; size: 30px; display: inline; text-align: center\">" + input + "</h1></html>";
+        return "<html><h1 style=\"color: red; size: 20px; display: inline; text-align: center\">" + input + "</h1></html>";
     }
 
     public static void sendMail(String mail, String code) {
@@ -49,8 +49,8 @@ public class SendMailHelper {
 
             String from = accName;
             String to = mail;
-            String subject = "Lấy Lại Mật Khẩu Đăng Nhập!";
-            String body = StrHtml(code) + " Sẽ là mật khẩu tạm thời! Vui Lòng Nhập: " + StrHtml(code) + " vào ô Password để đăng nhập";
+            String subject = "Quên Mật Khẩu Đăng Nhập!";
+            String body =StrHtml(code) + " là mã xác nhận của bạn, mã xác nhận chỉ hiệu lực trong 30 phút!";
             MimeMessage msg = new MimeMessage(s);
             Multipart multi = new MimeMultipart();
             MimeBodyPart msgBody = new MimeBodyPart();

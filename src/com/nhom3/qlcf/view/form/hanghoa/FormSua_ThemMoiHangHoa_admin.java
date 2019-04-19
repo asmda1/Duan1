@@ -301,7 +301,7 @@ public class FormSua_ThemMoiHangHoa_admin extends javax.swing.JPanel {
                         .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, 795, Short.MAX_VALUE))
                     .addGroup(jplbackroundLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jplnen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jplnen, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -312,7 +312,7 @@ public class FormSua_ThemMoiHangHoa_admin extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jplnen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jplnen, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

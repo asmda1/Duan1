@@ -12,6 +12,10 @@ import static com.nhom3.qlcf.view.form.login.Login.jpnNenButton_login;
 import static com.nhom3.qlcf.view.form.login.Login.lblLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import java.awt.Color;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.JLabel;
 
 /**
@@ -21,17 +25,19 @@ import javax.swing.JLabel;
 public class Loginhelper {
 
     public void getLogin(JLabel user) {
-        if (!Login.lg.list.isEmpty()) {
-            for (int i = 0; i < Login.lg.list.size(); i++) {
-                user.setText(Login.lg.list.get(i).getHoTen());
-                user.setName(Login.lg.list.get(i).getMaNguoidung());
+         if (!Login.lg.list.isEmpty()) {
+                    for (int i = 0; i < Login.lg.list.size(); i++) {
+                        user.setText(Login.lg.list.get(i).getHoTen());
+                        user.setName(Login.lg.list.get(i).getMaNguoidung());
 
-            }
-        }
+                    }
+                }
       
+
     }
-    public void QuayVe(){
-          if (Login.lg.list.get(0).getVaiTro().equals("Administration")) {
+
+    public void QuayVe() {
+        if (Login.lg.list.get(0).getVaiTro().equals("Administration")) {
             FormLogin.login.Card.removeAll();
             FormLogin.login.Card.add(new FormMenu());
             FormLogin.login.Card.repaint();

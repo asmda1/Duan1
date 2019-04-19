@@ -263,6 +263,12 @@ public class KhachDatOnline extends javax.swing.JDialog {
         lblthanhToan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblthanhToan.setOpaque(true);
         lblthanhToan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblthanhToanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblthanhToanMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblthanhToanMousePressed(evt);
             }
@@ -467,6 +473,16 @@ public class KhachDatOnline extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_lblbuttontimMousePressed
+
+    private void lblthanhToanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblthanhToanMouseEntered
+        // TODO add your handling code here:
+        lblthanhToan.setBackground(Color.red);
+    }//GEN-LAST:event_lblthanhToanMouseEntered
+
+    private void lblthanhToanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblthanhToanMouseExited
+        // TODO add your handling code here:
+        lblthanhToan.setBackground(new Color(0, 102, 255));
+    }//GEN-LAST:event_lblthanhToanMouseExited
 
     /**
      * @param args the command line arguments

@@ -190,6 +190,8 @@ public class NhapHang extends javax.swing.JPanel {
         lblThongBao = new javax.swing.JLabel();
         lblLoiNhapSo = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("NHẬP HÀNG");
@@ -504,6 +506,7 @@ public class NhapHang extends javax.swing.JPanel {
             updateHH = new HangHoaDAO().update(hangHoa);
             if (!updateHH) {
                 lblThongBao.setText("Nhập hàng không thành công!!");
+                  lblThongBao.setForeground(Color.red);
                 return;
             }
         }
@@ -511,7 +514,12 @@ public class NhapHang extends javax.swing.JPanel {
         String NhaCungCap = (String) cboNhaCungCap.getSelectedItem();
         if (NhaCungCap.equals("Chọn nhà cung cấp")) {
             lblThongBao.setText("Chưa chọn nhà cung cấp hàng!!!");
+            lblThongBao.setForeground(Color.red);
             return;
+        }else if(listHH.isEmpty()){
+           lblThongBao.setText("Không có hàng hóa nào!!!");
+            lblThongBao.setForeground(Color.red);
+            return; 
         }
         String maNhaCungCap = NhaCungCap.substring(0, NhaCungCap.indexOf(" "));
 
@@ -544,8 +552,10 @@ public class NhapHang extends javax.swing.JPanel {
 
         if (updateHH && updatePN && updateCTPN) {
             lblThongBao.setText("Nhập hàng hoàn tất!!");
+            lblThongBao.setForeground(Color.GREEN);
         } else {
             lblThongBao.setText("Nhập hàng không thành công!!");
+             lblThongBao.setForeground(Color.red);
         }
     }//GEN-LAST:event_lblNhapHangMousePressed
 
@@ -649,6 +659,7 @@ public class NhapHang extends javax.swing.JPanel {
                 cTPNTam.setSoLuong(Float.parseFloat(txtSoLuongNhap.getText().trim()));
             } else {
                 lblLoiNhapSo.setText("Nhập số lượng!!!");
+                lblThongBao.setForeground(Color.red);
                 return;
             }
             cTPNTam.setDvt(matHang.getDonViTinh());

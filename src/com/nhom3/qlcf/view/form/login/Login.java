@@ -14,10 +14,16 @@ import static com.nhom3.qlcf.view.form.login.FormLogin.jfLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.form.users.LayLaiMatKhau;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.Pattern;
 
 /**
@@ -27,6 +33,7 @@ import java.util.regex.Pattern;
 public class Login extends javax.swing.JPanel {
 
     public List<NguoiDung> list = null;
+    public List<Integer> diem = null;
     public static NguoiDung user;
     Pattern pattern;
     /**
@@ -53,11 +60,14 @@ public class Login extends javax.swing.JPanel {
         }
         return false;
     }
+    int s = 0;
 
     public boolean check() {
 
         String kytudatbiet = "{6,20}";
+
         pattern = Pattern.compile(kytudatbiet);
+
         if (txtManhanVien.getText().trim().equals("") && txtPass.getText().trim().equals("")) {
             lblThongBaoUser.setText("Không được bỏ trống tên đăng nhập");
             lblThongBaoPass.setText("Không được bỏ trống mật khẩu");
@@ -65,48 +75,161 @@ public class Login extends javax.swing.JPanel {
             lblLoiDangNhap.hide();
             lblThongBaoUser.show();
             lblThongBaoPass.show();
+            lbltime.hide();
             return false;
         } else if (pattern.matcher(txtManhanVien.getText()).matches() && txtPass.getText().trim().equals("")) {
             lblThongBaoUser.setText("User Không được thêm ký tự đặt biệt");
             lblLoiDangNhap.hide();
             lblThongBaoUser.show();
             lblThongBaoPass.hide();
+            lbltime.hide();
             return false;
         } else if (pattern.matcher(txtPass.getText()).matches() && txtManhanVien.getText().trim().equals("")) {
             lblThongBaoPass.setText("Pass Không được thêm ký tự đặt biệt");
             lblLoiDangNhap.hide();
             lblThongBaoUser.hide();
             lblThongBaoPass.show();
-
+            lbltime.hide();
             return false;
         } else if (txtManhanVien.getText().trim().equals("")) {
             lblThongBaoUser.setText("Không được bỏ trống tên đăng nhập");
             lblLoiDangNhap.hide();
             lblThongBaoUser.show();
             lblThongBaoPass.hide();
+            lbltime.hide();
             return false;
         } else if (txtPass.getText().trim().equals("")) {
             lblThongBaoPass.setText("Không được bỏ trống mật khẩu");
             lblLoiDangNhap.hide();
             lblThongBaoUser.hide();
             lblThongBaoPass.show();
+            lbltime.hide();
             return false;
         } else if (!kiemTraDangNhap(txtManhanVien.getText()) || !kiemTraDangNhap(txtPass.getText())) {
             lblLoiDangNhap.setForeground(Color.red);
             lblLoiDangNhap.setText("Tên Đăng Nhập Hoặc Mật Khẩu Không đúng");
-            lblLoiDangNhap.show();
-            lblThongBaoUser.hide();
-            lblThongBaoPass.hide();
+            if (s < 4) {
+                s++;
+                lblLoiDangNhap.setToolTipText(String.valueOf(s));
+            }
+            if (lblLoiDangNhap.getToolTipText().equals("4")) {
 
+                lblLoiDangNhap.setForeground(Color.red);
+                lblLoiDangNhap.setText("Bạn đăng nhập sai quá 3 lần! ");
+                lblLoiDangNhap.show();
+                lblThongBaoUser.hide();
+                lblThongBaoPass.hide();
+                lblLoiDangNhap.show();
+                lblThongBaoUser.hide();
+                lblThongBaoPass.hide();
+                lblLogin.setEnabled(false);
+                lbltime.show();
+                lblLogin.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                if (lbltime.getText().equals("15")) {
+                    time15s();
+                    lblLogin.setEnabled(false);
+                    txtPass.setText("");
+                    return false;
+
+                } else if (lbltime.getText().equals("30")) {
+                    diemNguoc30s();
+                    lblLogin.setEnabled(false);
+                    txtPass.setText("");
+                    return false;
+
+                }
+                return false;
+
+            }
             return false;
-
         }
 
         return true;
     }
+    static int interval;
+    static Timer timer;
+    //diem ngc time 15s
+    int interval1;
+    java.util.Timer timer1;
+
+    public void diemNguoc30s() {
+
+        String secs = "30";
+        int delay = 1000;
+        int period = 1000;
+        timer1 = new Timer();
+        interval1 = Integer.parseInt(secs);
+        System.out.println(secs);
+        timer1.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                int so = setInterval1();
+                lbltime.setText(String.valueOf(so));
+                if (so <= 0) {
+                    lblLoiDangNhap.hide();
+                    lbltime.hide();
+                    lbltime.setText("30");
+                    lblLogin.setEnabled(true);
+                    lblLoiDangNhap.setToolTipText("0");
+                    s = 0;
+
+                }
+            }
+        }, delay, period);
+
+    }
+
+    private final int setInterval1() {
+        if (interval1 == 1) {
+            timer1.cancel();
+        }
+        return --interval1;
+    }
+
+    public void time15s() {
+        String secs = "15";
+        int delay = 1000;
+        int period = 1000;
+        timer = new Timer();
+        interval = Integer.parseInt(secs);
+        System.out.println(secs);
+        timer.scheduleAtFixedRate(new TimerTask() {
+
+            public void run() {
+                int so = setInterval();
+                lbltime.setText(String.valueOf(so));
+                if (so <= 0) {
+                    lblLoiDangNhap.hide();
+                    lbltime.hide();
+                    lbltime.setText("30");
+                    lblLogin.setEnabled(true);
+                    lblLoiDangNhap.setToolTipText("0");
+                    s = 0;
+                }
+            }
+        }, delay, period);
+    }
+
+    private final int setInterval() {
+        if (interval == 1) {
+            timer.cancel();
+        }
+        return --interval;
+    }
 
     public void loginnv() {//
-        list = new NguoiDungDAO().select("Select * from NguoiDung  where taiKhoan ='" + txtManhanVien.getText() + "' and matKhau ='" + txtPass.getText() + "'");
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.SECOND, 3);
+        Date date = calendar.getTime();
+        TimerTask tim = new TimerTask() {
+            @Override
+            public void run() {
+                list = new NguoiDungDAO().select("Select * from NguoiDung  where taiKhoan ='" + txtManhanVien.getText() + "' and matKhau ='" + txtPass.getText() + "'");
+            }
+        };
+        Timer time = new Timer();
+        long period = 24 * 150;
+        time.schedule(tim, date, period);
+
         user = list.get(0);
         if (list.get(0).getVaiTro().equals("Administration")) {
             FormLogin.login.Card.removeAll();
@@ -122,7 +245,7 @@ public class Login extends javax.swing.JPanel {
             jfLogin.hide();
         } else {
             lblLoiDangNhap.setText("Thành Công");
-               lblLoiDangNhap.show();
+            lblLoiDangNhap.show();
             FormLogin.login.Card.removeAll();
             FormLogin.login.Card.add(new FormMenu(null));
             FormLogin.login.Card.repaint();
@@ -156,6 +279,7 @@ public class Login extends javax.swing.JPanel {
         jCheckBox1 = new javax.swing.JCheckBox();
         txtPass = new javax.swing.JPasswordField();
         txtManhanVien = new javax.swing.JTextField();
+        lbltime = new javax.swing.JLabel();
         lblThongBaoPass = new javax.swing.JLabel();
         lblLoiDangNhap = new javax.swing.JLabel();
         lblThongBaoUser = new javax.swing.JLabel();
@@ -268,13 +392,20 @@ public class Login extends javax.swing.JPanel {
         jpnLogin.add(txtPass);
         txtPass.setBounds(60, 290, 330, 50);
 
-        txtManhanVien.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtManhanVien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtManhanVien.setForeground(new java.awt.Color(255, 255, 255));
         txtManhanVien.setText("admin");
         txtManhanVien.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         txtManhanVien.setOpaque(false);
         jpnLogin.add(txtManhanVien);
         txtManhanVien.setBounds(60, 200, 330, 50);
+
+        lbltime.setForeground(new java.awt.Color(255, 0, 0));
+        lbltime.setText("15");
+        lbltime.setName("15"); // NOI18N
+        jpnLogin.add(lbltime);
+        lbltime.setBounds(300, 120, 20, 30);
+        lbltime.hide();
 
         lblThongBaoPass.setBackground(new java.awt.Color(255, 255, 255));
         lblThongBaoPass.setForeground(new java.awt.Color(255, 0, 0));
@@ -287,6 +418,7 @@ public class Login extends javax.swing.JPanel {
         lblLoiDangNhap.setBackground(new java.awt.Color(255, 255, 255));
         lblLoiDangNhap.setForeground(new java.awt.Color(255, 0, 0));
         lblLoiDangNhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLoiDangNhap.setToolTipText("0");
         lblLoiDangNhap.setOpaque(true);
         jpnLogin.add(lblLoiDangNhap);
         lblLoiDangNhap.setBounds(0, 120, 450, 30);
@@ -358,29 +490,42 @@ public class Login extends javax.swing.JPanel {
         jpnNenButton_login.setOpaque(false);
         lblLogin.setForeground(Color.white);
         jfLogin.hide();*/
-        Timehelper timer = new Timehelper();
-        lblLoiDangNhap.setForeground(Color.BLUE);
-        lblThongBaoUser.setText("");
-        lblThongBaoPass.setText("");
-        lblLoiDangNhap.setText("Đang đăng nhập...");
-        lblThongBaoPass.hide();
-        lblThongBaoUser.hide();
-        lblLoiDangNhap.show();
-        timer.TimerLoad(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                if (check()) {
-                    loginnv();
+        if (!lblLoiDangNhap.getToolTipText().equals("4")) {
+            if (lbltime.getText().equals("30") || lbltime.getText().equals("15")) {
+                lbltime.hide();
+                Timehelper timer = new Timehelper();
+                lblLoiDangNhap.setForeground(Color.BLUE);
+                lblThongBaoUser.setText("");
+                lblThongBaoPass.setText("");
+                lblLoiDangNhap.setText("Đang đăng nhập...");
+                lblThongBaoPass.hide();
+                lblThongBaoUser.hide();
+                lblLoiDangNhap.show();
+                timer.TimerLoad(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        if (lblLoiDangNhap.getToolTipText().equals("4")) {
 
+                        } else {
+                            if (check()) {
+                                lbltime.setText("15");
+                                loginnv();
+
+                            }
+                        }
+                        timer.t.stop();
+                    }
                 }
-                timer.t.stop();
+                );
+
             }
-        });
+        }
+
     }//GEN-LAST:event_lblLoginMousePressed
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
         // TODO add your handling code here:
-        
+
         QuenMatKhau laymk = new QuenMatKhau(null, true);
         laymk.setVisible(true);
     }//GEN-LAST:event_jLabel5MousePressed
@@ -398,6 +543,7 @@ public class Login extends javax.swing.JPanel {
     private javax.swing.JLabel lblPassicon;
     private javax.swing.JLabel lblThongBaoPass;
     private javax.swing.JLabel lblThongBaoUser;
+    private javax.swing.JLabel lbltime;
     private javax.swing.JLabel lbluserIcon;
     private javax.swing.JTextField txtManhanVien;
     public static javax.swing.JPasswordField txtPass;

@@ -9,8 +9,6 @@ import com.nhom3.qlcf.dao.NguoiDungDAO;
 import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.model.NguoiDung;
 import java.awt.Color;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComponent;
 
 /**
  *
@@ -181,6 +179,14 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         jLabel6.setText("Reset");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel6.setOpaque(true);
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel6MouseExited(evt);
+            }
+        });
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 110, 40));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -191,6 +197,12 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel7.setOpaque(true);
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel7MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel7MousePressed(evt);
             }
@@ -224,12 +236,20 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Tìm Kiếm");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.setOpaque(true);
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel1MousePressed(evt);
             }
@@ -302,6 +322,42 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_jLabel7MousePressed
+
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+        // TODO add your handling code here:
+        jLabel1.setForeground(Color.WHITE);
+        jPanel2.setBackground(Color.WHITE);
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+        // TODO add your handling code here:
+         jLabel1.setForeground(Color.WHITE);
+        jPanel2.setBackground(Color.BLACK);
+    }//GEN-LAST:event_jLabel1MouseExited
+
+    private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
+        // TODO add your handling code here:
+                jLabel7.setBackground(Color.BLACK);
+         jLabel7.setForeground(Color.white);
+    }//GEN-LAST:event_jLabel7MouseEntered
+
+    private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
+        // TODO add your handling code here:
+         jLabel6.setBackground(Color.BLACK);
+         jLabel6.setForeground(Color.white);
+    }//GEN-LAST:event_jLabel6MouseEntered
+
+    private void jLabel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseExited
+        // TODO add your handling code here:
+                jLabel7.setBackground(Color.white);
+         jLabel7.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jLabel7MouseExited
+
+    private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
+        // TODO add your handling code here:
+         jLabel6.setBackground(Color.white);
+         jLabel6.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jLabel6MouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

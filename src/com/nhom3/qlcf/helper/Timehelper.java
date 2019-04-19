@@ -5,15 +5,14 @@
  */
 package com.nhom3.qlcf.helper;
 
-import com.sun.org.apache.xalan.internal.templates.Constants;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.Timer;
 
 /**
  *
@@ -21,7 +20,7 @@ import javax.swing.Timer;
  */
 public class Timehelper implements TimerHelperInterFace {
 
-    public Timer t;
+    public javax.swing.Timer t;
 
     @Override
     public void TimerLoad(ActionListener action) {
@@ -45,11 +44,13 @@ public class Timehelper implements TimerHelperInterFace {
                     while (rs.next()) {
                         lbl.setText(rs.getString(1));
                         Soundhelper mp3;
-                        mp3 = new Soundhelper("src/com/nhom3/qlcf/mp3/RengReng.mp3");
+                       
+                        mp3 = new Soundhelper( getClass().getResource("/com/nhom3/qlcf/mp3/RengReng.mp3"));
+
                         if (lbl.getText().equals("0") || lblsound.getName().equals("mute")) {
                             lblsound.setName("sound");
                             lblsound.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/mute.png")));
-                                mp3.stop();
+                            mp3.stop();
                         } else {
                             mp3.play();
                             lblsound.setIcon(new ImageIcon(getClass().getResource("/com/nhom3/qlcf/img/sound.png")));
@@ -78,7 +79,7 @@ public class Timehelper implements TimerHelperInterFace {
         calendar.set(Calendar.SECOND, 7); //0h:0m:10s
         Date dateSchedule = calendar.getTime();
         long period = 24 * 150;  //tinh theo giay 
- 
+
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
@@ -87,7 +88,7 @@ public class Timehelper implements TimerHelperInterFace {
                     while (rs.next()) {
                         lbl.setText(rs.getString(1));
                         Soundhelper mp3;
-                        mp3 = new Soundhelper("src/com/nhom3/qlcf/mp3/RengReng.mp3");
+                       mp3 = new Soundhelper( getClass().getResource("/com/nhom3/qlcf/mp3/RengReng.mp3"));
                         if (lbl.getText().equals("0") || lblsound.getName().equals("mute")) {
                             mp3.stop();
                         } else {
@@ -102,12 +103,11 @@ public class Timehelper implements TimerHelperInterFace {
             }
         };
         if (lblsound.getName().equals("sound")) {
-            
+
             java.util.Timer timer = new java.util.Timer();
             timer.schedule(timerTask, dateSchedule, period);
-          
-                   
-        } 
+
+        }
 
     }
 

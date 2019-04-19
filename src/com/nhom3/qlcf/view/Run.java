@@ -8,6 +8,7 @@ package com.nhom3.qlcf.view;
 
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -35,6 +36,10 @@ public class Run extends javax.swing.JFrame {
     public Run() {
         initComponents();
         setLocationRelativeTo(null);
+         try {
+            setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/com/nhom3/qlcf/img/logoBar.png")));
+        } catch (Exception e) {
+        }
         /* jpnLogin.setBackground(new Color(0, 0, 0, 134));
         jpnNenButton_login.setBackground(new Color(0, 0, 0, 64));
         jfMain.hide();

@@ -6,6 +6,8 @@
 package com.nhom3.qlcf.view.form.doanhthu;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
@@ -21,22 +23,30 @@ public class TongSPCoDoanhThuCao extends javax.swing.JPanel {
      */
     public TongSPCoDoanhThuCao() {
         initComponents();
+        tblDoanhThuTheoSP.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
+        tblDoanhThuTheoSP.setFont(new Font("Tohoma", Font.PLAIN, 12));
+        tblDoanhThuTheoSP.getTableHeader().setOpaque(false);
+        tblDoanhThuTheoSP.getTableHeader().setBackground(new Color(0, 0, 0));
+        tblDoanhThuTheoSP.getTableHeader().setForeground(new Color(255, 255, 255));
+        tblDoanhThuTheoSP.setRowHeight(22);
         fillToTable();
+
     }
 
-    private void fillToTable(){
+    private void fillToTable() {
         ResultSet rs = JDBCHelper.executeQuery("EXEC dbo.DoanhThuTheoSP");
         DefaultTableModel model = (DefaultTableModel) tblDoanhThuTheoSP.getModel();
         model.setRowCount(0);
         try {
-            while (rs.next()){
-                Object[] row = new Object[]{rs.getString(1), rs.getString(2), rs.getDouble(3),  rs.getInt(4), rs.getDouble(5)};
+            while (rs.next()) {
+                Object[] row = new Object[]{rs.getString(1), rs.getString(2), rs.getDouble(3), rs.getInt(4), rs.getDouble(5)};
                 model.addRow(row);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

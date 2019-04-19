@@ -32,6 +32,13 @@ import java.awt.Color;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import javazoom.jl.decoder.JavaLayerException;
@@ -52,18 +59,20 @@ public class FormMenu extends javax.swing.JPanel {
     public FormMenu() {
         initComponents();
         trangchu = this;
-         new Loginhelper().getLogin(lblTenDangNhap);
+        new Loginhelper().getLogin(lblTenDangNhap);
 
     }
 
     public FormMenu(String nhanvien) {
+
         initComponents();
         trangchu = this;
         jpnMenu4.hide();
         jpnQuanLyTaiKhoan_Button.hide();
         jpnSuaHangHoa_Button.hide();
         jpnPhieuNhap_Button.hide();
-       new Loginhelper().getLogin(lblTenDangNhap);
+        new Loginhelper().getLogin(lblTenDangNhap);
+
     }
 
     /**
@@ -1251,8 +1260,7 @@ public class FormMenu extends javax.swing.JPanel {
 
     private void lblThemHangHoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThemHangHoaMouseClicked
         // TODO add your handling code here:
-        
-        
+
         FormLogin.login.Card.removeAll();
         FormLogin.login.Card.add(new FormNhapHang());
         FormLogin.login.Card.repaint();
@@ -1336,7 +1344,11 @@ public class FormMenu extends javax.swing.JPanel {
     private void lblTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTaiKhoanMousePressed
         // TODO add your handling code here:
         FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormTK());
+        try {
+            FormLogin.login.Card.add(new FormTK());
+        } catch (IOException ex) {
+            Logger.getLogger(FormMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         FormLogin.login.Card.repaint();
         FormLogin.login.Card.revalidate();
         FormLogin.login.Card.show();
@@ -1346,7 +1358,11 @@ public class FormMenu extends javax.swing.JPanel {
     private void lblQuanLyTaiKhoanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuanLyTaiKhoanMousePressed
         // TODO add your handling code here:
         FormLogin.login.Card.removeAll();
-        FormLogin.login.Card.add(new FormQuanLyTaiKhoan_admin());
+        try {
+            FormLogin.login.Card.add(new FormQuanLyTaiKhoan_admin());
+        } catch (IOException ex) {
+            Logger.getLogger(FormMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         FormLogin.login.Card.repaint();
         FormLogin.login.Card.revalidate();
         FormLogin.login.Card.show();

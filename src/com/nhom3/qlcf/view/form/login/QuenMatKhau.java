@@ -5,6 +5,7 @@
  */
 package com.nhom3.qlcf.view.form.login;
 
+import com.nhom3.qlcf.dao.NguoiDungDAO;
 import com.nhom3.qlcf.view.form.users.*;
 import com.nhom3.qlcf.dao.SanPhamDAO;
 import com.nhom3.qlcf.helper.Designhelper;
@@ -12,6 +13,7 @@ import com.nhom3.qlcf.helper.Hashing;
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.SendMailHelper;
 import com.nhom3.qlcf.helper.Timehelper;
+import com.nhom3.qlcf.helper.sendsmscode;
 import static com.nhom3.qlcf.view.form.banhang.FormBanHang.list;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -27,6 +29,7 @@ import javax.swing.JOptionPane;
 public class QuenMatKhau extends javax.swing.JDialog {
 
     String code;
+    String code1;
 
     /**
      * Creates new form LayLaiMatKhau
@@ -40,7 +43,7 @@ public class QuenMatKhau extends javax.swing.JDialog {
     public QuenMatKhau(java.awt.Frame parent, boolean modal, String email) {
         super(parent, modal);
         initComponents();
-        txtemail.setText(email);
+        txttofrom.setText(email);
         setLocationRelativeTo(parent);
     }
 
@@ -55,12 +58,12 @@ public class QuenMatKhau extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtemail = new javax.swing.JTextField();
+        txttofrom = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         lblthongbao = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lbllayma = new javax.swing.JLabel();
+        lblchapnhan = new javax.swing.JLabel();
+        lbltat = new javax.swing.JLabel();
         txtcode = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -70,11 +73,11 @@ public class QuenMatKhau extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("Nhập Email: ");
+        jLabel1.setText("SDT/email");
 
-        txtemail.addActionListener(new java.awt.event.ActionListener() {
+        txttofrom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtemailActionPerformed(evt);
+                txttofromActionPerformed(evt);
             }
         });
 
@@ -86,39 +89,60 @@ public class QuenMatKhau extends javax.swing.JDialog {
         lblthongbao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblthongbao.setText(".");
 
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Lấy Mã");
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbllayma.setBackground(new java.awt.Color(255, 255, 255));
+        lbllayma.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbllayma.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbllayma.setText("Lấy Mã");
+        lbllayma.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        lbllayma.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbllayma.setOpaque(true);
+        lbllayma.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbllaymaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbllaymaMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel3MousePressed(evt);
+                lbllaymaMousePressed(evt);
             }
         });
 
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Chấp Nhận");
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblchapnhan.setBackground(new java.awt.Color(255, 255, 255));
+        lblchapnhan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblchapnhan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblchapnhan.setText("Chấp Nhận");
+        lblchapnhan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        lblchapnhan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblchapnhan.setOpaque(true);
+        lblchapnhan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblchapnhanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblchapnhanMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel4MousePressed(evt);
+                lblchapnhanMousePressed(evt);
             }
         });
 
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Tắt");
-        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbltat.setBackground(new java.awt.Color(255, 255, 255));
+        lbltat.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbltat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbltat.setText("Tắt");
+        lbltat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        lbltat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbltat.setOpaque(true);
+        lbltat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbltatMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbltatMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel5MousePressed(evt);
+                lbltatMousePressed(evt);
             }
         });
 
@@ -138,17 +162,17 @@ public class QuenMatKhau extends javax.swing.JDialog {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txttofrom, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtcode, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lbllayma, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblchapnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addComponent(lbltat, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,7 +183,7 @@ public class QuenMatKhau extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txttofrom, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -169,11 +193,11 @@ public class QuenMatKhau extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtcode)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                            .addComponent(lbllayma, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
                         .addGap(36, 36, 36)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblchapnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbltat, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -191,11 +215,11 @@ public class QuenMatKhau extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtemailActionPerformed
+    private void txttofromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttofromActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtemailActionPerformed
+    }//GEN-LAST:event_txttofromActionPerformed
 
-    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+    private void lbllaymaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbllaymaMousePressed
         // TODO add your handling code here:
         lblthongbao.setText("Mã đang gửi...");
         Timehelper timehelper = new Timehelper();
@@ -203,13 +227,26 @@ public class QuenMatKhau extends javax.swing.JDialog {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 try {
-                    if (!txtemail.getText().trim().equals("")) {
-                        code = Hashing.randomCode(4);
-                        SendMailHelper.sendMail(txtemail.getText(), code);
-                        lblthongbao.setText("Mã đã được gửi vào email của bạn");
-                        lblthongbao.setForeground(Color.GREEN);
+                    if (txttofrom.getText().trim().equals("")) {
+                        lblthongbao.setText("Nhập SDT/email của bạn");
+                    } else if (!new NguoiDungDAO().checkSDT(txttofrom.getText()) && txttofrom.getText().matches("[0-9]+")) {
+                        lblthongbao.setText("SĐT không đúng hoặc chưa đăng ký!");
+                    } else if (!new NguoiDungDAO().checkEmail(txttofrom.getText()) && !txttofrom.getText().matches("[0-9]+")) {
+                        lblthongbao.setText("Email không đúng hoặc chưa đăng ký!");
                     } else {
-                        lblthongbao.setText("Nhập email của bạn");
+                        if (!txttofrom.getText().trim().equals("") && !txttofrom.getText().matches("[0-9]+")) {
+                            code = Hashing.randomCode(4);
+                            SendMailHelper.sendMail(txttofrom.getText(), code);
+                            lblthongbao.setText("Mã đã được gửi vào email của bạn");
+                            lblthongbao.setForeground(Color.GREEN);
+                        } else if (txttofrom.getText().matches("[0-9]+")) {
+                            lblthongbao.setText("Mã đã được gửi đến SĐT của bạn");
+                            code = Hashing.ramdomso(6);
+                            new sendsmscode().sendSMScode(txttofrom.getText(), code);
+                            lblthongbao.setForeground(Color.GREEN);
+                        } else {
+                            lblthongbao.setText("Nhập SDT/email của bạn");
+                        }
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Lỗi");
@@ -217,21 +254,18 @@ public class QuenMatKhau extends javax.swing.JDialog {
 
                 timehelper.t.stop();
             }
-        });
+        }
+        );
 
 
-    }//GEN-LAST:event_jLabel3MousePressed
+    }//GEN-LAST:event_lbllaymaMousePressed
     public boolean check() {
-        if (txtemail.getText().trim().equals("")) {
-            lblthongbao.setText("Không thể bỏ email của bạn");
+        if (txttofrom.getText().trim().equals("")) {
+            lblthongbao.setText("Không thể bỏ SDT/email của bạn");
             lblthongbao.setForeground(Color.red);
             return false;
         } else if (txtcode.getText().trim().equals("")) {
             lblthongbao.setText("Chưa nhập mã code!");
-            lblthongbao.setForeground(Color.red);
-            return false;
-        } else if (!txtemail.getText().matches("[\\w\\.]+@[\\w+]+\\.+[\\.\\w+]+")) {
-            lblthongbao.setText("Email phải đúng định dạng VD: abc@gmail.com!");
             lblthongbao.setForeground(Color.red);
             return false;
         } else if (!txtcode.getText().equals(code)) {
@@ -241,21 +275,61 @@ public class QuenMatKhau extends javax.swing.JDialog {
         }
         return true;
     }
-    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+    private void lblchapnhanMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblchapnhanMousePressed
         // TODO add your handling code here:
         if (check()) {
-            JDBCHelper.executeUpdate("Update dbo.NguoiDung set matKhau ='" + code + "' where email ='" + txtemail.getText() + "'");
+            txttofrom.setName(txttofrom.getText());
+            doiatkhau doi = new doiatkhau(null, rootPaneCheckingEnabled);
+            doi.setVisible(rootPaneCheckingEnabled);
             lblthongbao.setText("Lấy lại mật khẩu thành công!");
             lblthongbao.setForeground(Color.GREEN);
+            dispose();
         }
 
-    }//GEN-LAST:event_jLabel4MousePressed
+    }//GEN-LAST:event_lblchapnhanMousePressed
 
-    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
+    private void lbltatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltatMousePressed
         // TODO add your handling code here:
         code = null;
         dispose();
-    }//GEN-LAST:event_jLabel5MousePressed
+    }//GEN-LAST:event_lbltatMousePressed
+
+    private void lblchapnhanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblchapnhanMouseEntered
+        // TODO add your handling code here:
+        lblchapnhan.setBackground(Color.BLACK);
+        lblchapnhan.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lblchapnhanMouseEntered
+
+    private void lblchapnhanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblchapnhanMouseExited
+        // TODO add your handling code here:
+        lblchapnhan.setBackground(Color.WHITE);
+        lblchapnhan.setForeground(Color.BLACK);
+
+    }//GEN-LAST:event_lblchapnhanMouseExited
+
+    private void lbllaymaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbllaymaMouseEntered
+        // TODO add your handling code here:
+        lbllayma.setBackground(Color.BLACK);
+        lbllayma.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lbllaymaMouseEntered
+
+    private void lbllaymaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbllaymaMouseExited
+        // TODO add your handling code here:
+        lbllayma.setBackground(Color.WHITE);
+        lbllayma.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lbllaymaMouseExited
+
+    private void lbltatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltatMouseEntered
+        // TODO add your handling code here:
+        lbltat.setBackground(Color.BLACK);
+        lbltat.setForeground(Color.WHITE);
+    }//GEN-LAST:event_lbltatMouseEntered
+
+    private void lbltatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbltatMouseExited
+        // TODO add your handling code here:
+      lbltat.setBackground(Color.WHITE);
+        lbltat.setForeground(Color.BLACK);
+    }//GEN-LAST:event_lbltatMouseExited
 
     /**
      * @param args the command line arguments
@@ -305,12 +379,12 @@ public class QuenMatKhau extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblchapnhan;
+    private javax.swing.JLabel lbllayma;
+    private javax.swing.JLabel lbltat;
     private javax.swing.JLabel lblthongbao;
     private javax.swing.JTextField txtcode;
-    private javax.swing.JTextField txtemail;
+    protected static javax.swing.JTextField txttofrom;
     // End of variables declaration//GEN-END:variables
 }

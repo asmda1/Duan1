@@ -228,20 +228,22 @@ public class FormThemSanPham extends javax.swing.JPanel {
 
         jfThemSP.add(jpnToolbar19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 50));
 
-        jpnNe.setBackground(new Color(0,0,0,130));
+        jpnNe.setBackground(new java.awt.Color(255, 255, 255));
+        jpnNe.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jpnNe.setLayout(new javax.swing.BoxLayout(jpnNe, javax.swing.BoxLayout.LINE_AXIS));
 
         jpnNe.add(new ThemSanPham());
 
-        jfThemSP.add(jpnNe, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 840, 520));
+        jfThemSP.add(jpnNe, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 840, 530));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setBackground(new java.awt.Color(0, 51, 255));
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Thêm Sản Phẩm Mới");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

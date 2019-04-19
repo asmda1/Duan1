@@ -6,6 +6,8 @@
 package com.nhom3.qlcf.view.form.doanhthu;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
@@ -21,22 +23,29 @@ public class SanPhamBanChay extends javax.swing.JPanel {
      */
     public SanPhamBanChay() {
         initComponents();
+        tblSanPhamBanChay.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
+        tblSanPhamBanChay.setFont(new Font("Tohoma", Font.PLAIN, 12));
+        tblSanPhamBanChay.getTableHeader().setOpaque(false);
+        tblSanPhamBanChay.getTableHeader().setBackground(new Color(0, 0, 0));
+        tblSanPhamBanChay.getTableHeader().setForeground(new Color(255, 255, 255));
+        tblSanPhamBanChay.setRowHeight(22);
         fillToTable();
     }
 
-    private void fillToTable(){
+    private void fillToTable() {
         ResultSet rs = JDBCHelper.executeQuery("EXEC dbo.SanPhamBanChay");
         DefaultTableModel model = (DefaultTableModel) tblSanPhamBanChay.getModel();
         model.setRowCount(0);
         try {
-            while (rs.next()){
-                Object[] row =new Object[]{rs.getString(1), rs.getString(2), rs.getInt(3)};
+            while (rs.next()) {
+                Object[] row = new Object[]{rs.getString(1), rs.getString(2), rs.getInt(3)};
                 model.addRow(row);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

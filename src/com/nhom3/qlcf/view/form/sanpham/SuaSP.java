@@ -58,7 +58,6 @@ public class SuaSP extends javax.swing.JPanel {
                 BufferedImage image = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/default.png"));
                 lblHinhSP.setIcon(new ImageIcon(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), width, height)));
                 lblChonAnh.setIcon(new ImageIcon(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), width, height)));
-                
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -84,7 +83,6 @@ public class SuaSP extends javax.swing.JPanel {
 //        File defaultImage = new File(getClass().getResource("/com/nhom3/qlcf/img/default.png").getPath());
         BufferedImage image = null;
         File f;
-
 
         try {
             f = new File(Run.folderPAth + "Images\\" + sp.getHinhAnh());
@@ -119,12 +117,12 @@ public class SuaSP extends javax.swing.JPanel {
 
         BufferedImage image = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/default.png"));
         lblHinhSP.setIcon(new ImageIcon(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), 110, 130)));
-        
+
         txtTenSP.setText("");
         txtGia.setText("");
         cboThayDoiTrangThai.setSelectedIndex(0);
         lblChonAnh.setIcon(new ImageIcon(new ReSizehelper().buffImage(image, image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType(), 110, 130)));
-        
+
         sanPham = null;
     }
 
@@ -148,8 +146,13 @@ public class SuaSP extends javax.swing.JPanel {
                 }
 
                 image = ImageIO.read(sourceFile);
-                String fileName = sourceFile.getName();
-
+                String fileName = null;
+                if (sourceFile.getName() != null) {
+                    fileName = sourceFile.getName();
+                    lblChonAnh.setToolTipText("Đã chọn ảnh khác");
+                } else {
+                    lblChonAnh.setToolTipText("");
+                }
                 destFile = new File(Run.folderPAth + "Images\\" + fileName);
 
                 XuLy.copyFile(sourceFile, destFile);
@@ -299,6 +302,7 @@ public class SuaSP extends javax.swing.JPanel {
         });
         jplformNhap.add(lblButonCapNhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 110, 40));
 
+        lblChonAnh.setToolTipText("");
         lblChonAnh.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lblChonAnh.setOpaque(true);
         lblChonAnh.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -436,7 +440,12 @@ public class SuaSP extends javax.swing.JPanel {
             sanPham.setTenSp(XuLy.xuLyTen(txtTenSP.getText()));
             sanPham.setGiaBan(Double.parseDouble(txtGia.getText()));
             sanPham.setTrangThai(cboThayDoiTrangThai.getSelectedIndex() == 0);
-            sanPham.setHinhAnh(destFile.getName());
+            if (lblChonAnh.getToolTipText().equals("")) {
+                sanPham.setHinhAnh(sanPham.getHinhAnh());
+            } else {
+                sanPham.setHinhAnh(destFile.getName());
+            }
+
             boolean result = new SanPhamDAO().update(sanPham);
             if (result) {
                 lblThongBao.setText("Cập nhật sản phẩm thành công!!");

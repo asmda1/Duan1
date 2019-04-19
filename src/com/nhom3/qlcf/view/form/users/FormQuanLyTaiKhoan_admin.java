@@ -6,12 +6,17 @@
 package com.nhom3.qlcf.view.form.users;
 
 import com.nhom3.qlcf.helper.Loginhelper;
+import com.nhom3.qlcf.helper.ReSizehelper;
 import com.nhom3.qlcf.view.form.login.FormLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -25,7 +30,7 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
      */
     public static FormQuanLyTaiKhoan_admin quanlynhanvien;
 
-    public FormQuanLyTaiKhoan_admin() {
+    public FormQuanLyTaiKhoan_admin() throws IOException {
         initComponents();
         // jpnLogin1.setBackground(new Color(0, 0, 0, 134));
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
@@ -37,6 +42,11 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
         jpltable.repaint();
         jpltable.updateUI();
         new Loginhelper().getLogin(lblTenDangNhapBangHang);
+        BufferedImage image = ImageIO.read(getClass().getResource("/com/nhom3/qlcf/img/user.png"));
+                int type = image.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : image.getType();
+                BufferedImage HinhAnh = new ReSizehelper().buffImage(image, type, 150, 150);
+                ImageIcon icon = new ImageIcon(HinhAnh);
+                lbluser.setIcon(icon);
     }
 
     /**
@@ -61,7 +71,7 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
         lblOutBangHang = new javax.swing.JLabel();
         jpnNen = new javax.swing.JPanel();
         jpldanhmuc = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lbluser = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -246,49 +256,71 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
         jpldanhmuc.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jpldanhmuc.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel2.setOpaque(true);
-        jpldanhmuc.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 180, 200));
+        lbluser.setBackground(new java.awt.Color(255, 255, 255));
+        lbluser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbluser.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lbluser.setOpaque(true);
+        jpldanhmuc.add(lbluser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 180, 200));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Quản Lý");
         jpldanhmuc.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 180, -1));
 
-        jLabel5.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("  QUẢN LÝ NHÂN VIÊN");
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel5.setOpaque(true);
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel5MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel5MousePressed(evt);
             }
         });
         jpldanhmuc.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 240, 40));
 
-        jLabel6.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("TẠO TÀI KHOẢN");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.setOpaque(true);
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel6MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel6MousePressed(evt);
             }
         });
         jpldanhmuc.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 240, 40));
 
-        jLabel8.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("CHỈNH SỬA TÀI KHOẢN");
         jLabel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel8.setOpaque(true);
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel8MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel8MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel8MousePressed(evt);
             }
@@ -485,10 +517,45 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
         jpltable.updateUI();
     }//GEN-LAST:event_jLabel8MousePressed
 
+    private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
+        // TODO add your handling code here:
+             jLabel6.setBackground(Color.BLACK);
+        jLabel6.setForeground(Color.WHITE);
+    }//GEN-LAST:event_jLabel6MouseEntered
+
+    private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
+        // TODO add your handling code here:
+         jLabel6.setBackground(Color.WHITE);
+        jLabel6.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jLabel6MouseExited
+
+    private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
+        // TODO add your handling code here:
+             jLabel5.setBackground(Color.BLACK);
+        jLabel5.setForeground(Color.WHITE);
+    }//GEN-LAST:event_jLabel5MouseEntered
+
+    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
+        // TODO add your handling code here:
+         jLabel5.setBackground(Color.WHITE);
+        jLabel5.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jLabel5MouseExited
+
+    private void jLabel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseEntered
+        // TODO add your handling code here:
+          jLabel8.setBackground(Color.BLACK);
+        jLabel8.setForeground(Color.WHITE);
+    }//GEN-LAST:event_jLabel8MouseEntered
+
+    private void jLabel8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseExited
+        // TODO add your handling code here:
+              jLabel8.setBackground(Color.WHITE);
+        jLabel8.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jLabel8MouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static javax.swing.JPanel Card;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -510,5 +577,6 @@ public class FormQuanLyTaiKhoan_admin extends javax.swing.JPanel {
     private javax.swing.JLabel lblTenDangNhapBangHang;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblanhGiaoDien;
+    private javax.swing.JLabel lbluser;
     // End of variables declaration//GEN-END:variables
 }

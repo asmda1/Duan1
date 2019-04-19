@@ -5,17 +5,12 @@
  */
 package com.nhom3.qlcf.view.phieunhap;
 
-import com.nhom3.qlcf.dao.NhaCungCapDAO;
 import com.nhom3.qlcf.dao.PhieuNhapDAO;
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.helper.XuLy;
-import com.nhom3.qlcf.model.HangHoa;
-import com.nhom3.qlcf.model.NhaCungCap;
 import com.nhom3.qlcf.model.PhieuNhap;
-import com.nhom3.qlcf.view.form.doanhthu.*;
 import com.nhom3.qlcf.view.form.login.FormLogin;
-import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
@@ -23,10 +18,10 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -404,6 +399,12 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel4MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel4MousePressed(evt);
             }
@@ -412,7 +413,7 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("IN ALL:");
+        jLabel5.setText("Print All:");
         jpnNen.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 70, 30));
 
         lblsophieu.setText(".");
@@ -579,6 +580,16 @@ public class FormQuanLyPhieuNhap extends javax.swing.JPanel {
         // TODO add your handling code here:
         timkiem();
     }//GEN-LAST:event_jLabel3MousePressed
+
+    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
+        // TODO add your handling code here:
+        jLabel4.setBorder(new LineBorder(Color.BLUE));
+    }//GEN-LAST:event_jLabel4MouseEntered
+
+    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+        // TODO add your handling code here:
+        jLabel4.setBorder(new LineBorder(new Color(204, 204, 204)));
+    }//GEN-LAST:event_jLabel4MouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

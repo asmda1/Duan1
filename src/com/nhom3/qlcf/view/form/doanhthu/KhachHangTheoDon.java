@@ -5,7 +5,6 @@
  */
 package com.nhom3.qlcf.view.form.doanhthu;
 
-
 import com.nhom3.qlcf.dao.KhachHangDAO;
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.XuLy;
@@ -13,6 +12,7 @@ import com.nhom3.qlcf.model.KhachHang;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -34,6 +34,12 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
      */
     public KhachHangTheoDon() {
         initComponents();
+        tblKHTheoDon.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
+        tblKHTheoDon.setFont(new Font("Tohoma", Font.PLAIN, 12));
+        tblKHTheoDon.getTableHeader().setOpaque(false);
+        tblKHTheoDon.getTableHeader().setBackground(new Color(0, 0, 0));
+        tblKHTheoDon.getTableHeader().setForeground(new Color(255, 255, 255));
+        tblKHTheoDon.setRowHeight(22);
         txtSearch.setText("Tìm kiếm khách hàng");
         txtSearch.setForeground(Color.gray);
         XuLy.placeHolder(txtSearch, "Tìm kiếm khách hàng");
@@ -235,11 +241,11 @@ public class KhachHangTheoDon extends javax.swing.JPanel {
         String[] column = {"Mã HĐ", "Ngày lập", "Tên SP", "Size", "Extra", "Số lượng"};
         DefaultTableModel table = new DefaultTableModel(column, ABORT);
         JScrollPane scp = new JScrollPane();
-        JTable tbl = new JTable(table); 
+        JTable tbl = new JTable(table);
         scp.setViewportView(tbl);
-        scp.setPreferredSize(new Dimension(580, 550)); 
+        scp.setPreferredSize(new Dimension(580, 550));
         JPanel pnl = new JPanel(new BorderLayout(5, 5));
-        
+
         pnl.add(scp, BorderLayout.NORTH);
         JDialog dl = new JDialog(SwingUtilities.windowForComponent(this));
 //        dl.setModal(true); 

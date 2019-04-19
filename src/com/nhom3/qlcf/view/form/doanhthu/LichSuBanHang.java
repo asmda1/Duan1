@@ -6,6 +6,8 @@
 package com.nhom3.qlcf.view.form.doanhthu;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -19,33 +21,41 @@ import javax.swing.table.DefaultTableModel;
 public class LichSuBanHang extends javax.swing.JPanel {
 
     DefaultTableModel model = null;
+
     /**
      * Creates new form LichSuMuaHang
      */
     public LichSuBanHang() {
         initComponents();
+        tblLishSuMuaHang.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
+        tblLishSuMuaHang.setFont(new Font("Tohoma", Font.PLAIN, 12));
+        tblLishSuMuaHang.getTableHeader().setOpaque(false);
+        tblLishSuMuaHang.getTableHeader().setBackground(new Color(0, 0, 0));
+        tblLishSuMuaHang.getTableHeader().setForeground(new Color(255, 255, 255));
+        tblLishSuMuaHang.setRowHeight(22);
         fillToTable();
     }
 
-    private void showDetails(){
+    private void showDetails() {
         int index = tblLishSuMuaHang.getSelectedRow();
         lblNgayTao.setText("Ngày tạo: " + String.valueOf(tblLishSuMuaHang.getValueAt(index, 3)));
         lblSoLuong.setText("Tổng số lượng: " + String.valueOf(tblLishSuMuaHang.getValueAt(index, 2)));
     }
-    
-    private void fillToTable(){
+
+    private void fillToTable() {
         try {
             ResultSet rs = JDBCHelper.executeQuery("SELECT * FROM dbo.LichSuBanHang");
             model = (DefaultTableModel) tblLishSuMuaHang.getModel();
             model.setRowCount(0);
-            while (rs.next()){
-                Object[] row = new Object[]{ rs.getString(1), rs.getDouble(2), rs.getInt(3), rs.getDate(4), rs.getDouble(5)};
+            while (rs.next()) {
+                Object[] row = new Object[]{rs.getString(1), rs.getDouble(2), rs.getInt(3), rs.getDate(4), rs.getDouble(5)};
                 model.addRow(row);
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
