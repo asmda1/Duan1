@@ -10,7 +10,6 @@ import com.nhom3.qlcf.view.form.login.FormLogin;
 
 import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.login.Login;
-import com.nhom3.qlcf.view.form.menu.FormMenu;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 
 import java.awt.Color;

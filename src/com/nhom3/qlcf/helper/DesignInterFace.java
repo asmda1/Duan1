@@ -9,7 +9,6 @@ import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.Extra;
 import com.nhom3.qlcf.model.SanPham;
 import com.nhom3.qlcf.model.SizeSP;
-import com.sun.glass.ui.Size;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JLabel;

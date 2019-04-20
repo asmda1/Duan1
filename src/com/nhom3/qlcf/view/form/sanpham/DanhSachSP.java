@@ -12,7 +12,6 @@ import com.nhom3.qlcf.model.SanPham;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**

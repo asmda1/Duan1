@@ -6,19 +6,14 @@
 package com.nhom3.qlcf.view.form.login;
 
 import com.nhom3.qlcf.dao.NguoiDungDAO;
-import com.nhom3.qlcf.dao.NhaCungCapDAO;
 import com.nhom3.qlcf.helper.Timehelper;
 import com.nhom3.qlcf.model.NguoiDung;
-import com.nhom3.qlcf.model.NhaCungCap;
 import static com.nhom3.qlcf.view.form.login.FormLogin.jfLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
-import com.nhom3.qlcf.view.form.users.LayLaiMatKhau;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

@@ -28,7 +28,7 @@ public class ChinhSuaTaiKhoan extends javax.swing.JPanel {
     public boolean check() {
         String emails = "[\\w\\.]+@[\\w+]+\\.+[\\.\\w+]+";
         if (txtTimKiem.getText().trim().equals("Tìm Mã Nhân Viên") || txtTimKiem.getText().trim().equals("")) {
-            lblthongbao.setText("Nhập Mã NV là bắt buột");
+            lblthongbao.setText("Nhập Mã NV là bắt buộc");
             lblthongbao.setForeground(Color.red);
             return false;
         } else {

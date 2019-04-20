@@ -7,24 +7,21 @@ package com.nhom3.qlcf.view.form.doanhthu;
 
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.Loginhelper;
-import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.view.form.login.FormLogin;
-import com.nhom3.qlcf.view.form.menu.FormMenu;
-import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartMouseEvent;
+import org.jfree.chart.ChartMouseListener;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
@@ -179,7 +176,7 @@ public class FormThongKe extends javax.swing.JPanel {
         //set tickunit Domain
         axis.setLabelFont(font);
         axis.setLabelPaint(Color.red);
-        //set text cho lin
+        //set text cho line
         LineAndShapeRenderer ren = new LineAndShapeRenderer();
 
         chart = (CategoryPlot) Chart.getPlot();
@@ -201,6 +198,35 @@ public class FormThongKe extends javax.swing.JPanel {
         range.setLabelFont(font3);
 
         ChartPanel barPanel = new ChartPanel(Chart);
+        
+//        // event click vào chart
+//        barPanel.addChartMouseListener(new ChartMouseListener() {
+//            @Override
+//            public void chartMouseClicked(ChartMouseEvent cme) {
+//                int x = cme.getTrigger().getX();
+//                int y = cme.getTrigger().getY();
+//
+//                Point p = barPanel.getLocation();
+//                int px = (int) p.getX();
+//                int py = (int) p.getY();
+//
+//                x = x - px;
+//                y = y - py;
+//
+//                if (x < 0 || y < 0 || x > barPanel.getWidth() || y > barPanel.getHeight()) {
+//                    
+//                } else {
+//                    
+//                }
+//            }
+//
+//            @Override
+//            public void chartMouseMoved(ChartMouseEvent cme) {
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//        });
+
+
         barPanel.setVisible(true);
         barPanel.setSize(900, 500);
         jpnBieuDoLINE.removeAll();
@@ -764,7 +790,7 @@ public class FormThongKe extends javax.swing.JPanel {
         lblLogin.setForeground(Color.white);
         jpnDangXuat.setBackground(Color.white);
         lblDangXuat.setForeground(new Color(51, 102, 255));*/
-         Login.txtPass.setText("");
+        Login.txtPass.setText("");
         Login.lblLoiDangNhap.hide();
         jpnShowMenuOut.hide();
         jpnDangXuat.setBackground(Color.white);

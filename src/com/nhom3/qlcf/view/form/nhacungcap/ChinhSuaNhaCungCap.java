@@ -6,10 +6,8 @@
 package com.nhom3.qlcf.view.form.nhacungcap;
 
 import com.nhom3.qlcf.dao.NhaCungCapDAO;
-import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.model.NhaCungCap;
-import com.nhom3.qlcf.view.form.users.*;
 import java.awt.Color;
 import java.util.List;
 
@@ -77,7 +75,7 @@ public class ChinhSuaNhaCungCap extends javax.swing.JPanel {
         ncc.setMaNhaCungCap(lblTen.getName());
         
         if (txtDiachi.getText().trim().equals("") || txtSDT.getText().trim().equals("") || txtTen.getText().trim().equals("")) {
-            lbltb.setText("Bạn bỏ trống thông tin, hệ thống sẽ lấy dữ liệu củ");
+            lbltb.setText("Bạn bỏ trống thông tin, hệ thống sẽ lấy dữ liệu cũ");
             lbltb.setForeground(Color.ORANGE);
             ncc.setDienThoai(lblSDT.getText());
             ncc.setTenNhaCC(lblTen.getText());

@@ -13,8 +13,9 @@ import java.awt.image.BufferedImage;
  * @author baotri1998
  */
 public class ReSizehelper {
-        public BufferedImage buffImage(BufferedImage buffImage, int type,int chieurong,int chieucao ) {
-   
+
+    public BufferedImage buffImage(BufferedImage buffImage, int type, int chieurong, int chieucao) {
+
         BufferedImage buff = new BufferedImage(chieurong, chieucao, type);
         //set đồ họa ảnh
         Graphics2D g = buff.createGraphics();

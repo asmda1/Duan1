@@ -5,14 +5,10 @@
  */
 package com.nhom3.qlcf.view.form.nhacungcap;
 
-import com.nhom3.qlcf.dao.KhachHangDAO;
 import com.nhom3.qlcf.dao.NhaCungCapDAO;
-import com.nhom3.qlcf.model.KhachHang;
 import com.nhom3.qlcf.model.NhaCungCap;
-import com.nhom3.qlcf.view.form.hanghoa.*;
 import java.awt.Color;
 import java.util.List;
-import javax.print.attribute.standard.MediaSize;
 
 /**
  *

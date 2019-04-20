@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Le Minh Hung - PS08234
+ * @author baotri1998
  */
 public class Hashing {
 

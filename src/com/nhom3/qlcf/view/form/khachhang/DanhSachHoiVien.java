@@ -6,16 +6,9 @@
 package com.nhom3.qlcf.view.form.khachhang;
 
 import com.nhom3.qlcf.dao.KhachHangDAO;
-import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.model.KhachHang;
-import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnBack_button;
-import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnDangKyForm;
-import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.jpnGiaoDien;
-import static com.nhom3.qlcf.view.form.khachhang.FormKhachHang.lblBack;
 import java.awt.Color;
 import java.awt.Font;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 

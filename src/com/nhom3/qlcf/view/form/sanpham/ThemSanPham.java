@@ -16,10 +16,7 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -111,7 +108,7 @@ public class ThemSanPham extends javax.swing.JPanel {
 
     private void openImagesFolder() {
         try {
-            Desktop.getDesktop().open(new File(Run.folderPAth));
+            Desktop.getDesktop().open(new File(Run.folderPAth + "Images"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }

@@ -10,8 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.text.DecimalFormat;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,8 +18,9 @@ import javax.swing.table.DefaultTableModel;
  * @author baotri1998
  */
 public class LichSuBanHang extends javax.swing.JPanel {
-
+    
     DefaultTableModel model = null;
+    double tongDoanhThu = 0;
 
     /**
      * Creates new form LichSuMuaHang
@@ -34,14 +34,20 @@ public class LichSuBanHang extends javax.swing.JPanel {
         tblLishSuMuaHang.getTableHeader().setForeground(new Color(255, 255, 255));
         tblLishSuMuaHang.setRowHeight(22);
         fillToTable();
-    }
-
+        
+        for (int i = 0; i < tblLishSuMuaHang.getRowCount(); i++) {
+            double tien = (double) tblLishSuMuaHang.getValueAt(i, 4);
+            tongDoanhThu += tien;
+        }
+        lblDoanhThu.setText("Tổng doanh thu: " + new DecimalFormat("#,###,###").format(tongDoanhThu));        
+    } 
+    
     private void showDetails() {
         int index = tblLishSuMuaHang.getSelectedRow();
         lblNgayTao.setText("Ngày tạo: " + String.valueOf(tblLishSuMuaHang.getValueAt(index, 3)));
-        lblSoLuong.setText("Tổng số lượng: " + String.valueOf(tblLishSuMuaHang.getValueAt(index, 2)));
+//        lblSoLuong.setText("Tổng số lượng: " + String.valueOf(tblLishSuMuaHang.getValueAt(index, 2)));
     }
-
+    
     private void fillToTable() {
         try {
             ResultSet rs = JDBCHelper.executeQuery("SELECT * FROM dbo.LichSuBanHang");
@@ -71,7 +77,7 @@ public class LichSuBanHang extends javax.swing.JPanel {
         tblLishSuMuaHang = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         lblNgayTao = new javax.swing.JLabel();
-        lblSoLuong = new javax.swing.JLabel();
+        lblDoanhThu = new javax.swing.JLabel();
 
         setOpaque(false);
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
@@ -142,7 +148,7 @@ public class LichSuBanHang extends javax.swing.JPanel {
 
         lblNgayTao.setText("Ngày tạo: ");
 
-        lblSoLuong.setText("Tổng Số Lượng:");
+        lblDoanhThu.setText("Tổng doanh thu:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -155,7 +161,7 @@ public class LichSuBanHang extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(134, 134, 134)
-                        .addComponent(lblSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblDoanhThu, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -166,7 +172,7 @@ public class LichSuBanHang extends javax.swing.JPanel {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSoLuong)
+                    .addComponent(lblDoanhThu)
                     .addComponent(lblNgayTao))
                 .addGap(13, 13, 13)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -187,8 +193,8 @@ public class LichSuBanHang extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblDoanhThu;
     private javax.swing.JLabel lblNgayTao;
-    private javax.swing.JLabel lblSoLuong;
     private javax.swing.JTable tblLishSuMuaHang;
     // End of variables declaration//GEN-END:variables
 }

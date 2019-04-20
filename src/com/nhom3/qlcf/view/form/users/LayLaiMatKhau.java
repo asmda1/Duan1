@@ -5,18 +5,13 @@
  */
 package com.nhom3.qlcf.view.form.users;
 
-import com.nhom3.qlcf.dao.SanPhamDAO;
-import com.nhom3.qlcf.helper.Designhelper;
 import com.nhom3.qlcf.helper.Hashing;
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.SendMailHelper;
 import com.nhom3.qlcf.helper.Timehelper;
-import static com.nhom3.qlcf.view.form.banhang.FormBanHang.list;
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**

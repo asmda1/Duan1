@@ -19,7 +19,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -50,7 +49,7 @@ public class SendMailHelper {
             String from = accName;
             String to = mail;
             String subject = "Quên Mật Khẩu Đăng Nhập!";
-            String body =StrHtml(code) + " là mã xác nhận của bạn, mã xác nhận chỉ hiệu lực trong 30 phút!";
+            String body = StrHtml(code) + " là mã xác nhận của bạn, mã xác nhận chỉ hiệu lực trong 30 phút!";
             MimeMessage msg = new MimeMessage(s);
             Multipart multi = new MimeMultipart();
             MimeBodyPart msgBody = new MimeBodyPart();

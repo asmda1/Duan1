@@ -5,9 +5,7 @@
  */
 package com.nhom3.qlcf.helper;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
@@ -16,14 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.List;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.text.AbstractDocument;
 
 /**
  *
@@ -54,23 +45,23 @@ public class XuLy {
         });
     }
 
-    public static JTable popupDialog(JPanel parentFrame, String[] column) {
-        DefaultTableModel table = new DefaultTableModel(column, 0);
-        JScrollPane scp = new JScrollPane();
-        JTable tbl = new JTable(table);
-        scp.setViewportView(tbl);
-        scp.setPreferredSize(new Dimension(580, 550));
-        JPanel pnl = new JPanel(new BorderLayout(5, 5));
-
-        pnl.add(scp, BorderLayout.NORTH);
-        JDialog dl = new JDialog(SwingUtilities.windowForComponent(parentFrame));
-//        dl.setModal(true); 
-        dl.setSize(new Dimension(600, 600));
-        dl.add(pnl);
-        dl.setVisible(true);
-        dl.setLocationRelativeTo(null);
-        return tbl;
-    }
+//    public static JTable popupDialog(JPanel parentFrame, String[] column) {
+//        DefaultTableModel table = new DefaultTableModel(column, 0);
+//        JScrollPane scp = new JScrollPane();
+//        JTable tbl = new JTable(table);
+//        scp.setViewportView(tbl);
+//        scp.setPreferredSize(new Dimension(580, 550));
+//        JPanel pnl = new JPanel(new BorderLayout(5, 5));
+//
+//        pnl.add(scp, BorderLayout.NORTH);
+//        JDialog dl = new JDialog(SwingUtilities.windowForComponent(parentFrame));
+////        dl.setModal(true); 
+//        dl.setSize(new Dimension(600, 600));
+//        dl.add(pnl);
+//        dl.setVisible(true);
+//        dl.setLocationRelativeTo(null);
+//        return tbl;
+//    }
 
     public static String xuLyTen(String ten) {
         String[] c;

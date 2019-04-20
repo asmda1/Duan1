@@ -12,10 +12,6 @@ import static com.nhom3.qlcf.view.form.login.Login.jpnNenButton_login;
 import static com.nhom3.qlcf.view.form.login.Login.lblLogin;
 import com.nhom3.qlcf.view.form.menu.FormMenu;
 import java.awt.Color;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 import javax.swing.JLabel;
 
 /**

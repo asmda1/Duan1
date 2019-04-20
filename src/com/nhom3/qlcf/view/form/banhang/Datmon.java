@@ -99,9 +99,9 @@ public class Datmon extends javax.swing.JDialog {
         sp.setMaSanPham(lblten.getName());
         sp.setGiaBan(showSP.get(0).getGiaBan());
 //        sp.setHinhAnh("/com/qlbhcafe/img/" + lblimg.getText());
-        
+
         sp.setHinhAnh(lblimg.getText());
-        
+
         Ex.setId(lbltenExtra.getToolTipText());
         Ex.setTen(lbltenExtra.getText());
         Ex.setGia(Double.parseDouble(lblgiaExtra.getName()));
@@ -255,20 +255,20 @@ public class Datmon extends javax.swing.JDialog {
         lblgiagoc.setForeground(new java.awt.Color(0, 255, 0));
         lblgiagoc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblgiagoc.setText("GIÁ NIÊM YẾT:");
-        jPanel1.add(lblgiagoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 180, 30));
+        jPanel1.add(lblgiagoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 180, 30));
 
         lblsize.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblsize.setForeground(new java.awt.Color(0, 255, 0));
         lblsize.setText("Vừa");
         lblsize.setToolTipText("");
-        jPanel1.add(lblsize, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 80, 30));
+        jPanel1.add(lblsize, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 80, 30));
         if(lblsize.getText().equals("Lớn")){
             lblsize.setForeground(Color.ORANGE);
         }
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("SỐ LƯỢNG:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 100, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 100, -1));
 
         lblbutonTat.setBackground(new java.awt.Color(51, 51, 255));
         lblbutonTat.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -289,7 +289,7 @@ public class Datmon extends javax.swing.JDialog {
                 lblbutonTatMousePressed(evt);
             }
         });
-        jPanel1.add(lblbutonTat, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 370, 94, 30));
+        jPanel1.add(lblbutonTat, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 370, 94, 30));
 
         lblbutonThem.setBackground(new java.awt.Color(51, 51, 255));
         lblbutonThem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -309,22 +309,22 @@ public class Datmon extends javax.swing.JDialog {
                 lblbutonThemMousePressed(evt);
             }
         });
-        jPanel1.add(lblbutonThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 119, 30));
+        jPanel1.add(lblbutonThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 119, 30));
 
         jpnSize.setBackground(new java.awt.Color(255, 255, 255));
         jpnSize.setLayout(new javax.swing.BoxLayout(jpnSize, javax.swing.BoxLayout.LINE_AXIS));
-        jPanel1.add(jpnSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 220, 40));
+        jPanel1.add(jpnSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 220, 40));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("KÍCH CỠ:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, 30));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, 30));
 
         txtsoluong.setEditable(false);
         txtsoluong.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtsoluong.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtsoluong.setText("1");
         txtsoluong.setToolTipText("");
-        jPanel1.add(txtsoluong, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 60, 30));
+        jPanel1.add(txtsoluong, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 60, 30));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setOpaque(false);
@@ -354,7 +354,7 @@ public class Datmon extends javax.swing.JDialog {
         lblimg.setOpaque(true);
         jPanel2.add(lblimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 260));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, 260));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 200, 260));
 
         lbltru.setBackground(new java.awt.Color(0, 102, 255));
         lbltru.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -374,7 +374,7 @@ public class Datmon extends javax.swing.JDialog {
                 lbltruMousePressed(evt);
             }
         });
-        jPanel1.add(lbltru, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 30, 30));
+        jPanel1.add(lbltru, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 30, 30));
 
         lblcong.setBackground(new java.awt.Color(0, 102, 255));
         lblcong.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -394,15 +394,15 @@ public class Datmon extends javax.swing.JDialog {
                 lblcongMousePressed(evt);
             }
         });
-        jPanel1.add(lblcong, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 30, 30));
+        jPanel1.add(lblcong, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 30, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("THÊM: ");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 50, 20));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 50, 20));
 
         lbltengia1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbltengia1.setText("GIÁ BÁN:");
-        jPanel1.add(lbltengia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 70, 30));
+        jPanel1.add(lbltengia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 70, 30));
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -412,7 +412,7 @@ public class Datmon extends javax.swing.JDialog {
         jplExtra.setLayout(new javax.swing.BoxLayout(jplExtra, javax.swing.BoxLayout.LINE_AXIS));
         jScrollPane1.setViewportView(jplExtra);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 220, 100));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 390, 100));
 
         lbltenExtra.setBackground(new java.awt.Color(0, 51, 255));
         lbltenExtra.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -421,32 +421,32 @@ public class Datmon extends javax.swing.JDialog {
         lbltenExtra.setText("Trống");
         lbltenExtra.setToolTipText("EX000");
         lbltenExtra.setOpaque(true);
-        jPanel1.add(lbltenExtra, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 90, 20));
+        jPanel1.add(lbltenExtra, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 90, 20));
 
         lblgiaExtra.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
         lblgiaExtra.setText("+ 0 VNĐ");
         lblgiaExtra.setToolTipText("0");
-        jPanel1.add(lblgiaExtra, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, 80, 20));
+        jPanel1.add(lblgiaExtra, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, 80, 20));
         lblgiaExtra.setName("0");
 
         lbltinhthem.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbltinhthem.setText("0 VNĐ");
-        jPanel1.add(lbltinhthem, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, 160, 30));
+        jPanel1.add(lbltinhthem, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 330, 160, 30));
 
         lbltengia2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbltengia2.setText("TÍNH THÊM:");
-        jPanel1.add(lbltengia2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, -1, -1));
+        jPanel1.add(lbltengia2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, -1, -1));
 
         lblgia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblgia.setForeground(new java.awt.Color(51, 255, 0));
         lblgia.setText("....");
-        jPanel1.add(lblgia, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 170, 30));
+        jPanel1.add(lblgia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 170, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

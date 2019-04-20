@@ -6,12 +6,8 @@
 package com.nhom3.qlcf.helper;
 
 import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import javazoom.jl.decoder.JavaLayerException;
@@ -50,7 +46,7 @@ public class Soundhelper {
             public void run() {
                 try {
                     player.play();
-                } catch (Exception ex) {
+                } catch (JavaLayerException ex) {
                     System.out.println(ex);
                 }
             }

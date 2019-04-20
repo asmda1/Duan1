@@ -5,15 +5,12 @@
  */
 package com.nhom3.qlcf.view.form.users;
 
-import com.nhom3.qlcf.helper.Hashing;
 import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.helper.ReSizehelper;
 import com.nhom3.qlcf.view.form.login.FormLogin;
-import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
-import static com.nhom3.qlcf.view.form.users.DoiMatKhau.lblmaXN;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;

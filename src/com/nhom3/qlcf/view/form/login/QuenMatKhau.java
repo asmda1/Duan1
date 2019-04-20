@@ -6,20 +6,13 @@
 package com.nhom3.qlcf.view.form.login;
 
 import com.nhom3.qlcf.dao.NguoiDungDAO;
-import com.nhom3.qlcf.view.form.users.*;
-import com.nhom3.qlcf.dao.SanPhamDAO;
-import com.nhom3.qlcf.helper.Designhelper;
 import com.nhom3.qlcf.helper.Hashing;
-import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.SendMailHelper;
 import com.nhom3.qlcf.helper.Timehelper;
 import com.nhom3.qlcf.helper.sendsmscode;
-import static com.nhom3.qlcf.view.form.banhang.FormBanHang.list;
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -279,7 +272,7 @@ public class QuenMatKhau extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (check()) {
             txttofrom.setName(txttofrom.getText());
-            doiatkhau doi = new doiatkhau(null, rootPaneCheckingEnabled);
+            doimatkhau doi = new doimatkhau(null, rootPaneCheckingEnabled);
             doi.setVisible(rootPaneCheckingEnabled);
             lblthongbao.setText("Lấy lại mật khẩu thành công!");
             lblthongbao.setForeground(Color.GREEN);

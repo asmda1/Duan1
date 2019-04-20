@@ -7,13 +7,10 @@ package com.nhom3.qlcf.view.form.users;
 
 import com.nhom3.qlcf.dao.NguoiDungDAO;
 import com.nhom3.qlcf.helper.Loginhelper;
-import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.model.NguoiDung;
 import static com.nhom3.qlcf.view.form.users.FormTK.jpltable;
 import static com.nhom3.qlcf.view.form.users.FormTK.lblTitle;
 import java.awt.Color;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComponent;
 
 /**
  *

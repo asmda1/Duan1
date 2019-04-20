@@ -5,19 +5,16 @@
  */
 package com.nhom3.qlcf.view.form.banhang;
 
-import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.FontFactory;
-import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.CMYKColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.nhom3.qlcf.dao.CTHoaDonDAO;
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.model.CTHoaDon;
 import com.nhom3.qlcf.model.Extra;
@@ -43,12 +40,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFFontFormatting;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
@@ -389,7 +384,7 @@ public class InHoaDon extends javax.swing.JDialog {
             table.addCell(row1);
             PdfPCell row2 = new PdfPCell(new Phrase("Gia Ban"));
             table.addCell(row2);
-            PdfPCell row4 = new PdfPCell(new Phrase("Ma Size"));
+            PdfPCell row4 = new PdfPCell(new Phrase("Size"));
             table.addCell(row4);
             PdfPCell row3 = new PdfPCell(new Phrase("So Luong"));
             table.addCell(row3);
@@ -489,7 +484,7 @@ public class InHoaDon extends javax.swing.JDialog {
 
         } catch (FileNotFoundException e) {
             JOptionPane.showOptionDialog(null,
-                    "Có Sự Cố! File PDF đang sữ dụng, close để ghi dữ liệu mới.",
+                    "Có Sự Cố! File PDF đang sử dụng, close để ghi dữ liệu mới.",
                     "Ghi Dữ Liệu PDF Thất Bại",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.INFORMATION_MESSAGE,
@@ -570,9 +565,17 @@ public class InHoaDon extends javax.swing.JDialog {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Tên SP", "Giá Bán", "maSize", "Số Lượng", "Ghi chú"
+                "Tên SP", "Giá Bán", "Size", "Số Lượng", "Ghi chú"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblInHoaDon.setToolTipText("");
         tblInHoaDon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tblInHoaDon.setFocusable(false);

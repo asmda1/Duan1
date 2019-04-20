@@ -5,27 +5,22 @@
  */
 package com.nhom3.qlcf.view.form.login;
 
-import com.nhom3.qlcf.dao.NguoiDungDAO;
 import com.nhom3.qlcf.helper.Hashing;
 import com.nhom3.qlcf.helper.JDBCHelper;
-import com.nhom3.qlcf.helper.ReSizehelper;
 import static com.nhom3.qlcf.view.form.login.QuenMatKhau.txttofrom;
-import com.nhom3.qlcf.view.form.users.ThongTinTK;
 import java.awt.Color;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author baotri1998
  */
-public class doiatkhau extends javax.swing.JDialog {
+public class doimatkhau extends javax.swing.JDialog {
 
     /**
-     * Creates new form doiatkhau
+     * Creates new form doimatkhau
      */
-    public doiatkhau(java.awt.Frame parent, boolean modal) {
+    public doimatkhau(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(parent);
@@ -405,20 +400,21 @@ public class doiatkhau extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(doiatkhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doimatkhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(doiatkhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doimatkhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(doiatkhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doimatkhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(doiatkhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(doimatkhau.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                doiatkhau dialog = new doiatkhau(new javax.swing.JFrame(), true);
+                doimatkhau dialog = new doimatkhau(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

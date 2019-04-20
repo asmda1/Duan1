@@ -69,13 +69,13 @@ public class KiemKeCuoiNgay extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtSoLuongKiemKho = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        lblCapNhat = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         lblTBCapNhat = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         lblTBTraHang = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
+        lblTroVe = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -213,15 +213,15 @@ public class KiemKeCuoiNgay extends javax.swing.JPanel {
 
         txtSoLuongKiemKho.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel6.setBackground(new java.awt.Color(0, 51, 255));
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Cập Nhật");
-        jLabel6.setOpaque(true);
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblCapNhat.setBackground(new java.awt.Color(0, 51, 255));
+        lblCapNhat.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblCapNhat.setForeground(new java.awt.Color(255, 255, 255));
+        lblCapNhat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCapNhat.setText("Cập Nhật");
+        lblCapNhat.setOpaque(true);
+        lblCapNhat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel6MousePressed(evt);
+                lblCapNhatMousePressed(evt);
             }
         });
 
@@ -234,13 +234,13 @@ public class KiemKeCuoiNgay extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSoLuongKiemKho, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
             .addComponent(txtSoLuongKiemKho)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblCapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 102));
@@ -281,14 +281,14 @@ public class KiemKeCuoiNgay extends javax.swing.JPanel {
 
         jPanel12.setBackground(new java.awt.Color(0, 51, 255));
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Trở Vê");
-        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblTroVe.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTroVe.setForeground(new java.awt.Color(255, 255, 255));
+        lblTroVe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTroVe.setText("Trở Vê");
+        lblTroVe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblTroVe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel13MousePressed(evt);
+                lblTroVeMousePressed(evt);
             }
         });
 
@@ -296,11 +296,11 @@ public class KiemKeCuoiNgay extends javax.swing.JPanel {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+            .addComponent(lblTroVe, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+            .addComponent(lblTroVe, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -359,13 +359,13 @@ public class KiemKeCuoiNgay extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel13MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MousePressed
+    private void lblTroVeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTroVeMousePressed
         // TODO add your handling code here:
 
         FormKiemTraHangHoa.kiemtrahanghoa.jpnNen.show();
         FormKiemTraHangHoa.kiemtrahanghoa.jpnNen.add(new KiemTraTonKho());
         FormKiemTraHangHoa.kiemtrahanghoa.jpnNenKiemKe.hide();
-    }//GEN-LAST:event_jLabel13MousePressed
+    }//GEN-LAST:event_lblTroVeMousePressed
 
     private void lblTraHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblTraHangMousePressed
         // TODO add your handling code here:
@@ -424,7 +424,7 @@ public class KiemKeCuoiNgay extends javax.swing.JPanel {
         });
     }//GEN-LAST:event_lblTraHangMousePressed
 
-    private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
+    private void lblCapNhatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCapNhatMousePressed
         // TODO add your handling code here:
         if (hh == null) {
             lblTBCapNhat.setText("Chưa chọn hàng hóa!!!");
@@ -448,17 +448,15 @@ public class KiemKeCuoiNgay extends javax.swing.JPanel {
         } else {
             lblTBCapNhat.setText("Cập nhật thất bại!!");
         }
-    }//GEN-LAST:event_jLabel6MousePressed
+    }//GEN-LAST:event_lblCapNhatMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -468,12 +466,14 @@ public class KiemKeCuoiNgay extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JLabel lblCapNhat;
     private javax.swing.JLabel lblGiaVon;
     private javax.swing.JLabel lblSoLuong;
     private javax.swing.JLabel lblTBCapNhat;
     private javax.swing.JLabel lblTBTraHang;
     private javax.swing.JLabel lblTenHang;
     private javax.swing.JLabel lblTraHang;
+    private javax.swing.JLabel lblTroVe;
     private javax.swing.JTextField txtSoLuongKiemKho;
     private javax.swing.JTextField txtTenHH;
     // End of variables declaration//GEN-END:variables

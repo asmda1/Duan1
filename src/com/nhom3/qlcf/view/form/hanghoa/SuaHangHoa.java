@@ -8,9 +8,7 @@ package com.nhom3.qlcf.view.form.hanghoa;
 import com.nhom3.qlcf.dao.HangHoaDAO;
 import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.model.HangHoa;
-import static com.nhom3.qlcf.view.form.hanghoa.FormSua_ThemMoiHangHoa_admin.jplnen;
 import java.awt.Color;
-import java.text.DecimalFormat;
 
 /**
  *

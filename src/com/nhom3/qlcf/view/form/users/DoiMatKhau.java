@@ -8,21 +8,10 @@ package com.nhom3.qlcf.view.form.users;
 import com.nhom3.qlcf.dao.NguoiDungDAO;
 import com.nhom3.qlcf.helper.Hashing;
 import com.nhom3.qlcf.helper.JDBCHelper;
-import com.nhom3.qlcf.helper.Loginhelper;
-import com.nhom3.qlcf.helper.SendMailHelper;
-import com.nhom3.qlcf.helper.Timehelper;
-import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.model.NguoiDung;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 
 /**
  *

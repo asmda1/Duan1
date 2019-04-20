@@ -6,8 +6,8 @@
 package com.nhom3.qlcf.view.form.sanpham;
 
 import com.nhom3.qlcf.helper.Loginhelper;
+import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.view.form.login.FormLogin;
-import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
@@ -31,6 +31,9 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
         //jpnNenButton_login1.setBackground(new Color(0, 0, 0, 64));
         login = this;
         new Loginhelper().getLogin(lblTenDangNhapBangHang);
+        txtSearch.setText("Tìm kiếm");
+        txtSearch.setForeground(Color.GRAY);
+        XuLy.placeHolder(txtSearch, "Tìm kiếm");
     }
 
     /**
@@ -54,7 +57,7 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
         lblAn_BanHang = new javax.swing.JLabel();
         lblOutBangHang = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jpnNen = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -219,8 +222,6 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 255));
 
-        jTextField1.setText("Tìm kiếm");
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -233,13 +234,13 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField1)
+            .addComponent(txtSearch)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -483,7 +484,6 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
     protected static javax.swing.JPanel jfTSuaXoa;
     protected static javax.swing.JPanel jplnen;
     private javax.swing.JPanel jpnDangXuat;
@@ -499,5 +499,6 @@ public class FormSuaXoaSP_admin extends javax.swing.JPanel {
     private javax.swing.JLabel lblQuayVeBangHang;
     private javax.swing.JLabel lblTenDangNhapBangHang;
     private javax.swing.JLabel lblanhGiaoDien;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

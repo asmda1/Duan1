@@ -8,8 +8,6 @@ package com.nhom3.qlcf.view.form.hanghoa;
 import com.nhom3.qlcf.dao.HangHoaDAO;
 import com.nhom3.qlcf.helper.XuLy;
 import com.nhom3.qlcf.model.HangHoa;
-import com.nhom3.qlcf.view.form.login.FormLogin;
-import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;

@@ -5,12 +5,9 @@
  */
 package com.nhom3.qlcf.view.form.nhacungcap;
 
-import com.nhom3.qlcf.dao.KhachHangDAO;
 import com.nhom3.qlcf.dao.NhaCungCapDAO;
-import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.model.NhaCungCap;
 import java.awt.Color;
-import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 

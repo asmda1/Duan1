@@ -5,13 +5,10 @@
  */
 package com.nhom3.qlcf.view.form.nhacungcap;
 
-import com.nhom3.qlcf.dao.NhaCungCapDAO;
 import com.nhom3.qlcf.helper.JDBCHelper;
 import com.nhom3.qlcf.helper.Loginhelper;
 import com.nhom3.qlcf.helper.XuLy;
-import com.nhom3.qlcf.model.NhaCungCap;
 import com.nhom3.qlcf.view.form.login.FormLogin;
-import com.nhom3.qlcf.view.form.menu.FormMenu;
 import com.nhom3.qlcf.view.Run;
 import com.nhom3.qlcf.view.form.login.Login;
 import static com.nhom3.qlcf.view.form.menu.FormMenu.jfMain;
