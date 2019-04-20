@@ -258,7 +258,7 @@ public class SuaSP extends javax.swing.JPanel {
         jplformNhap.add(lbluser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 84, 140, 20));
 
         lblpass3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblpass3.setText("Thay Đỗi Hình: ");
+        lblpass3.setText("Thay Đổi Hình: ");
         jplformNhap.add(lblpass3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 100, 20));
 
         lblpass2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -435,8 +435,17 @@ public class SuaSP extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (checkNull()) {
             sanPham.setTenSp(XuLy.xuLyTen(txtTenSP.getText()));
-            sanPham.setGiaBan(Double.parseDouble(txtGia.getText()));
+
+            try {
+                sanPham.setGiaBan(Double.parseDouble(txtGia.getText()));
+            } catch (NumberFormatException e) {
+                lblThongBao.setText("Giá sản phẩm chỉ nhập số!!"); 
+                return;
+            }
+            lblThongBao.setText(" "); 
+
             sanPham.setTrangThai(cboThayDoiTrangThai.getSelectedIndex() == 0);
+
             if (lblChonAnh.getToolTipText().equals("")) {
                 sanPham.setHinhAnh(sanPham.getHinhAnh());
             } else {

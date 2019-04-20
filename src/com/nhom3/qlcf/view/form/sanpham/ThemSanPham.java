@@ -66,8 +66,6 @@ public class ThemSanPham extends javax.swing.JPanel {
         lblDuongDan.setText(" ");
     }
 
-   
-
     private void get_SetHinh() {
 
         int width = lblHinh.getWidth();
@@ -427,8 +425,14 @@ public class ThemSanPham extends javax.swing.JPanel {
             sp.setTenSp(XuLy.xuLyTen(txtTenSP.getText()));
             System.out.println("ten " + XuLy.xuLyTen(txtTenSP.getText()));
 
-            sp.setGiaBan(Double.parseDouble(txtGiaBan.getText().trim()));
-            System.out.println("gia " + txtGiaBan.getText().trim());
+            try {
+                sp.setGiaBan(Double.parseDouble(txtGiaBan.getText().trim()));
+                System.out.println("gia " + txtGiaBan.getText().trim());
+            } catch (NumberFormatException e) {
+                lblTBGiaSP.setText("Giá sản phẩm chỉ nhập số!!");
+                return;
+            }
+            lblTBGiaSP.setText(" "); 
 
             sp.setTrangThai(true);
 
